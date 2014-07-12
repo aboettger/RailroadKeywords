@@ -1,7 +1,3 @@
-pattern=BR[[:space:]]+01(|\.1[0-1])|(BR[[:space:]]+|)01[[:space:]]+(1001|105[2-9]|10[6-9][0-9]|110[0-5])
-
-# In Textdatei kopieren
-
  BR 01 
  BR 01.10 
  BR 01.11 

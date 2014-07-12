@@ -11,6 +11,8 @@ green="\e[0;32m"
 yellow="\e[0;33m"
 TOA="\e[0m" # No Color
 
+# START functions ##############################################################
+
 function logInfo () {
     echo -e "${green}$1${TOA}"
 }
@@ -20,20 +22,44 @@ function logWarn () {
 }
 
 function logError () {
-  echo -e "${red}$1${TOA}"
+  echo -e "${red}$1${TOA}" 1>&2
 }
 
-function runSearch () {
-  test_case="$1"
+function getPattern () {
+  pattern_case="$1"
+  #   echo "$pattern_case"
+  retValue=$(sed '/^#/d' "$pattern_case" | grep 'pattern=' | gawk  -F 'pattern=' '{print $2}')
+  
+  # retValue
+  echo "$retValue"
+}
 
-  echo "$test_case"
-  pattern=$(less "$test_case" | grep 'pattern=' | gawk  -F 'pattern=' '{print $2}')
-  #logInfo "$pattern"
-  test_results=$(less "$test_case" | sed '/^pattern=/d' | sed '/^$/d' | sed '/^#/ d' | grep -oaE "$pattern" | sed -e 's/^ *//' | sed -e 's/ *$//' | sed '/^$/d' | uniq)
-  echo "$test_results"
+function getResults () {
+  pattern_case="$1"
+  txt_path="$2"
+  pattern=$(getPattern "$pattern_case")
+  # echo "$pattern_case"
+  # remove UTF8 NO-BREAK
+  # remove UTF8 THIN SPACE
+  # remove UTF8 HAIR SPACE
+  # remove UTF8 ZERO WIDTH SPACE
+  CHARS=$(python -c 'print u"\u000C\u0009\u00A0\u2009\u200A\u200B".encode("utf8")')
+  sed 's/['"$CHARS"']/ /g' "$txt_path" | sed -e "s/[[:space:]]\{2,\}/ /g" | grep -oaE "$pattern" | sed '/^$/d' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/[^0-9]$//' | sed -e 's/^[/„“”(?-]*//' | sort -b | uniq
+}
+
+function runTest () {
+  pattern_case="$1"
+  pattern_path=$(dirname "$pattern_case")
+  test_path=${pattern_path//pattern/tests}
+  pattern_name=$(basename "$pattern_case")
+
+  # positive tests
+  test_name_positive=${pattern_name//pattern/positive.list}
+  test_case_positive="$test_path/$test_name_positive"
+  test_results=$(getResults "$pattern_case" "$test_case_positive")
   matched_elements=$(echo "$test_results" | sed '/^$/d' | wc -l)
-  given_elements=$(less "$test_case" | sed '/^pattern=/d' | sed '/^$/d' | sed '/^#/ d' | wc -l)
-  logInfo "TestCase: $(basename "$test_case")"
+  given_elements=$(sed '/^pattern=/d' "$test_case_positive"| sed '/^$/d' | sed '/^#/d' | wc -l)
+  logInfo "TestCase: $(basename "$test_case_positive")"
   if test "$matched_elements" -lt "$given_elements"; then
     logError "Test failed, to few elements found: $matched_elements/$given_elements"
     exit 1
@@ -43,86 +69,97 @@ function runSearch () {
   else
     logInfo "Test OK: $matched_elements/$given_elements"
   fi
-}
-
-
-test_path="$2"
-
-if [ "$1" == "test" ]; then
-
-  test_path="$2"
-
-  if [ ! -d "$test_path" ] && [ ! -d "$(dirname "$test_path")" ]; then
-    echo "Kein Verzeichnis mit Testdaten gefunden ($test_path)"
+  
+  # negative tests
+  test_name_negative=${pattern_name//pattern/negative.list}
+  test_case_negative="$test_path/$test_name_negative"
+  test_results=$(getResults "$pattern_case" "$test_case_negative")
+  matched_elements=$(echo "$test_results" | sed '/^$/d' | wc -l)
+  given_elements=$(sed '/^pattern=/d' "$test_case_negative"| sed '/^$/d' | sed '/^#/d' | wc -l)
+  logInfo "TestCase: $(basename "$test_case_negative")"
+  if test "$matched_elements" -eq "0"; then
+    logInfo "Test OK: $matched_elements/$given_elements"
+  else
+    logError "Test failed, to many elements found: $matched_elements/$given_elements"
     exit 1
   fi
+}
 
-  if [ -f "$test_path" ]; then
-    runSearch "$test_path"
+function runSearch () {
+  pattern_case="$1"
+  pdf_path="$2"
+  # echo "$pattern_case"
+  pdf_dirname=$(dirname "$pdf_path")
+  # echo "$pdf_dirname"
+  pdf_filename=$(basename "$pdf_path")
+  pdf_filename="${pdf_filename%.*}"
+  lines=$(wc -l < "$pdf_dirname/$pdf_filename.txt")
+  if [ "$lines" != "0" ]
+  then
+    getResults "$pattern_case" "$pdf_dirname/$pdf_filename.txt"
+  fi
+}
+
+# END functions ################################################################
+
+pattern_path="$2"
+pdf_path="$3"
+
+if [ ! -d "$pattern_path" ] && [ ! -d "$(dirname "$pattern_path")" ]; then
+  logError "Kein Verzeichnis mit Regulären Ausdrücken gefunden ($pattern_path)"
+  exit 1
+fi
+
+if [ "$1" == "test" ]; then
+  if [ -f "$pattern_path" ]; then
+    runTest "$pattern_path"
   else
-    find "$test_path" -type f -name 'test-*.txt' | { while read -r test_case;
+    find "$pattern_path" -type f -name '*.pattern' | { while read -r pattern_case;
       do
-        runSearch "$test_case"
+        runTest "$pattern_case"
     done }
   fi
 elif [ "$1" == "run" ]; then
-  if [ ! -d "$test_path" ]; then
-    echo "Kein Verzeichnis mit RegEx-Dateien gefunden ($test_path)"
-    exit 1
-  fi
-
-  if [ ! -f "$3" ]; then
+  if [ ! -f "$pdf_path" ]; then
     logError "PDF not found \"$3\""
     exit 1
   else
-    pdf_dirname=$(dirname "$3")
+    pdf_dirname=$(dirname "$pdf_path")
     # echo "$pdf_dirname"
-    pdf_filename=$(basename "$3")
+    pdf_filename=$(basename "$pdf_path")
     pdf_filename="${pdf_filename%.*}"
-    echo "$3"
     if [ -f "$pdf_dirname/$pdf_filename.md5" ]; then
       md5_current=$(cat "$pdf_dirname/$pdf_filename.md5")
     fi
     # echo "$md5_current"
-    md5_new=$(md5sum "$3"  | gawk  -F ' ' '{print $1}')
+    md5_new=$(md5sum "$pdf_path"  | gawk  -F ' ' '{print $1}')
     # echo "$md5_new"
     if [ "$md5_current" == "$md5_new" ]; then
       # Do nothing
       a=$a
-      # logInfo "\"$(basename "$3")\" scheint sich seit dem letzten Durchlauf nicht geändert zu haben."
+      # logInfo "\"$(basename "$pdf_path")\" scheint sich seit dem letzten Durchlauf nicht geändert zu haben."
       # logInfo "Versuche bestehende \"$pdf_filename.txt\" zu verwenden."
     else
       logInfo "Schreibe \"$pdf_filename.md5\"."
       echo "$md5_new" > "$pdf_dirname/$pdf_filename.md5"
 
       logInfo "Schreibe \"$pdf_filename.txt\"."
-      pdftotext -q "$3" "$pdf_dirname/$pdf_filename.txt"
+      pdftotext -q "$pdf_path" "$pdf_dirname/$pdf_filename.txt"
     fi
     if [ ! -f "$pdf_dirname/$pdf_filename.txt" ]; then
       # logWarn "\"$pdf_filename.txt\" nicht gefunden. schreibe \"$pdf_filename.txt\" neu."
-      pdftotext -q "$3" "$pdf_dirname/$pdf_filename.txt"
+      pdftotext -q "$pdf_path" "$pdf_dirname/$pdf_filename.txt"
     fi
 
-    find "$test_path" -type f -name 'test-*.txt' | { while read -r test_case;
-    do
-      # remove UTF8 NO-BREAK
-      # remove UTF8 THIN SPACE
-      # remove UTF8 HAIR SPACE
-      # remove UTF8 ZERO WIDTH SPACE
-      CHARS=$(python -c 'print u"\u000C\u0009\u00A0\u2009\u200A\u200B".encode("utf8")')
-      pattern=$(less "$test_case" | grep 'pattern=' | gawk  -F 'pattern=' '{print $2}')
-      # echo "$test_case"
-      # echo "$pattern"
-      # pdftotext -q "$3" - | tr -d '\2009' | tr -d '\200A' | tr -d '\200B' | tr '\n' ' ' | sed -e "s/[[:space:]]\{2,\}/ /g" | grep -oaE "$pattern" | sed '/^$/d' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e "s/^Baureihe/BR/" | sort -b | uniq  2>/dev/null
-      lines=$(wc -l < "$pdf_dirname/$pdf_filename.txt")
-  # echo "$a -> $lines"
-      if [ "$lines" != "0" ]
-      then
-        sed 's/['"$CHARS"']/ /g' "$pdf_dirname/$pdf_filename.txt" | sed -e "s/[[:space:]]\{2,\}/ /g" | grep -oaE "[^0-9]($pattern)[^0-9]" | sed '/^$/d' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/[^0-9]$//' | sed -e 's/^[/„“”(?-]*//' | sort -b | uniq 2>/dev/null
-      fi
-    done }
+    if [ -f "$pattern_path" ]; then
+      runSearch "$pattern_path" "$pdf_path"
+    else
+      find "$pattern_path" -type f -name 'test-*.pattern' | { while read -r pattern_case;
+        do
+          runSearch "$pattern_case" "$pdf_path"
+      done }
+    fi
   fi
 fi
-
 
 exit 0
