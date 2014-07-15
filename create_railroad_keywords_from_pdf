@@ -60,6 +60,7 @@ function runTest () {
   matched_elements=$(echo "$test_results" | sed '/^$/d' | wc -l)
   given_elements=$(sed '/^pattern=/d' "$test_case_positive"| sed '/^$/d' | sed '/^#/d' | wc -l)
   logInfo "TestCase: $(basename "$test_case_positive")"
+  echo "$test_results"
   if test "$matched_elements" -lt "$given_elements"; then
     logError "Test failed, to few elements found: $matched_elements/$given_elements"
     exit 1
