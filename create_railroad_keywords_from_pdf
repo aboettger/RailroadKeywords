@@ -43,7 +43,7 @@ function getResults () {
   # remove UTF8 THIN SPACE
   # remove UTF8 HAIR SPACE
   # remove UTF8 ZERO WIDTH SPACE
-  CHARS=$(python -c 'print u"\u000C\u0009\u00A0\u2009\u200A\u200B".encode("utf8")')
+  CHARS=$(python -c 'print u"\u0001\u000C\u0009\u00A0\u2004\u2005\u2006\u2009\u200A\u200B".encode("utf8")')
   sed 's/['"$CHARS"']/ /g' "$txt_path" | sed -e "s/[[:space:]]\{2,\}/ /g" | grep -oaE "$pattern" | sed '/^$/d' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/[^0-9]$//' | sed -e 's/^[/„“”(?-]*//' | sort -b | uniq
 }
 
@@ -100,6 +100,21 @@ function runSearch () {
   fi
 }
 
+# createTxtFile "$pdf_path" "$pdf_dirname" "$pdf_filename"
+function createTxtFile () {
+  pdf_path="$1"
+  pdf_dirname="$2"
+  pdf_filename="$3"
+  
+  pdftotext -q -layout "$pdf_path" "$pdf_dirname/$pdf_filename.txt"
+  
+  # Remove all NewLines (sed) and add a line terminator (awk) and write to a temporary file
+  temp_file=$(tempfile)
+  sed ':a;N;$!ba;s/\n/ /g' "$pdf_dirname/$pdf_filename.txt" | awk '{printf("%s!\n",$0)}' > "$temp_file"
+  # Move the temporary file 
+  mv "$temp_file" "$pdf_dirname/$pdf_filename.txt"
+}
+
 # END functions ################################################################
 
 pattern_path="$2"
@@ -140,15 +155,15 @@ elif [ "$1" == "run" ]; then
       # logInfo "\"$(basename "$pdf_path")\" scheint sich seit dem letzten Durchlauf nicht geändert zu haben."
       # logInfo "Versuche bestehende \"$pdf_filename.txt\" zu verwenden."
     else
-      logInfo "Schreibe \"$pdf_filename.md5\"."
+      # logInfo "Schreibe \"$pdf_filename.md5\"."
       echo "$md5_new" > "$pdf_dirname/$pdf_filename.md5"
 
-      logInfo "Schreibe \"$pdf_filename.txt\"."
-      pdftotext -q "$pdf_path" "$pdf_dirname/$pdf_filename.txt"
+      # logInfo "Schreibe \"$pdf_filename.txt\"."
+      createTxtFile "$pdf_path" "$pdf_dirname" "$pdf_filename"
     fi
     if [ ! -f "$pdf_dirname/$pdf_filename.txt" ]; then
       # logWarn "\"$pdf_filename.txt\" nicht gefunden. schreibe \"$pdf_filename.txt\" neu."
-      pdftotext -q "$pdf_path" "$pdf_dirname/$pdf_filename.txt"
+      createTxtFile "$pdf_path" "$pdf_dirname" "$pdf_filename"
     fi
 
     if [ -f "$pattern_path" ]; then
