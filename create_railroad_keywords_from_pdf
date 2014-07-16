@@ -38,13 +38,11 @@ function getResults () {
   pattern_case="$1"
   txt_path="$2"
   pattern=$(getPattern "$pattern_case")
-  # echo "$pattern_case"
-  # remove UTF8 NO-BREAK
-  # remove UTF8 THIN SPACE
-  # remove UTF8 HAIR SPACE
-  # remove UTF8 ZERO WIDTH SPACE
-  CHARS=$(python -c 'print u"\u0001\u000C\u0009\u00A0\u2004\u2005\u2006\u2009\u200A\u200B".encode("utf8")')
-  sed 's/['"$CHARS"']/ /g' "$txt_path" | sed -e "s/[[:space:]]\{2,\}/ /g" | grep -oaE "$pattern" | sed '/^$/d' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/[^0-9]$//' | sed -e 's/^[/„“”(?-]*//' | sort -b | uniq
+
+  echo "$pattern" | { while read -r line; do
+    # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
+    grep -oaE "$line" "$txt_path" | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/\-[0-9]//g' | sort -b | uniq
+  done }
 }
 
 function runTest () {
@@ -58,7 +56,7 @@ function runTest () {
   test_case_positive="$test_path/$test_name_positive"
   test_results=$(getResults "$pattern_case" "$test_case_positive")
   matched_elements=$(echo "$test_results" | sed '/^$/d' | wc -l)
-  given_elements=$(sed '/^pattern=/d' "$test_case_positive"| sed '/^$/d' | sed '/^#/d' | wc -l)
+  given_elements=$(sed '/^pattern=/d' "$test_case_positive" | sed '/^$/d' | sed '/^#/d' | wc -l)
   logInfo "TestCase: $(basename "$test_case_positive")"
   echo "$test_results"
   if test "$matched_elements" -lt "$given_elements"; then
@@ -107,11 +105,18 @@ function createTxtFile () {
   pdf_dirname="$2"
   pdf_filename="$3"
   
-  pdftotext -q -layout "$pdf_path" "$pdf_dirname/$pdf_filename.txt"
+  make_space=$(python -c 'print u"\u0001\u000C\u0009\u00A0\u2004\u2005\u2006\u2009\u200A\u200B".encode("utf8")')
+  
+  pdftotext -q "$pdf_path" "$pdf_dirname/$pdf_filename.txt"
   
   # Remove all NewLines (sed) and add a line terminator (awk) and write to a temporary file
   temp_file=$(tempfile)
-  sed ':a;N;$!ba;s/\n/ /g' "$pdf_dirname/$pdf_filename.txt" | awk '{printf("%s!\n",$0)}' > "$temp_file"
+  
+  ####################################
+  # nicht entfernen, weil
+  # tr '-' ' ' --> NOK --> VES-M Halle
+  ####################################
+  sed ':a;N;$!ba;s/\n/ /g' "$pdf_dirname/$pdf_filename.txt" | awk '{printf("%s!\n",$0)}' | sed 's/['"$make_space"']/ /g' | sed -e 's/\.[[:space:]]/ /g' | sed -e 's/\,[[:space:]]/ /g' | tr -d '(' | tr -d ')' | tr -d ':' | tr -d ';' | sed -e "s/[[:space:]]\{2,\}/ /g" > "$temp_file"
   # Move the temporary file 
   mv "$temp_file" "$pdf_dirname/$pdf_filename.txt"
 }
