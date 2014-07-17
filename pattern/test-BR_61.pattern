@@ -1,0 +1,5 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/61.asc
+
+pattern=[[:space:]](BR|Baureihe)[[:space:]]61(|\.0)[[:space:]]
+# BR 61.0
+pattern=[[:space:]]61[[:space:]]0(0[1-2])([[:space:]]|-[0-9])

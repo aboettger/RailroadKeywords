@@ -1,0 +1,14 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/02.asc
+
+pattern=[[:space:]](BR|Baureihe)[[:space:]]02(|\.0|\.1|\.02|\.03)[[:space:]]
+
+# 02.0
+pattern=[[:space:]]02[[:space:]]0(0[1-9]|10)([[:space:]]|-[0-9])
+# 02.1
+pattern=[[:space:]]02[[:space:]]1(0[1,2])([[:space:]]|-[0-9])
+# 02.10
+pattern=[[:space:]]02[[:space:]]10(01)([[:space:]]|-[0-9])
+# 02.02
+pattern=[[:space:]]02[[:space:]]02(01)([[:space:]]|-[0-9])
+# 02.03
+pattern=[[:space:]]02[[:space:]]03(14)([[:space:]]|-[0-9])

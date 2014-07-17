@@ -1,4 +1,0 @@
-# pattern=((S[[:space:]]36\.20)|((BR|Baureihe)[[:space:]]+01(|\.1[0-1]))|[^0-9]01[[:space:]]+(1001|105[2-9]|10[6-9][0-9]|110[0-5]))[^0-9]
-pattern=[[:space:]]S[[:space:]]36\.20[[:space:]]
-pattern=[[:space:]](BR|Baureihe)[[:space:]]01(|\.1[0-1])[[:space:]]
-pattern=[[:space:]]01[[:space:]](1001|105[2-9]|10[6-9][0-9]|110[0-5])([[:space:]]|-[0-9])
