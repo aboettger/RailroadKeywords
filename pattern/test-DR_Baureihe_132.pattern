@@ -1,3 +1,0 @@
-
-pattern=[[:space:]]BR[[:space:]]132[[:space:]]
-pattern=[[:space:]]132[[:space:]](00[1-9]|0[1-9][0-9]|[1-6][0-9][0-9]|70[0-9])[[:space:]]
