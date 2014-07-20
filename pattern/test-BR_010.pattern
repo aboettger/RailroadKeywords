@@ -1,0 +1,6 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/010.asc
+
+pattern=[[:space:]](BR|Baureihe)[[:space:]]010(|\.0)[[:space:]]
+
+# BR 010.0
+pattern=[[:space:]]010[[:space:]]0(0[1-2])([[:space:]]|-[0-9])
