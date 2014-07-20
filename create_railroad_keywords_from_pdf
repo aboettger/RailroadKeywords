@@ -40,8 +40,17 @@ function getResults () {
   pattern=$(getPattern "$pattern_case")
 
   echo "$pattern" | { while read -r line; do
+    # line=$(echo "$line" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g')
+    # sed "s/$line/\2/" "$txt_path"
+    # echo "$line"
     # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
-    grep -oaE "$line" "$txt_path" | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/\-[0-9]//g'
+    pattern_delete=$(sed '/^#/d' "$pattern_case" | grep 'pattern_delete=' | gawk  -F 'pattern_delete=' '{print $2}')
+    if [ -z "$pattern_delete" ]; then
+      grep -oaE "$line" "$txt_path" |                                 sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/\-[0-9]//g'
+    else
+      # echo "$pattern_delete"
+      grep -oaE "$line" "$txt_path" | sed -e "s/$pattern_delete//g" | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/\-[0-9]//g'
+    fi
   done }
 }
 
