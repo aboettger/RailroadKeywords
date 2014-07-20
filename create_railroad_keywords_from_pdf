@@ -70,6 +70,7 @@ function runTest () {
         logInfo "Test OK: $matched_elements/$given_elements"
       fi
   done }
+  if [ $? -gt 0 ]; then exit 1; fi
 
   
   # negative tests
