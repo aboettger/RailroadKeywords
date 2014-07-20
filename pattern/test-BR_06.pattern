@@ -2,5 +2,14 @@
 
 pattern=[[:space:]](BR|Baureihe)[[:space:]]06(|\.0)[[:space:]]
 
+# Es gibt auch eine BR E06, oft falsch als E 06 xxx geschrieben
+# Diese sollen hier auch gefunden werden, damit ich einen definierten Zustand habe.
+# Sie werden aber wieder gelöscht (pattern_delete)
+# Man könnte wohl auch mit back references arbeiten, das habe ich 
+# aber mit grep nicht hinbekommen
+
 # BR 06.0
-pattern=[[:space:]]06[[:space:]]0(0[1-2])([[:space:]]|-[0-9])
+pattern=(E|)[[:space:]]06[[:space:]]0(0[1-2])([[:space:]]|-[0-9])
+
+
+pattern_delete=^E.*
