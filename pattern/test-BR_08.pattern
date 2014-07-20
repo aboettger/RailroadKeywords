@@ -1,0 +1,6 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/08.asc
+
+pattern=[[:space:]](BR|Baureihe)[[:space:]]08(|\.10)[[:space:]]
+
+# BR 07.10
+pattern=[[:space:]]08[[:space:]]10(01)([[:space:]]|-[0-9])
