@@ -1,0 +1,12 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/14.asc
+
+pattern=[[:space:]](BR|Baureihe)[[:space:]]14(|\.[0-3])[[:space:]]
+
+# BR 14.0
+pattern=[[:space:]]14[[:space:]]0(0[0-3]|31)([[:space:]]|-[0-9])
+# BR 14.1
+pattern=[[:space:]]14[[:space:]]1(0[1-5]|4[1-5]|5[1-9]|6[0-1])([[:space:]]|-[0-9])
+# BR 14.2
+pattern=[[:space:]]14[[:space:]]2(0[1-9]|1[0-5])([[:space:]]|-[0-9])
+# BR 14.3
+pattern=[[:space:]]14[[:space:]]3(0[1-9]|1[0-7])([[:space:]]|-[0-9])
