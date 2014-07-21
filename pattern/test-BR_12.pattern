@@ -1,4 +1,4 @@
-# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/10.asc
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/12.asc
 
 pattern=[[:space:]](BR|Baureihe)[[:space:]]12(|\.0|\.1|\.2)[[:space:]]
 

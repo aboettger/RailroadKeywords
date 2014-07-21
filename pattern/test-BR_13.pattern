@@ -1,4 +1,4 @@
-# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/10.asc
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/13.asc
 
 pattern=[[:space:]](BR|Baureihe)[[:space:]]13(|\.[0-8]|\.1[0-2,5-8]|\.7[0-1])[[:space:]]
 
