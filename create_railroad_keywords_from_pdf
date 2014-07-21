@@ -102,7 +102,7 @@ function runTest () {
 function runSearch () {
   pattern_case="$1"
   pdf_path="$2"
-  # echo "$pattern_case"
+  
   pdf_dirname=$(dirname "$pdf_path")
   # echo "$pdf_dirname"
   pdf_filename=$(basename "$pdf_path")
@@ -112,6 +112,7 @@ function runSearch () {
   then
     getResults "$pattern_case" "$pdf_dirname/$pdf_filename.txt"
   fi
+
 }
 
 # createTxtFile "$pdf_path" "$pdf_dirname" "$pdf_filename"
