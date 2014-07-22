@@ -14,3 +14,7 @@ Einzeltest
 Schlüsselwörter erzeugen
 ------------------------
 ```create_railroad_keywords_from_pdf run [your_src_folder]/RailroadKeywords/tests/ [PDF]```
+
+Angaben im Verzeichnis "false_positive"
+----------------------------------------
+Die vorhandenen Dateien können nur als Vorlage dienen, da die verwendeten Calibre IDs meine Datenbank wiederspiegeln
