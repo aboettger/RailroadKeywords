@@ -48,7 +48,7 @@ function getResults () {
     if [ -z "$pattern_delete" ]; then
       grep -oaE "$line" "$txt_path" |                                 sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/\-[0-9]//g'
     else
-      # echo "$pattern_delete"
+      pattern_delete=$(echo "$pattern_delete" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
       grep -oaE "$line" "$txt_path" | sed -e "s/$pattern_delete//g" | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/\-[0-9]//g'
     fi
   done }
@@ -59,6 +59,26 @@ function runTest () {
   pattern_path=$(dirname "$pattern_case")
   test_path=${pattern_path//pattern/tests}
   pattern_name=$(basename "$pattern_case")
+
+  test_name=${pattern_name//pattern/}
+  # Finde Einträge in "tests/test-....positive.....list" "tests/test-....negative.....list" und  ohne führende und abschließende Leerzeichen
+  find "$test_path" -type f -name "$test_name*.list" | sort | { while read -r file;
+  do
+     matched_elements=$(grep '^[^ #]' "$file")
+     if [ "$matched_elements" != "" ]; then
+       logError "$matched_elements"
+       logError "Entry without leading spaces found: $file"
+       exit 1
+     fi
+     
+     matched_elements=$(grep '^[^#].*[^ ]$' "$file")
+     if [ "$matched_elements" != "" ]; then
+       logError "$matched_elements"
+       logError "Entry without trailing spaces found: $file"
+       exit 1
+     fi
+  done }
+  if [ $? -gt 0 ]; then exit 1; fi
 
   # positive tests
   test_name_positive=${pattern_name//pattern/positive}
@@ -90,6 +110,7 @@ function runTest () {
       matched_elements=$(echo "$test_results" | sed '/^$/d' | wc -l)
       given_elements=$(sed '/^pattern=/d' "$test_case_negative"| sed '/^$/d' | sed '/^#/d' | wc -l)
       logInfo "TestCase: $(basename "$test_case_negative")"
+      echo "$test_results"
       if test "$matched_elements" -eq "0"; then
         logInfo "Test OK: $matched_elements/$given_elements"
       else
@@ -97,6 +118,7 @@ function runTest () {
         exit 1
       fi
   done }
+  if [ $? -gt 0 ]; then exit 1; fi
 }
 
 function runSearch () {
