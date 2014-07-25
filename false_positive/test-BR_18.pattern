@@ -1,0 +1,6 @@
+# calibre_id=RegEx
+# z.B.
+# 2557=((,|)[[:space:]]{0,1}13 530(,|))|((,|)[[:space:]]{0,1}10 002(,|))
+# entfernt 13 500 und 10 002 aus den zu setzenden Schlüsselwörtern
+
+2601=((|,)[[:space:]]{0,1}18\.0(,|))|((|,)[[:space:]]{0,1}18\.5(,|))

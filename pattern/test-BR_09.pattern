@@ -1,6 +1,9 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/09.asc
 
-pattern=[[:space:]](BR|Baureihe)[[:space:]]09(|\.0)[[:space:]]
+pattern=(([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]09(\.0)[[:space:]])
 
 # BR 09.0
-pattern=[[:space:]]09[[:space:]]0(0[1-2])([[:space:]]|-[0-9])
+pattern=([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]09[[:space:]]0(0[1-2])([[:space:]]|-[0-9])
+
+# EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
+pattern_delete=(^([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])
