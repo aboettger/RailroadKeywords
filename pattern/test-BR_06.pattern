@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/06.asc
 
-pattern=[[:space:]](BR|Baureihe)[[:space:]]06(|\.0)[[:space:]]
+pattern=(([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]06(\.0)[[:space:]])
 
 # Es gibt auch eine BR E06, oft falsch als E 06 xxx geschrieben
 # Diese sollen hier auch gefunden werden, damit ich einen definierten Zustand habe.
@@ -9,7 +9,7 @@ pattern=[[:space:]](BR|Baureihe)[[:space:]]06(|\.0)[[:space:]]
 # aber mit grep nicht hinbekommen
 
 # BR 06.0
-pattern=(E|)[[:space:]]06[[:space:]]0(0[1-2])([[:space:]]|-[0-9])
+pattern=([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]06[[:space:]]0(0[1-2])([[:space:]]|-[0-9])
 
-
-pattern_delete=^E.*
+# EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
+pattern_delete=(^([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])
