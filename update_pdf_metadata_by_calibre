@@ -1,0 +1,70 @@
+#!/bin/bash
+#
+# Scans the given directory and all subdirectories for the file
+# "metadata.opf". This file is created by Calibre. From this file data will be
+# written into the PDFs, which are exactly in the same directory.
+# 
+# 
+#  REQUIREMENTS: calibre by KOVID GOYAL (http://calibre-ebook.com/)
+# 
+
+
+
+shopt -s nullglob
+shopt -s nocaseglob
+
+
+write_metadata() {
+  find "$1" -depth -type f -name "metadata.opf" | { while read -r metadata_path;
+    do
+      echo "metadata found: $metadata_path"
+      dir_name=$(dirname "$metadata_path")
+      
+
+        pdfs=$(find "$dir_name" -maxdepth 1 -type f -name '*.pdf' | wc -l)
+        
+        echo "pdfs found: $pdfs"
+        
+        if test "$pdfs" -gt 0; then
+          if [ -f "$dir_name/metadata.md5" ]; then
+            md5_metadata_current=$(cat "$dir_name/metadata.md5")
+          fi
+          md5_metadata_new=$(md5sum "$metadata_path"  | gawk  -F ' ' '{print $1}')
+
+          if [ "$md5_metadata_current" == "$md5_metadata_new" ]; then
+            echo "metadata.opf scheint sich seit dem letzten Lauf nicht geändert zu haben."
+            echo "Bitte ""$dir_name/metadata.md5"" löschen um Aktualisierung zu erzwingen."
+          else
+        
+            find "$dir_name" -maxdepth 1 -type f -name "*.pdf" | { while read -r pdf_path;
+              do
+                ebook-meta --from-opf="$metadata_path" "$pdf_path" 2>/dev/null
+                # Refresh pdf md5 after a pdf update
+                echo "Write new md5 for pdf"
+                pdf_filename=$(basename "$pdf_path")
+                pdf_filename="${pdf_filename%.*}"
+                md5=$(md5sum "$pdf_path"  | gawk  -F ' ' '{print $1}')
+                echo "$md5" > "$dir_name/$pdf_filename.md5"
+              done
+              echo
+            }
+
+            echo "$md5_metadata_new" > "$dir_name/metadata.md5"
+          fi
+        fi
+    done
+  }
+}
+
+[[ -z "$1" ]] && logError "Please specify a start directory." && exit 1
+
+if [ -f "$1" ]
+then
+  search_path=$(dirname "$1")
+else
+  search_path="$1"
+fi
+
+write_metadata "$search_path"
+
+exit 0
