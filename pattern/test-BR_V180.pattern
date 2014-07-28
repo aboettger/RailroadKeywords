@@ -1,6 +1,4 @@
 
-# Nicht nach V180 oder V 180 suchen, das ist doof, ich weiß, aber sonst wird 
-# z.B. V180 001 und V180, V180 002 und V180 usw. gefunden
 pattern=([[:space:]]V[[:space:]]{0,1}180(\.[0-3])[[:space:]])
 
 # V180.0
