@@ -11,6 +11,7 @@ pattern=[[:space:]]Henschel \- Wegmann \- Zug[[:space:]]
 
 # Bezeichnungen Loks
 pattern=[[:space:]]Köf (II|III)[[:space:]]
+pattern=(Breuer[[:space:]]\-[[:space:]]|)Rangiertraktor
 
 # Orte und Einrichtungen
 pattern=[[:space:]]VES \- M Halle[[:space:]]
