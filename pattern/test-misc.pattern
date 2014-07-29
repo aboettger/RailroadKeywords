@@ -1,5 +1,35 @@
-pattern=Berlin\-Friedrichstraße|Berlin Friedrichstraße|Tränenpalast
-pattern=Heckeneilzüge
-pattern=Schiebebühne
-pattern=VES\-M Halle
-pattern=1’C h2|2’C n4v
+# Bezeichnungen - Züge
+pattern=[[:space:]]Orient \- Express[[:space:]]
+pattern=[[:space:]]Heckeneil(züge|zug)[[:space:]]
+pattern=[[:space:]]Metropolitan[[:space:]]
+pattern=[[:space:]]Metronom[[:space:]]
+pattern=[[:space:]]Moorexpress[[:space:]]
+pattern=[[:space:]]Oberweißbacher Bergbahn[[:space:]]
+pattern=[[:space:]]Schwarzatalbahn[[:space:]]
+pattern=[[:space:]]Rheingold[[:space:]]
+pattern=[[:space:]]Henschel \- Wegmann \- Zug[[:space:]]
+
+# Bezeichnungen Loks
+pattern=[[:space:]]Köf (II|III)[[:space:]]
+
+# Orte und Einrichtungen
+pattern=[[:space:]]VES \- M Halle[[:space:]]
+pattern=[[:space:]]Schiebebühne[[:space:]]
+pattern=[[:space:]]Berlin( \- |[[:space:]])Friedrichstraße[[:space:]]
+pattern=[[:space:]]Tränenpalast[[:space:]]
+pattern=[[:space:]]Zeitz[[:space:]]
+pattern=[[:space:]]Gera[[:space:]]
+pattern=[[:space:]]Meuselwitz[[:space:]]
+pattern=[[:space:]]Tröglitz[[:space:]]
+pattern=[[:space:]]Hydrierwerk[[:space:]]
+
+# 
+pattern=[[:space:]]1’C h2[[:space:]]
+pattern=[[:space:]]2’C n4v[[:space:]]
+
+# Modellbau
+pattern=[[:space:]]Granier(en|technik)[[:space:]]
+pattern=[[:space:]]Mattieren[[:space:]]
+
+# Ereignisse
+pattern=[[:space:]]Das Goldene Gleis[[:space:]]
