@@ -160,7 +160,7 @@ function createTxtFile () {
   # '-' -> ' - ' --> NOK --> VES-M Halle
   #  | sed -e "s/[[:space:]]\{2,\}/ /g"
   ####################################
-  sed ':a;N;$!ba;s/\n/ \| /g' "$pdf_dirname/$pdf_filename.txt" | awk '{printf("%s!\n",$0)}' | sed 's/['"$make_space"']/ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/(/ ( /g' | sed -e 's/)/ ) /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' > "$temp_file"
+  sed ':a;N;$!ba;s/\n/ \| /g' "$pdf_dirname/$pdf_filename.txt" | awk '{printf("%s!\n",$0)}' | sed 's/['"$make_space"']/ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/(/ ( /g' | sed -e 's/)/ ) /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -e 's/\-/ - /g' > "$temp_file"
   # Move the temporary file 
   mv "$temp_file" "$pdf_dirname/$pdf_filename.txt"
 }

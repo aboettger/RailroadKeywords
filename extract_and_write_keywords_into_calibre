@@ -15,7 +15,6 @@ function cleanup {
   rm "$HOME/running/$script_name.pid"
   echo "Bye."
   echo
-  exit 0
 }
 
 function save_pid {
@@ -33,6 +32,8 @@ function save_pid {
 }
 
 save_pid
+
+notify-send "$(basename "$0")" "start"
 
 # Absolute path to this script, e.g. /home/user/bin/foo.sh
 script=$(readlink -f "$0")
@@ -75,7 +76,7 @@ find "$search_root" -type f -name '*.pdf' | {
     
     echo "$pdf_path"
     keywords=${keywords//Baureihe/BR}
-    keywords=$(echo "$keywords" | sort | sed -E 's/(V)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(VT)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(E)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(S)[[:space:]]([0-9])/\1\2/g' | uniq | tr '\n' ',' | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//')
+    keywords=$(echo "$keywords" | sort | sed -E 's/(V)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(VT)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(E)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(S)([0-9])/\1 \2/g' | uniq | tr '\n' ',' | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//' | sed -e 's/ \- /-/g')
 
     old_keywords=$(calibredb show_metadata "$calibre_id"  | grep "Tags" | awk -F: '{print $2}' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/, /,/g' )
     echo "Tags old: >$old_keywords<"
@@ -90,5 +91,7 @@ find "$search_root" -type f -name '*.pdf' | {
 echo "finished"
 
 cleanup
+
+notify-send "$(basename "$0")" "finished"
 
 exit 0
