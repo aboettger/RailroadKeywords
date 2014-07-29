@@ -48,9 +48,7 @@ fi
 
 find "$search_root" -type f -name '*.pdf' | {
   while read -r pdf_path; do
-    
   working_path=$(dirname "$pdf_path")
-
   metadata_path="$working_path/metadata.opf"
   if [ ! -f "$metadata_path" ]; then
     echo "$metadata_path not found" 1>&2
@@ -59,7 +57,7 @@ find "$search_root" -type f -name '*.pdf' | {
     # SubShell
     keywords=$(find "$script_path/pattern" -type f -name '*.pattern' | {
       while read -r pattern_path; do
-        keywords=$(keywords run "$pattern_path" "$pdf_path")
+        keywords=$("$script_path/create_railroad_keywords_from_pdf" run "$pattern_path" "$pdf_path")
         keywords=${keywords//Baureihe/BR}
         false_positive_pattern_path="$script_path/false_positive/$(basename "$pattern_path")"
         if [ -f "$false_positive_pattern_path" ]; then
