@@ -2,7 +2,7 @@
 
 pattern=[[:space:]]S[[:space:]]{0,1}36\.20[[:space:]]
 
-pattern=(([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]01(\.[0-2,5]|\.05|\.10|\.11|\.15|\.20|\.21|\.22)[[:space:]])
+pattern=(([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]01(\.[0-2,5]|\.05|\.10|\.11|\.15|\.20|\.21|\.22)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]01[[:space:]]([^0-9]|$))
 
 # Es gibt auch eine BR E01, oft falsch als E 01 xxx geschrieben
 # Diese sollen hier auch gefunden werden, damit ich einen definierten Zustand habe.
@@ -34,4 +34,4 @@ pattern=([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]01[[:space:]]21(1[4
 pattern=([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]01[[:space:]]22(0[4,7]|26)([[:space:]]|-[0-9])
 
 # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
-pattern_delete=(^([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])
+pattern_delete=(^([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)|([[:space:]][^0-9]$)
