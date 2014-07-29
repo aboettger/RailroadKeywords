@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/12.asc
 
-pattern=(([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]12(\.0|\.1|\.2)[[:space:]])
+pattern=(([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]12(\.0|\.1|\.2)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]12[[:space:]]([^0-9]|$))
 
 # Es gibt auch eine BR V12, oft falsch als V 01 xxx geschrieben
 # Diese sollen hier auch gefunden werden, damit ich einen definierten Zustand habe.
@@ -16,4 +16,4 @@ pattern=([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]12[[:space:]]1(01)(
 pattern=([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]12[[:space:]]2(0[1-2])([[:space:]]|-[0-9])
 
 # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
-pattern_delete=(^([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])
+pattern_delete=(^([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
