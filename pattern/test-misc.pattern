@@ -8,6 +8,7 @@ pattern=[[:space:]]Oberweißbacher Bergbahn[[:space:]]
 pattern=[[:space:]]Schwarzatalbahn[[:space:]]
 pattern=[[:space:]]Rheingold[[:space:]]
 pattern=[[:space:]]Henschel \- Wegmann \- Zug[[:space:]]
+pattern=[[:space:]]Jugoslavia \- Express[[:space:]]
 
 # Bezeichnungen Loks
 pattern=[[:space:]]Köf (II|III)[[:space:]]
@@ -31,6 +32,8 @@ pattern=[[:space:]]2’C n4v[[:space:]]
 # Modellbau
 pattern=[[:space:]]Granier(en|technik)[[:space:]]
 pattern=[[:space:]]Mattieren[[:space:]]
+pattern=[[:space:]]Kitbashing[[:space:]]
+pattern=[[:space:]]Patinieren[[:space:]]
 
 # Ereignisse
 pattern=[[:space:]]Das Goldene Gleis[[:space:]]
