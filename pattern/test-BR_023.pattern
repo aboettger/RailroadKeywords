@@ -1,0 +1,13 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/023.asc
+
+pattern=(([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]023(\.0|\.1)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]023[[:space:]]([^0-9]|$))
+
+# BR 023.0
+pattern=([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]023[[:space:]]0(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
+
+# BR 023.1
+pattern=([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]023[[:space:]]1(0[0-5])([[:space:]]|-[0-9])
+
+
+# EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
+pattern_delete=(^([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
