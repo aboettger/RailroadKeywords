@@ -21,10 +21,10 @@ extract_and_write_keywords_into_calibre
 ---------------------------------------
 Dieses Programm verwendet "create_railroad_keywords_from_pdf" um aus den PDFs in einer Calibre-Bibliothek Schlüsselwörter zu extrahieren, um diese in die Metadaten des Eintrags in der Calibre-Bibliothek zu schreiben
 
-extract_and_write_keywords_into_calibre [CalibreBibliotheksVerzeichnis]
+```extract_and_write_keywords_into_calibre [CalibreBibliotheksVerzeichnis]```
 
 update_pdf_metadata_by_calibre
 ------------------------------
 Dieses Programm kann die Angaben in den Metadaten für ein PDF in der Calibre-Bibliothek in das PDF übertragen. Dabei werden die md5-Prüfsummen, die "create_railroad_keywords_from_pdf" verwendet, neu abgelegt, da sich das PDF an sich nicht geändert hat uns somit keine neue Erzeugung der Textdatei durch "create_railroad_keywords_from_pdf" nötig ist.
 
-update_pdf_metadata_by_calibre [CalibreBibliotheksVerzeichnis]
+```update_pdf_metadata_by_calibre [CalibreBibliotheksVerzeichnis]```
