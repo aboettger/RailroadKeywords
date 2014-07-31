@@ -15,7 +15,7 @@ Im Verzeichnis "false_positive" werden Schlüsselwörter abgelegt, die für ein 
 ```create_railroad_keywords_from_pdf test [Projektverzeichnis]/RailroadKeywords/tests/[test-....txt]```
 
 * Schlüsselwörter erzeugen
-```create_railroad_keywords_from_pdf run [your_src_folder]/RailroadKeywords/tests/ [PDF]```
+```create_railroad_keywords_from_pdf run [Projektverzeichnis]/RailroadKeywords/tests/ [PDF]```
 
 extract_and_write_keywords_into_calibre
 ---------------------------------------
