@@ -9,13 +9,13 @@ Welche Schlüsselwörter gefunden werden sollen ist durch reguläre Ausdrücke i
 Im Verzeichnis "false_positive" werden Schlüsselwörter abgelegt, die für ein PDF nicht zutreffend sind. Die Einträge in den einzelnen Dateien setzen sich aus der Calibre-ID und einem regulären Ausdruck zusammen. Die im Projekt vorhandenen Dateien können nur als Vorlage dienen, da die verwendeten Calibre-IDs meine Datenbank wiederspiegeln.
 
 * Alle Tests durchführen
-```create_railroad_keywords_from_pdf test [Projektverzeichnis]/RailroadKeywords/tests/```
+```create_railroad_keywords_from_pdf test [Projektverzeichnis]/RailroadKeywords/pattern/```
 
 * Einzeltest durchführen
-```create_railroad_keywords_from_pdf test [Projektverzeichnis]/RailroadKeywords/tests/[test-....txt]```
+```create_railroad_keywords_from_pdf test [Projektverzeichnis]/RailroadKeywords/pattern/[test-....txt]```
 
 * Schlüsselwörter erzeugen
-```create_railroad_keywords_from_pdf run [Projektverzeichnis]/RailroadKeywords/tests/ [PDF]```
+```create_railroad_keywords_from_pdf run [Projektverzeichnis]/RailroadKeywords/pattern/ [PDF]```
 
 extract_and_write_keywords_into_calibre
 ---------------------------------------
