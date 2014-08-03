@@ -34,6 +34,21 @@ pattern=[[:space:]]Granier(en|technik)[[:space:]]
 pattern=[[:space:]]Mattieren[[:space:]]
 pattern=[[:space:]]Kitbashing[[:space:]]
 pattern=[[:space:]]Patinieren[[:space:]]
+pattern=[[:space:]]Widerstandslöten[[:space:]]
 
 # Ereignisse
 pattern=[[:space:]]Das Goldene Gleis[[:space:]]
+
+# Zeichnungen
+pattern=[[:space:]]Schnittzeichnung[[:space:]]
+pattern=[[:space:]]Typenzeichnung[[:space:]]
+
+# Begriffe rund um Dampfloks
+pattern=[[:space:]]Speisewasservorwärmung[[:space:]]
+
+# Personen
+pattern=[[:space:]]Robert Garbe[[:space:]]
+pattern=[[:space:]]Anton Hammel[[:space:]]
+pattern=[[:space:]]Richard Paul Wagner[[:space:]]
+pattern=[[:space:]]Friedrich Witte[[:space:]]
+pattern=[[:space:]]Hans Schulze[[:space:]]
