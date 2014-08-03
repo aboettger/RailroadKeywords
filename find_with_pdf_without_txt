@@ -1,0 +1,15 @@
+#! /bin/bash
+
+shopt -s nullglob
+shopt -s nocaseglob
+find "$1" -depth  -type d | { while read -r D;
+  do
+    case "$D" in
+      "$DR" ) continue;;
+    esac
+    pdfs=$(echo "$D"/*.pdf)
+    txts=$(echo "$D"/*.txt)
+    if [ "$txts" == "" ] && [ "$pdfs" != "" ]; then
+       echo "$pdfs"
+    fi
+done }
