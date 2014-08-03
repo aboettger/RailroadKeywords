@@ -165,6 +165,8 @@ function createTxtFile () {
   mv "$temp_file" "$pdf_dirname/$pdf_filename.txt"
 }
 
+function echoerr() { echo "$@" 1>&2; }
+
 # END functions ################################################################
 
 pattern_path="$2"
@@ -176,21 +178,30 @@ if [ ! -d "$pattern_path" ] && [ ! -d "$(dirname "$pattern_path")" ]; then
 fi
 
 if [ "$1" == "test" ]; then
+  time_complete_a=$(($(date +%s%N)/1000000))
   if [ -f "$pattern_path" ]; then
     runTest "$pattern_path"
   else
     find "$pattern_path" -type f -name '*.pattern' | { while read -r pattern_case;
       do
+        echoerr "$pattern_case"
+        timea=$(($(date +%s%N)/1000000))
+        
         runTest "$pattern_case"
+        
+        timeb=$(($(date +%s%N)/1000000))
+        echoerr "---> $((timeb - timea)) ms"
     done }
   fi
+  time_complete_b=$(($(date +%s%N)/1000000))
+  echoerr "Gesamtzeit: $((time_complete_b - time_complete_a)) ms"
+  
 elif [ "$1" == "run" ]; then
   if [ ! -f "$pdf_path" ]; then
     logError "PDF not found \"$3\""
     exit 1
   else
     pdf_dirname=$(dirname "$pdf_path")
-    # echo "$pdf_dirname"
     pdf_filename=$(basename "$pdf_path")
     pdf_filename="${pdf_filename%.*}"
     if [ -f "$pdf_dirname/$pdf_filename.md5" ]; then
