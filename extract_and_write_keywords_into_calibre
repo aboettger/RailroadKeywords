@@ -33,7 +33,7 @@ function save_pid {
 
 save_pid
 
-notify-send "$(basename "$0")" "start"
+# notify-send "$(basename "$0")" "start"
 
 # Absolute path to this script, e.g. /home/user/bin/foo.sh
 script=$(readlink -f "$0")
@@ -54,23 +54,53 @@ find "$search_root" -type f -name '*.pdf' | {
     echo "$metadata_path not found" 1>&2
   else
     calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "$metadata_path")
-    # SubShell
-    keywords=$(find "$script_path/pattern" -type f -name '*.pattern' | {
-      while read -r pattern_path; do
-        keywords=$("$script_path/create_railroad_keywords_from_pdf" run "$pattern_path" "$pdf_path")
-        keywords=${keywords//Baureihe/BR}
-        false_positive_pattern_path="$script_path/false_positive/$(basename "$pattern_path")"
+    
+    # pattern_files="$script_path/pattern/*"
+    # for pattern_path in $pattern_files; do
+    #   keywords=$("$script_path/create_railroad_keywords_from_pdf" run "$pattern_path" "$pdf_path")
+    #   keywords=${keywords//Baureihe/BR}
+    #   false_positive_pattern_path="$script_path/false_positive/$(basename "$pattern_path")"
+    #   if [ -f "$false_positive_pattern_path" ]; then
+    #     false_positive_pattern=$(grep "^$calibre_id=" "$false_positive_pattern_path" | gawk  -F "$calibre_id=" '{print $2}')
+    #     false_positive_pattern=$(echo "$false_positive_pattern" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
+    #     if [ ! -z "$false_positive_pattern" ]; then
+    #       keywords=$(echo "$keywords" | sed -e "s/$false_positive_pattern/,/g")
+    #       keywords=$(echo "$keywords" | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g")
+    #     fi
+    #   fi
+    # done
+    
+    # keywords=$(find "$script_path/pattern" -type f -name '*.pattern' | {
+    #   while read -r pattern_path; do
+    #     keywords=$("$script_path/create_railroad_keywords_from_pdf" run "$pattern_path" "$pdf_path")
+    #     keywords=${keywords//Baureihe/BR}
+    #     false_positive_pattern_path="$script_path/false_positive/$(basename "$pattern_path")"
+    #     if [ -f "$false_positive_pattern_path" ]; then
+    #       false_positive_pattern=$(grep "^$calibre_id=" "$false_positive_pattern_path" | gawk  -F "$calibre_id=" '{print $2}')
+    #       if [ ! -z "$false_positive_pattern" ]; then
+    #         false_positive_pattern=$(echo "$false_positive_pattern" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
+    #         keywords=$(echo "$keywords" | sed -e "s/$false_positive_pattern/,/g")
+    #       fi
+    #     fi
+    #     echo "$keywords"
+    #   done
+    # })
+    
+    keywords=$("$script_path/create_railroad_keywords_from_pdf" run "$script_path/pattern" "$pdf_path")
+    pattern_files="$script_path/pattern/*"
+    for pattern_path in $pattern_files; do
+      false_positive_pattern_path="$script_path/false_positive/$(basename "$pattern_path")"
         if [ -f "$false_positive_pattern_path" ]; then
           false_positive_pattern=$(grep "^$calibre_id=" "$false_positive_pattern_path" | gawk  -F "$calibre_id=" '{print $2}')
-          false_positive_pattern=$(echo "$false_positive_pattern" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
           if [ ! -z "$false_positive_pattern" ]; then
+            false_positive_pattern=$(echo "$false_positive_pattern" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
             keywords=$(echo "$keywords" | sed -e "s/$false_positive_pattern/,/g")
             keywords=$(echo "$keywords" | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g")
           fi
         fi
-        echo "$keywords"
-      done
-    })
+    done
+    keywords=${keywords//Baureihe/BR}
+    keywords=$(echo "$keywords" | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g")
     
     echo "$pdf_path"
     keywords=${keywords//Baureihe/BR}
@@ -90,6 +120,6 @@ echo "finished"
 
 cleanup
 
-notify-send "$(basename "$0")" "finished"
+# notify-send "$(basename "$0")" "finished"
 
 exit 0
