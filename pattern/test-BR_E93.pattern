@@ -1,0 +1,11 @@
+# Nicht nach E93 oder E 93 suchen, das ist doof, ich weiß, aber sonst wird 
+# z.B. E93 001 UND E93, E93 002 UND E93 usw. gefunden
+
+pattern=([[:space:]]E[[:space:]]{0,1}93(|\.0)[[:space:]]([^0-9]|$))|([[:space:]](BR|Baureihe)[[:space:]]E[[:space:]]{0,1}93[[:space:]]([^0-9]|$))
+
+# E93
+pattern=([[:space:]]E[[:space:]]{0,1}93[[:space:]](0[1-9]|1[0-8])[[:space:]])
+# E93.0
+pattern=([[:space:]]E[[:space:]]{0,1}93[[:space:]]0(0[1-9]|1[0-8])[[:space:]])
+
+pattern_delete=([[:space:]][^0-9]$)
