@@ -99,12 +99,10 @@ find "$search_root" -type f -name '*.pdf' | {
           fi
         fi
     done
-    keywords=${keywords//Baureihe/BR}
-    keywords=$(echo "$keywords" | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g")
     
-    echo "$pdf_path"
+    echo "Processing: $pdf_path"
     keywords=${keywords//Baureihe/BR}
-    keywords=$(echo "$keywords" | sort | sed -E 's/(V)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(VT)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(E)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(S)([0-9])/\1 \2/g' | uniq | tr '\n' ',' | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//' | sed -e 's/ \- /-/g')
+    keywords=$(echo "$keywords" | sort | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g" | sed -E 's/(V)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(VT)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(E)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(S)([0-9])/\1 \2/g' | uniq | tr '\n' ',' | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//' | sed -e 's/ \- /-/g')
 
     old_keywords=$(calibredb show_metadata "$calibre_id"  | grep "Tags" | awk -F: '{print $2}' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/, /,/g' )
     echo "Tags old: >$old_keywords<"
