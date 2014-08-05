@@ -12,7 +12,8 @@ pattern=[[:space:]]Jugoslavia \- Express[[:space:]]
 
 # Bezeichnungen Loks
 pattern=[[:space:]]Köf (II|III)[[:space:]]
-pattern=(Breuer[[:space:]]\-[[:space:]]|)Rangiertraktor
+pattern=[[:space:]](Breuer[[:space:]]\-[[:space:]]|)Rangiertraktor[[:space:]]
+pattern=[[:space:]]NOHAB|Kartoffelkäfer[[:space:]]
 
 # Orte und Einrichtungen
 pattern=[[:space:]]VES \- M Halle[[:space:]]
