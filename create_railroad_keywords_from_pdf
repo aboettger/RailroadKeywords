@@ -148,10 +148,12 @@ function createTxtFile () {
   
   make_space=$(python -c 'print u"\u0001\u000C\u0009\u00A0\u2004\u2005\u2006\u2009\u200A\u200B".encode("utf8")')
   
-  pdftotext -q "$pdf_path" "$pdf_dirname/$pdf_filename.txt"
+  # pdftotext -q "$pdf_path" "$pdf_dirname/$pdf_filename.txt"
+  pdf2txt -o "$pdf_dirname/$pdf_filename.human-readable.txt" "$pdf_path"
   
   # Remove all NewLines (sed) and add a line terminator (awk) and write to a temporary file
-  temp_file=$(tempfile)
+  temp_file_1=$(tempfile)
+  temp_file_2=$(tempfile)
   
   ####################################
   # nicht entfernen, weil
@@ -160,9 +162,12 @@ function createTxtFile () {
   # '-' -> ' - ' --> NOK --> VES-M Halle
   #  | sed -e "s/[[:space:]]\{2,\}/ /g"
   ####################################
-  sed ':a;N;$!ba;s/\n/ \| /g' "$pdf_dirname/$pdf_filename.txt" | awk '{printf("%s!\n",$0)}' | sed 's/['"$make_space"']/ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/(/ ( /g' | sed -e 's/)/ ) /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -e 's/\-/ - /g' > "$temp_file"
+  # sed ':a;N;$!ba;s/\n/ \| /g' "$pdf_dirname/$pdf_filename.human-readable.txt" | awk '{printf("%s!\n",$0)}' | sed 's/['"$make_space"']/ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/(/ ( /g' | sed -e 's/)/ ) /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -E 's/([a-z])\-(\|[[:space:]]){0,1}([a-z])/\1\2/g' | sed -e 's/\-/ - /g' > "$temp_file"
+  sed -E ':a;N;$!ba;s/([a-z])\-\n([a-z])/\1\2/g' "$pdf_dirname/$pdf_filename.human-readable.txt" > "$temp_file_1"
+  # sed ':a;N;$!ba;s/\n/ \| /g' "$temp_file_1" | awk '{printf("%s!\n",$0)}' | sed 's/['"$make_space"']/ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/(/ ( /g' | sed -e 's/)/ ) /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -e 's/\-/ - /g' > "$temp_file_2"
+  sed ':a;N;$!ba;s/\n/ /g' "$temp_file_1" | awk '{printf("%s!\n",$0)}' | sed 's/['"$make_space"']/ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/(/ ( /g' | sed -e 's/)/ ) /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -e 's/\-/ - /g' > "$temp_file_2"
   # Move the temporary file 
-  mv "$temp_file" "$pdf_dirname/$pdf_filename.txt"
+  mv "$temp_file_2" "$pdf_dirname/$pdf_filename.txt"
 }
 
 function echoerr() { echo "$@" 1>&2; }
