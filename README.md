@@ -28,3 +28,8 @@ update_pdf_metadata_by_calibre
 Dieses Programm kann die Angaben in den Metadaten für ein PDF in der Calibre-Bibliothek in das PDF übertragen. Dabei werden die md5-Prüfsummen, die "create_railroad_keywords_from_pdf" verwendet, neu abgelegt, da sich das PDF an sich nicht geändert hat uns somit keine neue Erzeugung der Textdatei durch "create_railroad_keywords_from_pdf" nötig ist.
 
 ```update_pdf_metadata_by_calibre [CalibreBibliotheksVerzeichnis]```
+
+Related Projects
+----------------
+
+ * <a href="https://github.com/euske/pdfminer">pdfminer</a>
