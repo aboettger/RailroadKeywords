@@ -55,6 +55,8 @@ find "$search_root" -type f -name '*.pdf' | {
   else
     calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "$metadata_path")
     
+    echo "Processing: $working_path"
+    
     # pattern_files="$script_path/pattern/*"
     # for pattern_path in $pattern_files; do
     #   keywords=$("$script_path/create_railroad_keywords_from_pdf" run "$pattern_path" "$pdf_path")
@@ -110,11 +112,12 @@ find "$search_root" -type f -name '*.pdf' | {
     if [ "$old_keywords" != "$keywords" ]; then
       calibredb set_metadata --field tags:"$keywords" "$calibre_id"
     fi
+    echo "…done"
   fi
   done
 }
 
-echo "finished"
+echo "…finished"
 
 cleanup
 
