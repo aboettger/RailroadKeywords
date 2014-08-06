@@ -1,5 +1,14 @@
 RailroadKeywords
 ================
+
+Requirements
+------------
+* **Calibre** (http://calibre-ebook.com/)
+* Aktuellste Version von **pdfminer** (https://github.com/euske/pdfminer)
+
+Beschreibung
+------------
+
 Dieses Projekt soll aus vorhandenen PDFs alle (mir) bekannten Baureihen deutscher Lokomotiven und Triebwagen extrahieren. Es besteht aus drei Einzelprogrammen, die auch unabhängig voneinander einsetzbar sind.
 
 **create_railroad_keywords_from_pdf**
