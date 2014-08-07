@@ -38,7 +38,7 @@ function getResults () {
   pattern_case="$1"
   txt_path="$2"
   pattern=$(getPattern "$pattern_case")
-  logInfo "pattern $pattern_case"
+  # logInfo "pattern $pattern_case"
   # timea=$(($(date +%s%N)/1000000))
 
 #echo "$pattern_case"
