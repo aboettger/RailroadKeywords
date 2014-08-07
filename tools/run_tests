@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+script_path=$(dirname "$script")
+
+"$script_path/compress_pattern"
+"$script_path/../create_railroad_keywords_from_pdf" test "$script_path/../pattern/"
