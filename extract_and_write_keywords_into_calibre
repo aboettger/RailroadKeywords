@@ -11,7 +11,7 @@ function trapint {
 }
 
 function cleanup {
-  echo "Cleaning up..."
+  echo "Cleaning up…"
   rm "$HOME/running/$script_name.pid"
   echo "Bye."
   echo
