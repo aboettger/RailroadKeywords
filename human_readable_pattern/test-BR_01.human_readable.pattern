@@ -1,14 +1,8 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/01.asc
 
-pattern=[[:space:]]S[[:space:]]{0,1}36\.20[[:space:]]
+pattern=([[:space:]]S[[:space:]]{0,1}36\.20[[:space:]])
 
 pattern=(([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]01(\.[0-2,5]|\.05|\.10|\.11|\.15|\.20|\.21|\.22)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]01[[:space:]]([^0-9]|$))
-
-# Es gibt auch eine BR E01, oft falsch als E 01 xxx geschrieben
-# Diese sollen hier auch gefunden werden, damit ich einen definierten Zustand habe.
-# Sie werden aber wieder gelöscht (pattern_delete)
-# Man könnte wohl auch mit back references arbeiten, das habe ich 
-# aber mit grep nicht hinbekommen
 
 # 01.0
 pattern=([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]01[[:space:]]0(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9])

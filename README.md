@@ -17,6 +17,9 @@ Mit diesem Programm werden Schlüsselwörter aus PDFs extrahiert. Dazu wird mit 
 Welche Schlüsselwörter gefunden werden sollen ist durch reguläre Ausdrücke in den Dateien im Verzeichnis "pattern" dieses Projekts definiert. Damit diese möglichst genau arbeiten können Tests durchgeführt werden. Die Testdateien befinden sich im Verzeichnis "tests".
 Im Verzeichnis "false_positive" werden Schlüsselwörter abgelegt, die für ein PDF nicht zutreffend sind. Die Einträge in den einzelnen Dateien setzen sich aus der Calibre-ID und einem regulären Ausdruck zusammen. Die im Projekt vorhandenen Dateien können nur als Vorlage dienen, da die verwendeten Calibre-IDs meine Datenbank wiederspiegeln.
 
+* Pattern-Dateien erzeugen
+Im Verzeichnis "RailroadKeywords/human_readable_pattern" liegen Pattern-Dateien, die lesbar und damit wartbar sind. Das Script "RailroadKeywords/tools/compress_pattern" komprimiert diese Dateien und legt diese im Verzeichnis "RailroadKeywords/pattern" ab. Natürlich können in diesem Verzeichnis auch die "human_readable"-Dateien liegen, dann wird das Laufzeitverhalten aber schlechter.
+
 * Alle Tests durchführen
 ```create_railroad_keywords_from_pdf test [Projektverzeichnis]/RailroadKeywords/pattern/```
 
