@@ -14,11 +14,11 @@ TOA="\e[0m" # No Color
 # START functions ##############################################################
 
 function logInfo () {
-    echo -e "${green}$1${TOA}"
+    echo -e "${green}$1${TOA}" 1>&2
 }
 
 function logWarn () {
-  echo -e "${yellow}$1${TOA}"
+  echo -e "${yellow}$1${TOA}" 1>&2
 }
 
 function logError () {
@@ -38,6 +38,9 @@ function getResults () {
   pattern_case="$1"
   txt_path="$2"
   pattern=$(getPattern "$pattern_case")
+  logInfo "pattern $pattern_case"
+  # timea=$(($(date +%s%N)/1000000))
+
 #echo "$pattern_case"
   echo "$pattern" | { while read -r line; do
     # line=$(echo "$line" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g')
@@ -55,6 +58,8 @@ function getResults () {
   #    exit 0
     fi
   done }
+  # timeb=$(($(date +%s%N)/1000000))
+  # logInfo "---> $((timeb - timea)) ms"
 }
 
 function runTest () {
@@ -133,11 +138,11 @@ function runSearch () {
   pdf_filename=$(basename "$pdf_path")
   pdf_filename="${pdf_filename%.*}"
   lines=$(wc -l < "$pdf_dirname/$pdf_filename.txt")
+  
   if [ "$lines" != "0" ]
   then
     getResults "$pattern_case" "$pdf_dirname/$pdf_filename.txt"
   fi
-
 }
 
 # createTxtFile "$pdf_path" "$pdf_dirname" "$pdf_filename"
@@ -147,9 +152,24 @@ function createTxtFile () {
   pdf_filename="$3"
   
   make_space=$(python -c 'print u"\u0001\u000C\u0009\u00A0\u2004\u2005\u2006\u2009\u200A\u200B".encode("utf8")')
-  
-  # pdftotext -q "$pdf_path" "$pdf_dirname/$pdf_filename.txt"
+  # pdftotext "$pdf_path" "$pdf_dirname/$pdf_filename.txt"
+  # if [ $? -gt 0 ]; then 
+  #   logError "Fehler in der Verarbeitung, lösche txt-Dateien"
+  #   rm "$pdf_dirname/$pdf_filename.human-readable.txt"
+  #   rm "$pdf_dirname/$pdf_filename.txt"
+  #   exit 1;
+  # fi
   pdf2txt.py -o "$pdf_dirname/$pdf_filename.human-readable.txt" "$pdf_path"
+  if [ $? -gt 0 ]; then 
+    logError "Fehler in der Verarbeitung, lösche txt-Dateien"
+    if [ -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
+      rm "$pdf_dirname/$pdf_filename.human-readable.txt"
+    fi
+    if [ -f "$pdf_dirname/$pdf_filename.txt" ]; then
+      rm "$pdf_dirname/$pdf_filename.txt"
+    fi
+    exit 1;
+  fi
   
   # Remove all NewLines (sed) and add a line terminator (awk) and write to a temporary file
   temp_file_1=$(tempfile)
@@ -165,7 +185,7 @@ function createTxtFile () {
   # sed ':a;N;$!ba;s/\n/ \| /g' "$pdf_dirname/$pdf_filename.human-readable.txt" | awk '{printf("%s!\n",$0)}' | sed 's/['"$make_space"']/ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/(/ ( /g' | sed -e 's/)/ ) /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -E 's/([a-z])\-(\|[[:space:]]){0,1}([a-z])/\1\2/g' | sed -e 's/\-/ - /g' > "$temp_file"
   sed -E ':a;N;$!ba;s/([a-z])\-\n([a-z])/\1\2/g' "$pdf_dirname/$pdf_filename.human-readable.txt" > "$temp_file_1"
   # sed ':a;N;$!ba;s/\n/ \| /g' "$temp_file_1" | awk '{printf("%s!\n",$0)}' | sed 's/['"$make_space"']/ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/(/ ( /g' | sed -e 's/)/ ) /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -e 's/\-/ - /g' > "$temp_file_2"
-  sed ':a;N;$!ba;s/\n/ /g' "$temp_file_1" | awk '{printf("%s!\n",$0)}' | sed 's/['"$make_space"']/ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/(/ ( /g' | sed -e 's/)/ ) /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -e 's/\-/ - /g' | sed -E 's/[[:space:]]{2,}/ /g' | sed -E 's/([[:space:]]BR)([0-9])/\1 \2/g' > "$temp_file_2"
+  sed ':a;N;$!ba;s/\n/ \n /g' "$temp_file_1" | awk '{printf("%s!\n",$0)}' | sed 's/['"$make_space"']/ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/(/ ( /g' | sed -e 's/)/ ) /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -e 's/\-/ - /g' | sed -E 's/[[:space:]]{2,}/ /g' | sed -E 's/([[:space:]]BR)([0-9])/\1 \2/g' > "$temp_file_2"
   # Move the temporary file 
   mv "$temp_file_2" "$pdf_dirname/$pdf_filename.txt"
 }
@@ -200,8 +220,7 @@ if [ "$1" == "test" ]; then
   fi
   time_complete_b=$(($(date +%s%N)/1000000))
   echoerr "Gesamtzeit: $((time_complete_b - time_complete_a)) ms"
-  
-elif [ "$1" == "run" ]; then
+elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
   if [ ! -f "$pdf_path" ]; then
     logError "PDF not found \"$3\""
     exit 1
@@ -232,13 +251,18 @@ elif [ "$1" == "run" ]; then
       createTxtFile "$pdf_path" "$pdf_dirname" "$pdf_filename"
     fi
 
-    if [ -f "$pattern_path" ]; then
-      runSearch "$pattern_path" "$pdf_path"
-    else
-      find "$pattern_path" -type f -name 'test-*.pattern' | { while read -r pattern_case;
-        do
-          runSearch "$pattern_case" "$pdf_path"
-      done }
+    if  [ "$1" == "run" ]; then
+      # time_complete_a=$(($(date +%s%N)/1000000))
+      if [ -f "$pattern_path" ]; then
+        runSearch "$pattern_path" "$pdf_path"
+      else
+        find "$pattern_path" -type f -name 'test-*.pattern' | { while read -r pattern_case;
+          do
+            runSearch "$pattern_case" "$pdf_path"
+        done }
+      fi
+      # time_complete_b=$(($(date +%s%N)/1000000))
+      # logInfo "Gesamtzeit: $((time_complete_b - time_complete_a)) ms"
     fi
   fi
 fi
