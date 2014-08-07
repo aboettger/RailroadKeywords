@@ -1,3 +1,11 @@
+Hinweis Update (07.08.2014)
+=======
+Mit dem heutigen Update (07.08.2014) wird das Laufzeitverhalten erheblich verbessert. Dazu müssen alle Textdateien gelöscht werden, die vor dem heutigen Update erzeugt wurden. Bitte das "CalibreBibliotheksVerzeichnis" verwenden, welches auch gemeint ist. Für verlorene Dateien übernehme ich keine Haftung.
+
+```
+find [CalibreBibliotheksVerzeichnis] -type f -name '*.txt' | { while read file; do rm "$file"; done }
+```
+
 RailroadKeywords
 ================
 
@@ -10,6 +18,27 @@ Beschreibung
 ------------
 
 Dieses Projekt soll aus vorhandenen PDFs alle (mir) bekannten Baureihen deutscher Lokomotiven und Triebwagen extrahieren. Es besteht aus drei Einzelprogrammen, die auch unabhängig voneinander einsetzbar sind.
+
+Folgende Schritte sind auszuführen:
+```
+tools/compress_pattern
+tools/run_tests
+extract_and_write_keywords_into_calibre [CalibreBibliotheksVerzeichnis oder CalibreBibliotheksUnterverzeichnis]
+
+```
+Wenn das Projekt also im Verzeichnis "~/src" liegt und die PDFs in der Calibre-Bibliothek "~/MeineEisenbahnliteratur" dann sieht das so aus (Calibre kann mehrere Bibliotheken verwalten):
+```
+~/src/RailroadKeywords/tools/compress_pattern
+~/src/RailroadKeywords/tools/run_tests
+~/src/RailroadKeywords/extract_and_write_keywords_into_calibre ~/MeineEisenbahnliteratur
+
+```
+
+**tools/compress_pattern**
+Mit diesem Tool werden die lesbaren Pattern-Dateien komprimiert und im Zielverzeichnis abgelegt.
+
+**tools/run_tests**
+Mit diesem Tool werden die Pattern-Dateien getestet, damit sie alles finden, was sie finden sollen.
 
 **create_railroad_keywords_from_pdf**
 
