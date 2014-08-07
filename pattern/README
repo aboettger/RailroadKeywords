@@ -1,0 +1,2 @@
+Alle BR-pattern-Dateien sollten mit "RailroadKeywords/tools/compress_pattern" erzeugt werden.
+Die dafür notwendigen "lesbaren" pattern-Dateien liegen im Verzeichnis "RailroadKeywords/human_readable_pattern"
