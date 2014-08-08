@@ -1,0 +1,2 @@
+pattern=([[:space:]]2’C([[:space:]]|\-)h4v[[:space:]])
+pattern=([[:space:]]2’C([[:space:]]|\-)n4v[[:space:]])
