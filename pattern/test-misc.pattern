@@ -26,9 +26,8 @@ pattern=[[:space:]]Meuselwitz[[:space:]]
 pattern=[[:space:]]Tröglitz[[:space:]]
 pattern=[[:space:]]Hydrierwerk[[:space:]]
 
-# 
-pattern=[[:space:]]1’C h2[[:space:]]
-pattern=[[:space:]]2’C n4v[[:space:]]
+# Gattung
+pattern=[[:space:]]S[[:space:]]{0,1}3/6[[:space:]]
 
 # Modellbau
 pattern=[[:space:]]Granier(en|technik)[[:space:]]
