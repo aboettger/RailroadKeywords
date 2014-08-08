@@ -1,7 +1,5 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/01.asc
 
-pattern=([[:space:]]S[[:space:]]{0,1}36\.20[[:space:]])
-
 pattern=(([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]01(\.[0-2,5]|\.05|\.10|\.11|\.15|\.20|\.21|\.22)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]01[[:space:]]([^0-9]|$))
 
 # 01.0
