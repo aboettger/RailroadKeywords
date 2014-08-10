@@ -1,10 +1,10 @@
 comm -2 -3  <(sort 118\ 001-999.list) <(sort ../tests/test-BR_118.positive.002.list)
 
 # Sucht in vorhandenen txt-dateien, die mittels "pdftotext" erzeugt werden, nach einem Suchbegrif und startet "extract_and_write_keywords_into_calibre"
-find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' | { while read file; do grep -aEil "Robert Garbe" "$file" | { while read -r pdf; do extract_and_write_keywords_into_calibre $pdf; done } done } 
+find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readable.txt' | { while read file; do grep -aEil " Nossen " "$file" | { while read -r pdf; do echo "$file"; extract_and_write_keywords_into_calibre "$pdf"; done } done }
 
 # Findet PDFs ohne txt-Dateien, die mittels "pdftotext" erzeugt werden und startet "extract_and_write_keywords_into_calibre"
-find_with_pdf_without_txt | { while read -r pdf; do extract_and_write_keywords_into_calibre $pdf; done }
+find_with_pdf_without_txt | { while read -r pdf; do extract_and_write_keywords_into_calibre "$pdf"; done }
 
 # Textdateien löschen um das System zu zwingen, neue anzulegen
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' | { while read file; do rm "$file"; done }
