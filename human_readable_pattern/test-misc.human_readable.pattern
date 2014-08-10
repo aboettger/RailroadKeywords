@@ -28,6 +28,7 @@ pattern=([[:space:]]Gera[[:space:]])
 pattern=([[:space:]]Meuselwitz[[:space:]])
 pattern=([[:space:]]Tröglitz[[:space:]])
 pattern=([[:space:]]Hydrierwerk[[:space:]])
+pattern=([[:space:]]Meiningen[[:space:]])
 
 # Modellbau
 pattern=([[:space:]]Granier(en|technik)[[:space:]])
