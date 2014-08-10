@@ -1,0 +1,8 @@
+
+pattern=([[:space:]](Mecklenburg \- Pommersche Schmalspurbahn)|(MPSB)[[:space:]])
+pattern=([[:space:]]Windbergbahn[[:space:]])
+pattern=([[:space:]]Brandenburgische Städtebahn[[:space:]])
+pattern=([[:space:]]Selketalbahn[[:space:]])
+pattern=([[:space:]]Saal \- Eisenbahn[[:space:]])
+pattern=([[:space:]]Thüringerwaldbahn[[:space:]])
+pattern=([[:space:]]Müglitztalbahn[[:space:]])
