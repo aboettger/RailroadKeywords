@@ -1,0 +1,44 @@
+#!/bin/bash
+# createTxtFile "$pdf_path" "$pdf_dirname" "$pdf_filename"
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+# script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+# script_path=$(dirname "$script")
+# script_name=$(basename "$script")
+
+pdf_path="$1"
+pdf_dirname="$2"
+pdf_filename="$3"
+
+make_space=$(python -c 'print u"\u0001\u000C\u0009\u00A0\u2004\u2005\u2006\u2009\u200A\u200B".encode("utf8")')
+# pdftotext "$pdf_path" "$pdf_dirname/$pdf_filename.txt"
+# if [ $? -gt 0 ]; then 
+#   logError "Fehler in der Verarbeitung, lösche txt-Dateien"
+#   rm "$pdf_dirname/$pdf_filename.human-readable.txt"
+#   rm "$pdf_dirname/$pdf_filename.txt"
+#   exit 1;
+# fi
+pdf2txt.py -o "$pdf_dirname/$pdf_filename.human-readable.txt" "$pdf_path"
+if [ $? -gt 0 ]; then 
+  logError "Fehler in der Verarbeitung, lösche txt-Dateien"
+  if [ -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
+    rm "$pdf_dirname/$pdf_filename.human-readable.txt"
+  fi
+  if [ -f "$pdf_dirname/$pdf_filename.txt" ]; then
+    rm "$pdf_dirname/$pdf_filename.txt"
+  fi
+  exit 1;
+fi
+
+temp_file_1=$(tempfile)
+temp_file_2=$(tempfile)
+temp_file_3=$(tempfile)
+
+sed -E ':a;N;$!ba;s/([a-z])\-\n([a-z])/\1\2/g' "$pdf_dirname/$pdf_filename.human-readable.txt" > "$temp_file_1"
+sed -E ':a;N;$!ba;s/([a-zA-Z])(\-)\n([A-Z])/\1\2\3/g' "$temp_file_1" > "$temp_file_2"
+sed ':a;N;$!ba;s/\n/ \n /g' "$temp_file_2" | sed 's/['"$make_space"']/ /g' | sed -e 's/\*[[:space:]]/ \* /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/(/ ( /g' | sed -e 's/)/ ) /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -e 's/\-/ - /g' | sed -E 's/[[:space:]]{2,}/ /g' | sed -E 's/([[:space:]]BR)([0-9])/\1 \2/g' > "$temp_file_3"
+# Move the temporary file 
+mv "$temp_file_3" "$pdf_dirname/$pdf_filename.txt"
+
+exit 0
