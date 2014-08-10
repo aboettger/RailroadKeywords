@@ -1,18 +1,3 @@
-# Bezeichnungen - Züge
-pattern=([[:space:]]Orient \- Express[[:space:]])
-pattern=([[:space:]]Heckeneil(züge|zug)[[:space:]])
-pattern=([[:space:]]Metropolitan[[:space:]])
-pattern=([[:space:]]Metronom[[:space:]])
-pattern=([[:space:]]Moorexpress[[:space:]])
-pattern=([[:space:]]Oberweißbacher Bergbahn[[:space:]])
-pattern=([[:space:]]Schwarzatalbahn[[:space:]])
-pattern=([[:space:]]Rheingold[[:space:]])
-pattern=([[:space:]]Henschel \- Wegmann \- Zug[[:space:]])
-pattern=([[:space:]]Jugoslavia \- Express[[:space:]])
-
-# Bezeichnungen - Bahnen
-pattern=([[:space:]](Mecklenburg \- Pommersche Schmalspurbahn)|(MPSB)[[:space:]])
-
 # Bezeichnungen Loks
 pattern=([[:space:]]Köf (II|III)[[:space:]])
 pattern=([[:space:]](Breuer[[:space:]]\-[[:space:]]|)Rangiertraktor[[:space:]])
@@ -29,6 +14,8 @@ pattern=([[:space:]]Meuselwitz[[:space:]])
 pattern=([[:space:]]Tröglitz[[:space:]])
 pattern=([[:space:]]Hydrierwerk[[:space:]])
 pattern=([[:space:]]Meiningen[[:space:]])
+pattern=([[:space:]]Ottbergen[[:space:]])
+pattern=([[:space:]]Nossen[[:space:]])
 
 # Modellbau
 pattern=([[:space:]]Granier(en|technik)[[:space:]])
@@ -46,10 +33,4 @@ pattern=([[:space:]]Typenzeichnung[[:space:]])
 
 # Begriffe rund um Dampfloks
 pattern=([[:space:]]Speisewasservorwärmung[[:space:]])
-
-# Personen
-pattern=([[:space:]]Robert Garbe[[:space:]])
-pattern=([[:space:]]Anton Hammel[[:space:]])
-pattern=([[:space:]]Richard Paul Wagner[[:space:]])
-pattern=([[:space:]]Friedrich Witte[[:space:]])
-pattern=([[:space:]]Hans Schulze[[:space:]])
+pattern=([[:space:]]Dampflokhochburg[[:space:]])
