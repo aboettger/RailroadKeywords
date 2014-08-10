@@ -5,7 +5,7 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
-find "$script_path/../human_readable_pattern" -type f -name "test-BR*.human_readable.pattern" | sort | { while read -r file;
+find "$script_path/../human_readable_pattern" -type f -name "test-*.human_readable.pattern" | sort | { while read -r file;
 do
   output_filename=${file//human_readable.pattern/pattern}
   output_filename=${output_filename//human_readable_pattern/pattern}
