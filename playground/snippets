@@ -8,3 +8,6 @@ find_with_pdf_without_txt | { while read -r pdf; do extract_and_write_keywords_i
 
 # Textdateien löschen um das System zu zwingen, neue anzulegen
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' | { while read file; do rm "$file"; done }
+
+# Schreibe "createTxtFile.md5" neu
+find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.pdf' | { while read file; do md5_new_CreateTxtFile=$(md5sum "/home/aboettger/src/RailroadKeywords/functions/createTxtFile"  | gawk  -F ' ' '{print $1}'); echo "$md5_new_CreateTxtFile" > "$(dirname "$file")/createTxtFile.md5"; done }
