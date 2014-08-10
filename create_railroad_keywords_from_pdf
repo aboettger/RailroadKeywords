@@ -142,11 +142,14 @@ function runSearch () {
   # echo "$pdf_dirname"
   pdf_filename=$(basename "$pdf_path")
   pdf_filename="${pdf_filename%.*}"
-  lines=$(wc -l < "$pdf_dirname/$pdf_filename.txt")
   
-  if [ "$lines" != "0" ]
-  then
-    getResults "$pattern_case" "$pdf_dirname/$pdf_filename.txt"
+  if [ -f "$pdf_dirname/$pdf_filename.txt" ]; then
+    lines=$(wc -l < "$pdf_dirname/$pdf_filename.txt")
+    
+    if [ "$lines" != "0" ]
+    then
+      getResults "$pattern_case" "$pdf_dirname/$pdf_filename.txt"
+    fi
   fi
 }
 
