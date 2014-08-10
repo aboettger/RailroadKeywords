@@ -7,6 +7,13 @@
 # script_path=$(dirname "$script")
 # script_name=$(basename "$script")
 
+red="\e[0;31m"
+TOA="\e[0m" # No Color
+
+function logError () {
+  echo -e "${red}$1${TOA}" 1>&2
+}
+
 pdf_path="$1"
 pdf_dirname="$2"
 pdf_filename="$3"
