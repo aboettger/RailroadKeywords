@@ -77,16 +77,16 @@ function runTest () {
   # Finde Einträge in "tests/test-....positive.....list" "tests/test-....negative.....list" und  ohne führende und abschließende Leerzeichen
   find "$test_path" -type f -name "$test_name*.list" | sort | { while read -r file;
   do
-     matched_elements=$(grep '^[^ #]' "$file")
-     if [ "$matched_elements" != "" ]; then
-       logError "$matched_elements"
+     matched_elements_without_leading=$(sed /^[[:space:]]*#/d "$file" | grep '^[^ ]')
+     if [ "$matched_elements_without_leading" != "" ]; then
+       logError "$matched_elements_without_leading"
        logError "Entry without leading spaces found: $file"
        exit 1
      fi
      
-     matched_elements=$(grep '^[^ #].*[^ ]$' "$file")
-     if [ "$matched_elements" != "" ]; then
-       logError "$matched_elements"
+     matched_elements_without_trailing=$(sed /^[[:space:]]*#/d "$file" | grep '[^ ]$')
+     if [ "$matched_elements_without_trailing" != "" ]; then
+       logError "$matched_elements_without_trailing"
        logError "Entry without trailing spaces found: $file"
        exit 1
      fi
