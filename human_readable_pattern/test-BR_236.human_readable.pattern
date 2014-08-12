@@ -1,14 +1,14 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/236.asc
 
-pattern=(([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]236(\.[1-2,4])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]236[[:space:]]([^0-9]|$))
+pattern=(([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]236(\.[1-2,4])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]236[[:space:]]([^0-9]|$))
 
 
 # BR 236.1
-pattern=([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]236[[:space:]]1(0[1-9]|1[0-9]|2[0-6]|50)([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]236[[:space:]]1(0[1-9]|1[0-9]|2[0-6]|50)([[:space:]]|-[0-9])
 # BR 236.2
-pattern=([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]236[[:space:]]2(0[1-9]|1[0,2-9]|2[0-9]|3[0-8]|5[1-9]|6[0-2])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]236[[:space:]]2(0[1-9]|1[0,2-9]|2[0-9]|3[0-8]|5[1-9]|6[0-2])([[:space:]]|-[0-9])
 # BR 236.4
-pattern=([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]236[[:space:]]4(0[1-9]|1[0-8])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]236[[:space:]]4(0[1-9]|1[0-8])([[:space:]]|-[0-9])
 
 # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
-pattern_delete=(^([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+pattern_delete=(^([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
