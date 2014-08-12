@@ -1,11 +1,11 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/04.asc
 
-pattern=(([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]04(\.0|\.00)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]04[[:space:]]([^0-9]|$))
+pattern=(([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]04(\.0|\.00)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]04[[:space:]]([^0-9]|$))
 
 # BR 04.0
-pattern=([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]04[[:space:]]0(0[1-2])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]04[[:space:]]0(0[1-2])([[:space:]]|-[0-9])
 # BR 04.00
-pattern=([[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]04[[:space:]]00(15|22)([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]04[[:space:]]00(15|22)([[:space:]]|-[0-9])
 
 # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
-pattern_delete=(^([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+pattern_delete=(^([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
