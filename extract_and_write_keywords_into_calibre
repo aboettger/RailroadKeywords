@@ -96,7 +96,7 @@ find "$search_root" -type f -name '*.pdf' | {
           false_positive_pattern=$(grep "^$calibre_id=" "$false_positive_pattern_path" | gawk  -F "$calibre_id=" '{print $2}')
           if [ ! -z "$false_positive_pattern" ]; then
             false_positive_pattern=$(echo "$false_positive_pattern" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
-            keywords=$(echo "$keywords" | sed -e "s/$false_positive_pattern/,/g")
+            keywords=$(echo "$keywords" | sed -e "s/$false_positive_pattern//g")
             keywords=$(echo "$keywords" | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g")
           fi
         fi
