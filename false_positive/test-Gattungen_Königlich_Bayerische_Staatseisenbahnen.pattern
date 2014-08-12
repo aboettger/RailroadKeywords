@@ -2,3 +2,6 @@
 # z.B.
 # 2557=^(13 530)|(10 002)$
 # entfernt 13 500 und 10 002 aus den zu setzenden Schlüsselwörtern
+
+2590=^(LE)$
+2532=^(1’C)$
