@@ -95,6 +95,7 @@ function runTest () {
 
   # positive tests
   test_name_positive=${pattern_name//pattern/positive}
+  logInfo "$test_name_positive"
   find "$test_path" -type f -name "$test_name_positive*.list" | sort | { while read -r test_case_positive;
     do
       test_results=$(getResults "$pattern_case" "$test_case_positive")
@@ -213,10 +214,7 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
       logInfo "Schreibe \"createTxtFile.md5\"."
       echo "$md5_new_CreateTxtFile" > "$pdf_dirname/createTxtFile.md5"
       
-      # Erzwinge neu "$pdf_dirname/$pdf_filename.md5"
-      logInfo "Erzwinge neu schreiben von \"$pdf_dirname/$pdf_filename.md5\"."
-      md5_new_Pdf=$(md5sum "$pdf_path"  | gawk  -F ' ' '{print $1}')
-      echo "$md5_new_Pdf" > "$pdf_dirname/$pdf_filename.md5"
+
     fi
 
     if [ -f "$pdf_dirname/$pdf_filename.md5" ]; then
@@ -228,13 +226,17 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
     if [ "$md5_current_Pdf" == "$md5_new_Pdf" ]; then
       # Do nothing
       true
-      # logInfo "\"$(basename "$pdf_path")\" scheint sich seit dem letzten Durchlauf nicht geändert zu haben."
-      # logInfo "Versuche bestehende \"$pdf_filename.txt\" zu verwenden."
+      logInfo "\"$(basename "$pdf_path")\" scheint sich seit dem letzten Durchlauf nicht geändert zu haben."
+      logInfo "Versuche bestehende \"$pdf_filename.txt\" zu verwenden."
     else
-       logInfo "Schreibe \"$pdf_filename.txt\"."
+      logInfo "\"$(basename "$pdf_path")\" hat sich seit dem letzten Durchlauf geändert."
+      logInfo "Schreibe \"$pdf_dirname/$pdf_filename.human-readable.txt\" neu."
+      if [ -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
+        rm "$pdf_dirname/$pdf_filename.human-readable.txt"
+      fi
       "$script_path/functions/createTxtFile" "$pdf_path" "$pdf_dirname" "$pdf_filename"
       
-      # logInfo "Schreibe \"$pdf_filename.md5\"."
+       logInfo "Schreibe \"$pdf_filename.md5\"."
       echo "$md5_new_Pdf" > "$pdf_dirname/$pdf_filename.md5"
     fi
     
