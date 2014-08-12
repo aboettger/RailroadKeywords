@@ -1,6 +1,6 @@
 # Bezeichnungen Loks
 pattern=([[:space:]]Köf (II|III)[[:space:]])
-pattern=([[:space:]](Breuer[[:space:]]\-[[:space:]]|)Rangiertraktor[[:space:]])
+pattern=([[:space:]](Breuer \- |)Rangiertraktor[[:space:]])
 pattern=([[:space:]]NOHAB|Kartoffelkäfer[[:space:]])
 
 # Orte und Einrichtungen
@@ -35,3 +35,14 @@ pattern=([[:space:]]Typenzeichnung[[:space:]])
 # Begriffe rund um Dampfloks
 pattern=([[:space:]]Speisewasservorwärmung[[:space:]])
 pattern=([[:space:]]Dampflokhochburg[[:space:]])
+pattern=([[:space:]]Einheitslok(omotive){0,1}[[:space:]])
+pattern=([[:space:]]Kriegslok(omotive){0,1}[[:space:]])
+pattern=([[:space:]]Wehrmachtslok(omotive){0,1}[[:space:]])
+
+#
+pattern=([[:space:]]Kriegselektrolok(omotive){0,1}[[:space:]])
+
+# Modellbahnanlagen
+pattern=([[:space:]]Bay Shore Line[[:space:]])
+pattern=([[:space:]]Modellbahnwunderland[[:space:]])
+pattern=([[:space:]]ARGE Spur 0[[:space:]])
