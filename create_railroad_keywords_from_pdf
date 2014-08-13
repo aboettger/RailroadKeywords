@@ -198,10 +198,9 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
     if [ -f "$pdf_dirname/createTxtFile.md5" ]; then
       md5_current_CreateTxtFile=$(cat "$pdf_dirname/createTxtFile.md5")
     else
-      # Wenn Prüfsummendatei nicht existiert, dann anlegen, aber ohne neue Erstellung der txt-Dateien
+      # Wenn Prüfsummendatei nicht existiert, dann anlegen
       logInfo "Erstelle initial \"$pdf_dirname/createTxtFile.md5\""
       echo "$md5_new_CreateTxtFile" > "$pdf_dirname/createTxtFile.md5"
-      md5_current_CreateTxtFile=$(cat "$pdf_dirname/createTxtFile.md5")
     fi
     
     # echo "$md5_new"
