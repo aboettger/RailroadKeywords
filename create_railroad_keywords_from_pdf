@@ -42,7 +42,19 @@ function getPattern () {
 function getResults () {
   pattern_case="$1"
   txt_path="$2"
+  
   pattern=$(getPattern "$pattern_case")
+  
+  # prefix=$(sed '/^#/d' "$pattern_case" | grep 'prefix=' | gawk  -F 'prefix=' '{print $2}') 
+  # if [ ! -z "$prefix" ]; then
+  #   prefix=$(echo "$prefix" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
+  # fi
+
+  pattern_delete=$(sed '/^#/d' "$pattern_case" | grep 'pattern_delete=' | gawk  -F 'pattern_delete=' '{print $2}')    
+  if [ ! -z "$pattern_delete" ]; then
+    pattern_delete=$(echo "$pattern_delete" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
+  fi
+  
   # logInfo "pattern $pattern_case"
   # timea=$(($(date +%s%N)/1000000))
 
@@ -51,16 +63,19 @@ function getResults () {
     # line=$(echo "$line" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g')
     # sed "s/$line/\2/" "$txt_path"
     # echo "$line"
-    pattern_delete=$(sed '/^#/d' "$pattern_case" | grep 'pattern_delete=' | gawk  -F 'pattern_delete=' '{print $2}')
-    if [ -z "$pattern_delete" ]; then
-      result=$(grep -oaE "$line" "$txt_path" |                                 sed -e 's/^ *//' | sed -e 's/ *$//')
-    else
-      pattern_delete=$(echo "$pattern_delete" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
-      result=$(grep -oaE "$line" "$txt_path" | sed -e "s/$pattern_delete//g" | sed -e 's/^ *//' | sed -e 's/ *$//')
+    
+    result=$(grep -oaE "$line" "$txt_path" | sed -e 's/^ *//' | sed -e 's/ *$//')
+    
+    if [ ! -z "$pattern_delete" ]; then
+      result=$(echo "$result" | sed -e "s/$pattern_delete//g")
     fi
+    
+    if [ ! -z "$prefix" ]; then
+      result=$(echo "$result" | sed -E "s/^(.*)$/$prefix\1/g")
+    fi
+
     if [ "$result" != "" ]; then
       echo "$result"
-  #    exit 0
     fi
   done }
   # timeb=$(($(date +%s%N)/1000000))
