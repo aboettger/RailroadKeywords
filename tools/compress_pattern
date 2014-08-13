@@ -5,10 +5,24 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
-find "$script_path/../pattern" -type f -name "*.pattern" | sort | { while read -r file;
-do
-  rm "$file"
-done }
+exec < /dev/tty
+
+while true; do
+  read -n 1 -p "Alle Dateien im Verzeichnis \"pattern\" werden gelöscht und neu durch die Vorgaben in \"human_readable_pattern\" angelegt. [y/n]: " yn
+  echo;
+  case $yn in
+    [Yy]* ) 
+      find "$script_path/../pattern" -type f -name "*.pattern" | sort | { while read -r file;
+      do
+        rm "$file"
+      done }
+    break;;
+    [Nn]* )
+    break;;
+    * ) echo "Please respond with [y]es or [n]o.";;
+  esac
+done
+
 
 find "$script_path/../human_readable_pattern" -type f -name "test-*.human_readable.pattern" | sort | { while read -r file;
 do
