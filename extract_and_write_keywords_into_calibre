@@ -89,7 +89,9 @@ find "$search_root" -type f -name '*.pdf' | {
     # })
     
     keywords=$("$script_path/create_railroad_keywords_from_pdf" run "$script_path/pattern" "$pdf_path")
+    
     pattern_files="$script_path/pattern/*"
+    
     for pattern_path in $pattern_files; do
       false_positive_pattern_path="$script_path/false_positive/$(basename "$pattern_path")"
         if [ -f "$false_positive_pattern_path" ]; then
