@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+script_path=$(dirname "$script")
+
+script_name=$(basename "$script")
+
+red="\e[0;31m"
+green="\e[0;32m"
+yellow="\e[0;33m"
+TOA="\e[0m" # No Color
+
+function logInfo () {
+    echo -e "${green}$1${TOA}"
+}
+
+function logWarn () {
+  echo -e "${yellow}$1${TOA}"
+}
+
+function logError () {
+  echo -e "${red}$1${TOA}"
+}
+
+
+
+keyword="$2"
+if [ -z "$keyword" ]; then
+  echo "Benutzung: $script_name \"[PfadZurCalibreDB]\" \"[Schlüsselwort]\""
+  exit 1
+fi
+
+find "$1" -type f -name "*.txt" ! -name "*human-readable.txt" | {
+  while read -r path; do
+    result=$(grep "[[:space:]]$keyword[[:space:]]" "$path")
+    if [ ! -z "$result" ]; then
+      working_path=$(dirname "$path")
+      metadata_path="$working_path/metadata.opf"
+      calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "$metadata_path")
+      echo -ne "Calibre-ID $calibre_id \r"
+      keywords=$(calibredb show_metadata "$calibre_id"  | grep "Tags" | awk -F: '{print $2}' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/, /,/g' )
+      if [ ! -z "$keywords" ]; then
+      
+        keywords=$(echo "$keywords" | tr ',' "\n")
+        # echo "$keywords"
+        echo "$keywords" | while read line; do
+          if [ "$line" == "$keyword" ]; then
+            # echo "$keywords"
+            logWarn "================================"
+            logWarn "$path"
+            logWarn "================================"
+            
+            keywords_pattern=$(echo "$line" | sed -E 's/^(.*)$/[[:space:]]\1[[:space:]]/g')
+            # echo "$keywords_pattern"
+
+            egrep -anET -C 5 "$keywords_pattern" "$path"
+            exec < /dev/tty
+            echo
+
+            echo -e "Bitte diesen Eintrag unter \"false_positive\" vornehmen oder bestehenden Eintrag für \"$calibre_id\" ergänzen: ${green}$calibre_id=^(($line))$ ${TOA}"
+            read -n 1 -p "Schlüsselwörter neu erzeugen? [y/n]: " yn
+            echo
+            case $yn in
+              [Yy]* ) 
+                extract_and_write_keywords_into_calibre "$path"
+              break;;
+              [Nn]* )
+              break;;
+              * ) echo "Please respond with [y]es or [n]o."
+              break;;
+            esac
+          fi
+        done
+      fi
+    fi
+  done
+}
