@@ -58,8 +58,9 @@ find "$1" -type f -name "*.txt" ! -name "*human-readable.txt" | {
             egrep -anET -C 5 "$keywords_pattern" "$path"
             exec < /dev/tty
             echo
-
-            echo -e "Bitte diesen Eintrag unter \"false_positive\" vornehmen oder bestehenden Eintrag für \"$calibre_id\" ergänzen: ${green}$calibre_id=^(($line))$ ${TOA}"
+            
+            line_pattern=$(echo $line | sed -e 's/\//\\\//g')
+            echo -e "Bitte diesen Eintrag unter \"false_positive\" vornehmen oder bestehenden Eintrag für \"$calibre_id\" ergänzen: ${green}$calibre_id=^(($line_pattern))$ ${TOA}"
             read -n 1 -p "Schlüsselwörter neu erzeugen? [y/n]: " yn
             echo
             case $yn in
