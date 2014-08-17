@@ -3,10 +3,11 @@ pattern=([[:space:]]Köf (II|III)[[:space:]])
 pattern=([[:space:]]Kö (I|II)[[:space:]])
 pattern=([[:space:]](Breuer \- |)Rangiertraktor[[:space:]])
 pattern=([[:space:]]NOHAB|Kartoffelkäfer[[:space:]])
+pattern=([[:space:]]Kleinlok(|s)[[:space:]])
 
 # Orte und Einrichtungen
 pattern=([[:space:]]VES \- M Halle[[:space:]])
-pattern=([[:space:]]Schiebebühne[[:space:]])
+pattern=([[:space:]]Schiebebühne(|n)[[:space:]])
 pattern=([[:space:]]Berlin( \- |[[:space:]])Friedrichstraße[[:space:]])
 pattern=([[:space:]]Görlitzer Bahnhof[[:space:]])
 pattern=([[:space:]]Tränenpalast[[:space:]])
@@ -18,6 +19,7 @@ pattern=([[:space:]]Hydrierwerk[[:space:]])
 pattern=([[:space:]]Meiningen[[:space:]])
 pattern=([[:space:]]Ottbergen[[:space:]])
 pattern=([[:space:]]Nossen[[:space:]])
+pattern=([[:space:]]DFKM[[:space:]])
 
 # Modellbau
 pattern=([[:space:]]Granier(en|technik)[[:space:]])
@@ -25,23 +27,29 @@ pattern=([[:space:]]Mattieren[[:space:]])
 pattern=([[:space:]]Kitbashing[[:space:]])
 pattern=([[:space:]]Patinieren[[:space:]])
 pattern=([[:space:]]Widerstandslöten[[:space:]])
+pattern=([[:space:]]Dreipunkt(lagerung){0,1}[[:space:]])
 
 # Ereignisse
 pattern=([[:space:]]Das Goldene Gleis[[:space:]])
 
 # Zeichnungen
-pattern=([[:space:]]Schnittzeichnung[[:space:]])
-pattern=([[:space:]]Typenzeichnung[[:space:]])
+pattern=([[:space:]]Schnittzeichnung(|en)[[:space:]])
+pattern=([[:space:]]Typenzeichnung(|en)[[:space:]])
 
 # Begriffe rund um Dampfloks
 pattern=([[:space:]]Speisewasservorwärmung[[:space:]])
 pattern=([[:space:]]Dampflokhochburg[[:space:]])
-pattern=([[:space:]]Einheitslok(omotive){0,1}[[:space:]])
-pattern=([[:space:]]Kriegslok(omotive){0,1}[[:space:]])
-pattern=([[:space:]]Wehrmachtslok(omotive){0,1}[[:space:]])
+pattern=([[:space:]]Einheitslok(|s)(omotive){0,1}(|en)[[:space:]])
+pattern=([[:space:]]Kriegslok(|s)(omotive){0,1}(|en)[[:space:]])
 
 #
-pattern=([[:space:]]Kriegselektrolok(omotive){0,1}[[:space:]])
+pattern=([[:space:]]Kriegselektrolok(|s)(omotive){0,1}(|en)[[:space:]])
+pattern=([[:space:]]Schienenwolf{0,1}[[:space:]])
+pattern=([[:space:]]Kleinbahn(|en)[[:space:]])
+pattern=([[:space:]]Schmalspurbahn(|en)[[:space:]])
+pattern=([[:space:]]Feldbahn(|en)[[:space:]])
+pattern=([[:space:]]Wehrmachtslok(|s)(omotive){0,1}(|en)[[:space:]])
+pattern=([[:space:]]Donnerbüchse(|n)[[:space:]])
 
 # Modellbahnanlagen
 pattern=([[:space:]]Bay Shore Line[[:space:]])
