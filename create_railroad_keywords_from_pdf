@@ -173,7 +173,7 @@ function echoerr() { echo "$@" 1>&2; }
 
 # END functions ################################################################
 
-"$script_path/tools/compress_pattern"
+
 
 pattern_path="$2"
 pdf_path="$3"
@@ -184,6 +184,7 @@ if [ ! -d "$pattern_path" ] && [ ! -d "$(dirname "$pattern_path")" ]; then
 fi
 
 if [ "$1" == "test" ]; then
+  "$script_path/tools/compress_pattern"
   time_complete_a=$(($(date +%s%N)/1000000))
   if [ -f "$pattern_path" ]; then
     runTest "$pattern_path"
