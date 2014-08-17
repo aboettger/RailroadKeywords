@@ -173,6 +173,8 @@ function echoerr() { echo "$@" 1>&2; }
 
 # END functions ################################################################
 
+"$script_path/tools/compress_pattern"
+
 pattern_path="$2"
 pdf_path="$3"
 
