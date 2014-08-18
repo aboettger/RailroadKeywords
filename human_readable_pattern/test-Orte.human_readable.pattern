@@ -1,0 +1,7 @@
+# Ortsnamen, Städte, …
+pattern=([[:space:]]Zeitz[[:space:]])
+pattern=([[:space:]]Gera[[:space:]])
+pattern=([[:space:]]Meuselwitz[[:space:]])
+pattern=([[:space:]]Tröglitz[[:space:]])
+pattern=([[:space:]]Meiningen[[:space:]])
+pattern=([[:space:]]Nossen[[:space:]])
