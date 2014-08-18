@@ -5,29 +5,25 @@ pattern=([[:space:]](Breuer \- |)Rangiertraktor[[:space:]])
 pattern=([[:space:]]NOHAB|Kartoffelkäfer[[:space:]])
 pattern=([[:space:]]Kleinlok(|s)[[:space:]])
 
-# Orte und Einrichtungen
-pattern=([[:space:]]VES \- M Halle[[:space:]])
-pattern=([[:space:]]Schiebebühne(|n)[[:space:]])
-pattern=([[:space:]]Berlin( \- |[[:space:]])Friedrichstraße[[:space:]])
+# Bauwerke (Bahnhöfe, BWs, …)
+pattern=([[:space:]]Hindenburgdamm[[:space:]])
 pattern=([[:space:]]Görlitzer Bahnhof[[:space:]])
 pattern=([[:space:]]Tränenpalast[[:space:]])
-pattern=([[:space:]]Zeitz[[:space:]])
-pattern=([[:space:]]Gera[[:space:]])
-pattern=([[:space:]]Meuselwitz[[:space:]])
-pattern=([[:space:]]Tröglitz[[:space:]])
-pattern=([[:space:]]Hydrierwerk[[:space:]])
-pattern=([[:space:]]Meiningen[[:space:]])
-pattern=([[:space:]]Ottbergen[[:space:]])
-pattern=([[:space:]]Nossen[[:space:]])
-pattern=([[:space:]]DFKM[[:space:]])
+pattern=([[:space:]]VES \- M Halle[[:space:]])
 
-# Modellbau
-pattern=([[:space:]]Granier(en|technik)[[:space:]])
-pattern=([[:space:]]Mattieren[[:space:]])
-pattern=([[:space:]]Kitbashing[[:space:]])
-pattern=([[:space:]]Patinieren[[:space:]])
-pattern=([[:space:]]Widerstandslöten[[:space:]])
-pattern=([[:space:]]Dreipunkt(lagerung){0,1}[[:space:]])
+# Betriebseinrichtungen
+pattern=([[:space:]]Schiebebühne(|n)[[:space:]])
+pattern=([[:space:]]Kohlebunker[[:space:]])
+
+# Örtlichkeiten (KEINE Städte, Ortsnamen)
+pattern=([[:space:]]Berlin( \- |[[:space:]])Friedrichstraße[[:space:]])
+pattern=([[:space:]]Hydrierwerk[[:space:]])
+
+# Vereine
+pattern=([[:space:]]DFKM[[:space:]])
+pattern=([[:space:]]ARGE Spur 0[[:space:]])
+pattern=([[:space:]]Magdeburger Eisenbahnfreunde[[:space:]])
+pattern=([[:space:]]Museumsbahn Schönheide[[:space:]])
 
 # Ereignisse
 pattern=([[:space:]]Das Goldene Gleis[[:space:]])
@@ -54,4 +50,5 @@ pattern=([[:space:]]Donnerbüchse(|n)[[:space:]])
 # Modellbahnanlagen
 pattern=([[:space:]]Bay Shore Line[[:space:]])
 pattern=([[:space:]]Modellbahnwunderland[[:space:]])
-pattern=([[:space:]]ARGE Spur 0[[:space:]])
+pattern=([[:space:]]Bassumer Modellbahn[[:space:]])
+pattern=([[:space:]]Oktorail[[:space:]])
