@@ -1,0 +1,110 @@
+# A
+pattern=([[:space:]]A (I|II|III|IV|V)[[:space:]])
+
+# AA
+pattern=([[:space:]]AA I[[:space:]])
+
+# B
+pattern=([[:space:]]B (I|II|III|IV|V|VI|VII|VIII|IX|X|XI)[[:space:]])
+
+# BB
+pattern=([[:space:]]BB (I|II)[[:space:]])
+
+# C
+pattern=([[:space:]]C (I|II|III|IV|V|VI)[[:space:]])
+
+# D
+pattern=([[:space:]]D (I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII)[[:space:]])
+pattern=([[:space:]]D4ielT[[:space:]])
+
+# E
+pattern=([[:space:]]E I[[:space:]])
+
+# EG
+pattern=([[:space:]]EG [1-2,3-5][[:space:]])
+pattern=([[:space:]]EG 2[[:space:]]{0,1}(×|x)[[:space:]]{0,1}2/2[[:space:]])
+pattern=([[:space:]]EG 4[[:space:]]{0,1}(×|x)[[:space:]]{0,1}1/1[[:space:]])
+
+# EP
+pattern=([[:space:]]EP ([1-5]|3/5|3/6|3/6II)[[:space:]])
+
+# ES
+pattern=([[:space:]]ES 1[[:space:]])
+
+# G
+pattern=([[:space:]]G 1(I|II|III|IV)[[:space:]])
+pattern=([[:space:]]G 2(I|II)[[:space:]])
+pattern=([[:space:]]G 3[[:space:]])
+pattern=([[:space:]]G 3/3[[:space:]])
+pattern=([[:space:]]G 3/4([[:space:]]{0,1}N|[[:space:]]{0,1}H|)[[:space:]])
+pattern=([[:space:]]G 4/5([[:space:]]{0,1}N|[[:space:]]{0,1}H|)[[:space:]])
+pattern=([[:space:]]G 4(I|II|III)[[:space:]])
+pattern=([[:space:]]G 5[[:space:]])
+pattern=([[:space:]]G 5/5[[:space:]])
+
+# Gt
+pattern=([[:space:]]Gt 2[[:space:]]{0,1}(×|x)[[:space:]]{0,1}4/4[[:space:]])
+
+# GtL
+pattern=([[:space:]]GtL 4/[4-5][[:space:]])
+
+# Gts
+pattern=([[:space:]]Gts 2[[:space:]]{0,1}(×|x)[[:space:]]{0,1}3/3[[:space:]])
+pattern=([[:space:]]Gts 4/4[[:space:]])
+
+# L
+pattern=([[:space:]]L [1-2][[:space:]])
+
+# LE
+pattern=([[:space:]]LE[[:space:]])
+
+pattern=([[:space:]]MBCC[[:space:]])
+pattern=([[:space:]]MBCi[[:space:]])
+pattern=([[:space:]]MBCL[[:space:]])
+pattern=([[:space:]]MC[[:space:]])
+pattern=([[:space:]]MCCi[[:space:]])
+pattern=([[:space:]]MCi[[:space:]])
+
+# ML
+pattern=([[:space:]]ML 2/2[[:space:]])
+
+pattern=([[:space:]]MPL[[:space:]])
+
+# P
+pattern=([[:space:]]P 1(I|II|III)[[:space:]])
+pattern=([[:space:]]P 2/4[[:space:]])
+pattern=([[:space:]]P 2(I|II)[[:space:]])
+pattern=([[:space:]]P 3/5([[:space:]]{0,1}N|[[:space:]]{0,1}H|)[[:space:]])
+pattern=([[:space:]]P 3(I|II)[[:space:]])
+pattern=([[:space:]]P [4-5][[:space:]])
+
+# Pt
+pattern=([[:space:]]Pt 2/3[[:space:]])
+pattern=([[:space:]]Pt 2/4([[:space:]]{0,1}N|[[:space:]]{0,1}H|)[[:space:]])
+pattern=([[:space:]]Pt 2/5([[:space:]]{0,1}N|[[:space:]]{0,1}H|)[[:space:]])
+pattern=([[:space:]]Pt 3/6[[:space:]])
+
+# PtL
+pattern=([[:space:]]PtL (2/2|3/3|3/4)[[:space:]])
+
+# Pts
+pattern=([[:space:]]Pts (2/2|3/4)[[:space:]])
+pattern=([[:space:]]Pts 3/3([[:space:]]{0,1}N|[[:space:]]{0,1}H|)[[:space:]])
+
+# PtzL
+pattern=([[:space:]]PtzL 3/4[[:space:]])
+
+# R
+pattern=([[:space:]]R (3/3|4/4)[[:space:]])
+
+# S
+pattern=([[:space:]]S [2,3]/[5,6][[:space:]])
+pattern=([[:space:]]S 3/5([[:space:]]{0,1}N|[[:space:]]{0,1}H|)[[:space:]])
+
+# T
+pattern=([[:space:]]T [1,3,5][[:space:]])
+pattern=([[:space:]]T 2(I|II)[[:space:]])
+pattern=([[:space:]]T 4(I|II)[[:space:]])
+
+
+pattern_delete=
