@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+script_path=$(dirname "$script")
+
+sed -e "s/[[:space:]]xx[[:space:]]/ $1 /g" < "$script_path/../all/xx.all.template" > "$script_path/../all/$2.all.txt"
