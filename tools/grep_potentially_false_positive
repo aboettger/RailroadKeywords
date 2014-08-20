@@ -24,9 +24,8 @@ function logError () {
   echo -e "${red}$1${TOA}"
 }
 
-
-
 keyword="$2"
+
 if [ -z "$keyword" ]; then
   echo "Benutzung: $script_name \"[PfadZurCalibreDB]\" \"[Schlüsselwort]\""
   exit 1
