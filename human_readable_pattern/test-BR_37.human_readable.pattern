@@ -1,0 +1,20 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/37.asc
+
+pattern=(([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]37(\.(([0-4])|10))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]37[[:space:]]([^0-9]|$))
+
+
+# BR 37.0
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]37[[:space:]]0(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-4,6-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
+# BR 37.1
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]37[[:space:]]1(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-4,6-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
+# BR 37.2
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]37[[:space:]]2(0[0-6]|5[1-7])([[:space:]]|-[0-9])
+# BR 37.3
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]37[[:space:]]3(0[1-9]|1[0-9]|20)([[:space:]]|-[0-9])
+# BR 37.4
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]37[[:space:]]4(0[1-6,8-9]|1[0-7])([[:space:]]|-[0-9])
+# BR 37.10
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]37[[:space:]]10(09)([[:space:]]|-[0-9])
+
+# EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
+pattern_delete=(^([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
