@@ -1,7 +1,10 @@
 comm -2 -3  <(sort 118\ 001-999.list) <(sort ../tests/test-BR_118.positive.002.list)
 
-# Sucht in vorhandenen txt-dateien, die mittels "pdftotext" erzeugt werden, nach einem Suchbegrif und startet "extract_and_write_keywords_into_calibre"
+# Sucht in vorhandenen txt-dateien, die mittels "pdftotext" erzeugt werden, nach einem Suchbegriff und startet "extract_and_write_keywords_into_calibre"
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readable.txt' | { while read file; do grep -aEl " Nossen " "$file" | { while read -r pdf; do echo "$file"; extract_and_write_keywords_into_calibre "$pdf"; done } done }
+
+# Sucht in vorhandenen txt-dateien, die mittels "pdftotext" erzeugt werden, nach einem Suchbegriff und zeigt den umgebenen Text an
+find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readable.txt' | { while read file; do egrep -anET -C 5 "Pfälzische" "$file"; done }
 
 # Findet PDFs ohne txt-Dateien, die mittels "pdftotext" erzeugt werden und startet "extract_and_write_keywords_into_calibre"
 find_with_pdf_without_txt | { while read -r pdf; do extract_and_write_keywords_into_calibre "$pdf"; done }
