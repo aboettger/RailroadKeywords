@@ -148,6 +148,26 @@ function runTest () {
       fi
   done }
   if [ $? -gt 0 ]; then exit 1; fi
+    
+  # diff tests
+  diff_name=${pattern_name//\.pattern/}
+  diff_name=${diff_name//test-/}
+  find "$script_path/diffs" -type f -name "$diff_name.diff" | sort | { while read -r diff;
+    do
+      logInfo "$diff"
+      test_results=$(getResults "$pattern_case" "$diff")
+      matched_elements=$(echo "$test_results" | sed '/^$/d' | wc -l)
+      given_elements=$(sed '/^pattern=/d' "$diff"| sed '/^$/d' | sed '/^#/d' | wc -l)
+      logInfo "TestCase: $(basename "$diff")"
+      echo "$test_results"
+      if test "$matched_elements" -eq "0"; then
+        logInfo "Test OK: $matched_elements/$given_elements"
+      else
+        logError "Test failed, to many elements found: $matched_elements/$given_elements"
+        exit 1
+      fi
+  done }
+  if [ $? -gt 0 ]; then exit 1; fi
 }
 
 function runSearch () {
@@ -185,6 +205,8 @@ fi
 
 if [ "$1" == "test" ]; then
   "$script_path/tools/compress_pattern"
+  "$script_path/tools/create_diffs"
+  
   time_complete_a=$(($(date +%s%N)/1000000))
   if [ -f "$pattern_path" ]; then
     runTest "$pattern_path"
