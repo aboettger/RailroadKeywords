@@ -46,6 +46,7 @@ pattern=([[:space:]]Schmalspurbahn(|en)[[:space:]])
 pattern=([[:space:]]Feldbahn(|en)[[:space:]])
 pattern=([[:space:]]Wehrmachtslok(|s)(omotive){0,1}(|en)[[:space:]])
 pattern=([[:space:]]Donnerbüchse(|n)[[:space:]])
+pattern=([[:space:]]Langenschwalbacher[[:space:]])
 
 # Modellbahnanlagen
 pattern=([[:space:]]Bay Shore Line[[:space:]])
