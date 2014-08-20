@@ -26,7 +26,7 @@ pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:s
 # BR 36.10
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]36[[:space:]]10(0[0-9]|1[0-4])([[:space:]]|-[0-9])
 # BR 36.12
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]36[[:space:]]12(0[1-9]|1[0-9]|2[0-9]|5[1-8])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]36[[:space:]]12(0[1-9]|1[0-9]|5[1-8])([[:space:]]|-[0-9])
 # BR 36.70
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]36[[:space:]]70(0[1-9])([[:space:]]|-[0-9])
 
