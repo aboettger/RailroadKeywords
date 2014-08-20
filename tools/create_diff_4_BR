@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+script_path=$(dirname "$script")
+
+comm -2 -3  <(sort "$script_path/../all/$2.all.txt" ) <(sort "$script_path/../tests/test-$2.positive.002.list") > "$script_path/../diffs/$2.diff"
