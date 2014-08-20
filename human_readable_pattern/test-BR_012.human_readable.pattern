@@ -3,7 +3,7 @@
 pattern=(([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]012\.[0-1][[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]012[[:space:]]([^0-9]|$))
 
 # BR 012.0
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]012[[:space:]]0(01|5[2,4,5,6-9]|6[0,1,3,4,6,8]|7[1,3-7,9]|8[0-2,4,5,8,9]|92)([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]012[[:space:]]0(01|5[2,4,5,7-9]|6[0,1,3,4,6,8]|7[1,3-7,9]|8[0-2,4,5,8,9]|92)([[:space:]]|-[0-9])
 # BR 012.1
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]012[[:space:]]1(0[0-5])([[:space:]]|-[0-9])
 
