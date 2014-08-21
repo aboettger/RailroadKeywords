@@ -107,6 +107,8 @@ function runTest () {
      fi
   done }
   if [ $? -gt 0 ]; then exit 1; fi
+    
+  logInfo "-----"
 
   # positive tests
   test_name_positive=${pattern_name//pattern/positive}
@@ -129,10 +131,13 @@ function runTest () {
       fi
   done }
   if [ $? -gt 0 ]; then exit 1; fi
+    
+  logInfo "-----"
 
   
   # negative tests
   test_name_negative=${pattern_name//pattern/negative}
+  logInfo "$test_name_negative"
   find "$test_path" -type f -name "$test_name_negative*.list" | sort | { while read -r test_case_negative;
     do
       test_results=$(getResults "$pattern_case" "$test_case_negative")
@@ -149,10 +154,13 @@ function runTest () {
   done }
   if [ $? -gt 0 ]; then exit 1; fi
     
+  logInfo "-----"
+    
   # diff tests
   diff_name=${pattern_name//\.pattern/}
   diff_name=${diff_name//test-/}
-  find "$script_path/diffs" -type f -name "$diff_name.diff" | sort | { while read -r diff;
+  
+  find "$script_path/diffs" -type f -name "$diff_name.*.diff" | sort | { while read -r diff;
     do
       logInfo "$diff"
       test_results=$(getResults "$pattern_case" "$diff")
