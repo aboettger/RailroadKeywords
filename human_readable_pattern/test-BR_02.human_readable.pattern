@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/02.asc
 
-pattern=(([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]02(\.[0-3]|\.02|\.03|\.10)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]02[[:space:]]([^0-9]|$))
+pattern=(([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]02(\.[0-1]|\.02|\.03|\.10)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]02[[:space:]]([^0-9]|$))
 
 # 02.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]02[[:space:]]0(0[1-9]|10)([[:space:]]|-[0-9])

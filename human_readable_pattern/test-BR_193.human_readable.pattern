@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/193.asc
 
-pattern=(([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]193(\.[0-1])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]193[[:space:]]([^0-9]|$))
+pattern=(([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]193(\.0)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]193[[:space:]]([^0-9]|$))
 
 
 # BR 193.0
