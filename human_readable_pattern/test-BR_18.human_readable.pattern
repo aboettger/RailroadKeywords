@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/18.asc
 
-pattern=(([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]18(\.[0-6]|\.10)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]18[[:space:]]([^0-9]|$))
+pattern=(([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]18(\.[0-6])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]18[[:space:]]([^0-9]|$))
 
 
 # BR 18.0
