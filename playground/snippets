@@ -14,3 +14,7 @@ find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' | { while read file; d
 
 # Schreibe "createTxtFile.md5" neu
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.pdf' | { while read file; do md5_new_CreateTxtFile=$(md5sum "/home/aboettger/src/RailroadKeywords/functions/createTxtFile"  | gawk  -F ' ' '{print $1}'); echo "$md5_new_CreateTxtFile" > "$(dirname "$file")/createTxtFile.md5"; done }
+
+# 
+sed '/^[[:space:]]*$/d' "/home/aboettger/src/RailroadKeywords/tests/test-Feldbahn.positive.001.list" | sed '/^[[:space:]]*#/d' | { while read -r line; do echo; search_for=$(echo "$line" | sed -e 's/^ //g' | sed -e 's/ $//g'); echo "Stichwort: [$search_for]"; /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive ~/Eisenbahn/Eisenbahnliteratur "$line"; done }
+sed '/^[[:space:]]*$/d' "/home/aboettger/src/RailroadKeywords/playground/potentially_false_positive" | sed '/^[[:space:]]*#/d' | { while read -r line; do echo; search_for=$(echo "$line" | sed -e 's/^ //g' | sed -e 's/ $//g'); echo "Stichwort: [$search_for]"; /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive ~/Eisenbahn/Eisenbahnliteratur "$line"; done }
