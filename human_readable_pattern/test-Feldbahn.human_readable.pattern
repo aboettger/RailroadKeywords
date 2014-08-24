@@ -1,0 +1,25 @@
+# Diepholzer Maschinenfabrik Fritz Schöttler (Diema)
+pattern=([[:space:]]DL (6|8)[[:space:]])
+pattern=([[:space:]]DFL 10[[:space:]])
+pattern=([[:space:]]DS (14|[2,3,6,9]0)[[:space:]])
+pattern=([[:space:]]DVL 15/1[[:space:]])
+
+# Lokomotivbau Karl Marx Babelsberg (LKM)
+pattern=([[:space:]]Ns 1[[:space:]]{0,1}b[[:space:]])
+pattern=([[:space:]]Ns 2[[:space:]])
+pattern=([[:space:]]Ns 2[[:space:]]{0,1}[f,k,h][[:space:]])
+pattern=([[:space:]]Ns 2[[:space:]]{0,1}[a-e][[:space:]])
+pattern=([[:space:]]Nsg 2[[:space:]])
+
+pattern=([[:space:]]B[[:space:]]{0,1}360[[:space:]])
+
+# Jung
+pattern=([[:space:]]ZL 105[[:space:]])
+
+# Schöma
+pattern=([[:space:]]LD 80[[:space:]])
+
+# O&K
+pattern=([[:space:]]AO (2|5)[[:space:]])
+pattern=([[:space:]]D 30[[:space:]])
+pattern=([[:space:]]D 40[[:space:]])
