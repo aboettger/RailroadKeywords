@@ -7,7 +7,7 @@ find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readab
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readable.txt' | { while read file; do egrep -anET -C 5 "Pfälzische" "$file"; done }
 
 # Findet PDFs ohne txt-Dateien, die mittels "pdftotext" erzeugt werden und startet "extract_and_write_keywords_into_calibre"
-find_with_pdf_without_txt | { while read -r pdf; do extract_and_write_keywords_into_calibre "$pdf"; done }
+find_with_pdf_without_txt ~/Eisenbahn/Eisenbahnliteratur | { while read -r pdf; do extract_and_write_keywords_into_calibre "$pdf"; done }
 
 # Textdateien löschen um das System zu zwingen, neue anzulegen
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' | { while read file; do rm "$file"; done }
@@ -18,3 +18,5 @@ find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.pdf' | { while read file; d
 # 
 sed '/^[[:space:]]*$/d' "/home/aboettger/src/RailroadKeywords/tests/test-Feldbahn.positive.001.list" | sed '/^[[:space:]]*#/d' | { while read -r line; do echo; search_for=$(echo "$line" | sed -e 's/^ //g' | sed -e 's/ $//g'); echo "Stichwort: [$search_for]"; /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive ~/Eisenbahn/Eisenbahnliteratur "$line"; done }
 sed '/^[[:space:]]*$/d' "/home/aboettger/src/RailroadKeywords/playground/potentially_false_positive" | sed '/^[[:space:]]*#/d' | { while read -r line; do echo; search_for=$(echo "$line" | sed -e 's/^ //g' | sed -e 's/ $//g'); echo "Stichwort: [$search_for]"; /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive ~/Eisenbahn/Eisenbahnliteratur "$line"; done }
+
+sed '/^[[:space:]]*$/d' "/home/aboettger/src/RailroadKeywords/false_positive/potentially_false_positive" | sed '/^[[:space:]]*#/d' | { while read -r line; do echo; echo "$line"; /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive ~/Eisenbahn/Eisenbahnliteratur "$line"; done }
