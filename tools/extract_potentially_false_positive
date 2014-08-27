@@ -14,15 +14,27 @@ if [ -f "$output_file" ]; then
 fi
 
 
-
 find "$script_path/../tests" -type f -name "*.positive*.list" | sort | { while read -r file;
+#find "$script_path/../tests" -type f -name "test-BR_17.positive.001.list" | sort | { while read -r file;
   do
     echo "$file"
-    cat "$file" | { while read -r line; do
+    sed '/^\#/d' "$file" | sed '/^$/d' | { while read -r line; do
       compressed_line=$(echo "$line" | tr -d ' ')
       len_compressed_line=$(echo ${#compressed_line})
       if [ "$len_compressed_line" -gt 0 ] && [ "$len_compressed_line" -lt 3 ]; then
         echo "$line" >> "$output_file"
+      fi
+      
+      if [[ $line == *.* ]]; then
+        var1=$(echo "$line" | cut -f1 -d.)
+        var2=$(echo "$line" | cut -f2 -d.)
+        size1=${#var1}
+        size2=${#var2}
+        if [ "$size1" -gt "0" ] && [ "$size1" -lt "3" ] && [ "$size2" -gt "0" ] && [ "$size2" -lt "3" ] ; then
+          if [ "$var1" -gt "0" ] && [ "$var1" -lt "32" ] && [ "$var2" -gt "0" ] && [ "$var2" -lt "13" ] ; then
+            echo "$line" >> "$output_file"
+          fi
+        fi
       fi
     done
   }
@@ -35,5 +47,7 @@ if [ -f "$output_file" ]; then
   sort "$output_file" | uniq >> "$tmp_file"
   mv "$tmp_file" "$output_file"
 fi
+
+echo "Ergebnis abgelegt in: \"$script_path/../false_positive/potentially_false_positive\""
 
 exit 0
