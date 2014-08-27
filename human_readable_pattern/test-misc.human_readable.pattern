@@ -31,12 +31,18 @@ pattern=([[:space:]]Das Goldene Gleis[[:space:]])
 # Zeichnungen
 pattern=([[:space:]]Schnittzeichnung(|en)[[:space:]])
 pattern=([[:space:]]Typenzeichnung(|en)[[:space:]])
+pattern=([[:space:]]Maßtabelle(|n)[[:space:]])
+pattern=([[:space:]]Längenmaße[[:space:]])
 
 # Begriffe rund um Dampfloks
 pattern=([[:space:]]Speisewasservorwärmung[[:space:]])
 pattern=([[:space:]]Dampflokhochburg[[:space:]])
 pattern=([[:space:]]Einheitslok(|s)(omotive){0,1}(|en)[[:space:]])
 pattern=([[:space:]]Kriegslok(|s)(omotive){0,1}(|en)[[:space:]])
+pattern=([[:space:]]Neubaukessel[[:space:]])
+pattern=([[:space:]]Altbaukessel[[:space:]])
+pattern=([[:space:]]Ölhauptfeuerung[[:space:]])
+pattern=([[:space:]]Reko[[:space:]])
 
 #
 pattern=([[:space:]]Kriegselektrolok(|s)(omotive){0,1}(|en)[[:space:]])
