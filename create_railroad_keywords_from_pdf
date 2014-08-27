@@ -260,8 +260,6 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
       "$script_path/functions/createTxtFile" "$pdf_path" "$pdf_dirname" "$pdf_filename"
       logInfo "Schreibe \"createTxtFile.md5\"."
       echo "$md5_new_CreateTxtFile" > "$pdf_dirname/createTxtFile.md5"
-      
-
     fi
 
     if [ -f "$pdf_dirname/$pdf_filename.md5" ]; then
@@ -270,21 +268,27 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
     # echo "$md5_current_Pdf"
     md5_new_Pdf=$(md5sum "$pdf_path"  | gawk  -F ' ' '{print $1}')
     # echo "$md5_new_Pdf"
-    if [ "$md5_current_Pdf" == "$md5_new_Pdf" ]; then
-      # Do nothing
-      true
+    if [ "$md5_current_Pdf" == "$md5_new_Pdf" ] && [ ! -f "$pdf_dirname/txt_created_by_pdftotext" ]; then
       logInfo "\"$(basename "$pdf_path")\" scheint sich seit dem letzten Durchlauf nicht geändert zu haben."
       logInfo "Versuche bestehende \"$pdf_filename.txt\" zu verwenden."
     else
-      logInfo "\"$(basename "$pdf_path")\" hat sich seit dem letzten Durchlauf geändert."
+      if [ "$md5_current_Pdf" != "$md5_new_Pdf" ]; then
+        logInfo "\"$(basename "$pdf_path")\" hat sich seit dem letzten Durchlauf geändert."
+      fi
+      if [ -f "$pdf_dirname/txt_created_by_pdftotext" ]; then
+        logWarn "\"pdftotext\" wurde zur Erstellung von \"$pdf_dirname/$pdf_filename.human-readable.txt\" verwendet. Erzwinge neue Erstellung."
+      fi
       logInfo "Schreibe \"$pdf_dirname/$pdf_filename.human-readable.txt\" neu."
       if [ -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
         rm "$pdf_dirname/$pdf_filename.human-readable.txt"
       fi
       "$script_path/functions/createTxtFile" "$pdf_path" "$pdf_dirname" "$pdf_filename"
       
-       logInfo "Schreibe \"$pdf_filename.md5\"."
-      echo "$md5_new_Pdf" > "$pdf_dirname/$pdf_filename.md5"
+      # Wenn Text durch Alternativprogramm generiert wurde, dann Neuerstellung bei nächsten Durchlauf erzwingen
+      if [ ! -f "$pdf_dirname/txt_created_by_pdftotext" ]; then
+        logInfo "Schreibe \"$pdf_filename.md5\"."
+        echo "$md5_new_Pdf" > "$pdf_dirname/$pdf_filename.md5"
+      fi
     fi
     
     if [ ! -f "$pdf_dirname/$pdf_filename.txt" ]; then

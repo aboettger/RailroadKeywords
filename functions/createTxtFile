@@ -32,22 +32,43 @@ make_space=$(python -c 'print u"\u0001\u000C\u0009\u00A0\u2004\u2005\u2006\u2009
 #   exit 1;
 # fi
 
-if [ ! -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
+if [ ! -f "$pdf_dirname/$pdf_filename.human-readable.txt" ] || [ -f "$pdf_dirname/txt_created_by_pdftotext" ]; then
+  logInfo "Verwende \"pdf2txt\""
   pdf2txt.py -o "$pdf_dirname/$pdf_filename.human-readable.txt" "$pdf_path"
   if [ $? -gt 0 ]; then 
-    logError "Fehler in der Verarbeitung, lösche txt-Dateien"
+    logError "Fehler in der Verarbeitung durch \"pdf2txt\", lösche txt-Dateien"
     if [ -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
       rm "$pdf_dirname/$pdf_filename.human-readable.txt"
     fi
     if [ -f "$pdf_dirname/$pdf_filename.txt" ]; then
       rm "$pdf_dirname/$pdf_filename.txt"
     fi
-    exit 1;
+    
+    logInfo "Neuer Versuch unter Verwendung von \"pdftotext\"…"
+
+    pdftotext "$pdf_path" "$pdf_dirname/$pdf_filename.human-readable.txt"
+    if [ $? -gt 0 ]; then 
+      logError "Fehler in der Verarbeitung, lösche txt-Dateien"
+      if [ -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
+        rm "$pdf_dirname/$pdf_filename.human-readable.txt"
+      fi
+      if [ -f "$pdf_dirname/$pdf_filename.txt" ]; then
+        rm "$pdf_dirname/$pdf_filename.txt"
+      fi
+      exit 1;
+    fi
+    touch "$pdf_dirname/txt_created_by_pdftotext"
+  else
+    if [ -f "$pdf_dirname/txt_created_by_pdftotext" ]; then
+      rm "$pdf_dirname/txt_created_by_pdftotext"
+    fi
   fi
-  # Erzwinge neu "$pdf_dirname/$pdf_filename.md5"
-  logInfo "Erzwinge neu schreiben von \"$pdf_dirname/$pdf_filename.md5\"."
-  md5_new_Pdf=$(md5sum "$pdf_path"  | gawk  -F ' ' '{print $1}')
-  echo "$md5_new_Pdf" > "$pdf_dirname/$pdf_filename.md5"
+
+  if [ ! -f "$pdf_dirname/txt_created_by_pdftotext" ]; then
+    logInfo "Erzwinge neu schreiben von \"$pdf_dirname/$pdf_filename.md5\"."
+    md5_new_Pdf=$(md5sum "$pdf_path"  | gawk  -F ' ' '{print $1}')
+    echo "$md5_new_Pdf" > "$pdf_dirname/$pdf_filename.md5"
+  fi
 fi
 
 temp_file_1=$(tempfile)
