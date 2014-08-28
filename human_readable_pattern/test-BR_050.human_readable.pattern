@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/050.asc
 
-pattern=(([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]050(\.[0-9])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]050[[:space:]]([^0-9]|$))
+pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]050(\.[0-9])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]050[[:space:]]([^0-9]|$))
 
 
 # BR 050.0
@@ -25,4 +25,4 @@ pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:s
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]050[[:space:]]9(0[2,4-5,7,9]|1[0,2,3,5-6,9]|2[0-4,8]|3[1-4,7]|4[5,9]|5[1-2,4,7-9]|6[0,2-6,8]|7[0,5,7-9]|8[1,4,7-9]|9[3,7,9])([[:space:]]|-[0-9])
 
 # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
-pattern_delete=(^([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)

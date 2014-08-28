@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/92.asc
 
-pattern=(([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]92(\.0|\.1|\.2|\.3|\.4|\.5|\.6|\.7|\.8|\.9|\.10|\.11|\.15|\.16|\.19|\.20|\.21|\.22|\.23|\.24|\.25|\.26|\.27|\.28|\.29|\.33|\.60|\.61|\.62|\.63|\.64|\.65|\.66|\.67|\.68)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]92[[:space:]]([^0-9]|$))
+pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]92(\.0|\.1|\.2|\.3|\.4|\.5|\.6|\.7|\.8|\.9|\.10|\.11|\.15|\.16|\.19|\.20|\.21|\.22|\.23|\.24|\.25|\.26|\.27|\.28|\.29|\.33|\.60|\.61|\.62|\.63|\.64|\.65|\.66|\.67|\.68)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]92[[:space:]]([^0-9]|$))
 
 # BR 92.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]92[[:space:]]0(0[1-9]|1[0-1])([[:space:]]|-[0-9])
@@ -114,4 +114,4 @@ pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:s
 
 
 # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
-pattern_delete=(^([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
