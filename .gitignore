@@ -1,5 +1,13 @@
 all/*txt
+
 diffs/*diff
+
 pattern/*pattern
+
 *~
+
 *#
+
+false_positive/*
+!false_positive/*.template
+!false_positive/README
