@@ -1,7 +1,0 @@
-# calibre_id=RegEx
-# z.B.
-# 2557=^((13 530)|(10 002))$
-# entfernt 13 500 und 10 002 aus den zu setzenden Schlüsselwörtern
-
-2490=^((132 104))$
-2560=^((132 103))$
