@@ -1,0 +1,6 @@
+Benennung der Dateien in diesem Verzeichnis:
+
+Wenn es im Verzeichnis "tests" eine Datei gibt, die
+"tests/test-BR_01.positive.001.list" gibt, dann ist der name für die dazu
+gehörende Datei im Verzeichnis "false_positive"
+"false_positive/test-BR_01.pattern"
