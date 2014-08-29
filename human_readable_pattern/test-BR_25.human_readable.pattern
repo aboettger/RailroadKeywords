@@ -1,7 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/25.asc
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]25(\.(0|10))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]25[[:space:]]([^0-9]|$))
-
+pattern=([[:space:]]25er[[:space:]])
 
 # BR 25.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]25[[:space:]]0(01)([[:space:]]|-[0-9])

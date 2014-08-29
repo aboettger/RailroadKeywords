@@ -1,7 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/33.asc
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]33(\.([0-2]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]33[[:space:]]([^0-9]|$))
-
+pattern=([[:space:]]33er[[:space:]])
 
 # BR 33.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]33[[:space:]]0(0[1-2])([[:space:]]|-[0-9])

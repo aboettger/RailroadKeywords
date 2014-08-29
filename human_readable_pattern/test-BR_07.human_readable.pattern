@@ -1,7 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/07.asc
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]07(\.10)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]07[[:space:]]([^0-9]|$))
-
+pattern=([[:space:]]07er[[:space:]])
 # BR 07.10
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]07[[:space:]]10(01)([[:space:]]|-[0-9])
 

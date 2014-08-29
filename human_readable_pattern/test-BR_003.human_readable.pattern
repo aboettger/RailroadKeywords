@@ -1,7 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/003.asc
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]003\.[0-2][[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]003[[:space:]]([^0-9]|$))
-
+pattern=([[:space:]]003er[[:space:]])
 # BR 003.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]003[[:space:]]0(14|3[4,7]|55|6[1-3,6]|7[2,6-7]|8[7-8]|9[0,2,4])([[:space:]]|-[0-9])
 # BR 003.1

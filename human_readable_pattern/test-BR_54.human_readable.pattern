@@ -1,7 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/54.asc
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]54(\.([0-9]|1[0-7]|41))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]54[[:space:]]([^0-9]|$))
-
+pattern=([[:space:]]54er[[:space:]])
 
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]54[[:space:]]0(0[123456789]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[01]|8[123456789]|9[012])([[:space:]]|-[0-9])
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]54[[:space:]]1(0[123456789]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[01234567])([[:space:]]|-[0-9])

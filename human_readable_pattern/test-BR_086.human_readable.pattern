@@ -1,7 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/086.asc
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]086(\.([0-8]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]086[[:space:]]([^0-9]|$))
-
+pattern=([[:space:]]086er[[:space:]])
 
 # BR 086.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]086[[:space:]]0(05|11|49|69|9[4-6,8-9])([[:space:]]|-[0-9])

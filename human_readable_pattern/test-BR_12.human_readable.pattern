@@ -1,7 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/12.asc
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]12(\.0|\.1|\.2)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]12[[:space:]]([^0-9]|$))
-
+pattern=([[:space:]]12er[[:space:]])
 # BR 12.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]12[[:space:]]0(0[1-9]|1[0-3])([[:space:]]|-[0-9])
 # BR 12.1
