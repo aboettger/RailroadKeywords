@@ -1,7 +1,8 @@
 # Bezeichnungen Loks
-pattern=([[:space:]]Köf (II|III)[[:space:]])
-pattern=([[:space:]]Kö (I|II)[[:space:]])
 pattern=([[:space:]](Breuer \- |)Rangiertraktor[[:space:]])
-pattern=([[:space:]]NOHAB|Kartoffelkäfer[[:space:]])
 pattern=([[:space:]]Kleinlok(|s)[[:space:]])
+pattern=([[:space:]]Kö (I|II)[[:space:]])
+pattern=([[:space:]]Köf (II|III)[[:space:]])
 pattern=([[:space:]]Ludmilla(|s)[[:space:]])
+pattern=([[:space:]]NOHAB|Kartoffelkäfer[[:space:]])
+pattern=([[:space:]]Taigatrommel[[:space:]])
