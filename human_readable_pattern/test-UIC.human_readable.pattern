@@ -1,0 +1,3 @@
+#  Internationale Eisenbahnverband, französisch Union internationale des chemins de fer (UIC)
+pattern=([[:space:]]UIC 438\.1[[:space:]])
+pattern=([[:space:]]UIC[[:space:]])
