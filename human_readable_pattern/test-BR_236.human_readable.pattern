@@ -1,7 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/236.asc
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]236(\.[1-2,4])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]236[[:space:]]([^0-9]|$))
-
+pattern=([[:space:]]236er[[:space:]])
 
 # BR 236.1
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]236[[:space:]]1(0[1-2,4-9]|1[0-5,7-9]|2[0-6]|50)([[:space:]]|-[0-9])

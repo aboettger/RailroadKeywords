@@ -4,6 +4,7 @@
 pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]59(\.(0))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]59[[:space:]]([^0-9]|$))
+pattern=([[:space:]]59er[[:space:]])
 
 #pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)
 #([[:space:]]|-[0-9])

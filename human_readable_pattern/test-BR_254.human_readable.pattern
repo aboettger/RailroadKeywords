@@ -1,7 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/254.asc
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]254(\.[0-1])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]254[[:space:]]([^0-9]|$))
-
+pattern=([[:space:]]254er[[:space:]])
 
 # BR 254.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]254[[:space:]]0(1[6-7]|2[0-1]|40|5[2,6-9]|6[5-6,9]|78|8[2,9]|96)([[:space:]]|-[0-9])

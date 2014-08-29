@@ -1,12 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/10.asc
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]10(\.0)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]10[[:space:]]([^0-9]|$))
-
-# Es gibt auch eine BR E10, oft falsch als E 10 xxx geschrieben
-# Diese sollen hier auch gefunden werden, damit ich einen definierten Zustand habe.
-# Sie werden aber wieder gelöscht (pattern_delete)
-# Man könnte wohl auch mit back references arbeiten, das habe ich 
-# aber mit grep nicht hinbekommen
+pattern=([[:space:]]10er[[:space:]])
 
 # BR 10.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]10[[:space:]]0(0[1-2])([[:space:]]|-[0-9])

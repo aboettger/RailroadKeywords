@@ -1,7 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/095.asc
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]095(\.0)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]095[[:space:]]([^0-9]|$))
-
+pattern=([[:space:]]095er[[:space:]])
 # BR 095.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]095[[:space:]]0(16)([[:space:]]|-[0-9])
 
