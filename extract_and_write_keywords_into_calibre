@@ -13,6 +13,8 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
+libraryPath="$2"
+
 # START functions ##############################################################
 
 function logInfo () {
@@ -134,11 +136,11 @@ find "$search_root" -type f -name '*.pdf' | {
     # keywords=$(echo "$keywords" | sort | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g" | sed -E 's/(V)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(VT)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(E)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(S)([0-9])/\1 \2/g' | uniq | tr '\n' ',' | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//' | sed -e 's/ \- /-/g')
     keywords=$(echo "$keywords" | sort | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g" | uniq | tr '\n' ',' | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//' | sed -e 's/ \- /-/g')
 
-    old_keywords=$(calibredb show_metadata "$calibre_id"  | grep "Tags" | awk -F: '{print $2}' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/, /,/g' )
+    old_keywords=$(calibredb show_metadata "$calibre_id"  --library-path="$libraryPath" | grep "Tags" | awk -F: '{print $2}' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/, /,/g' )
     echo "Tags old: >$old_keywords<"
     echo "Tags new: >$keywords<"
     if [ "$old_keywords" != "$keywords" ]; then
-      calibredb set_metadata --field tags:"$keywords" "$calibre_id"
+      calibredb set_metadata --field tags:"$keywords" "$calibre_id" --library-path="$libraryPath"
     fi
     echo "…done"
   fi
