@@ -59,16 +59,13 @@ save_pid
 
 # notify-send "$(basename "$0")" "start"
 
-# Absolute path to this script, e.g. /home/user/bin/foo.sh
-script=$(readlink -f "$0")
-# Absolute path this script is in, thus /home/user/bin
-script_path=$(dirname "$script")
-
 if [ -f "$1" ]; then
   search_root=$(dirname "$1")
 else
   search_root="$1"
 fi
+
+search_root=$(pwd "$search_root")
 
 logInfo "Suche Calibre-DB (metadata.db)…"
 
