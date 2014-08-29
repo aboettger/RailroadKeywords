@@ -13,8 +13,6 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
-libraryPath="$2"
-
 # START functions ##############################################################
 
 function logInfo () {
@@ -72,6 +70,22 @@ else
   search_root="$1"
 fi
 
+logInfo "Suche Calibre-DB (metadata.db)…"
+
+calibreDbSearchPath="$search_root"
+while [ ! -f "$calibreDbSearchPath/metadata.db" ] && [ "$calibreDbSearchPath" != "/" ]; do
+  logInfo "$calibreDbSearchPath"
+  calibreDbSearchPath=$(dirname "$calibreDbSearchPath")
+done
+
+if [ -f "$calibreDbSearchPath/metadata.db" ]; then
+  logInfo "Calibre-DB (metadata.db) gefunden: \"$calibreDbSearchPath/metadata.db\""
+else
+  logError "Calibre-DB (metadata.db) nicht gefunden"
+  cleanup
+  exit 1
+fi
+
 find "$search_root" -type f -name '*.pdf' | {
   while read -r pdf_path; do
   working_path=$(dirname "$pdf_path")
@@ -85,7 +99,7 @@ find "$search_root" -type f -name '*.pdf' | {
     
     # pattern_files="$script_path/pattern/*"
     # for pattern_path in $pattern_files; do
-    #   keywords=$("$script_path/create_railroad_keywords_from_pdf" run "$pattern_path" "$pdf_path")
+    #   keywords=$("$script_path/60road_keywords_from_pdf" run "$pattern_path" "$pdf_path")
     #   keywords=${keywords//Baureihe/BR}
     #   false_positive_pattern_path="$script_path/false_positive/$(basename "$pattern_path")"
     #   if [ -f "$false_positive_pattern_path" ]; then
@@ -100,7 +114,7 @@ find "$search_root" -type f -name '*.pdf' | {
     
     # keywords=$(find "$script_path/pattern" -type f -name '*.pattern' | {
     #   while read -r pattern_path; do
-    #     keywords=$("$script_path/create_railroad_keywords_from_pdf" run "$pattern_path" "$pdf_path")
+    #     keywords=$("$script_path/60road_keywords_from_pdf" run "$pattern_path" "$pdf_path")
     #     keywords=${keywords//Baureihe/BR}
     #     false_positive_pattern_path="$script_path/false_positive/$(basename "$pattern_path")"
     #     if [ -f "$false_positive_pattern_path" ]; then
@@ -136,11 +150,11 @@ find "$search_root" -type f -name '*.pdf' | {
     # keywords=$(echo "$keywords" | sort | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g" | sed -E 's/(V)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(VT)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(E)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(S)([0-9])/\1 \2/g' | uniq | tr '\n' ',' | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//' | sed -e 's/ \- /-/g')
     keywords=$(echo "$keywords" | sort | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g" | uniq | tr '\n' ',' | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//' | sed -e 's/ \- /-/g')
 
-    old_keywords=$(calibredb show_metadata "$calibre_id"  --library-path="$libraryPath" | grep "Tags" | awk -F: '{print $2}' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/, /,/g' )
+    old_keywords=$(calibredb show_metadata "$calibre_id"  --library-path="$calibreDbSearchPath" | grep "Tags" | awk -F: '{print $2}' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/, /,/g' )
     echo "Tags old: >$old_keywords<"
     echo "Tags new: >$keywords<"
     if [ "$old_keywords" != "$keywords" ]; then
-      calibredb set_metadata --field tags:"$keywords" "$calibre_id" --library-path="$libraryPath"
+      calibredb set_metadata --field tags:"$keywords" "$calibre_id" --library-path="$calibreDbSearchPath"
     fi
     echo "…done"
   fi
