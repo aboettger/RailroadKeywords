@@ -65,7 +65,9 @@ else
   search_root="$1"
 fi
 
-search_root=$(pwd "$search_root")
+if [ "$search_root" == "." ]; then
+  search_root=$(pwd)
+fi
 
 logInfo "Suche Calibre-DB (metadata.db)…"
 
