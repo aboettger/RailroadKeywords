@@ -71,10 +71,12 @@ function getResults () {
     fi
 
     if [ ! -z "$prefix" ]; then
-      result=$(echo "$result" | sed -E "s/^(.*)$/$prefix\1/g")
+      result=$(echo "$result" | sed -E "s/^(.*)\$/$prefix\1/g")
     fi
 
     if [ "$result" != "" ]; then
+      result=$(echo "$result" | sort | uniq)
+      logInfo "Treffer gefunden durch \"$pattern_case\":\n$result"
       echo "$result"
     fi
   done }
