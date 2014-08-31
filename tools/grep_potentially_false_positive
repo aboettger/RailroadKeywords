@@ -41,29 +41,29 @@ find "$1" -type f -name "*.txt" ! -name "*human-readable.txt" | {
       echo -ne "Calibre-ID $calibre_id \r"
       keywords=$(calibredb show_metadata "$calibre_id"  | grep "Tags" | awk -F: '{print $2}' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/, /,/g' )
       if [ ! -z "$keywords" ]; then
-      
+
         keywords=$(echo "$keywords" | tr ',' "\n")
         # echo "$keywords"
-        echo "$keywords" | while read line; do
+        while read line; do
           if [ "$line" == "$keyword" ]; then
             # echo "$keywords"
             logWarn "================================"
             logWarn "$path"
             logWarn "================================"
-            
-            keywords_pattern=$(echo "$line" | sed -E 's/^(.*)$/[[:space:]]\1[[:space:]]/g')
+echo "$line"
+            keywords_pattern=$(sed -E 's/^(.*)$/[[:space:]]\1[[:space:]]/g' <<< "$line")
             # echo "$keywords_pattern"
 
             egrep -anET -C 5 "$keywords_pattern" "$path"
+
+            line_pattern=$(sed -e 's/\//\\\//g' <<< "$line")
             exec < /dev/tty
             echo
-            
-            line_pattern=$(echo $line | sed -e 's/\//\\\//g')
-            echo -e "Bitte diesen Eintrag unter \"false_positive\" vornehmen oder bestehenden Eintrag für \"$calibre_id\" ergänzen: ${green}$calibre_id=^(($line_pattern))$ ${TOA}"
+            echo -e "Bitte diesen Eintrag unter \"false_positive\" vornehmen oder bestehenden Eintrag für \"$calibre_id\" ergänzen: ${green}$calibre_id=^(($line_pattern))\$ ${TOA}"
             read -n 1 -p "Schlüsselwörter neu erzeugen? [y/n]: " yn
             echo
             case $yn in
-              [Yy]* ) 
+              [Yy]* )
                 extract_and_write_keywords_into_calibre "$path"
               break;;
               [Nn]* )
@@ -72,7 +72,7 @@ find "$1" -type f -name "*.txt" ! -name "*human-readable.txt" | {
               break;;
             esac
           fi
-        done
+        done <<< "$keywords"
       fi
     fi
   done
