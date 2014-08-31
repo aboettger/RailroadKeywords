@@ -75,7 +75,7 @@ function getResults () {
     fi
 
     if [ "$result" != "" ]; then
-      log_result=$(echo "$result" | sort | uniq)
+      log_result=$(echo "$result" | sort | uniq | sed -e 's/^/\\t/g')
       logInfo "Treffer gefunden durch \"$pattern_case\":\n$log_result"
       echo "$result"
     fi
