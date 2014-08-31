@@ -67,7 +67,7 @@ function getResults () {
     result=$(grep -oaE "$line" "$txt_path" | sed -e 's/^ *//' | sed -e 's/ *$//')
 
     if [ ! -z "$pattern_delete" ]; then
-      result=$(echo "$result" | sed -e "s/$pattern_delete//g")
+      result=$(sed -e "s/$pattern_delete//g" <<< "$result")
     fi
 
     if [ ! -z "$prefix" ]; then
@@ -75,8 +75,8 @@ function getResults () {
     fi
 
     if [ "$result" != "" ]; then
-      result=$(echo "$result" | sort | uniq)
-      logInfo "Treffer gefunden durch \"$pattern_case\":\n$result"
+      log_result=$(echo "$result" | sort | uniq)
+      logInfo "Treffer gefunden durch \"$pattern_case\":\n$log_result"
       echo "$result"
     fi
   done }
