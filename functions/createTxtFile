@@ -74,6 +74,7 @@ fi
 temp_file_1=$(tempfile)
 temp_file_2=$(tempfile)
 temp_file_3=$(tempfile)
+temp_file_4=$(tempfile)
 
 logInfo "Schreibe \"$pdf_filename.txt\" neu."
 
@@ -82,7 +83,14 @@ logInfo "Schreibe \"$pdf_filename.txt\" neu."
 sed -E ':a;N;$!ba;s/([a-z])\-\n([a-z])/\1\2/g' "$pdf_dirname/$pdf_filename.human-readable.txt" > "$temp_file_1"
 sed -E ':a;N;$!ba;s/([a-zA-Z])(\-)\n([A-Z])/\1\2\3/g' "$temp_file_1" > "$temp_file_2"
 sed ':a;N;$!ba;s/\n/ \n /g' "$temp_file_2" | sed 's/['"$make_space"']/ /g' | sed -e 's/\*[[:space:]]/ \* /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -E 's/\-/ - /g' | sed -E 's/([0-9])\-(.)/\1 - \2/g' | sed -E 's/[[:space:]]{2,}/ /g' | sed -E 's/([[:space:]]BR)([0-9])/\1 \2/g' > "$temp_file_3"
+sed -E 's/[[:space:]][a-z]{3,}/ ~/g' "$temp_file_3" > "$temp_file_4"
 # Move the temporary file 
-mv "$temp_file_3" "$pdf_dirname/$pdf_filename.txt"
+cp "$temp_file_4" "$pdf_dirname/$pdf_filename.txt"
+
+rm "$temp_file_1"
+rm "$temp_file_2"
+rm "$temp_file_3"
+rm "$temp_file_4"
+
 
 exit 0
