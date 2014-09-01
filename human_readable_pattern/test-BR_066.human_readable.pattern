@@ -1,0 +1,13 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/066.asc
+
+# EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+
+pattern=([[:space:]]066er[[:space:]])
+pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]066(\.(0))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]066[[:space:]]([^0-9]|$))
+
+
+#pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)
+#([[:space:]]|-[0-9])
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]066[[:space:]]0(0[2])([[:space:]]|-[0-9])
