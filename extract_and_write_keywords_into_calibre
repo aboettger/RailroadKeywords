@@ -46,7 +46,7 @@ function save_pid {
   if [ ! -d "$HOME/running/" ]; then
     mkdir "$HOME/running/"
   fi
-  
+
   if [ -f "$HOME/running/$script_name.pid" ]; then
     echo "$script_name is already running ($HOME/running/$script_name.pid)"
     exit 1
@@ -93,9 +93,9 @@ find "$search_root" -type f -name '*.pdf' | {
     echo "$metadata_path not found" 1>&2
   else
     calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "$metadata_path")
-    
+
     logInfo "Processing: $working_path"
-    
+
     # pattern_files="$script_path/pattern/*"
     # for pattern_path in $pattern_files; do
     #   keywords=$("$script_path/60road_keywords_from_pdf" run "$pattern_path" "$pdf_path")
@@ -110,7 +110,7 @@ find "$search_root" -type f -name '*.pdf' | {
     #     fi
     #   fi
     # done
-    
+
     # keywords=$(find "$script_path/pattern" -type f -name '*.pattern' | {
     #   while read -r pattern_path; do
     #     keywords=$("$script_path/60road_keywords_from_pdf" run "$pattern_path" "$pdf_path")
@@ -126,11 +126,11 @@ find "$search_root" -type f -name '*.pdf' | {
     #     echo "$keywords"
     #   done
     # })
-    
+
     keywords=$("$script_path/create_railroad_keywords_from_pdf" run "$script_path/pattern" "$pdf_path")
-    
+
     pattern_files="$script_path/pattern/*"
-    
+
     for pattern_path in $pattern_files; do
       false_positive_pattern_path="$script_path/false_positive/$(basename "$pattern_path")"
         if [ -f "$false_positive_pattern_path" ]; then
@@ -140,20 +140,33 @@ find "$search_root" -type f -name '*.pdf' | {
               logWarn "Falscher Treffer wird entfernt durch \"$pattern\", definiert in \"$false_positive_pattern_path\"."
               pattern=$(echo "$pattern" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
               keywords=$(echo "$keywords" | sed -e "s/$pattern//g")
-              keywords=$(echo "$keywords" | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g")
+              keywords=$(echo "$keywords" | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,\$//g")
             fi
           done <<< "$false_positive_pattern"
         fi
     done
-    
+
     logInfo "Processing: $pdf_path"
     # keywords=${keywords//Baureihe/BR}
     # keywords=$(echo "$keywords" | sort | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g" | sed -E 's/(V)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(VT)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(E)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(S)([0-9])/\1 \2/g' | uniq | tr '\n' ',' | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//' | sed -e 's/ \- /-/g')
-    keywords=$(echo "$keywords" | sort | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g" | uniq | tr '\n' ',' | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//' | sed -e 's/ \- /-/g')
+    keywords=$(echo "$keywords" | sort | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,\$//g" | uniq | tr '\n' ',' | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//' | sed -e 's/ \- /-/g')
 
     old_keywords=$(calibredb show_metadata "$calibre_id"  --library-path="$calibreDbSearchPath" | grep "Tags" | awk -F: '{print $2}' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/, /,/g' )
-    echo "Tags old: >$old_keywords<"
-    echo "Tags new: >$keywords<"
+
+    temp_file_keywords=$(tempfile)
+    temp_file_old_keywords=$(tempfile)
+
+    tr ',' '\n' <<< "$keywords" > "$temp_file_keywords"
+    tr ',' '\n' <<< "$old_keywords" > "$temp_file_old_keywords"
+
+    echo "$keywords"
+    diff "$temp_file_old_keywords" "$temp_file_keywords" | tee >(grep "<") >(grep ">") > /dev/null 2>&1
+
+    rm "$temp_file_keywords"
+    rm "$temp_file_old_keywords"
+
+    # echo "Tags alt: >$old_keywords<"
+    # echo "Tags neu: >$keywords<"
     if [ "$old_keywords" != "$keywords" ]; then
       calibredb set_metadata --field tags:"$keywords" "$calibre_id" --library-path="$calibreDbSearchPath"
     fi
