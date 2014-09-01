@@ -42,6 +42,7 @@ function getPattern () {
 function getResults () {
   pattern_case="$1"
   txt_path="$2"
+  isTest="$3"
 
   pattern=$(getPattern "$pattern_case")
 
@@ -75,8 +76,10 @@ function getResults () {
     fi
 
     if [ "$result" != "" ]; then
-      log_result=$(echo "$result" | sort | uniq | sed -e 's/^/\\t/g')
-      logInfo "Treffer gefunden durch \"$pattern_case\":\n$log_result"
+      if [ "$isTest" == "0" ]; then
+        log_result=$(echo "$result" | sort | uniq | sed -e 's/^/\\t/g')
+        logInfo "Treffer gefunden durch \"$pattern_case\":\n$log_result"
+      fi
       echo "$result"
     fi
   done }
@@ -117,7 +120,7 @@ function runTest () {
   logInfo "$test_name_positive"
   find "$test_path" -type f -name "$test_name_positive*.list" | sort | { while read -r test_case_positive;
     do
-      test_results=$(getResults "$pattern_case" "$test_case_positive")
+      test_results=$(getResults "$pattern_case" "$test_case_positive" "1")
       matched_elements=$(echo "$test_results" | sed '/^[[:space:]]*$/d' | wc -l)
       given_elements=$(sed '/^[[:space:]]*$/d' "$test_case_positive" | sed '/^[[:space:]]*#/d' | wc -l)
       logInfo "TestCase: $(basename "$test_case_positive")"
@@ -142,7 +145,7 @@ function runTest () {
   logInfo "$test_name_negative"
   find "$test_path" -type f -name "$test_name_negative*.list" | sort | { while read -r test_case_negative;
     do
-      test_results=$(getResults "$pattern_case" "$test_case_negative")
+      test_results=$(getResults "$pattern_case" "$test_case_negative" "1")
       matched_elements=$(echo "$test_results" | sed '/^$/d' | wc -l)
       given_elements=$(sed '/^pattern=/d' "$test_case_negative"| sed '/^$/d' | sed '/^#/d' | wc -l)
       logInfo "TestCase: $(basename "$test_case_negative")"
@@ -165,7 +168,7 @@ function runTest () {
   find "$script_path/diffs" -type f -name "$diff_name.*.diff" | sort | { while read -r diff;
     do
       logInfo "$diff"
-      test_results=$(getResults "$pattern_case" "$diff")
+      test_results=$(getResults "$pattern_case" "$diff" "1")
       matched_elements=$(echo "$test_results" | sed '/^$/d' | wc -l)
       given_elements=$(sed '/^pattern=/d' "$diff"| sed '/^$/d' | sed '/^#/d' | wc -l)
       logInfo "TestCase: $(basename "$diff")"
@@ -194,7 +197,7 @@ function runSearch () {
 
     if [ "$lines" != "0" ]
     then
-      getResults "$pattern_case" "$pdf_dirname/$pdf_filename.txt"
+      getResults "$pattern_case" "$pdf_dirname/$pdf_filename.txt" "0"
     fi
   fi
 }
