@@ -10,4 +10,15 @@ pattern/*pattern
 
 false_positive/*
 !false_positive/*.template
+!false_positive/*.example
 !false_positive/README
+
+human_readable_pattern/private/*
+!human_readable_pattern/private/*.template
+!human_readable_pattern/private/*.example
+!human_readable_pattern/private/README
+
+tests/private/*
+!tests/private/*.template
+!tests/private/*.example
+!tests/private/README
