@@ -17,10 +17,18 @@ while true; do
         rm "$file"
       done }
       
-      find "$script_path/../human_readable_pattern" -type f -name "test-*.human_readable.pattern" | sort | { while read -r file;
+      find "$script_path/../human_readable_pattern/standard" -type f -name "test-*.human_readable.pattern" | sort | { while read -r file;
       do
-        output_filename=${file//human_readable.pattern/pattern}
-        output_filename=${output_filename//human_readable_pattern/pattern}
+        output_filename="$script_path/../pattern/$(basename "$file")"
+        output_filename=${output_filename//human_readable./}
+        echo "$output_filename"
+        sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern_delete=/d' | sed ':a;N;$!ba;s/\npattern=/|/g' >> "$output_filename"
+        sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern=/d' | sed ':a;N;$!ba;s/\npattern_delete=/|/g' >> "$output_filename"
+      done }
+      find "$script_path/../human_readable_pattern/private" -type f -name "test-*.human_readable.pattern" | sort | { while read -r file;
+      do
+        output_filename="$script_path/../pattern/$(basename "$file")"
+        output_filename=${output_filename//human_readable./}
         echo "$output_filename"
         sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern_delete=/d' | sed ':a;N;$!ba;s/\npattern=/|/g' >> "$output_filename"
         sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern=/d' | sed ':a;N;$!ba;s/\npattern_delete=/|/g' >> "$output_filename"
