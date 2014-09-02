@@ -48,7 +48,10 @@ find "$1" -type f -name "*.txt" ! -name "*human-readable.txt" | {
           if [ "$line" == "$keyword" ]; then
             # echo "$keywords"
             logWarn "================================"
+            logWarn "$working_path"
             logWarn "$path"
+            logWarn "$(find "$working_path" -type f -name '*.pdf')"
+            logWarn "$(find "$working_path" -type f -name '*human-readable.txt')"
             logWarn "================================"
 echo "$line"
             keywords_pattern=$(sed -E 's/^(.*)$/[[:space:]]\1[[:space:]]/g' <<< "$line")
