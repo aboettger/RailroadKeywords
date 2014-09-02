@@ -1,7 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/73.asc
 
 pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
-pattern_delete=([[:space:]]*.*er[[:space:]](-.*|J.*))
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]73(\.([012]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]73[[:space:]]([^0-9]|$))
 pattern=(([[:space:]]73er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))

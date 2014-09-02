@@ -1,7 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/60.asc
 
 pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
-pattern_delete=([[:space:]]*.*er[[:space:]](-.*|J.*))
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]60(\.(0))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]60[[:space:]]([^0-9]|$))
 pattern=(([[:space:]]60er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
