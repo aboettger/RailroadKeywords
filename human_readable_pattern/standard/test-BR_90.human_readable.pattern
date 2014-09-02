@@ -4,7 +4,7 @@ pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:spac
 pattern_delete=([[:space:]]*.*er[[:space:]](-.*|J.*))
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]90(\.([0-3]|1[01]|64|70))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]90[[:space:]]([^0-9]|$))
-pattern=([[:space:]]90er([[:space:]](- ){0,1}Jahre(|n)){0,1}[[:space:]])
+pattern=(([[:space:]]90er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
 #pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)
 #([[:space:]]|-[0-9])
