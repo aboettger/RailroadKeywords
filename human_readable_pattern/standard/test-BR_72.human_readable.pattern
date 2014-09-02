@@ -9,5 +9,5 @@ pattern=(([[:space:]]72er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 #pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)
 #([[:space:]]|-[0-9])
 
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]72[[:space:]]0(0[1212])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]72[[:space:]]0(0[12])([[:space:]]|-[0-9])
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]72[[:space:]]1(0[12])([[:space:]]|-[0-9])
