@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+script_path=$(dirname "$script")
+
+red="\e[0;31m"
+green="\e[0;32m"
+yellow="\e[0;33m"
+TOA="\e[0m" # No Color
+
+function logInfo () {
+    echo -e "${green}$1${TOA}"
+}
+
+function logWarn () {
+  echo -e "${yellow}$1${TOA}"
+}
+
+function logError () {
+  echo -e "${red}$1${TOA}"
+}
+
+baureihe="$1"
+
+if [ ! -f "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" ]; then
+  cp "$script_path/../human_readable_pattern/standard/test-BR_XXX.human_readable.pattern.template" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+  sed -i "s/XXX/$baureihe/g" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+  if [ -f "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" ]; then
+    logInfo "neue Datei: \"$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern\""
+  fi
+else
+  logWarn "\"$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern\" existiert bereits"
+fi
+
+if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" ]; then
+  cp "$script_path/../tests/standard/test-BR_XXX.negative.001.list.template" "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
+  sed -i "s/XXX/$baureihe/g" "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
+  if [ -f "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" ]; then
+    logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.negative.001.list\""
+  fi
+else
+  logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.negative.001.list\" existiert bereits"
+fi
+
+if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.ods" ]; then
+  cp "$script_path/../tests/standard/test-BR_XXX.ods.template" "$script_path/../tests/standard/test-BR_$baureihe.ods"
+  if [ -f "$script_path/../tests/standard/test-BR_$baureihe.ods" ]; then
+    logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.ods\""
+  fi
+else
+  logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.ods\" existiert bereits"
+fi
+
+if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" ]; then
+  cp "$script_path/../tests/standard/test-BR_XXX.positive.001.list.template" "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list"
+  if [ -f "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" ]; then
+    logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.positive.001.list\""
+  fi
+else
+  logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.positive.001.list\" existiert bereits"
+fi
+
+if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" ]; then
+  cp "$script_path/../tests/standard/test-BR_XXX.positive.002.list.template" "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list"
+  if [ -f "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" ]; then
+    logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.positive.002.list\""
+  fi
+else
+  logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.positive.002.list\" existiert bereits"
+fi
