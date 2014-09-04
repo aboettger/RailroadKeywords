@@ -5,37 +5,54 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
-exec < /dev/tty
+function compress() {
+  file=$1
+  output_filename="$script_path/../pattern/$(basename "$file")"
+  output_filename=${output_filename//human_readable./}
+  echo "$output_filename"
+  sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern_delete=/d' | sed ':a;N;$!ba;s/\npattern=/|/g' >> "$output_filename"
+  sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern=/d' | sed ':a;N;$!ba;s/\npattern_delete=/|/g' >> "$output_filename"
+}
 
-while true; do
-  read -n 1 -p "Alle Dateien im Verzeichnis \"pattern\" werden gelöscht und neu durch die Vorgaben in \"human_readable_pattern\" angelegt. [y/n]: " yn
-  echo;
-  case $yn in
-    [Yy]* ) 
-      find "$script_path/../pattern" -type f -name "*.pattern" | sort | { while read -r file;
-      do
-        rm "$file"
-      done }
-      
-      find "$script_path/../human_readable_pattern/standard" -type f -name "test-*.human_readable.pattern" | sort | { while read -r file;
-      do
-        output_filename="$script_path/../pattern/$(basename "$file")"
-        output_filename=${output_filename//human_readable./}
-        echo "$output_filename"
-        sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern_delete=/d' | sed ':a;N;$!ba;s/\npattern=/|/g' >> "$output_filename"
-        sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern=/d' | sed ':a;N;$!ba;s/\npattern_delete=/|/g' >> "$output_filename"
-      done }
-      find "$script_path/../human_readable_pattern/private" -type f -name "test-*.human_readable.pattern" | sort | { while read -r file;
-      do
-        output_filename="$script_path/../pattern/$(basename "$file")"
-        output_filename=${output_filename//human_readable./}
-        echo "$output_filename"
-        sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern_delete=/d' | sed ':a;N;$!ba;s/\npattern=/|/g' >> "$output_filename"
-        sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern=/d' | sed ':a;N;$!ba;s/\npattern_delete=/|/g' >> "$output_filename"
-      done }
-    break;;
-    [Nn]* )
-    break;;
-    * ) echo "Please respond with [y]es or [n]o.";;
-  esac
-done
+if [ ! -d "$1" ]; then
+  if [ -f "$script_path/../pattern/$(basename "$1")" ]; then
+    rm "$script_path/../pattern/$(basename "$1")"
+  fi
+  file=$(basename "$1")
+  file=${file//pattern/human_readable.pattern}
+  file_standard="$script_path/../human_readable_pattern/standard/$file"
+  file_private="$script_path/../human_readable_pattern/private/$file"
+  
+  if [ -f "$file_standard" ]; then
+    compress "$file_standard"
+  fi
+  if [ -f "$file_private" ]; then
+    compress "$file_private"
+  fi
+else
+  exec < /dev/tty
+  while true; do
+    read -n 1 -p "Alle Dateien im Verzeichnis \"pattern\" werden gelöscht und neu durch die Vorgaben in \"human_readable_pattern\" angelegt. [y/n]: " yn
+    echo;
+    case $yn in
+      [Yy]* )
+        find "$script_path/../pattern" -type f -name "*.pattern" | sort | { while read -r file;
+        do
+          rm "$file"
+        done }
+        
+        find "$script_path/../human_readable_pattern/standard" -type f -name "test-*.human_readable.pattern" | sort | { while read -r file;
+        do
+          compress "$file"
+        done }
+        find "$script_path/../human_readable_pattern/private" -type f -name "test-*.human_readable.pattern" | sort | { while read -r file;
+        do
+          compress "$file"
+        done }
+      break;;
+      [Nn]* )
+      break;;
+      * ) echo "Please respond with [y]es or [n]o.";;
+    esac
+  done
+fi
