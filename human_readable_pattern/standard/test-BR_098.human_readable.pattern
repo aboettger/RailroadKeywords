@@ -1,0 +1,10 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/098.asc
+
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)
+
+pattern=(([[:space:]]098er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+
+pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]098(\.(8))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]098[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]098[[:space:]]8(1[23]|8[6])([[:space:]]|-[0-9])
