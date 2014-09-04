@@ -5,28 +5,44 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
-exec < /dev/tty
 
-while true; do
-  read -n 1 -p "Alle Dateien in den Verzeichnissen \"diffs/*.diff\" und \"all/*.txt\" werden gelöscht und neu angelegt. [y/n]: " yn
-  echo;
-  case $yn in
-    [Yy]* ) 
-      rm "$script_path"/../diffs/*.diff
-      rm "$script_path"/../all/*.txt
+if [ ! -d "$1" ]; then
+  if [ -f "$script_path/../diffs/$(basename "$1")" ]; then
+    rm "$script_path/../diffs/$(basename "$1")"
+  fi
+  if [ -f "$script_path/../all/$(basename "$1")" ]; then
+    rm "$script_path/../all/$(basename "$1")"
+  fi
+  
+  br=$(basename "$1" | sed -E "s/test-BR_(.*)\.pattern/\1/g")
+  echo "$br"
+  "$script_path/create_all_4_BR" "$br" "BR_$br"
+  "$script_path/create_diff_4_BR" "$br" "BR_$br"
+else
+  exec < /dev/tty
 
-      find "$script_path/../tests" -name "test-BR_*.positive.002.list" | { while read -r file;
-        do
-          echo "$file"
-          br=$(basename "$file" | sed -E "s/test-BR_(.*)\.positive\.002\.list/\1/g")
-          "$script_path/create_all_4_BR" "$br" "BR_$br"
-          "$script_path/create_diff_4_BR" "$br" "BR_$br"
-        done 
-      }
-    break;;
-    [Nn]* )
-      exit 0;
-    break;;
-    * ) echo "Please respond with [y]es or [n]o.";;
-  esac
-done
+  while true; do
+    read -n 1 -p "Alle Dateien in den Verzeichnissen \"diffs/*.diff\" und \"all/*.txt\" werden gelöscht und neu angelegt. [y/n]: " yn
+    echo;
+    case $yn in
+      [Yy]* ) 
+        rm "$script_path"/../diffs/*.diff
+        rm "$script_path"/../all/*.txt
+
+        find "$script_path/../tests" -name "test-BR_*.positive.002.list" | { while read -r file;
+          do
+            echo "$file"
+            br=$(basename "$file" | sed -E "s/test-BR_(.*)\.positive\.002\.list/\1/g")
+            echo "$br"
+            "$script_path/create_all_4_BR" "$br" "BR_$br"
+            "$script_path/create_diff_4_BR" "$br" "BR_$br"
+          done 
+        }
+      break;;
+      [Nn]* )
+        exit 0;
+      break;;
+      * ) echo "Please respond with [y]es or [n]o.";;
+    esac
+  done
+fi
