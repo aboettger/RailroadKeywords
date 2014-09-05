@@ -14,7 +14,7 @@ function compress() {
   sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern=/d' | sed ':a;N;$!ba;s/\npattern_delete=/|/g' >> "$output_filename"
 }
 
-if [ ! -d "$1" ]; then
+if [ ! -z "$1" ] && [ ! -d "$1" ]; then
   if [ -f "$script_path/../pattern/$(basename "$1")" ]; then
     rm "$script_path/../pattern/$(basename "$1")"
   fi
