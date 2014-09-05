@@ -126,7 +126,12 @@ find "$search_root" -type f -name '*.pdf' | {
     #     echo "$keywords"
     #   done
     # })
-
+    pdf_dirname=$(dirname "$pdf_path")
+    # echo "$pdf_dirname"
+    pdf_filename=$(basename "$pdf_path")
+    pdf_filename="${pdf_filename%.*}"
+    logInfo "Dateigöße ($pdf_filename.txt): $(stat -c%s "$pdf_dirname/$pdf_filename.txt")"
+    
     keywords=$("$script_path/create_railroad_keywords_from_pdf" run "$script_path/pattern" "$pdf_path")
 
     pattern_files="$script_path/pattern/*"
