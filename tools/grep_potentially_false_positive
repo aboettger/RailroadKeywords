@@ -46,34 +46,89 @@ find "$1" -type f -name "*.txt" ! -name "*human-readable.txt" | {
         # echo "$keywords"
         while read line; do
           if [ "$line" == "$keyword" ]; then
+            # echo
+            # echo "$calibre_id=$keyword"
+            # echo "$script_path/../true_positive/*"
             # echo "$keywords"
-            logWarn "================================"
-            logWarn "$working_path"
-            logWarn "$path"
-            logWarn "$(find "$working_path" -type f -name '*.pdf')"
-            logWarn "$(find "$working_path" -type f -name '*human-readable.txt')"
-            logWarn "================================"
-echo "$line"
-            keywords_pattern=$(sed -E 's/^(.*)$/[[:space:]]\1[[:space:]]/g' <<< "$line")
-            # echo "$keywords_pattern"
 
-            egrep -anET -C 5 "$keywords_pattern" "$path"
+            list_files_standard=$(grep -l "[[:space:]]$line[[:space:]]" "$script_path"/../tests/standard/*positive*)
+            # ask_4_action=""
+            dont_ask_file=""
+            ignore_file=""
+            while read list_file_standard; do
+              # echo "$list_file_standard"
+              pattern_file_standard=${list_file_standard//tests\/standard/false_positive}
+              pattern_file_standard=${pattern_file_standard//positive.001.list/pattern}
+              list_file_standard=${list_file_standard//positive.001./}
+              list_file_standard=${list_file_standard//tests/true_positive}
+              list_file_standard=${list_file_standard//\/standard/}
+              # echo "# $list_file_standard"
+              if [ -f "$list_file_standard" ]; then
+                true_positive=$(grep -l "^$calibre_id=$keyword\$" "$list_file_standard")
+              else
+                true_positive=""
+              fi
+              if [ ! -z "$true_positive" ]; then
+                echo
+                echo "\"$line\" wurde in \"$true_positive\" gefunden, keine Aktion nötig."
+                echo
+              else
+                keywords_pattern=$(sed -E 's/^(.*)$/[[:space:]]\1[[:space:]]/g' <<< "$line")
 
-            line_pattern=$(sed -e 's/\//\\\//g' <<< "$line")
-            exec < /dev/tty
-            echo
-            echo -e "Bitte diesen Eintrag unter \"false_positive\" vornehmen oder bestehenden Eintrag für \"$calibre_id\" ergänzen: ${green}$calibre_id=^(($line_pattern))\$ ${TOA}"
-            read -n 1 -p "Schlüsselwörter neu erzeugen? [y/n]: " yn
-            echo
-            case $yn in
-              [Yy]* )
-                extract_and_write_keywords_into_calibre "$path"
-              break;;
-              [Nn]* )
-              break;;
-              * ) echo "Please respond with [y]es or [n]o."
-              break;;
-            esac
+                logWarn "================================"
+                logWarn "$working_path"
+                logWarn "$path"
+                logWarn "$(find "$working_path" -type f -name '*.pdf')"
+                logWarn "$(find "$working_path" -type f -name '*human-readable.txt')"
+                logWarn "================================"
+
+
+                # echo "$keywords_pattern"
+
+                egrep -anET -C 5 "$keywords_pattern" "$path"
+
+                # ask_4_action="1"
+                echo
+                pattern_file_name="$(basename "$pattern_file_standard")"
+                human_readable_file_name=${pattern_file_name//.pattern/.human_readable.pattern}
+
+                logInfo "\"$line\" wurde gefunden durch:"
+                find "$script_path/../human_readable_pattern" -type f -name "$human_readable_file_name"
+                line_pattern=$(sed -e 's/\//\\\//g' <<< "$line")
+                ignore_file="$pattern_file_standard"
+                dont_ask_file="$list_file_standard"
+
+                # if [ ! -z "$ask_4_action" ]; then
+                  echo
+                  echo "1) Nicht mehr fragen"
+                  echo "2) Schlüsselwort dauerhaft entfernen"
+                  echo "3) PDF ansehen"
+                  echo "4) TXT ansehen"
+                  echo "5) Nichts tun"
+                  while true; do
+                    read -p "Bitte wählen: " input < /dev/tty
+                    case $input in
+                        [1]* )
+                          echo "$calibre_id=$line" >> "$dont_ask_file"
+                          echo -e "Nach \"$line\" für Calibre-ID \"$calibre_id\" wird nicht mehr gefragt: ${green}$calibre_id=$line${TOA} in \"$dont_ask_file\""
+                          break;;
+                        [2]* )
+                          echo "$calibre_id=^($line_pattern)\$" >> "$ignore_file"
+                          extract_and_write_keywords_into_calibre "$path"
+                          echo -e "\"$line\" für Calibre-ID \"$calibre_id\" wurde dauerhaft entfernt: ${green}$calibre_id=^($line_pattern)\$${TOA} in \"$ignore_file\""
+                          break;;
+                        [3]* )
+                          xdg-open "$(find "$working_path" -type f -name '*.pdf')" > /dev/null 2>&1
+                          ;;
+                        [4]* )
+                          xdg-open "$(find "$working_path" -type f -name '*human-readable.txt')" > /dev/null 2>&1
+                          ;;
+                        [5]* ) break;;
+                        * ) echo "Ungültige Auswahl";;
+                    esac
+                  done
+              fi
+            done <<< "$list_files_standard"
           fi
         done <<< "$keywords"
       fi
