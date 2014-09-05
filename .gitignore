@@ -13,6 +13,11 @@ false_positive/*
 !false_positive/*.example
 !false_positive/README
 
+true_positive/*
+!true_positive/*.template
+!true_positive/*.example
+!true_positive/README
+
 human_readable_pattern/private/*
 !human_readable_pattern/private/*.template
 !human_readable_pattern/private/*.example
