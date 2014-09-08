@@ -1,0 +1,17 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/115.asc
+
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)
+
+pattern=(([[:space:]]115er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+
+pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]115(\.(1|2|3|4|5|6|7|8))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]115[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]115[[:space:]]1(0[6]|1[46]|4[8]|5[2469]|6[6]|7[8]|9[8])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]115[[:space:]]2(0[359]|1[1]|2[4]|3[02]|6[1]|7[8]|8[689]|9[3])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]115[[:space:]]3(0[27]|1[48]|2[378]|3[126]|4[6]|5[0345]|7[68]|8[13])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]115[[:space:]]4(4[58]|5[9]|8[2])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]115[[:space:]]5(0[9]|1[3])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]115[[:space:]]6(2[2]|3[8]|5[0]|6[4])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]115[[:space:]]7(6[0])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]115[[:space:]]8(6[2])([[:space:]]|-[0-9])
