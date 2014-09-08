@@ -1,5 +1,7 @@
 
 pattern=([[:space:]]V[[:space:]]{0,1}36(|\.[0-4]|\.48)[[:space:]]([^0-9]|$))|([[:space:]](BR|Baureihe)[[:space:]]V[[:space:]]{0,1}36[[:space:]]([^0-9]|$))
+category=Baureihen[category_separator]BR V36
+pattern=([[:space:]]V[[:space:]]{0,1}36(|\.[0-4]|\.48)[[:space:]]([^0-9]|$))|([[:space:]](BR|Baureihe)[[:space:]]V[[:space:]]{0,1}36[[:space:]]([^0-9]|$))
 
 # V36.0
 pattern=([[:space:]]V[[:space:]]{0,1}36[[:space:]]0(0[1-3]|1[5-9]|2[0-9]|3[0-7]|5[0-3]|6[0-7]|80)[[:space:]])

@@ -1,5 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/22.asc
 
+category=Baureihen[category_separator]BR 22
+
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]22(\.0)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]22[[:space:]]([^0-9]|$))
 pattern=([[:space:]]22er[[:space:]])
 

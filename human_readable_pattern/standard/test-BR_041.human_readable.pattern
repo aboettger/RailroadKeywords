@@ -1,5 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/041.asc
 
+category=Baureihen[category_separator]BR 041
+
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]041(\.(([0-3])))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]041[[:space:]]([^0-9]|$))
 pattern=([[:space:]]041er[[:space:]])
 # BR 041.0

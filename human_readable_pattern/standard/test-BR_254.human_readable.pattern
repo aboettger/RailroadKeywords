@@ -1,5 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/254.asc
 
+category=Baureihen[category_separator]BR 254
+
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]254(\.[0-1])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]254[[:space:]]([^0-9]|$))
 pattern=([[:space:]]254er[[:space:]])
 

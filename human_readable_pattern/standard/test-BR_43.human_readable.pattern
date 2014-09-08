@@ -1,5 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/43.asc
 
+category=Baureihen[category_separator]BR 43
+
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]43(\.(0|10))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]43[[:space:]]([^0-9]|$))
 pattern=([[:space:]]43er[[:space:]])
 # BR 43.0

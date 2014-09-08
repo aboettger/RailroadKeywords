@@ -1,5 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/23.asc
 
+category=Baureihen[category_separator]BR 23
+
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]23(\.0|\.1|\.10|\.11)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]23[[:space:]]([^0-9]|$))
 pattern=([[:space:]]23er[[:space:]])
 
