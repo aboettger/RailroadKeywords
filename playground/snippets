@@ -20,3 +20,6 @@ sed '/^[[:space:]]*$/d' "/home/aboettger/src/RailroadKeywords/tests/test-Feldbah
 sed '/^[[:space:]]*$/d' "/home/aboettger/src/RailroadKeywords/playground/potentially_false_positive" | sed '/^[[:space:]]*#/d' | { while read -r line; do echo; search_for=$(echo "$line" | sed -e 's/^ //g' | sed -e 's/ $//g'); echo "Stichwort: [$search_for]"; /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive ~/Eisenbahn/Eisenbahnliteratur "$line"; done }
 
 sed '/^[[:space:]]*$/d' "/home/aboettger/src/RailroadKeywords/false_positive/potentially_false_positive" | sed '/^[[:space:]]*#/d' | { while read -r line; do echo; echo "$line"; /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive ~/Eisenbahn/Eisenbahnliteratur "$line"; done }
+
+
+find /home/aboettger/src/RailroadKeywords/human_readable_pattern/private -type f -name "test-*.pattern" | { while read file; do keyword_category="$(basename "$file")";  keyword_category=${keyword_category//test-/}; keyword_category=${keyword_category//.human_readable.pattern/}; keyword_category=${keyword_category//_/ }; gawk -v var="$keyword_category" 'NR==1{printf "category=";print var;print;print} NR!=1' "$file"  > "/home/aboettger/tmp/$(basename "$file")"; mv "/home/aboettger/tmp/$(basename "$file")" "$file"; done }
