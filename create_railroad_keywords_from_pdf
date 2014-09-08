@@ -16,7 +16,7 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
-calibre_category_separator=$(look calibre_category_separator "$script_path"/main.cfg | cut -d '=' -f 2-)
+category_separator=$(look category_separator "$script_path"/main.cfg | cut -d '=' -f 2-)
 
 # START functions ##############################################################
 
@@ -77,21 +77,21 @@ function getResults () {
     fi
 
     if [ "$result" != "" ]; then
-      keyword_category="$(basename "$pattern_case")"
-      # ${pattern_file_hit//pattern\//false_positive\/}
-      keyword_category=${keyword_category//test-/}
-      keyword_category=${keyword_category//.pattern/}
-      keyword_category=${keyword_category//_/ }
+      category=$(look category "$pattern_case" | cut -d '=' -f 2-)
       result=$(sort <<< "$result" | uniq)
       if [ "$isTest" == "0" ]; then
         log_result=$(sort <<< "$result" | uniq | sed -e 's/^/\\t/g')
         
-        logInfo "Kategorie: $keyword_category (\"$pattern_case\")\n$log_result"
+        logInfo "Kategorie: $category (\"$pattern_case\")\n$log_result"
         # logInfo "Treffer gefunden durch \"$pattern_case\":\n$log_result"
       fi
       while read -r keyword; do
         if [[ $keyword != "" ]]; then
-          echo "$keyword_category$calibre_category_separator$keyword"
+          if [[ $category_separator == "" ]] || [[ $category == "" ]]; then
+            echo "$keyword"
+          else
+            echo "$category$category_separator$keyword"
+          fi
         fi
       done <<< "$result"
     fi
