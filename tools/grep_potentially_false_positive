@@ -48,21 +48,34 @@ while read -r calibre_id; do
     fi
   done <<< "$metadata_files"
 
-
-  list_files_standard=$(grep -l "[[:space:]]$keyword[[:space:]]" "$script_path"/../tests/standard/*positive*)
-  # ask_4_action=""
+  pattern_files=$(find "$script_path"/../pattern -type f -name "test-UIC.pattern")
+  pattern_files_hit=$(
+    while read pattern_file; do
+    pattern=$(sed '/^#/d' "$pattern_file" | grep 'pattern=' | gawk  -F 'pattern=' '{print $2}' | sed 's/(/\\(/g' | sed 's/)/\\)/g' | sed 's/|/\\|/g')
+    result=$(grep "$pattern" <<< " $keyword ")
+    if [[ $result != "" ]]; then
+      echo "$pattern_file"
+    fi
+    done <<< "$pattern_files"
+  )
+  # echo "$pattern_files_hit"
+  
+  echo
+  echo -e "${green}$keyword${TOA} für Calibre-ID ${green}$calibre_id${TOA} gefunden durch:"
+  echo "$pattern_files_hit"
+  
   dont_ask_file=""
   ignore_file=""
-  while read list_file_standard; do
-    # echo "$list_file_standard"
-    pattern_file_standard=${list_file_standard//tests\/standard/false_positive}
-    pattern_file_standard=${pattern_file_standard//positive.001.list/pattern}
-    list_file_standard=${list_file_standard//positive.001./}
-    list_file_standard=${list_file_standard//tests/true_positive}
-    list_file_standard=${list_file_standard//\/standard/}
-    # echo "# $list_file_standard"
-    if [ -f "$list_file_standard" ]; then
-      true_positive=$(grep -l "^$calibre_id=$keyword\$" "$list_file_standard")
+  while read pattern_file_hit; do
+    # echo "$pattern_file_hit"
+    false_positive_file=${pattern_file_hit//pattern\//false_positive\/}
+    # echo "$false_positive_file"
+    true_positive_file=${pattern_file_hit//pattern\//true_positive\/}
+    true_positive_file=${true_positive_file//pattern/list}
+    # echo "$true_positive_file"
+
+    if [ -f "$true_positive_file" ]; then
+      true_positive=$(grep -l "^$calibre_id=$keyword\$" "$true_positive_file")
     else
       true_positive=""
     fi
@@ -76,18 +89,18 @@ while read -r calibre_id; do
       hr_txt_path=${pdf_path//.pdf/.human-readable.txt}
       txt_path=${pdf_path//.pdf/.txt}
 
-      pattern_file_name="$(basename "$pattern_file_standard")"
+      pattern_file_name="$(basename "$false_positive_file")"
       human_readable_file_name=${pattern_file_name//.pattern/.human_readable.pattern}
 
       echo
-      echo "\"$keyword\" für Calibre-ID $calibre_id gefunden"
-      find "$script_path/../human_readable_pattern" -type f -name "$human_readable_file_name"
+      echo "Bitte Entscheidung treffen für:"
+      logInfo "$pattern_file_hit"
       echo
       egrep -anET -C 5 "$keywords_pattern" "$txt_path"
 
       keyword_pattern=$(sed -e 's/\//\\\//g' <<< "$keyword")
-      ignore_file="$pattern_file_standard"
-      dont_ask_file="$list_file_standard"
+      ignore_file="$false_positive_file"
+      dont_ask_file="$true_positive_file"
 
       echo
       echo "1) Nicht mehr fragen"
@@ -125,7 +138,7 @@ while read -r calibre_id; do
         esac
       done
     fi
-  done <<< "$list_files_standard"
+  done <<< "$pattern_files_hit"
 done <<< "$calibre_ids"
 
 exit 0
