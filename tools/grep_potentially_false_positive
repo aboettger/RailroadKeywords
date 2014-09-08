@@ -76,13 +76,13 @@ while read -r calibre_id; do
       hr_txt_path=${pdf_path//.pdf/.human-readable.txt}
       txt_path=${pdf_path//.pdf/.txt}
 
-pattern_file_name="$(basename "$pattern_file_standard")"
-human_readable_file_name=${pattern_file_name//.pattern/.human_readable.pattern}
+      pattern_file_name="$(basename "$pattern_file_standard")"
+      human_readable_file_name=${pattern_file_name//.pattern/.human_readable.pattern}
 
-echo
-echo "\"$keyword\" für Calibre-ID $calibre_id gefunden"
-find "$script_path/../human_readable_pattern" -type f -name "$human_readable_file_name"
-echo
+      echo
+      echo "\"$keyword\" für Calibre-ID $calibre_id gefunden"
+      find "$script_path/../human_readable_pattern" -type f -name "$human_readable_file_name"
+      echo
       egrep -anET -C 5 "$keywords_pattern" "$txt_path"
 
       keyword_pattern=$(sed -e 's/\//\\\//g' <<< "$keyword")
