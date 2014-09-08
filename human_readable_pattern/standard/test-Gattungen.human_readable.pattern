@@ -1,4 +1,7 @@
+category=Gattungen
+
 # A
+pattern=([[:space:]]A (I|II|III|IV|V)[[:space:]])
 pattern=([[:space:]]A (I|II|III|IV|V)[[:space:]])
 
 # AA

@@ -1,5 +1,7 @@
 # Nicht nach E93 oder E 93 suchen, das ist doof, ich weiß, aber sonst wird 
 # z.B. E93 001 UND E93, E93 002 UND E93 usw. gefunden
+category=Baureihen[category_separator]BR E93
+# z.B. E93 001 UND E93, E93 002 UND E93 usw. gefunden
 
 pattern=([[:space:]]E[[:space:]]{0,1}93(|\.0)[[:space:]]([^0-9]|$))|([[:space:]](BR|Baureihe)[[:space:]]E[[:space:]]{0,1}93[[:space:]]([^0-9]|$))
 

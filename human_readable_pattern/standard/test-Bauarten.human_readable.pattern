@@ -1,4 +1,8 @@
+category=Bauarten
+
 # 1’C	2-6-0	Mogul
+pattern=([[:space:]]1’C(t|)([[:space:]]|([[:space:]]\-[[:space:]])|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
+
 pattern=([[:space:]]1’C(t|)([[:space:]]|([[:space:]]\-[[:space:]])|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
 
 # 2’C	4-6-0	Ten-Wheeler

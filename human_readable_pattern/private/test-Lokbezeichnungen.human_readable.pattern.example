@@ -1,3 +1,4 @@
+category=Lokbezeichnunugen
 # Bezeichnungen Loks
 pattern=([[:space:]](Breuer \- |)Rangiertraktor[[:space:]])
 pattern=([[:space:]]Kleinlok(|s)[[:space:]])

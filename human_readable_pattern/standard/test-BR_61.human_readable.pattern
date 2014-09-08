@@ -1,5 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/61.asc
 
+category=Baureihen[category_separator]BR 61
+
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]61(\.0)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]61[[:space:]]([^0-9]|$))
 pattern=([[:space:]]61er[[:space:]])
 # BR 61.0

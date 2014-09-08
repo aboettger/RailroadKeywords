@@ -1,5 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/08.asc
 
+category=Baureihen[category_separator]BR 08
+
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]08(\.10)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]08[[:space:]]([^0-9]|$))
 pattern=([[:space:]]08er[[:space:]])
 # BR 08.10

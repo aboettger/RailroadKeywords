@@ -1,5 +1,7 @@
 
 pattern=([[:space:]]V[[:space:]]{0,1}180(|\.[0-3])[[:space:]]([^0-9]|$))|([[:space:]](BR|Baureihe)[[:space:]]V[[:space:]]{0,1}180[[:space:]]([^0-9]|$))
+category=Baureihen[category_separator]BR V180
+pattern=([[:space:]]V[[:space:]]{0,1}180(|\.[0-3])[[:space:]]([^0-9]|$))|([[:space:]](BR|Baureihe)[[:space:]]V[[:space:]]{0,1}180[[:space:]]([^0-9]|$))
 
 # V180.0
 pattern=([[:space:]]V[[:space:]]{0,1}180[[:space:]]0(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-7])[[:space:]])

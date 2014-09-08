@@ -1,5 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/103.asc
 
+category=Baureihen[category_separator]BR 103
+
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]103(\.[0-2,9])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]103[[:space:]]([^0-9]|$))
 pattern=([[:space:]]103er[[:space:]])
 

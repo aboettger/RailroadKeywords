@@ -1,5 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/69.asc
 
+category=Baureihen[category_separator]BR 69
+
 # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
 pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
 

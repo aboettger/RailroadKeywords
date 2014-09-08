@@ -1,5 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/51.asc
 
+category=Baureihen[category_separator]BR 51
+
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]51(\.0)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]51[[:space:]]([^0-9]|$))
 pattern=([[:space:]]51er[[:space:]])
 

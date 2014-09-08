@@ -1,5 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/044.asc
 
+category=Baureihen[category_separator]BR 044
+
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]044(\.([0-9]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]044[[:space:]]([^0-9]|$))
 pattern=([[:space:]]044er[[:space:]])
 # BR 044.0

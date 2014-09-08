@@ -1,5 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/118.asc
 
+category=Baureihen[category_separator]BR 118
+
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]118(\.[0-8])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]118[[:space:]]([^0-9]|$))
 pattern=([[:space:]]118er[[:space:]])
 # BR 118.0

@@ -1,5 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/194.asc
 
+category=Baureihen[category_separator]BR 194
+
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]194(\.[0-2,5])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]194[[:space:]]([^0-9]|$))
 pattern=([[:space:]]194er[[:space:]])
 

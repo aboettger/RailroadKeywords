@@ -1,5 +1,7 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/10.asc
 
+category=Baureihen[category_separator]BR 10
+
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]10(\.0)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]10[[:space:]]([^0-9]|$))
 pattern=([[:space:]]10er[[:space:]])
 
