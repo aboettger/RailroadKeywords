@@ -7,6 +7,8 @@ script_path=$(dirname "$script")
 
 script_name=$(basename "$script")
 
+calibre_category_separator=$(look calibre_category_separator "$script_path"/../main.cfg | cut -d '=' -f 2-)
+
 red="\e[0;31m"
 green="\e[0;32m"
 yellow="\e[0;33m"
@@ -32,7 +34,8 @@ if [ -z "$keyword" ] || [ -z "$library_path" ]; then
   exit 1
 fi
 
-search_for="'tags:\"~^$keyword\$\"'"
+search_for="'tags:\"~^.*\\$calibre_category_separator$keyword\$\"'"
+echo "$search_for"
 result=$(eval calibredb list --for-machine --library-path "$library_path" --fields=tags -s "$search_for")
 calibre_ids=$(awk -F"\"id\": " '{print $2}' <<< "$result" | sed 's/,//g' | sed '/^$/d')
 

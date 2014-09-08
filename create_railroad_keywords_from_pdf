@@ -16,6 +16,8 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
+calibre_category_separator=$(look calibre_category_separator "$script_path"/main.cfg | cut -d '=' -f 2-)
+
 # START functions ##############################################################
 
 function logInfo () {
@@ -89,7 +91,7 @@ function getResults () {
       fi
       while read -r keyword; do
         if [[ $keyword != "" ]]; then
-          echo "$keyword_category.$keyword"
+          echo "$keyword_category$calibre_category_separator$keyword"
         fi
       done <<< "$result"
     fi
