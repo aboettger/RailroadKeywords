@@ -1,0 +1,19 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/143.asc
+
+category=Baureihen[category_separator]BR 143
+
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)
+
+pattern=(([[:space:]]143er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+
+pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]143(\.(0|1|2|3|5|6|8|9))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]143[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]143[[:space:]]0(0[12356789]|1[012345789]|2[0-9]|3[0-9]|4[0-9]|5[023456789]|6[123456789]|7[0-9]|8[0-9]|9[01234578])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]143[[:space:]]1(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[013456789]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]143[[:space:]]2(0[012345678]|1[012345678]|2[012456789]|3[0-9]|4[0-9]|5[0-9]|6[012356789]|7[0-9]|8[0-9]|9[012345689])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]143[[:space:]]3(0[0-9]|1[0-9]|2[013456789]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]143[[:space:]]5(5[123456789]|6[0-9]|7[0-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]143[[:space:]]6(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[012])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]143[[:space:]]8(0[123456789]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]143[[:space:]]9(0[0-9]|1[013456789]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0123])([[:space:]]|-[0-9])
