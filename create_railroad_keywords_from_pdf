@@ -137,7 +137,8 @@ function runTest () {
       matched_elements=$(echo "$test_results" | sed '/^[[:space:]]*$/d' | wc -l)
       given_elements=$(sed '/^[[:space:]]*$/d' "$test_case_positive" | sed '/^[[:space:]]*#/d' | wc -l)
       logInfo "TestCase: $(basename "$test_case_positive")"
-      echo "$test_results"
+      category=$(look category "$pattern_case" | cut -d '=' -f 2-)
+      echo "${test_results//$category./}"
       if test "$matched_elements" -lt "$given_elements"; then
         logError "Test failed, to few elements found: $matched_elements/$given_elements"
         exit 1
@@ -162,7 +163,8 @@ function runTest () {
       matched_elements=$(echo "$test_results" | sed '/^$/d' | wc -l)
       given_elements=$(sed '/^pattern=/d' "$test_case_negative"| sed '/^$/d' | sed '/^#/d' | wc -l)
       logInfo "TestCase: $(basename "$test_case_negative")"
-      echo "$test_results"
+      category=$(look category "$pattern_case" | cut -d '=' -f 2-)
+      echo "${test_results//$category./}"
       if test "$matched_elements" -eq "0"; then
         logInfo "Test OK: $matched_elements/$given_elements"
       else
@@ -185,7 +187,8 @@ function runTest () {
       matched_elements=$(echo "$test_results" | sed '/^$/d' | wc -l)
       given_elements=$(sed '/^pattern=/d' "$diff"| sed '/^$/d' | sed '/^#/d' | wc -l)
       logInfo "TestCase: $(basename "$diff")"
-      echo "$test_results"
+      category=$(look category "$pattern_case" | cut -d '=' -f 2-)
+      echo "${test_results//$category./}"
       if test "$matched_elements" -eq "0"; then
         logInfo "Test OK: $matched_elements/$given_elements"
       else
