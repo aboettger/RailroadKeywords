@@ -78,7 +78,6 @@ function getResults () {
 
     if [ "$result" != "" ]; then
       category=$(look category "$pattern_case" | cut -d '=' -f 2-)
-      result=$(sort <<< "$result" | uniq)
       if [ "$isTest" == "0" ]; then
         log_result=$(sort <<< "$result" | uniq | sed -e 's/^/\\t/g')
         
