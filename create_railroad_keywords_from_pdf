@@ -231,9 +231,8 @@ if [ ! -d "$pattern_path" ] && [ ! -d "$(dirname "$pattern_path")" ]; then
   exit 1
 fi
 
-"$script_path/tools/compress_pattern" "$2"
-
 if [ "$1" == "test" ]; then
+  "$script_path/tools/compress_pattern" "$2"
   "$script_path/tools/create_diffs" "$2"
 
   time_complete_a=$(($(date +%s%N)/1000000))
