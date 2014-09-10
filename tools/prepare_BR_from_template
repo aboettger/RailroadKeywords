@@ -25,8 +25,18 @@ function logError () {
 baureihe="$1"
 
 if [ ! -f "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" ]; then
-  cp "$script_path/../human_readable_pattern/standard/test-BR_XXX.human_readable.pattern.template" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
-  sed -i "s/XXX/$baureihe/g" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+  if [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
+    cp "$script_path/../human_readable_pattern/standard/test-BR_YYXX.human_readable.pattern.template" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+    yy=$(sed "s/[0-9]*//g" <<< "$baureihe")
+    xx=$(sed "s/[A-Z]*//g" <<< "$baureihe")
+echo "$yy"
+echo "$xx"
+    sed -i "s/YY/$yy/g" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+    sed -i "s/XX/$xx/g" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+  else
+    cp "$script_path/../human_readable_pattern/standard/test-BR_XXX.human_readable.pattern.template" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+    sed -i "s/XXX/$baureihe/g" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+  fi
   if [ -f "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" ]; then
     logInfo "neue Datei: \"$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern\""
   fi
@@ -35,8 +45,12 @@ else
 fi
 
 if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" ]; then
-  cp "$script_path/../tests/standard/test-BR_XXX.negative.001.list.template" "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
-  sed -i "s/XXX/$baureihe/g" "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
+  if [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
+    touch "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
+  else
+    cp "$script_path/../tests/standard/test-BR_XXX.negative.001.list.template" "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
+    sed -i "s/XXX/$baureihe/g" "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
+  fi
   if [ -f "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" ]; then
     logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.negative.001.list\""
   fi
@@ -45,7 +59,11 @@ else
 fi
 
 if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.ods" ]; then
-  cp "$script_path/../tests/standard/test-BR_XXX.ods.template" "$script_path/../tests/standard/test-BR_$baureihe.ods"
+  if [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
+    cp "$script_path/../tests/standard/test-BR_YYXX.ods.template" "$script_path/../tests/standard/test-BR_$baureihe.ods"
+  else
+    cp "$script_path/../tests/standard/test-BR_XXX.ods.template" "$script_path/../tests/standard/test-BR_$baureihe.ods"
+  fi
   if [ -f "$script_path/../tests/standard/test-BR_$baureihe.ods" ]; then
     logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.ods\""
   fi
