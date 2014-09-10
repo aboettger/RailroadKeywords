@@ -1,0 +1,7 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/YYXX.asc
+
+category=Baureihen[category_separator]BR YYXX
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]YY[[:space:]]{0,1}XX[[:space:]]([^0-9]|$))
