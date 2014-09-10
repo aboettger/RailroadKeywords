@@ -1,13 +1,12 @@
-# Nicht nach E70 oder E 70 suchen, das ist doof, ich weiß, aber sonst wird 
-# z.B. E70 001 UND E70, E70 002 UND E70 usw. gefunden
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E70.asc
+
 category=Baureihen[category_separator]BR E70
-# z.B. E70 001 UND E70, E70 002 UND E70 usw. gefunden
-
-pattern=([[:space:]]E[[:space:]]{0,1}70(|\.0)[[:space:]]([^0-9]|$))|([[:space:]](BR|Baureihe)[[:space:]]E[[:space:]]{0,1}70[[:space:]]([^0-9]|$))
-
-# E70
-pattern=([[:space:]]E[[:space:]]{0,1}70[[:space:]](0[2-8]|2[1-2])[[:space:]])
-# E70.0
-pattern=([[:space:]]E[[:space:]]{0,1}70[[:space:]]0(0[2-8]|2[1-2])[[:space:]])
 
 pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}70[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}70(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}70[[:space:]](0[2345678]|2[12])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}70[[:space:]]0(0[2345678]|2[12])([[:space:]]|-[0-9]))

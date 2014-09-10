@@ -1,13 +1,12 @@
-# Nicht nach E95 oder E 95 suchen, das ist doof, ich weiß, aber sonst wird 
-# z.B. E95 001 UND E95, E95 002 UND E95 usw. gefunden
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E95.asc
+
 category=Baureihen[category_separator]BR E95
-# z.B. E95 001 UND E95, E95 002 UND E95 usw. gefunden
-
-pattern=([[:space:]]E[[:space:]]{0,1}95(|\.0)[[:space:]]([^0-9]|$))|([[:space:]](BR|Baureihe)[[:space:]]E[[:space:]]{0,1}95[[:space:]]([^0-9]|$))
-
-# E95
-pattern=([[:space:]]E[[:space:]]{0,1}95[[:space:]]0([1-6])[[:space:]])
-# E95.0
-pattern=([[:space:]]E[[:space:]]{0,1}95[[:space:]]0(0[1-6])[[:space:]])
 
 pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}95[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}95(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}95[[:space:]](0[123456])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}95[[:space:]]0(0[123456])([[:space:]]|-[0-9]))
