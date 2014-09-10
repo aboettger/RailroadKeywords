@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/YYXX.asc
 
-category=Baureihen[category_separator]BR YYXX
+category=Baureihen[category_separator]YYXX
 
 pattern_delete=([[:space:]][^0-9]$)
 

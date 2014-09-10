@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E03.asc
 
-category=Baureihen[category_separator]BR E03
+category=Baureihen[category_separator]E03
 
 pattern_delete=([[:space:]][^0-9]$)
 
