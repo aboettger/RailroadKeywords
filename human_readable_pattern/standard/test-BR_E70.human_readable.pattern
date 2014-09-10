@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E70.asc
 
-category=Baureihen[category_separator]BR E70
+category=Baureihen[category_separator]E70
 
 pattern_delete=([[:space:]][^0-9]$)
 

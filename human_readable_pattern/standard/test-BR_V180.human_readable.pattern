@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V180.asc
 
-category=Baureihen[category_separator]BR V180
+category=Baureihen[category_separator]V180
 
 pattern_delete=([[:space:]][^0-9]$)
 

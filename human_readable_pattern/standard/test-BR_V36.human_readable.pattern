@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V36.asc
 
-category=Baureihen[category_separator]BR V36
+category=Baureihen[category_separator]V36
 
 pattern_delete=([[:space:]][^0-9]$)
 
