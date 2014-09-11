@@ -1,0 +1,9 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E90.asc
+
+category=Baureihen[category_separator]E90
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}90[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}90[[:space:]](5[123456789]|6[0])([[:space:]]|-[0-9]))
