@@ -1,0 +1,13 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E16.asc
+
+category=Baureihen[category_separator]E16
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}16[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}16(\.(0|1))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}16[[:space:]](0[123456789]|1[0-9]|2[01])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}16[[:space:]]0(0[123456789]|1[0-9]|2[01])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}16[[:space:]]1(0[1])([[:space:]]|-[0-9]))
