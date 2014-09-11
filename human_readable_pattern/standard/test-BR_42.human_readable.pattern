@@ -31,7 +31,7 @@ pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:s
 # BR 42.16
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]42[[:space:]]16(0[0-6])([[:space:]]|-[0-9])
 # BR 42.17
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]42[[:space:]]17(4[1-9]|5[0-9]|60||9[1-9])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]42[[:space:]]17(4[1-9]|5[0-9]|60|9[1-9])([[:space:]]|-[0-9])
 # BR 42.18
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]42[[:space:]]18(0[0-8]|4[1-9]|5[0-2]|8[1-9]|9[0-9])([[:space:]]|-[0-9])
 # BR 42.19
