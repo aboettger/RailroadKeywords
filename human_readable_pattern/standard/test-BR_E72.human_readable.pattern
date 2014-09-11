@@ -1,0 +1,11 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E72.asc
+
+category=Baureihen[category_separator]E72
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}72[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}72(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}72[[:space:]]0(0[12345678])([[:space:]]|-[0-9]))
