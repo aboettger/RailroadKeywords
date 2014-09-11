@@ -1,0 +1,11 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E320.asc
+
+category=Baureihen[category_separator]E320
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}320[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}320(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}320[[:space:]]0(0[1]|1[1]|2[1])([[:space:]]|-[0-9]))
