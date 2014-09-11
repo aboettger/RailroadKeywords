@@ -1,0 +1,11 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V29.asc
+
+category=Baureihen[category_separator]V29
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]V[[:space:]]{0,1}29[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}29(\.(9))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}29[[:space:]]9(5[123])([[:space:]]|-[0-9]))
