@@ -1,0 +1,12 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E79.asc
+
+category=Baureihen[category_separator]E79
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}79[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}79(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}79[[:space:]](0[12])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}79[[:space:]]0(0[12])([[:space:]]|-[0-9]))
