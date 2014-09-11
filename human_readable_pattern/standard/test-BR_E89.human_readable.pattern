@@ -1,0 +1,12 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E89.asc
+
+category=Baureihen[category_separator]E89
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}89[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}89(\.(0|1))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}89[[:space:]]0(0[1234567])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}89[[:space:]]1(0[123456789])([[:space:]]|-[0-9]))
