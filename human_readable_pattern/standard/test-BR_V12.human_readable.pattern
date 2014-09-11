@@ -1,0 +1,11 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V12.asc
+
+category=Baureihen[category_separator]V12
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]V[[:space:]]{0,1}12[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}12(\.(9))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}12[[:space:]]9(0[1])([[:space:]]|-[0-9]))
