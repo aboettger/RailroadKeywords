@@ -1,0 +1,12 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V22.asc
+
+category=Baureihen[category_separator]V22
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]V[[:space:]]{0,1}22[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}22(\.(0|1))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}22[[:space:]]0(0[123456789]|1[56789]|4[567])([[:space:]]|-[0-9]))
+pattern=([[:space:]]V[[:space:]]{0,1}22[[:space:]]1(0[0])([[:space:]]|-[0-9]))
