@@ -1,0 +1,12 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E06.asc
+
+category=Baureihen[category_separator]E06
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}06[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}06(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}06[[:space:]](0[123456789]|1[012])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}06[[:space:]]0(0[123456789]|1[012])([[:space:]]|-[0-9]))
