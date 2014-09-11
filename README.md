@@ -8,7 +8,7 @@ find [CalibreBibliotheksVerzeichnis] -type f -name '*.txt' | { while read file; 
 
 RailroadKeywords
 ================
-*Vielen Dank an Ingo Hütter und sein Projekt <a href="http://www.beitraege.lokomotive.de/">Beiträge zur Lokomotiv- und Eisenbahngeschichte</a>*
+**Vielen Dank an Ingo Hütter und sein Projekt <a href="http://www.beitraege.lokomotive.de/">Beiträge zur Lokomotiv- und Eisenbahngeschichte</a>**
 
 Requirements
 ------------
