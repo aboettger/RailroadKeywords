@@ -5,7 +5,7 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
-sed -e "s/xx/$1/g" < "$script_path/../all/BR XX 001 - BR XX 9999.template" > "$script_path/../all/$2.all.002.txt"
+sed -e "s/xx/$1/g" < "$script_path/../all/BR XX 01 - BR XX 9999.template" > "$script_path/../all/$2.all.002.txt"
 sed -e "s/xx/$1/g" < "$script_path/../all/BR XX.0 - BR XX.99.template" > "$script_path/../all/$2.all.001.txt"
 
 # Für Fahrzeuge mit V, E, VT erzeuge ich keine Schlüsselwörter in der Art "BR E 01" oder "BR E01"
