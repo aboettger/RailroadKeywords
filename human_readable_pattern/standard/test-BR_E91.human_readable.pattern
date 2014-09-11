@@ -1,0 +1,13 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E91.asc
+
+category=Baureihen[category_separator]E91
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}91[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}91(\.(0|1))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}91[[:space:]](0[123456789]|1[0-9]|2[0]|3[89]|4[0-9]|8[123456789]|9[0-9])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}91[[:space:]]0(0[123456789]|1[0-9]|2[0]|3[89]|4[0-9]|8[123456789]|9[0-9])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}91[[:space:]]1(0[0123456])([[:space:]]|-[0-9]))
