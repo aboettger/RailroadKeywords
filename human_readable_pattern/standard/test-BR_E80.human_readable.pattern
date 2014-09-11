@@ -1,0 +1,12 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E80.asc
+
+category=Baureihen[category_separator]E80
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}80[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}80(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}80[[:space:]](0[12345])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}80[[:space:]]0(0[12345])([[:space:]]|-[0-9]))
