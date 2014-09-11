@@ -1,0 +1,11 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V27.asc
+
+category=Baureihen[category_separator]V27
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]V[[:space:]]{0,1}27[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}27(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}27[[:space:]]0(1[1])([[:space:]]|-[0-9]))
