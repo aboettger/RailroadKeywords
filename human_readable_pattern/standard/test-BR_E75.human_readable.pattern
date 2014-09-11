@@ -1,0 +1,12 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E75.asc
+
+category=Baureihen[category_separator]E75
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}75[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}75(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}75[[:space:]](0[123456789]|1[012]|5[123456789]|6[0-9])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}75[[:space:]]0(0[123456789]|1[012]|5[123456789]|6[0-9])([[:space:]]|-[0-9]))
