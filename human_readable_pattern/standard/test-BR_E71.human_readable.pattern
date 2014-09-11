@@ -1,0 +1,12 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E71.asc
+
+category=Baureihen[category_separator]E71
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}71[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}71(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}71[[:space:]](1[123456789]|2[0-9]|3[01234567])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}71[[:space:]]0(1[123456789]|2[0-9]|3[01234567])([[:space:]]|-[0-9]))
