@@ -1,0 +1,12 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E174.asc
+
+category=Baureihen[category_separator]E174
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}174[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}174(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}174[[:space:]](0[1])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}174[[:space:]]0(0[1])([[:space:]]|-[0-9]))
