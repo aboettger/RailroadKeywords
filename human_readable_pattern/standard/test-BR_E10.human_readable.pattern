@@ -1,0 +1,18 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E10.asc
+
+category=Baureihen[category_separator]E10
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}10[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}10(\.(0|1|2|3|4|1[234]))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}10[[:space:]]0(0[12345])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}10[[:space:]]1(0[123456789]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}10[[:space:]]2(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[01234]|7[123456789]|8[0-9]|9[0-9])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}10[[:space:]]3(0[01234567]|1[3456789]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}10[[:space:]]4(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[01234])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}10[[:space:]]12(3[9]|4[01234]|6[56789]|7[0])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}10[[:space:]]13(0[89]|1[012])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}10[[:space:]]14(8[5])([[:space:]]|-[0-9]))
