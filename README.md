@@ -73,4 +73,5 @@ Dieses Programm kann die Angaben in den Metadaten für ein PDF in der Calibre-Bi
 Related Projects
 ----------------
 
+ * <a href="http://www.beitraege.lokomotive.de/">Beiträge zur Lokomotiv- und Eisenbahngeschichte</a> 
  * <a href="https://github.com/euske/pdfminer">pdfminer</a>
