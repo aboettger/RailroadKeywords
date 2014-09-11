@@ -1,0 +1,12 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E05.asc
+
+category=Baureihen[category_separator]E05
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}05[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}05(\.(0|1))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}05[[:space:]]0(0[12])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}05[[:space:]]1(0[3])([[:space:]]|-[0-9]))
