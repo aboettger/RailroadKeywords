@@ -1,0 +1,13 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E18.asc
+
+category=Baureihen[category_separator]E18
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}18[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}18(\.(0|2))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}18[[:space:]](0[123456789]|1[0-9]|2[0-9]|3[0-9]|4[01234])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}18[[:space:]]0(0[123456789]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[012345])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}18[[:space:]]2(0[12345678])([[:space:]]|-[0-9]))
