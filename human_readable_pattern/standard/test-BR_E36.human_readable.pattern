@@ -1,0 +1,12 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/E36.asc
+
+category=Baureihen[category_separator]E36
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]E[[:space:]]{0,1}36[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}36(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]E[[:space:]]{0,1}36[[:space:]](0[1234]|2[1234])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}36[[:space:]]0(0[1234]|2[1234])([[:space:]]|-[0-9]))
