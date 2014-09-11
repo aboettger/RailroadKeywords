@@ -29,8 +29,7 @@ if [ ! -f "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.hum
     cp "$script_path/../human_readable_pattern/standard/test-BR_YYXX.human_readable.pattern.template" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
     yy=$(sed "s/[0-9]*//g" <<< "$baureihe")
     xx=$(sed "s/[A-Z]*//g" <<< "$baureihe")
-echo "$yy"
-echo "$xx"
+
     sed -i "s/YY/$yy/g" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
     sed -i "s/XX/$xx/g" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
   else
