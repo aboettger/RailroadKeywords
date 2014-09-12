@@ -1,0 +1,12 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V188.asc
+
+category=Baureihen[category_separator]V188
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]V[[:space:]]{0,1}188[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}188(\.(0|0[0]))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}188[[:space:]]0(0[123])([[:space:]]|-[0-9]))
+pattern=([[:space:]]V[[:space:]]{0,1}188[[:space:]]00(1[ab]|2[ab]|3[ab])([[:space:]]|-[0-9]))
