@@ -1,0 +1,11 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V50.asc
+
+category=Baureihen[category_separator]V50
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]V[[:space:]]{0,1}50[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}50(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}50[[:space:]]0(0[12])([[:space:]]|-[0-9]))
