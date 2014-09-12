@@ -88,20 +88,27 @@ else
   logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.positive.002.list\" existiert bereits"
 fi
 
-echo
-echo "w) weiter"
+echo "Dateien werden zur Bearbeitung geöffnet"
+echo "w) Dateien öffnen"
+echo "q) ohne Bearbeitung fortfahren"
 while true; do
   read -p "Bitte wählen: " input < /dev/tty
   case $input in
       [w]* )
         xdg-open "$script_path/../tests/standard/test-BR_$baureihe.ods"
+        atom "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+        atom "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list"
+        atom "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list"
+        break;;
+      [q]* )
         break;;
       * ) echo "Ungültige Auswahl";;
   esac
 done
 
-echo
-echo "w) weiter"
+echo "Tests werden durchgeführt"
+echo "w) Tests starten"
+echo "q) ohne Tests fortfahren"
 while true; do
   read -p "Bitte wählen: " input < /dev/tty
   case $input in
@@ -109,18 +116,23 @@ while true; do
         awk '/^$/{ if (! blank++) print; next } { blank=0; print }' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
         /home/aboettger/src/RailroadKeywords/create_railroad_keywords_from_pdf test /home/aboettger/src/RailroadKeywords/pattern/test-BR_"$baureihe".pattern
         break;;
+      [q]* )
+        break;;
       * ) echo "Ungültige Auswahl";;
   esac
 done
 
-echo
-echo "w) weiter"
+echo "Geänderte Dateien zur Versionskontrolle hinzufügen und auf Server veröffentlichen"
+echo "w) zur Versionskontrolle hinzufügen"
+echo "q) ohne Versionskontrolle fortfahren"
 while true; do
   read -p "Bitte wählen: " input < /dev/tty
   case $input in
       [w]* )
         git add --all
         git commit -a -m "Baureihe $baureihe hinzugefügt"
+        break;;
+      [q]* )
         break;;
       * ) echo "Ungültige Auswahl";;
   esac
