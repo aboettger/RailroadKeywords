@@ -1,0 +1,11 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V320.asc
+
+category=Baureihen[category_separator]V320
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]V[[:space:]]{0,1}320[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}320(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}320[[:space:]]0(0[1])([[:space:]]|-[0-9]))
