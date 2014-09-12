@@ -87,3 +87,41 @@ if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" ]
 else
   logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.positive.002.list\" existiert bereits"
 fi
+
+echo
+echo "w) weiter"
+while true; do
+  read -p "Bitte wählen: " input < /dev/tty
+  case $input in
+      [w]* )
+        xdg-open "$script_path/../tests/standard/test-BR_$baureihe.ods"
+        break;;
+      * ) echo "Ungültige Auswahl";;
+  esac
+done
+
+echo
+echo "w) weiter"
+while true; do
+  read -p "Bitte wählen: " input < /dev/tty
+  case $input in
+      [w]* )
+        awk '/^$/{ if (! blank++) print; next } { blank=0; print }' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+        /home/aboettger/src/RailroadKeywords/create_railroad_keywords_from_pdf test /home/aboettger/src/RailroadKeywords/pattern/test-BR_"$baureihe".pattern
+        break;;
+      * ) echo "Ungültige Auswahl";;
+  esac
+done
+
+echo
+echo "w) weiter"
+while true; do
+  read -p "Bitte wählen: " input < /dev/tty
+  case $input in
+      [w]* )
+        git add --all
+        git commit -a -m "Baureihe $baureihe hinzugefügt"
+        break;;
+      * ) echo "Ungültige Auswahl";;
+  esac
+done
