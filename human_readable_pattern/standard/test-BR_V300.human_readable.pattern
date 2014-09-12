@@ -1,0 +1,11 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V300.asc
+
+category=Baureihen[category_separator]V300
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]V[[:space:]]{0,1}300[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}300(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}300[[:space:]]0(0[1])([[:space:]]|-[0-9]))
