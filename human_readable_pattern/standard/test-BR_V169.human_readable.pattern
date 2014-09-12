@@ -1,0 +1,11 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V169.asc
+
+category=Baureihen[category_separator]V169
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]V[[:space:]]{0,1}169[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}169(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}169[[:space:]]0(0[1])([[:space:]]|-[0-9]))
