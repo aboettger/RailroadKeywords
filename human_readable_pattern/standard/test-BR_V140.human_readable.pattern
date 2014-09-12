@@ -1,0 +1,11 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V140.asc
+
+category=Baureihen[category_separator]V140
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]V[[:space:]]{0,1}140[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}140(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}140[[:space:]]0(0[1])([[:space:]]|-[0-9]))
