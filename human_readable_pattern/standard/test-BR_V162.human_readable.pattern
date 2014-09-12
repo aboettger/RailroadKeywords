@@ -1,0 +1,11 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V162.asc
+
+category=Baureihen[category_separator]V162
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]V[[:space:]]{0,1}162[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}162(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}162[[:space:]]0(0[123])([[:space:]]|-[0-9]))
