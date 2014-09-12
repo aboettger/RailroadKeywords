@@ -1,0 +1,16 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/160.asc
+
+category=Baureihen[category_separator]BR 160
+
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)
+
+pattern=(([[:space:]]160er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+
+# Pattern #1
+
+pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]160(\.(0))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]160[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]160[[:space:]]0(0[123456789]|1[01234])([[:space:]]|-[0-9])
