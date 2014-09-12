@@ -15,7 +15,7 @@ if [ ! -d "$1" ]; then
   fi
   
   br=$(basename "$1" | sed -E "s/test-BR_(.*)\.pattern/\1/g")
-  echo "$br"
+  # echo "$br"
   "$script_path/create_all_4_BR" "$br" "BR_$br"
   "$script_path/create_diff_4_BR" "$br" "BR_$br"
 else
@@ -31,9 +31,9 @@ else
 
         find "$script_path/../tests" -name "test-BR_*.positive.002.list" | { while read -r file;
           do
-            echo "$file"
+            # echo "$file"
             br=$(basename "$file" | sed -E "s/test-BR_(.*)\.positive\.002\.list/\1/g")
-            echo "$br"
+            # echo "$br"
             "$script_path/create_all_4_BR" "$br" "BR_$br"
             "$script_path/create_diff_4_BR" "$br" "BR_$br"
           done 

@@ -27,3 +27,6 @@ tests/private/*
 !tests/private/*.template
 !tests/private/*.example
 !tests/private/README
+
+test_results/*
+!test_results/README
