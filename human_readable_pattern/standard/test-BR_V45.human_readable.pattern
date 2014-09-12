@@ -1,0 +1,11 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V45.asc
+
+category=Baureihen[category_separator]V45
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]V[[:space:]]{0,1}45[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}45(\.(0))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}45[[:space:]]0(0[123456789]|1[0])([[:space:]]|-[0-9]))
