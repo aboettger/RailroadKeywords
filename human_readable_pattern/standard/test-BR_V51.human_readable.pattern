@@ -1,0 +1,11 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/V51.asc
+
+category=Baureihen[category_separator]V51
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]V[[:space:]]{0,1}51[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}51(\.(9))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]V[[:space:]]{0,1}51[[:space:]]9(0[123])([[:space:]]|-[0-9]))
