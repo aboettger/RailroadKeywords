@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/12.asc
 
-category=Baureihen[category_separator]BR 12
+category=Baureihen[category_separator]12
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]12(\.0|\.1|\.2)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]12[[:space:]]([^0-9]|$))
 pattern=([[:space:]]12er[[:space:]])

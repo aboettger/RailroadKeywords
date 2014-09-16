@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/36.asc
 
-category=Baureihen[category_separator]BR 36
+category=Baureihen[category_separator]36
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]36(\.(([0-9])|1[0,2]|70))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]36[[:space:]]([^0-9]|$))
 pattern=([[:space:]]36er[[:space:]])

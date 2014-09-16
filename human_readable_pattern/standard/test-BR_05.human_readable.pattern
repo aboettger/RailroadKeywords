@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/05.asc
 
-category=Baureihen[category_separator]BR 05
+category=Baureihen[category_separator]05
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]05(\.0)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]05[[:space:]]([^0-9]|$))
 pattern=([[:space:]]05er[[:space:]])

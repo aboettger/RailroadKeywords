@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/195.asc
 
-category=Baureihen[category_separator]BR 195
+category=Baureihen[category_separator]195
 
 pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
 pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)

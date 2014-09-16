@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/38.asc
 
-category=Baureihen[category_separator]BR 38
+category=Baureihen[category_separator]38
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]38(\.(([0,2-5])|1[0-9]|2[0-9]|3[0-9]|4[0-6]|5[2-3]|70))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]38[[:space:]]([^0-9]|$))
 pattern=([[:space:]]38er[[:space:]])

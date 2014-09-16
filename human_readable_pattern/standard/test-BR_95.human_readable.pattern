@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/95.asc
 
-category=Baureihen[category_separator]BR 95
+category=Baureihen[category_separator]95
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]95(\.0|\.1|\.2|\.3|\.00|\.10|\.66)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]95[[:space:]]([^0-9]|$))
 pattern=([[:space:]]95er[[:space:]])

@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/39.asc
 
-category=Baureihen[category_separator]BR 39
+category=Baureihen[category_separator]39
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]39(\.(([0-4]|10)))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]39[[:space:]]([^0-9]|$))
 pattern=([[:space:]]39er[[:space:]])

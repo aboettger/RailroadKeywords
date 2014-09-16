@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/17.asc
 
-category=Baureihen[category_separator]BR 17
+category=Baureihen[category_separator]17
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]17(\.[0-8]|\.1[0-2])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]17[[:space:]]([^0-9]|$))
 pattern=([[:space:]]17er[[:space:]])

@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/53.asc
 
-category=Baureihen[category_separator]BR 53
+category=Baureihen[category_separator]53
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]53(\.([0,3,6-8]|10|7[0-8]|8[0-3,5]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]53[[:space:]]([^0-9]|$))
 pattern=([[:space:]]53er[[:space:]])

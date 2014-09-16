@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/37.asc
 
-category=Baureihen[category_separator]BR 37
+category=Baureihen[category_separator]37
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]37(\.(([0-4])|10))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]37[[:space:]]([^0-9]|$))
 pattern=([[:space:]]37er[[:space:]])

@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/18.asc
 
-category=Baureihen[category_separator]BR 18
+category=Baureihen[category_separator]18
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]18(\.[0-6])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]18[[:space:]]([^0-9]|$))
 pattern=([[:space:]]18er[[:space:]])
