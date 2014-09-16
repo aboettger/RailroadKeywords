@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/35.asc
 
-category=Baureihen[category_separator]BR 35
+category=Baureihen[category_separator]35
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]35(\.(([0-5,7-8])|1[0-1]|20))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]35[[:space:]]([^0-9]|$))
 pattern=([[:space:]]35er[[:space:]])

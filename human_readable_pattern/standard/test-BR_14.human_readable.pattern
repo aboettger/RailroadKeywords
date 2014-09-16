@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/14.asc
 
-category=Baureihen[category_separator]BR 14
+category=Baureihen[category_separator]14
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]14(\.[0-3])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]14[[:space:]]([^0-9]|$))
 pattern=([[:space:]]14er[[:space:]])

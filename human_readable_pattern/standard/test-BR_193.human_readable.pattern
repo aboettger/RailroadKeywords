@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/193.asc
 
-category=Baureihen[category_separator]BR 193
+category=Baureihen[category_separator]193
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]193(\.0)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]193[[:space:]]([^0-9]|$))
 pattern=([[:space:]]193er[[:space:]])

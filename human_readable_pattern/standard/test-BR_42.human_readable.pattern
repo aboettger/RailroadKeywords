@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/42.asc
 
-category=Baureihen[category_separator]BR 42
+category=Baureihen[category_separator]42
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]42(\.(([0,4-9])|00|1[0,3-9]|2[3-8]|50|90))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]42[[:space:]]([^0-9]|$))
 pattern=([[:space:]]42er[[:space:]])

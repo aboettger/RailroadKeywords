@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/54.asc
 
-category=Baureihen[category_separator]BR 54
+category=Baureihen[category_separator]54
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]54(\.([0-9]|1[0-7]|41))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]54[[:space:]]([^0-9]|$))
 pattern=([[:space:]]54er[[:space:]])

@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/132.asc
 
-category=Baureihen[category_separator]BR 132
+category=Baureihen[category_separator]132
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]132(\.[0-7])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]132[[:space:]]([^0-9]|$))
 pattern=([[:space:]]132er[[:space:]])

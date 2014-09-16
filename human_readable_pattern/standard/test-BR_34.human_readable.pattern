@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/34.asc
 
-category=Baureihen[category_separator]BR 34
+category=Baureihen[category_separator]34
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]34(\.((7[0,3,6-9])|8[0-2]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]34[[:space:]]([^0-9]|$))
 pattern=([[:space:]]34er[[:space:]])

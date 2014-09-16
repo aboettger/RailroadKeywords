@@ -1,6 +1,6 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/010.asc
 
-category=Baureihen[category_separator]BR 010
+category=Baureihen[category_separator]010
 
 pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]010\.0[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]010[[:space:]]([^0-9]|$))
 pattern=([[:space:]]010er[[:space:]])
