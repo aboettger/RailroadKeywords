@@ -144,7 +144,7 @@ function runTest () {
       temp_file_2="$script_path/test_results/$(basename "$test_case_positive").2"
       
       echo "$test_results" > "$temp_file_1"
-      echo "$test_results"
+      echo -e "${yellow}$test_results${TOA}"
       
       sed '/^[[:space:]]*$/d' "$test_case_positive" | sed '/^[[:space:]]*#/d' | sed 's/^[[:space:]]*//g' | sed 's/[[:space:]]*$//g' > "$temp_file_2"
       
