@@ -40,7 +40,7 @@ if [ ! -f "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.hum
     logInfo "neue Datei: \"$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern\""
   fi
 else
-  logWarn "\"$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern\" existiert bereits"
+  logError "\"$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern\" existiert bereits"
 fi
 
 if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" ]; then
@@ -54,7 +54,7 @@ if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" ]
     logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.negative.001.list\""
   fi
 else
-  logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.negative.001.list\" existiert bereits"
+  logError "\"$script_path/../tests/standard/test-BR_$baureihe.negative.001.list\" existiert bereits"
 fi
 
 if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.ods" ]; then
@@ -67,7 +67,7 @@ if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.ods" ]; then
     logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.ods\""
   fi
 else
-  logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.ods\" existiert bereits"
+  logError "\"$script_path/../tests/standard/test-BR_$baureihe.ods\" existiert bereits"
 fi
 
 if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" ]; then
@@ -76,7 +76,7 @@ if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" ]
     logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.positive.001.list\""
   fi
 else
-  logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.positive.001.list\" existiert bereits"
+  logError "\"$script_path/../tests/standard/test-BR_$baureihe.positive.001.list\" existiert bereits"
 fi
 
 if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" ]; then
@@ -85,7 +85,7 @@ if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" ]
     logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.positive.002.list\""
   fi
 else
-  logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.positive.002.list\" existiert bereits"
+  logError "\"$script_path/../tests/standard/test-BR_$baureihe.positive.002.list\" existiert bereits"
 fi
 
 echo "Dateien werden zur Bearbeitung geöffnet"
