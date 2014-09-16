@@ -1,0 +1,16 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/229.asc
+
+category=Baureihen[category_separator]BR 229
+
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)
+
+pattern=(([[:space:]]229er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+
+# Pattern #1
+
+pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]229(\.(1))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]229[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]229[[:space:]]1(0[026]|1[38]|2[068]|4[47]|7[0134]|8[1468]|9[39])([[:space:]]|-[0-9])
