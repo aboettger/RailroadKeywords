@@ -1,0 +1,17 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VT63.asc
+
+category=Baureihen[category_separator]VT63
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VT[[:space:]]{0,1}63[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VT[[:space:]]{0,1}63(\.([59]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VT[[:space:]]{0,1}63[[:space:]]5(0[0])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}63[[:space:]]9(0[0-9]|1[0])([[:space:]]|-[0-9]))
