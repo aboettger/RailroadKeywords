@@ -1,0 +1,19 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VT50.asc
+
+category=Baureihen[category_separator]VT50
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VT[[:space:]]{0,1}50[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VT[[:space:]]{0,1}50(\.([012]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VT[[:space:]]{0,1}50[[:space:]]0(0[012])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}50[[:space:]]1(0[0123])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}50[[:space:]]2(0[01234])([[:space:]]|-[0-9]))
