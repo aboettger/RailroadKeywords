@@ -1,0 +1,15 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VT99.asc
+
+category=Baureihen[category_separator]VT99
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VT[[:space:]]{0,1}99[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VT[[:space:]]{0,1}99(\.([5]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VT[[:space:]]{0,1}99[[:space:]]5(0[01])([[:space:]]|-[0-9]))
