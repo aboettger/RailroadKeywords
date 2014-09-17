@@ -1,0 +1,15 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VT134.asc
+
+category=Baureihen[category_separator]VT134
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VT[[:space:]]{0,1}134[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VT[[:space:]]{0,1}134(\.([0]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VT[[:space:]]{0,1}134[[:space:]]0(3[01])([[:space:]]|-[0-9]))
