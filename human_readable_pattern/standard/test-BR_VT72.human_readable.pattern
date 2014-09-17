@@ -1,0 +1,17 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VT72.asc
+
+category=Baureihen[category_separator]VT72
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VT[[:space:]]{0,1}72[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VT[[:space:]]{0,1}72(\.([9]|90[0]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VT[[:space:]]{0,1}72[[:space:]]9(0[0])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}72[[:space:]]90(0[ab])([[:space:]]|-[0-9]))
