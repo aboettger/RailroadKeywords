@@ -1,0 +1,23 @@
+#! /bin/bash
+# Usage: compare_line_count [first_dir] [second_dir]
+# 
+
+find "$1" -depth  -type f -name "*.asc" | { while read -r asc;
+  do
+    echo -ne "$asc \r"
+    ascLineCount=$(sed '/^[[:space:]]*\#/d' "$asc" | sed '/^$/d' | wc -l )
+    ascFileName=$(basename "$asc")
+    key=${ascFileName//.asc/}
+    testFilePath="$2/test-BR_$key.positive.002.list"
+    if [[ -f $testFilePath ]]; then
+      testLineCount=$(sed '/^[[:space:]]*\#/d' "$testFilePath" | sed '/^$/d' | wc -l )
+      if [[ $ascLineCount != $testLineCount ]]; then
+        echo ">>> Unterschiedliche Anzahl:"
+        echo "$asc: $ascLineCount"
+        echo "$testFilePath: $testLineCount"
+        exit 1
+      fi
+    fi
+done }
+
+exit 0
