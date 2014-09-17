@@ -1,0 +1,16 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/240.asc
+
+category=Baureihen[category_separator]240
+
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)
+
+pattern=(([[:space:]]240er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+
+# Pattern #1
+
+pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]240(\.(0))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]240[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]240[[:space:]]0(0[123])([[:space:]]|-[0-9])
