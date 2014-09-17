@@ -1,0 +1,15 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VT85.asc
+
+category=Baureihen[category_separator]VT85
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VT[[:space:]]{0,1}85[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VT[[:space:]]{0,1}85(\.([9]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VT[[:space:]]{0,1}85[[:space:]]9(0[012345])([[:space:]]|-[0-9]))
