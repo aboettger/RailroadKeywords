@@ -1,0 +1,23 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VT98.asc
+
+category=Baureihen[category_separator]VT98
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VT[[:space:]]{0,1}98[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VT[[:space:]]{0,1}98(\.([9]|9[5678]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VT[[:space:]]{0,1}98[[:space:]]9(0[123])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}98[[:space:]]95(0[123456789]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}98[[:space:]]96(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}98[[:space:]]97(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}98[[:space:]]98(0[0-9]|1[0-9]|2[0-9])([[:space:]]|-[0-9]))
