@@ -96,9 +96,9 @@ while true; do
   case $input in
       [w]* )
         xdg-open "$script_path/../tests/standard/test-BR_$baureihe.ods"
-        atom "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
-        atom "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list"
-        atom "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list"
+        xdg-open "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+        xdg-open "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list"
+        xdg-open "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list"
         break;;
       [q]* )
         break;;
