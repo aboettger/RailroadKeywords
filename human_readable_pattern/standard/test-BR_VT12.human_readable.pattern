@@ -1,0 +1,20 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VT12.asc
+
+category=Baureihen[category_separator]VT12
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VT[[:space:]]{0,1}12[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VT[[:space:]]{0,1}12(\.(1[4]|[56]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VT[[:space:]]{0,1}12\.14\.0(1[abcd]|2[abcd]|3[abcd])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}12[[:space:]]5(0[123456789]|1[012])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}12[[:space:]]6(0[135689]|1[1234567]|2[0])([[:space:]]|-[0-9]))
+
