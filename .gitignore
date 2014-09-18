@@ -4,6 +4,8 @@ diffs/*diff
 
 pattern/*pattern
 
+tests/standard/*ods
+
 *~
 
 *#
