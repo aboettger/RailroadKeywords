@@ -90,6 +90,7 @@ fi
 
 echo "Dateien werden zur Bearbeitung geöffnet"
 echo "w) Dateien öffnen"
+echo "d) Alle Dateien des Typs \"$baureihe\" löschen und beenden"
 echo "q) ohne Bearbeitung fortfahren"
 while true; do
   read -p "Bitte wählen: " input < /dev/tty
@@ -99,6 +100,11 @@ while true; do
         xdg-open "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" > /dev/null 2>&1
         xdg-open "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" > /dev/null 2>&1
         xdg-open "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" > /dev/null 2>&1
+        break;;
+      [d]* )
+        find "$script_path/../tests/standard/" -name "test-BR_$baureihe\.*" -exec rm {} \;
+        find "$script_path/../human_readable_pattern/standard/" -name "test-BR_$baureihe\.*" -exec rm {} \;
+        exit 0
         break;;
       [q]* )
         break;;
