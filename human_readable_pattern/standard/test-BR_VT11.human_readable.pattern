@@ -1,0 +1,16 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VT11.asc
+
+category=Baureihen[category_separator]VT11
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VT[[:space:]]{0,1}11[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VT[[:space:]]{0,1}11(\.(5[0]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VT[[:space:]]{0,1}11[[:space:]]50(0[123456789]|1[0-9])([[:space:]]|-[0-9]))
+
