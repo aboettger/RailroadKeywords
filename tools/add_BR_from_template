@@ -129,6 +129,7 @@ while true; do
   read -p "Bitte wählen: " input < /dev/tty
   case $input in
       [w]* )
+        cd "$script_path/../"
         git add --all
         git commit -a -m "Baureihe $baureihe hinzugefügt"
         break;;
