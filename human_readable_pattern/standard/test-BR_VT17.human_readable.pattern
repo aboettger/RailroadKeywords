@@ -1,0 +1,18 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VT17.asc
+
+category=Baureihen[category_separator]VT17
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VT[[:space:]]{0,1}17(\.([0]|00[012345]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]0(0[012345])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]00(0[ab]|1[ab]|2[ab]|3[ab]|4[ab]|5[ab])([[:space:]]|-[0-9]))
+
