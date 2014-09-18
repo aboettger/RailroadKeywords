@@ -97,8 +97,8 @@ while true; do
       [w]* )
         xdg-open "$script_path/../tests/standard/test-BR_$baureihe.ods" > /dev/null 2>&1
         xdg-open "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" > /dev/null 2>&1
-        xdg-open "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" > /dev/null 2>&1
         xdg-open "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" > /dev/null 2>&1
+        xdg-open "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" > /dev/null 2>&1
         break;;
       [q]* )
         break;;
