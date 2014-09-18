@@ -1,0 +1,21 @@
+#! /bin/bash
+# Usage: compare_line_count [first_dir]
+# 
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+script_path=$(dirname "$script")
+
+find "$1" -depth  -type f -name "*.asc" | sort | { while read -r asc;
+  do
+    # echo -ne "$asc \r"
+    ascFileName=$(basename "$asc")
+     key=${ascFileName//.asc/}
+    testFilePath="$script_path/../pattern/test-BR_$key.pattern"
+    if [[ ! -f $testFilePath ]]; then
+      echo "$asc"
+    fi
+done }
+
+exit 0
