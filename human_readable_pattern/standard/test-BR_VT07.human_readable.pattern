@@ -1,0 +1,25 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VT07.asc
+
+category=Baureihen[category_separator]VT07
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VT[[:space:]]{0,1}07[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VM[[:space:]]{0,1}07(\.([5]))[[:space:]]([^0-9]|$))
+pattern=([[:space:]]VS[[:space:]]{0,1}07(\.([5]))[[:space:]]([^0-9]|$))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}07(\.([5]|50[12]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VM[[:space:]]{0,1}07[[:space:]]5(0[12])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VS[[:space:]]{0,1}07[[:space:]]5(0[12])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}07[[:space:]]5(0[12])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}07[[:space:]]50(1[abc]|2[abc])([[:space:]]|-[0-9]))
+
