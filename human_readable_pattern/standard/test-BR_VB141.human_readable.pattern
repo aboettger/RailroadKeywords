@@ -1,0 +1,20 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VB141.asc
+
+category=Baureihen[category_separator]VB141
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VB[[:space:]]{0,1}141[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VB[[:space:]]{0,1}141(\.([012]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VB[[:space:]]{0,1}141[[:space:]]0(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VB[[:space:]]{0,1}141[[:space:]]1(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[012345])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VB[[:space:]]{0,1}141[[:space:]]2(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0123456])([[:space:]]|-[0-9]))
+
