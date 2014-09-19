@@ -1,0 +1,16 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VS97.asc
+
+category=Baureihen[category_separator]VS97
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VS[[:space:]]{0,1}97[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VS[[:space:]]{0,1}97(\.([0]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VS[[:space:]]{0,1}97[[:space:]]0(0[123456])([[:space:]]|-[0-9]))
+
