@@ -6,6 +6,8 @@ pattern_delete=([[:space:]][^0-9]$)
 
 pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]([^0-9]|$))
 
+# Pattern #1
+
 pattern=([[:space:]]VT[[:space:]]{0,1}137(\.([0-9]|14[9]|15[012345]|22[456789]|23[012348]|27[345678]|28[3456789]|29[012345]|32[6789]|33[01]|36[789]|37[0123456]|55[5]|85[12345678]|90[123]|60[0]))[[:space:]]([^0-9]|$))
 
 # Pattern #2
@@ -29,31 +31,135 @@ pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]8(5[12345678])([[:space:]]|-
 
 pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]9(0[123])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]14(9[ab])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]149((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]15(0[ab]|1[ab]|2[ab]|3[abc]|4[abc]|5[abc])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]150((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]22(4[ab]|5[ab]|6[ab]|7[ab]|8[ab]|9[ab])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]151((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]23(0[ab]|1[ab]|2[ab]|3[abc]|4[abcd]|8[ab])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]152((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]27(3[abc]|4[abc]|5[abc]|6[abc]|7[abc]|8[abc])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]153((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]28(3[abc]|4[abc]|5[abc]|6[abc]|7[abc]|8[ab]|9[ab])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]154((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]29(0[ab]|1[ab]|2[ab]|3[ab]|4[ab]|5[ab])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]155((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]32(6[ab]|7[ab]|8[ab]|9[ab])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]224((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]33(0[ab]|1[ab])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]225((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]36(7[ab]|8[ab]|9[ab])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]226((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]37(0[ab]|1[ab]|2[ab]|3[ab]|4[ab]|5[ab]|6[ab])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]227((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]55(5[ab])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]228((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]85(1[abc]|2[abc]|3[abc]|4[abc]|5[abc]|6[abc]|7[abc]|8[abc])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]229((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]90(1[abcd]|2[abcde]|3[a])([[:space:]]|-[0-9]))
-pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]600a(b[c])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]230((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]231((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]232((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]233((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]234((a){0,1}|(b){0,1}|(c){0,1}|(d){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]238((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]273((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]274((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]275((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]276((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]277((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]278((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]283((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]284((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]285((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]286((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]287((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]288((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]289((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]290((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]291((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]292((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]293((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]294((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]295((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]326((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]327((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]328((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]329((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]330((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]331((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]367((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]368((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]369((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]370((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]371((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]372((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]373((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]374((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]375((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]376((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]555((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]851((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]852((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]853((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]854((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]855((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]856((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]857((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]858((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]901((a){0,1}|(b){0,1}|(c){0,1}|(d){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]902((a){0,1}|(b){0,1}|(c){0,1}|(d){0,1}|(e){0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]903((a){0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}137[[:space:]]600((abc){0,1})([[:space:]]|-[0-9]))
+
