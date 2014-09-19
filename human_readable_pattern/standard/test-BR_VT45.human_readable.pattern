@@ -14,7 +14,27 @@ pattern=([[:space:]]VT[[:space:]]{0,1}45(\.([5]|50[0-9]|51[01]))[[:space:]]([^0-
 
 pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]5(0[0-9]|1[01])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]50(0[ab]|1[ab]|2[ab]|3[ab]|4[ab]|5[ab]|6[ab]|7[ab]|8[ab]|9[ab])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]500((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]51(0[ab]|1[ab])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]501((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]502((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]503((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]504((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]505((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]506((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]507((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]508((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]509((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]510((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}45[[:space:]]511((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
 
