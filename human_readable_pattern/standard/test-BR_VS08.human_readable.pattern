@@ -1,0 +1,18 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VS08.asc
+
+category=Baureihen[category_separator]VS08
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VS[[:space:]]{0,1}08[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VS[[:space:]]{0,1}08(\.([58]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VS[[:space:]]{0,1}08[[:space:]]5(0[123456789]|1[0123])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VS[[:space:]]{0,1}08[[:space:]]8(0[123456])([[:space:]]|-[0-9]))
+
