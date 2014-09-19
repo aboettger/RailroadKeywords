@@ -14,5 +14,5 @@ pattern=([[:space:]]VT[[:space:]]{0,1}19(\.([5]|50[0]))[[:space:]]([^0-9]|$))
 
 pattern=([[:space:]]VT[[:space:]]{0,1}19[[:space:]]5(0[0])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}19[[:space:]]50(0[abc])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}19[[:space:]]500((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
 
