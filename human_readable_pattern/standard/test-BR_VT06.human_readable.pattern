@@ -1,0 +1,28 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VT06.asc
+
+category=Baureihen[category_separator]VT06
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06(\.([015]|00[01]|10[123456789]|11[01]|50[012]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]0(0[01])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]1(0[123456789]|1[01])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]5(0[012])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]00(0[abc]|1[abc])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]10(1[abc]|2[abc]|3[abc]|4[abc]|5[abc]|6[abc]|7[abc]|8[abc]|9[abc])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]11(0[abc]|1[abc])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]50(0[abc]|1[abc]|2[abc])([[:space:]]|-[0-9]))
+
