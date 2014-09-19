@@ -14,4 +14,7 @@ pattern=([[:space:]]VT[[:space:]]{0,1}87(\.([9]|90[01]))[[:space:]]([^0-9]|$))
 
 pattern=([[:space:]]VT[[:space:]]{0,1}87[[:space:]]9(0[01])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}87[[:space:]]90(0[ab]|1[ab])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}87[[:space:]]900((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}87[[:space:]]901((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+
