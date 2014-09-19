@@ -1,0 +1,16 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VS146.asc
+
+category=Baureihen[category_separator]VS146
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VS[[:space:]]{0,1}146[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VS[[:space:]]{0,1}146(\.([0]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VS[[:space:]]{0,1}146[[:space:]]0(0[012345678])([[:space:]]|-[0-9]))
+
