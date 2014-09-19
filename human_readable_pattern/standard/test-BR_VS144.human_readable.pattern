@@ -1,0 +1,19 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VS144.asc
+
+category=Baureihen[category_separator]VS144
+
+pattern_delete=([[:space:]][^0-9]$)
+
+pattern=([[:space:]]VS[[:space:]]{0,1}144[[:space:]]([^0-9]|$))
+
+# Pattern #1
+
+pattern=([[:space:]]VS[[:space:]]{0,1}144(\.([059]))[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]VS[[:space:]]{0,1}144[[:space:]]0(0[123456])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VS[[:space:]]{0,1}144[[:space:]]5(0[012])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VS[[:space:]]{0,1}144[[:space:]]9(0[1])([[:space:]]|-[0-9]))
+
