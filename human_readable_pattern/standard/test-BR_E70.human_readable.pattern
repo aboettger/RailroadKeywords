@@ -8,5 +8,5 @@ pattern=([[:space:]]E[[:space:]]{0,1}70[[:space:]]([^0-9]|$))
 
 pattern=([[:space:]]E[[:space:]]{0,1}70(\.(0))[[:space:]]([^0-9]|$))
 
-pattern=([[:space:]]E[[:space:]]{0,1}70[[:space:]](0[2345678]|2[12])([[:space:]]|-[0-9]))
-pattern=([[:space:]]E[[:space:]]{0,1}70[[:space:]]0(0[2345678]|2[12])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}70[[:space:]](0[2-8]|2[12])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}70[[:space:]]0(0[2-8]|2[12])([[:space:]]|-[0-9]))

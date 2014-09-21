@@ -8,11 +8,11 @@ pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]([^0-9]|$))
 
 # Pattern #1
 
-pattern=([[:space:]]VT[[:space:]]{0,1}17(\.([0]|00[012345]))[[:space:]]([^0-9]|$))
+pattern=([[:space:]]VT[[:space:]]{0,1}17(\.([0]|00[0-5]))[[:space:]]([^0-9]|$))
 
 # Pattern #2
 
-pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]0(0[012345])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]0(0[0-5])([[:space:]]|-[0-9]))
 
 pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]000((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
 

@@ -8,5 +8,5 @@ pattern=([[:space:]]E[[:space:]]{0,1}06[[:space:]]([^0-9]|$))
 
 pattern=([[:space:]]E[[:space:]]{0,1}06(\.(0))[[:space:]]([^0-9]|$))
 
-pattern=([[:space:]]E[[:space:]]{0,1}06[[:space:]](0[123456789]|1[012])([[:space:]]|-[0-9]))
-pattern=([[:space:]]E[[:space:]]{0,1}06[[:space:]]0(0[123456789]|1[012])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}06[[:space:]](0[1-9]|1[012])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}06[[:space:]]0(0[1-9]|1[012])([[:space:]]|-[0-9]))

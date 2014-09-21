@@ -8,4 +8,4 @@ pattern=([[:space:]]E[[:space:]]{0,1}251[[:space:]]([^0-9]|$))
 
 pattern=([[:space:]]E[[:space:]]{0,1}251(\.(0))[[:space:]]([^0-9]|$))
 
-pattern=([[:space:]]E[[:space:]]{0,1}251[[:space:]]0(0[123456789]|1[012345])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}251[[:space:]]0(0[1-9]|1[0-5])([[:space:]]|-[0-9]))

@@ -12,7 +12,7 @@ pattern=([[:space:]]VS[[:space:]]{0,1}12(\.([56]))[[:space:]]([^0-9]|$))
 
 # Pattern #2
 
-pattern=([[:space:]]VS[[:space:]]{0,1}12[[:space:]]5(0[123456789])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VS[[:space:]]{0,1}12[[:space:]]5(0[1-9])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VS[[:space:]]{0,1}12[[:space:]]6(0[12345678])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VS[[:space:]]{0,1}12[[:space:]]6(0[1-8])([[:space:]]|-[0-9]))
 

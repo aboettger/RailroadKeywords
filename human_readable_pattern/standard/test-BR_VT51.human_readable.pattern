@@ -14,4 +14,4 @@ pattern=([[:space:]]VT[[:space:]]{0,1}51(\.([01]))[[:space:]]([^0-9]|$))
 
 pattern=([[:space:]]VT[[:space:]]{0,1}51[[:space:]]0(0[01])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}51[[:space:]]1(0[01234])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}51[[:space:]]1(0[0-4])([[:space:]]|-[0-9]))

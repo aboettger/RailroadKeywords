@@ -8,4 +8,4 @@ pattern=([[:space:]]V[[:space:]]{0,1}80[[:space:]]([^0-9]|$))
 
 pattern=([[:space:]]V[[:space:]]{0,1}80(\.(0))[[:space:]]([^0-9]|$))
 
-pattern=([[:space:]]V[[:space:]]{0,1}80[[:space:]]0(0[123456789]|1[0])([[:space:]]|-[0-9]))
+pattern=([[:space:]]V[[:space:]]{0,1}80[[:space:]]0(0[1-9]|1[0])([[:space:]]|-[0-9]))

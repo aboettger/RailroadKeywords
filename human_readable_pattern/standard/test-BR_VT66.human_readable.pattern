@@ -12,4 +12,4 @@ pattern=([[:space:]]VT[[:space:]]{0,1}66(\.([9]))[[:space:]]([^0-9]|$))
 
 # Pattern #2
 
-pattern=([[:space:]]VT[[:space:]]{0,1}66[[:space:]]9(0[01234567])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}66[[:space:]]9(0[0-7])([[:space:]]|-[0-9]))

@@ -12,5 +12,5 @@ pattern=([[:space:]]VS[[:space:]]{0,1}97(\.([0]))[[:space:]]([^0-9]|$))
 
 # Pattern #2
 
-pattern=([[:space:]]VS[[:space:]]{0,1}97[[:space:]]0(0[123456])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VS[[:space:]]{0,1}97[[:space:]]0(0[1-6])([[:space:]]|-[0-9]))
 

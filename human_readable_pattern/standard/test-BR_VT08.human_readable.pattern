@@ -14,9 +14,9 @@ pattern=([[:space:]]VT[[:space:]]{0,1}08(\.([058]|00[01]))[[:space:]]([^0-9]|$))
 
 pattern=([[:space:]]VT[[:space:]]{0,1}08[[:space:]]0(0[01])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}08[[:space:]]5(0[123456789]|1[0-9]|2[0])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}08[[:space:]]5(0[1-9]|1[0-9]|2[0])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}08[[:space:]]8(0[123456])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}08[[:space:]]8(0[1-6])([[:space:]]|-[0-9]))
 
 pattern=([[:space:]]VT[[:space:]]{0,1}08[[:space:]]00(0[abcd]{0,1}|1[abcd]{0,1})([[:space:]]|-[0-9]))
 

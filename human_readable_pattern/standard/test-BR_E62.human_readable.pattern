@@ -6,4 +6,4 @@ pattern_delete=([[:space:]][^0-9]$)
 
 pattern=([[:space:]]E[[:space:]]{0,1}62[[:space:]]([^0-9]|$))
 
-pattern=([[:space:]]E[[:space:]]{0,1}62[[:space:]](0[12345])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}62[[:space:]](0[1-5])([[:space:]]|-[0-9]))

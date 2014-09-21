@@ -12,5 +12,5 @@ pattern=([[:space:]]VT[[:space:]]{0,1}25(\.([5]))[[:space:]]([^0-9]|$))
 
 # Pattern #2
 
-pattern=([[:space:]]VT[[:space:]]{0,1}25[[:space:]]5(0[123456])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}25[[:space:]]5(0[1-6])([[:space:]]|-[0-9]))
 
