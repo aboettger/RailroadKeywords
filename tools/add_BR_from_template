@@ -180,8 +180,15 @@ while true; do
   case $input in
       [w]* )
         cd "$script_path/../"
-        git add --all
-        git commit -a -m "Baureihe $baureihe hinzugefügt"
+        git add "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" \
+          "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" \
+          "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" \
+          "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list"
+        git commit -o "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" \
+          "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" \
+          "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" \
+          "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" \
+          -m "Baureihe $baureihe hinzugefügt"
         break;;
       [q]* )
         break;;
