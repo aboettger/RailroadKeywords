@@ -1,0 +1,25 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/321.asc
+
+category=Baureihen[category_separator]321
+
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)
+
+pattern=(([[:space:]]321er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+
+# Pattern #1
+
+pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]321(\.(0|1|2|5|6))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]321[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]321[[:space:]]0(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[012456789]|5[0-9]|6[0-4]|7[1-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]321[[:space:]]1(0[0-9]|1[0-9]|2[0-9]|3[0-4]|4[1-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-4])([[:space:]]|-[0-9])
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]321[[:space:]]2(0[1-9]|1[1-9]|2[0-9]|3[0-9]|4[0-7])([[:space:]]|-[0-9])
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]321[[:space:]]5(0[1-9]|1[0-9]|2[023456789]|3[0123479]|4[0-9]|5[0-6])([[:space:]]|-[0-9])
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]321[[:space:]]6(0[1-9]|1[0-9]|2[0-7])([[:space:]]|-[0-9])
+
