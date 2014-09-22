@@ -26,3 +26,6 @@ find /home/aboettger/src/RailroadKeywords/human_readable_pattern/private -type f
 
 # Entferne doppelte Leerzeilen
 br="163"; awk '/^$/{ if (! blank++) print; next } { blank=0; print }' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$br".human_readable.pattern > ~/tmp/test-BR_"$br".human_readable.pattern; mv ~/tmp/test-BR_"$br".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$br".human_readable.pattern
+
+# Finde Pattern-Dateien, die sich innerhalb der letzten 12 Stunden geändert haben
+find ~/src/RailroadKeywords/pattern/ -name "*.pattern" -cmin -720 | awk -F/ '{print $7}'
