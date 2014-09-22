@@ -16,8 +16,6 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
-cfg_category_separator=$(look category_separator "$script_path"/main.cfg | cut -d '=' -f 2-)
-
 # START functions ##############################################################
 
 function logInfo () {
@@ -40,6 +38,17 @@ function getPattern () {
   # retValue
   echo "$retValue"
 }
+
+if [[ ! -f $script_path/main.cfg ]]; then
+  logWarn "Keine Konfigurationsdatei \"$script_path/main.cfg\" gefunden. Versuche eine Konfiguration aus \"$script_path/main.cfg.template\" zu erstellen."
+  cp "$script_path"/main.cfg.template "$script_path"/main.cfg
+fi
+if [[ ! -f $script_path/main.cfg ]]; then
+  logError "Keine Konfigurationsdatei \"$script_path/main.cfg\" gefunden."
+  exit 1
+fi
+
+cfg_category_separator=$(look category_separator "$script_path"/main.cfg | cut -d '=' -f 2-)
 
 function getResults () {
   pattern_case="$1"

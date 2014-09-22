@@ -41,6 +41,16 @@ function cleanup {
   echo
 }
 
+if [[ ! -f $script_path/main.cfg ]]; then
+  logWarn "Keine Konfigurationsdatei \"$script_path/main.cfg\" gefunden. Versuche eine Konfiguration aus \"$script_path/main.cfg.template\" zu erstellen."
+  cp "$script_path"/main.cfg.template "$script_path"/main.cfg
+fi
+if [[ ! -f $script_path/main.cfg ]]; then
+  logError "Keine Konfigurationsdatei \"$script_path/main.cfg\" gefunden."
+  cleanup
+  exit 1
+fi
+
 function save_pid {
   script_name=$(basename "$0")
   if [ ! -d "$HOME/running/" ]; then
