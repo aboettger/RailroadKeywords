@@ -16,7 +16,7 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
-category_separator=$(look category_separator "$script_path"/main.cfg | cut -d '=' -f 2-)
+cfg_category_separator=$(look category_separator "$script_path"/main.cfg | cut -d '=' -f 2-)
 
 # START functions ##############################################################
 
@@ -86,10 +86,10 @@ function getResults () {
       fi
       while read -r keyword; do
         if [[ $keyword != "" ]]; then
-          if [[ $category_separator == "" ]] || [[ $category == "" ]]; then
+          if [[ $cfg_category_separator == "" ]] || [[ $category == "" ]]; then
             echo "$keyword"
           else
-            echo "$category$category_separator$keyword"
+            echo "$category$cfg_category_separator$keyword"
           fi
         fi
       done <<< "$result"
@@ -332,9 +332,16 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
       if [ -f "$pattern_path" ]; then
         runSearch "$pattern_path" "$pdf_path"
       else
+        
+        cfg_pattern_files=$(look pattern_files "$script_path"/main.cfg | cut -d '=' -f 2-)
+        script_path_escaped=${script_path////\\/}
+        cfg_pattern_files=$(sed -e 's/[[:space:]]//g' <<< "$cfg_pattern_files" | sed -e "s/,/\\n/g" | sed -e "s/^/$script_path_escaped\/pattern\//g")
+
         find "$pattern_path" -type f -name 'test-*.pattern' | { while read -r pattern_case;
           do
-            runSearch "$pattern_case" "$pdf_path"
+            if [[ -d $cfg_pattern_files ]] || [[ $cfg_pattern_files =~ $pattern_case ]]; then
+              runSearch "$pattern_case" "$pdf_path"
+            fi
         done }
       fi
       # time_complete_b=$(($(date +%s%N)/1000000))

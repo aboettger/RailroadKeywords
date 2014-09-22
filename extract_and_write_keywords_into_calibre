@@ -134,10 +134,17 @@ find "$search_root" -type f -name '*.pdf' | {
       logInfo "Dateigöße ($pdf_filename.txt): $(stat -c%s "$pdf_dirname/$pdf_filename.txt")"
     fi
 
+    cfg_pattern_files=$(look pattern_files "$script_path"/main.cfg | cut -d '=' -f 2-)
+
     keywords=$("$script_path/create_railroad_keywords_from_pdf" run "$script_path/pattern" "$pdf_path")
-
-    pattern_files="$script_path/pattern/*"
-
+    
+    if [[ $cfg_pattern_files == "" ]]; then
+      pattern_files="$script_path/pattern/*"
+    else
+      script_path_escaped=${script_path////\\/}
+      pattern_files=$(sed -e 's/[[:space:]]//g' <<< "$cfg_pattern_files" | sed -e "s/,/\\n/g" | sed -e "s/^/$script_path_escaped\/pattern\//g")
+    fi
+    
     for pattern_path in $pattern_files; do
       false_positive_pattern_path="$script_path/false_positive/$(basename "$pattern_path")"
         if [ -f "$false_positive_pattern_path" ]; then
@@ -145,9 +152,9 @@ find "$search_root" -type f -name '*.pdf' | {
           while read -r pattern; do
             if [ ! -z "$pattern" ]; then
               logWarn "Falscher Treffer wird entfernt durch \"$pattern\", definiert in \"$false_positive_pattern_path\"."
-              pattern=$(echo "$pattern" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
-              keywords=$(echo "$keywords" | sed -e "s/$pattern//g")
-              keywords=$(echo "$keywords" | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,\$//g")
+              pattern=$(sed -e 's/(/\\(/g' <<< "$pattern" | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
+              keywords=$(sed -e "s/$pattern//g" <<< "$keywords")
+              keywords=$(sed -e "s/,,/,/g" <<< "$keywords" | sed -e "s/^,//g" | sed -e "s/,\$//g" | sed -e 's/ \- /-/g')
             fi
           done <<< "$false_positive_pattern"
         fi
@@ -157,9 +164,17 @@ find "$search_root" -type f -name '*.pdf' | {
     # keywords=${keywords//Baureihe/BR}
     # keywords=$(echo "$keywords" | sort | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g" | sed -E 's/(V)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(VT)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(E)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(S)([0-9])/\1 \2/g' | uniq | tr '\n' ',' | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//' | sed -e 's/ \- /-/g')
     # make_another_dot=$(python -c 'print u"\u0323".encode("utf8")')
-    keywords=$(echo "$keywords" | sort | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,\$//g" | uniq | tr '\n' ',' | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//' | sed -e 's/ \- /-/g')
 
     old_keywords=$(calibredb show_metadata "$calibre_id"  --library-path="$calibreDbSearchPath" | grep "Tags" | awk -F: '{print $2}' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/, /,/g' )
+    
+    cfg_remove_not_found=$(look remove_not_found "$script_path"/main.cfg | cut -d '=' -f 2-)
+    if [[ $cfg_remove_not_found == "0" ]]; then
+      old_keywords_list=$(tr ',' "\n" <<< "$old_keywords")
+      keywords="$keywords,$old_keywords_list"
+      keywords=$(tr ',' "\n" <<< "$keywords")
+    fi
+    keywords=$(sort  <<< "$keywords" | uniq)
+    keywords=$(tr '\n' ',' <<< "$keywords" | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//')
 
     temp_file_keywords=$(tempfile)
     temp_file_old_keywords=$(tempfile)
