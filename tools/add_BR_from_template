@@ -11,187 +11,246 @@ yellow="\e[0;33m"
 TOA="\e[0m" # No Color
 
 function logInfo () {
-    echo -e "${green}$1${TOA}"
+    echo -e >&2 "${green}$1${TOA}"
 }
 
 function logWarn () {
-  echo -e "${yellow}$1${TOA}"
+  echo -e >&2 "${yellow}$1${TOA}"
 }
 
 function logError () {
-  echo -e "${red}$1${TOA}"
+  echo -e >&2 "${red}$1${TOA}"
 }
 
 baureihe="$1"
 
-if [ ! -f "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" ]; then
-  if [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
-    cp "$script_path/../human_readable_pattern/standard/test-BR_YYXX.human_readable.pattern.template" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
-    yy=$(sed "s/[0-9]*//g" <<< "$baureihe")
-    xx=$(sed "s/[A-Z]*//g" <<< "$baureihe")
 
-    sed -i "s/YY/$yy/g" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
-    sed -i "s/XX/$xx/g" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+# 0
+function startCreate () {
+  if [ ! -f "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" ]; then
+    if [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
+      cp "$script_path/../human_readable_pattern/standard/test-BR_YYXX.human_readable.pattern.template" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+      yy=$(sed "s/[0-9]*//g" <<< "$baureihe")
+      xx=$(sed "s/[A-Z]*//g" <<< "$baureihe")
+
+      sed -i "s/YY/$yy/g" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+      sed -i "s/XX/$xx/g" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+    else
+      cp "$script_path/../human_readable_pattern/standard/test-BR_XXX.human_readable.pattern.template" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+      sed -i "s/XXX/$baureihe/g" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+    fi
+    if [ -f "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" ]; then
+      logInfo "neue Datei: \"$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern\""
+    fi
   else
-    cp "$script_path/../human_readable_pattern/standard/test-BR_XXX.human_readable.pattern.template" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
-    sed -i "s/XXX/$baureihe/g" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+    logWarn "\"$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern\" existiert bereits"
   fi
-  if [ -f "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" ]; then
-    logInfo "neue Datei: \"$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern\""
-  fi
-else
-  logWarn "\"$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern\" existiert bereits"
-fi
 
-if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" ]; then
-  if [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
-    touch "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
+  if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" ]; then
+    if [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
+      touch "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
+    else
+      cp "$script_path/../tests/standard/test-BR_XXX.negative.001.list.template" "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
+      sed -i "s/XXX/$baureihe/g" "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
+    fi
+    if [ -f "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" ]; then
+      logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.negative.001.list\""
+    fi
   else
-    cp "$script_path/../tests/standard/test-BR_XXX.negative.001.list.template" "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
-    sed -i "s/XXX/$baureihe/g" "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
+    logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.negative.001.list\" existiert bereits"
   fi
-  if [ -f "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" ]; then
-    logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.negative.001.list\""
-  fi
-else
-  logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.negative.001.list\" existiert bereits"
-fi
 
-if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.ods" ]; then
-  if [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
-    cp "$script_path/../tests/standard/test-BR_YYXX.ods.template" "$script_path/../tests/standard/test-BR_$baureihe.ods"
+  if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.ods" ]; then
+    if [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
+      cp "$script_path/../tests/standard/test-BR_YYXX.ods.template" "$script_path/../tests/standard/test-BR_$baureihe.ods"
+    else
+      cp "$script_path/../tests/standard/test-BR_XXX.ods.template" "$script_path/../tests/standard/test-BR_$baureihe.ods"
+    fi
+    if [ -f "$script_path/../tests/standard/test-BR_$baureihe.ods" ]; then
+      logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.ods\""
+    fi
   else
-    cp "$script_path/../tests/standard/test-BR_XXX.ods.template" "$script_path/../tests/standard/test-BR_$baureihe.ods"
+    logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.ods\" existiert bereits"
   fi
-  if [ -f "$script_path/../tests/standard/test-BR_$baureihe.ods" ]; then
-    logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.ods\""
-  fi
-else
-  logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.ods\" existiert bereits"
-fi
 
-if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" ]; then
-  cp "$script_path/../tests/standard/test-BR_XXX.positive.001.list.template" "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list"
-  if [ -f "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" ]; then
-    logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.positive.001.list\""
+  if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" ]; then
+    cp "$script_path/../tests/standard/test-BR_XXX.positive.001.list.template" "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list"
+    if [ -f "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" ]; then
+      logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.positive.001.list\""
+    fi
+  else
+    logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.positive.001.list\" existiert bereits"
   fi
-else
-  logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.positive.001.list\" existiert bereits"
-fi
 
-if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" ]; then
-  cp "$script_path/../tests/standard/test-BR_XXX.positive.002.list.template" "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list"
-  if [ -f "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" ]; then
-    logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.positive.002.list\""
+  if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" ]; then
+    cp "$script_path/../tests/standard/test-BR_XXX.positive.002.list.template" "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list"
+    if [ -f "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" ]; then
+      logInfo "neue Datei: \"$script_path/../tests/standard/test-BR_$baureihe.positive.002.list\""
+    fi
+  else
+    logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.positive.002.list\" existiert bereits"
   fi
-else
-  logWarn "\"$script_path/../tests/standard/test-BR_$baureihe.positive.002.list\" existiert bereits"
-fi
+  echo "startOpen"
+}
 
-echo "Dateien werden zur Bearbeitung geöffnet"
-echo "w) Dateien öffnen"
-echo "d) Alle Dateien des Typs \"$baureihe\" löschen und beenden"
-echo "q) ohne Bearbeitung fortfahren"
+# 1
+function startOpen () {
+  echo >&2
+  echo >&2 "Dateien werden zur Bearbeitung geöffnet"
+  echo >&2 "w) Dateien öffnen"
+  echo >&2 "d) Alle Dateien des Typs \"$baureihe\" löschen und beenden"
+  echo >&2 "q) ohne Bearbeitung fortfahren"
+  echo >&2 "b) zurück zum Erstellen der Dateien"
+  while true; do
+    read -p "Bitte wählen: " input < /dev/tty
+    case "$input" in
+        [w]* )
+          xdg-open "$script_path/../tests/standard/test-BR_$baureihe.ods" > /dev/null 2>&1
+          xdg-open "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" > /dev/null 2>&1
+          xdg-open "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" > /dev/null 2>&1
+          xdg-open "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" > /dev/null 2>&1
+          echo "startTest"
+          break;;
+        [d]* )
+          find "$script_path/../tests/standard/" -name "test-BR_$baureihe\.*" -exec rm {} \;
+          find "$script_path/../human_readable_pattern/standard/" -name "test-BR_$baureihe\.*" -exec rm {} \;
+          echo "startQuit"
+          break;;
+        [q]* )
+          echo "startTest"
+          break;;
+        [b]* )
+          echo "startCreate"
+          break;;
+        * ) echo >&2 "Ungültige Auswahl";;
+    esac
+  done
+}
+
+# 2
+function startTest () {
+  echo >&2
+  echo >&2 "Tests werden durchgeführt"
+  echo >&2 "w) Tests starten"
+  echo >&2 "q) ohne Tests fortfahren"
+  echo >&2 "b) zurück zum Öffnen der Dateien"
+  while true; do
+    read -p "Bitte wählen: " input < /dev/tty
+    case "$input" in
+        [w]* )
+          awk '/^$/{ if (! blank++) print; next } { blank=0; print }' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[0123456789\]/[0-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[012345678\]/[0-8]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[01234567\]/[0-7]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[0123456\]/[0-6]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[012345\]/[0-5]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[01234\]/[0-4]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[0123\]/[0-3]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[012\]/[0-2]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          
+          sed 's/\[123456789\]/[1-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[12345678\]/[1-8]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[1234567\]/[1-7]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[123456\]/[1-6]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[12345\]/[1-5]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[1234\]/[1-4]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[123\]/[1-3]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          
+          sed 's/\[23456789\]/[2-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[2345678\]/[2-8]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[234567\]/[2-7]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[23456\]/[2-6]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[2345\]/[2-5]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[234\]/[2-4]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+
+          sed 's/\[3456789\]/[3-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[345678\]/[3-8]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[34567\]/[3-7]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[3456\]/[3-6]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[345\]/[3-5]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          
+          sed 's/\[456789\]/[4-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[45678\]/[4-8]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[4567\]/[4-7]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[456\]/[4-6]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          
+          sed 's/\[56789\]/[5-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[5678\]/[5-8]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[567\]/[5-7]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          
+          sed 's/\[6789\]/[6-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          sed 's/\[678\]/[6-8]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+          
+          sed 's/\[789\]/[7-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
+
+          /home/aboettger/src/RailroadKeywords/create_railroad_keywords_from_pdf test /home/aboettger/src/RailroadKeywords/pattern/test-BR_"$baureihe".pattern >&2
+          echo "startGit"
+          break;;
+        [q]* )
+          echo "startGit"
+          break;;
+        [b]* )
+          echo "startOpen"
+          break;;
+        * ) echo >&2 "Ungültige Auswahl";;
+    esac
+  done
+}
+
+# 3
+function startGit () {
+  echo >&2
+  echo >&2 "Geänderte Dateien zur Versionskontrolle hinzufügen und auf Server veröffentlichen"
+  echo >&2 "w) zur Versionskontrolle hinzufügen"
+  echo >&2 "q) ohne Versionskontrolle fortfahren"
+  echo >&2 "b) zurück zum Testen"
+  while true; do
+    read -p "Bitte wählen: " input < /dev/tty
+    case "$input" in
+        [w]* )
+          cd "$script_path/../"
+          git add "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" \
+            "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" \
+            "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" \
+            "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" >&2
+          git commit -o "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" \
+            "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" \
+            "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" \
+            "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" \
+            -m "Baureihe $baureihe hinzugefügt" >&2
+          echo "startQuit"
+          break;;
+        [q]* )
+          echo "startQuit"
+          break;;
+        [b]* )
+          echo "startTest"
+          break;;
+        * ) echo >&2 "Ungültige Auswahl";;
+    esac
+  done
+}
+
+retValue=$(startCreate)
 while true; do
-  read -p "Bitte wählen: " input < /dev/tty
-  case $input in
-      [w]* )
-        xdg-open "$script_path/../tests/standard/test-BR_$baureihe.ods" > /dev/null 2>&1
-        xdg-open "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" > /dev/null 2>&1
-        xdg-open "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" > /dev/null 2>&1
-        xdg-open "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" > /dev/null 2>&1
+  case $retValue in
+      "startCreate")
+        retValue=$(startCreate)
+        ;;
+      "startOpen")
+        retValue=$(startOpen)
+        ;;
+      "startTest")
+        retValue=$(startTest)
+        ;;
+      "startGit")
+        retValue=$(startGit)
+        ;;
+      "startQuit")
         break;;
-      [d]* )
-        find "$script_path/../tests/standard/" -name "test-BR_$baureihe\.*" -exec rm {} \;
-        find "$script_path/../human_readable_pattern/standard/" -name "test-BR_$baureihe\.*" -exec rm {} \;
-        exit 0
-        break;;
-      [q]* )
-        break;;
-      * ) echo "Ungültige Auswahl";;
+      *) break;;
   esac
 done
 
-echo "Tests werden durchgeführt"
-echo "w) Tests starten"
-echo "q) ohne Tests fortfahren"
-while true; do
-  read -p "Bitte wählen: " input < /dev/tty
-  case $input in
-      [w]* )
-        awk '/^$/{ if (! blank++) print; next } { blank=0; print }' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[0123456789\]/[0-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[012345678\]/[0-8]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[01234567\]/[0-7]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[0123456\]/[0-6]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[012345\]/[0-5]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[01234\]/[0-4]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[0123\]/[0-3]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[012\]/[0-2]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        
-        sed 's/\[123456789\]/[1-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[12345678\]/[1-8]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[1234567\]/[1-7]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[123456\]/[1-6]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[12345\]/[1-5]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[1234\]/[1-4]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[123\]/[1-3]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        
-        sed 's/\[23456789\]/[2-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[2345678\]/[2-8]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[234567\]/[2-7]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[23456\]/[2-6]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[2345\]/[2-5]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[234\]/[2-4]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
 
-        sed 's/\[3456789\]/[3-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[345678\]/[3-8]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[34567\]/[3-7]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[3456\]/[3-6]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[345\]/[3-5]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        
-        sed 's/\[456789\]/[4-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[45678\]/[4-8]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[4567\]/[4-7]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[456\]/[4-6]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        
-        sed 's/\[56789\]/[5-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[5678\]/[5-8]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[567\]/[5-7]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        
-        sed 's/\[6789\]/[6-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        sed 's/\[678\]/[6-8]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-        
-        sed 's/\[789\]/[7-9]/g' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern  > ~/tmp/test-BR_"$baureihe".human_readable.pattern; mv ~/tmp/test-BR_"$baureihe".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$baureihe".human_readable.pattern
-
-        /home/aboettger/src/RailroadKeywords/create_railroad_keywords_from_pdf test /home/aboettger/src/RailroadKeywords/pattern/test-BR_"$baureihe".pattern
-        break;;
-      [q]* )
-        break;;
-      * ) echo "Ungültige Auswahl";;
-  esac
-done
-
-echo "Geänderte Dateien zur Versionskontrolle hinzufügen und auf Server veröffentlichen"
-echo "w) zur Versionskontrolle hinzufügen"
-echo "q) ohne Versionskontrolle fortfahren"
-while true; do
-  read -p "Bitte wählen: " input < /dev/tty
-  case $input in
-      [w]* )
-        cd "$script_path/../"
-        git add "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" \
-          "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" \
-          "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" \
-          "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list"
-        git commit -o "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" \
-          "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" \
-          "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" \
-          "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" \
-          -m "Baureihe $baureihe hinzugefügt"
-        break;;
-      [q]* )
-        break;;
-      * ) echo "Ungültige Auswahl";;
-  esac
-done
+exit 0
