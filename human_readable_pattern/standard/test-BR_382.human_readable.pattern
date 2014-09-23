@@ -1,0 +1,18 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/382.asc
+
+category=Baureihen[category_separator]382
+
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)
+
+pattern=(([[:space:]]382er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+
+# Pattern #1
+
+pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]382(\.(0|1))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]382[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]382[[:space:]]0(0[1])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]382[[:space:]]1(0[1])([[:space:]]|-[0-9])
+
