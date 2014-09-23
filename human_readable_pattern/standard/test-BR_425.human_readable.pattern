@@ -1,0 +1,19 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/425.asc
+
+category=Baureihen[category_separator]425
+
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)
+
+pattern=(([[:space:]]425er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+
+# Pattern #1
+
+pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]425(\.(1|4))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]425[[:space:]]([^0-9]|$))
+
+# Pattern #2
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]425[[:space:]]1(0[123678]|1[056789]|2[0-4])([[:space:]]|-[0-9])
+
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]425[[:space:]]4(0[123678]|1[056789]|2[0-4])([[:space:]]|-[0-9])
+
