@@ -95,6 +95,9 @@ function getResults () {
       fi
       while read -r keyword; do
         if [[ $keyword != "" ]]; then
+          # Da ich bei der Erstellung der txt-Dateien einen Bindestrich "-"
+          # durch " - " ersetze, muss ich das hier wieder rückgängig machen.
+          keyword=${keyword// - /-}
           if [[ $cfg_category_separator == "" ]] || [[ $category == "" ]]; then
             echo "$keyword"
           else
