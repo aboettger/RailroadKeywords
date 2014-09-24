@@ -5,7 +5,6 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
-
 if [ ! -d "$1" ]; then
   if [ -f "$script_path/../diffs/$(basename "$1")" ]; then
     rm "$script_path/../diffs/$(basename "$1")"
@@ -14,10 +13,13 @@ if [ ! -d "$1" ]; then
     rm "$script_path/../all/$(basename "$1")"
   fi
   
-  br=$(basename "$1" | sed -E "s/test-BR_(.*)\.pattern/\1/g")
-  # echo "$br"
-  "$script_path/create_all_4_BR" "$br" "BR_$br"
-  "$script_path/create_diff_4_BR" "$br" "BR_$br"
+  filename=$(basename "$1")
+  if [[ $filename == test-BR_* ]]; then
+    br=$(sed -E "s/test-BR_(.*)\.pattern/\1/g" <<< "$filename")
+    # echo "###$br"
+    "$script_path/create_all_4_BR" "$br" "BR_$br"
+    "$script_path/create_diff_4_BR" "$br" "BR_$br"
+  fi
 else
   exec < /dev/tty
 
@@ -31,11 +33,13 @@ else
 
         find "$script_path/../tests" -name "test-BR_*.positive.002.list" | { while read -r file;
           do
-            # echo "$file"
-            br=$(basename "$file" | sed -E "s/test-BR_(.*)\.positive\.002\.list/\1/g")
-            # echo "$br"
-            "$script_path/create_all_4_BR" "$br" "BR_$br"
-            "$script_path/create_diff_4_BR" "$br" "BR_$br"
+            filename=$(basename "$file")
+            if [[ $filename == test-BR_* ]]; then
+              br=$(sed -E "s/test-BR_(.*)\.positive\.002\.list/\1/g" <<< "$filename")
+              # echo "$br"
+              "$script_path/create_all_4_BR" "$br" "BR_$br"
+              "$script_path/create_diff_4_BR" "$br" "BR_$br"
+            fi
           done 
         }
       break;;
