@@ -1,17 +1,44 @@
-  WR 200 B 14 
-  WR 200 B 
-  WR 200 
-
-  WR 360 C 14 
-  WR 360 C 
-  WR 360 
-
-  WR 550 D 14 
-  WR 550 D 
-  WR 550 
+# Quelle: http://www.wikiwand.com/de/Diesellokomotiven_der_Wehrmacht
+# Quelle: http://www.bundesbahnzeit.de/page.php?id=Wehrmachtsdiesel
 
   WR 220 B 
   WR 220 C 
   WR 220 
+  WR220B 
+  WR220C 
+  WR220 
+
+  WR 200 B 13 
+  WR 200 B 14 
+  WR 200 B 
+  WR 200 
+  WR200B13 
+  WR200B14 
+  WR200B 
+  WR200 
+  
+  WR 240 B 15 
+  WR 240 B 
+  WR 240 
+  WR240B15 
+  WR240B 
+  WR240 
+
+  WR 360 C 12 
+  WR 360 C 14 
+  WR 360 C 
+  WR 360 
+  WR360C12 
+  WR360C14 
+  WR360C 
+  WR360 
+
+  WR 550 D 14 
+  WR 550 D 
+  WR 550 
+  WR550D14 
+  WR550D 
+  WR550 
 
   D 311 
+  D311 
