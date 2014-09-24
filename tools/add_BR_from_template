@@ -28,7 +28,7 @@ baureihe="$1"
 # 0
 function startCreate () {
   if [ ! -f "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" ]; then
-    if [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
+    if [[ $baureihe == D* ]] || [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
       cp "$script_path/../human_readable_pattern/standard/test-BR_YYXX.human_readable.pattern.template" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
       yy=$(sed "s/[0-9]*//g" <<< "$baureihe")
       xx=$(sed "s/[A-Z]*//g" <<< "$baureihe")
@@ -47,7 +47,7 @@ function startCreate () {
   fi
 
   if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list" ]; then
-    if [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
+    if [[ $baureihe == D* ]] || [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
       touch "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
     else
       cp "$script_path/../tests/standard/test-BR_XXX.negative.001.list.template" "$script_path/../tests/standard/test-BR_$baureihe.negative.001.list"
@@ -61,7 +61,7 @@ function startCreate () {
   fi
 
   if [ ! -f "$script_path/../tests/standard/test-BR_$baureihe.ods" ]; then
-    if [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
+    if [[ $baureihe == D* ]] || [[ $baureihe == E* ]] || [[ $baureihe == V* ]]; then
       cp "$script_path/../tests/standard/test-BR_YYXX.ods.template" "$script_path/../tests/standard/test-BR_$baureihe.ods"
     else
       cp "$script_path/../tests/standard/test-BR_XXX.ods.template" "$script_path/../tests/standard/test-BR_$baureihe.ods"

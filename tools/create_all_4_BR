@@ -9,6 +9,6 @@ sed -e "s/xx/$1/g" < "$script_path/../all/BR XX 0 - BR XX 9999.template" > "$scr
 sed -e "s/xx/$1/g" < "$script_path/../all/BR XX.0 - BR XX.99.template" > "$script_path/../all/$2.all.001.txt"
 
 # Für Fahrzeuge mit V, E, VT erzeuge ich keine Schlüsselwörter in der Art "BR E 01" oder "BR E01"
-if [[ $1 == E* ]] || [[ $1 == V* ]]; then
+if [[ $1 == D* ]] || [[ $1 == E* ]] || [[ $1 == V* ]]; then
   sed -i "s/[[:space:]]BR.*//g" "$script_path/../all/$2.all.001.txt"
 fi
