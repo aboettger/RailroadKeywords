@@ -1,0 +1,19 @@
+category=Wehrmachtslokomotiven
+
+pattern=([[:space:]]WR 200[[:space:]])
+pattern=([[:space:]]WR 200 B[[:space:]])
+pattern=([[:space:]]WR 200 B 14[[:space:]])
+
+pattern=([[:space:]]WR 360[[:space:]])
+pattern=([[:space:]]WR 360 C[[:space:]])
+pattern=([[:space:]]WR 360 C 14[[:space:]])
+
+pattern=([[:space:]]WR 550[[:space:]])
+pattern=([[:space:]]WR 550 D[[:space:]])
+pattern=([[:space:]]WR 550 D 14[[:space:]])
+
+pattern=([[:space:]]WR 220[[:space:]])
+pattern=([[:space:]]WR 220 B[[:space:]])
+pattern=([[:space:]]WR 220 C[[:space:]])
+
+pattern=([[:space:]]D 311[[:space:]])
