@@ -1,44 +1,84 @@
 # Quelle: http://www.wikiwand.com/de/Diesellokomotiven_der_Wehrmacht
 # Quelle: http://www.bundesbahnzeit.de/page.php?id=Wehrmachtsdiesel
+# Quelle: http://fooblog.mexxoft.com/wr360c14k/
+# Quelle: 	Die Diesellokomotiven der Wehrmacht, Umfangreiche Listen, Stefan Lauscher, EK Verlag Freiburg, ISBN 3-88255-236-0
 
-  WR 220 B 
-  WR 220 C 
-  WR 220 
-  WR220B 
-  WR220C 
-  WR220 
 
-  WR 200 B 13 
-  WR 200 B 14 
-  WR 200 B 
-  WR 200 
-  WR200B13 
-  WR200B14 
-  WR200B 
-  WR200 
+# ## Regelspur
+
+  # Baumuster
+    HR 360 
+    HR360 
+    HR 360 B 18 
+    HR 360 B 
+    HR 360 C 12 
+    HR 360 C 
+
+
+  # Bauarten der Wehrmacht
+    WR 200 B 13 
+    WR 200 B 14 
+    WR 200 B 
+    WR 200 
+    WR200B13 
+    WR200B14 
+    WR200B 
+    WR200 
+    
+    WR 360 C 12 
+    WR 360 C 14 
+    WR 360 C 14 K 
+    WR 360 C 
+    WR 360 
+    WR360C12 
+    WR360C14 
+    WR360C14K 
+    WR360C 
+    WR360 
+
+    WR 550 D 14 
+    WR 550 D 
+    WR 550 
+    WR550D14 
+    WR550D 
+    WR550 
+
+    D 311 
+    D311 
   
-  WR 240 B 15 
-  WR 240 B 
-  WR 240 
-  WR240B15 
-  WR240B 
-  WR240 
+  # ??? Bauarten der Wehrmacht ???
+    WR 220 B 
+    WR 220 C 
+    WR 220 
+    WR220B 
+    WR220C 
+    WR220 
+    
+    WR 240 B 15 
+    WR 240 B 
+    WR 240 
+    WR240B15 
+    WR240B 
+    WR240 
 
-  WR 360 C 12 
-  WR 360 C 14 
-  WR 360 C 
-  WR 360 
-  WR360C12 
-  WR360C14 
-  WR360C 
-  WR360 
+# ## Schmalspur
 
-  WR 550 D 14 
-  WR 550 D 
-  WR 550 
-  WR550D14 
-  WR550D 
-  WR550 
+  HF 50 B 
+  HF 50 
+  HF50B 
+  HF50 
 
-  D 311 
-  D311 
+  HF 130 C 
+  HF 130 
+  HF130C 
+  HF130 
+
+  HF 130 D 
+  HF 130 
+  HF130D 
+  HF130 
+
+  HF 200 D 
+  HF 200 
+  HF200D 
+  HF200 
