@@ -35,11 +35,15 @@ if [ -z "$keyword" ] || [ -z "$library_path" ]; then
 fi
 
 search_for="'tags:\"~^.*\\$category_separator$keyword\$\"'"
-echo "$search_for"
+echo "Suche mittels $search_for in Calibre"
 result=$(eval calibredb list --for-machine --library-path "$library_path" --fields=tags -s "$search_for")
 calibre_ids=$(awk -F"\"id\": " '{print $2}' <<< "$result" | sed 's/,//g' | sed '/^$/d')
 
+countCalibreIds=$(wc -l <<< "$calibre_ids")
+count=0
+
 while read -r calibre_id; do
+  count=$((count+1))
   # echo "$calibre_id"
   metadata_files=$(find "$1" -type f -name "metadata.opf")
   while read -r metadata_file; do
@@ -61,87 +65,86 @@ while read -r calibre_id; do
     fi
     done <<< "$pattern_files"
   )
-  # echo "$pattern_files_hit"
-  
-  echo
-  echo -e "${green}$keyword${TOA} für Calibre-ID ${green}$calibre_id${TOA} gefunden durch:"
-  echo "$pattern_files_hit"
-  
-  dont_ask_file=""
-  ignore_file=""
-  while read pattern_file_hit; do
-    # echo "$pattern_file_hit"
-    false_positive_file=${pattern_file_hit//pattern\//false_positive\/}
-    # echo "$false_positive_file"
-    true_positive_file=${pattern_file_hit//pattern\//true_positive\/}
-    true_positive_file=${true_positive_file//pattern/list}
-    # echo "$true_positive_file"
+  pattern_files_hit=$(sed '/^$/d' <<< "$pattern_files_hit")
 
-    if [ -f "$true_positive_file" ]; then
-      true_positive=$(grep -l "^$calibre_id=$keyword\$" "$true_positive_file")
-    else
-      true_positive=""
-    fi
-    if [ ! -z "$true_positive" ]; then
-      echo "\"$keyword\" für Calibre-ID $calibre_id  wurde in \"$true_positive\" gefunden, keine Aktion nötig."
-    else
-      keywords_pattern=$(sed -E 's/^(.*)$/[[:space:]]\1[[:space:]]/g' <<< "$keyword")
+  if [[ $pattern_files_hit == "" ]]; then
+    echo "[$count/$countCalibreIds] Keine Aktion nötig für Calibre ID: $calibre_id"
+  else
+    echo
+    echo -e "${green}$keyword${TOA} für Calibre-ID ${green}$calibre_id${TOA} gefunden durch:"
+    echo "$pattern_files_hit"
+    dont_ask_file=""
+    ignore_file=""
+    while read pattern_file_hit; do
+      # echo "$pattern_file_hit"
+      false_positive_file=${pattern_file_hit//pattern\//false_positive\/}
+      # echo "$false_positive_file"
+      true_positive_file=${pattern_file_hit//pattern\//true_positive\/}
+      true_positive_file=${true_positive_file//pattern/list}
+      # echo "$true_positive_file"
 
-      pdf_path=$(find "$working_path" -type f -name '*.pdf')
-      pdf_name=$(basename "$pdf_path")
-      hr_txt_path=${pdf_path//.pdf/.human-readable.txt}
-      txt_path=${pdf_path//.pdf/.txt}
+      if [ -f "$true_positive_file" ]; then
+        true_positive=$(grep -l "^$calibre_id=$keyword\$" "$true_positive_file")
+      else
+        true_positive=""
+      fi
+      if [ ! -z "$true_positive" ]; then
+        echo "\"$keyword\" für Calibre-ID $calibre_id  wurde in \"$true_positive\" gefunden, keine Aktion nötig."
+      else
+        keywords_pattern=$(sed -E 's/^(.*)$/[[:space:]]\1[[:space:]]/g' <<< "$keyword")
 
-      pattern_file_name="$(basename "$false_positive_file")"
-      human_readable_file_name=${pattern_file_name//.pattern/.human_readable.pattern}
+        pdf_path=$(find "$working_path" -type f -name '*.pdf')
+        hr_txt_path=${pdf_path//.pdf/.human-readable.txt}
+        txt_path=${pdf_path//.pdf/.txt}
 
-      echo
-      echo "Bitte Entscheidung treffen für:"
-      logInfo "$pattern_file_hit"
-      echo
-      egrep -anET -C 5 "$keywords_pattern" "$txt_path"
+        echo
+        echo "Bitte Entscheidung treffen für:"
+        logInfo "$pattern_file_hit"
+        echo
+        egrep -anET -C 5 "$keywords_pattern" "$txt_path"
 
-      keyword_pattern=$(sed -e 's/\//\\\//g' <<< "$keyword")
-      ignore_file="$false_positive_file"
-      dont_ask_file="$true_positive_file"
+        keyword_pattern=$(sed -e 's/\//\\\//g' <<< "$keyword")
+        ignore_file="$false_positive_file"
+        dont_ask_file="$true_positive_file"
 
-      echo
-      echo "1) Nicht mehr fragen"
-      echo "2) Schlüsselwort dauerhaft entfernen"
-      echo "3) PDF ansehen"
-      echo "4) TXT ansehen"
-      echo "5) Verzeichnis öffnen (\"$working_path\")"
-      echo "6) Nichts tun"
-      while true; do
-        read -p "Bitte wählen: " input < /dev/tty
-        case $input in
-            [1]* )
-              echo "$calibre_id=$keyword" >> "$dont_ask_file"
-              echo -e "Nach \"$keyword\" für Calibre-ID \"$calibre_id\" wird nicht mehr gefragt: ${green}$calibre_id=$keyword${TOA} in \"$dont_ask_file\""
-              break;;
-            [2]* )
-              echo "$calibre_id=^($keyword_pattern)\$" >> "$ignore_file"
-              extract_and_write_keywords_into_calibre "$working_path"
-              echo -e "\"$keyword\" für Calibre-ID \"$calibre_id\" wurde dauerhaft entfernt: ${green}$calibre_id=^($keyword_pattern)\$${TOA} in \"$ignore_file\""
-              break;;
-            [3]* )
-              echo "Öffne \"$pdf_path\""
-              xdg-open "$pdf_path" > /dev/null 2>&1
-              ;;
-            [4]* )
-              echo "Öffne \"$hr_txt_path\""
-              xdg-open "$hr_txt_path" > /dev/null 2>&1
-              ;;
-            [5]* )
-              echo "Öffne \"$working_path\""
-              xdg-open "$working_path" > /dev/null 2>&1
-              ;;
-            [6]* ) break;;
-            * ) echo "Ungültige Auswahl";;
-        esac
-      done
-    fi
-  done <<< "$pattern_files_hit"
+        echo
+        echo "1) Nicht mehr fragen"
+        echo "2) Schlüsselwort dauerhaft entfernen"
+        echo "3) PDF ansehen"
+        echo "4) TXT ansehen"
+        echo "5) Verzeichnis öffnen (\"$working_path\")"
+        echo "6) Nichts tun"
+        while true; do
+          read -p "Bitte wählen: " input < /dev/tty
+          case $input in
+              [1]* )
+                echo "$calibre_id=$keyword" >> "$dont_ask_file"
+                echo -e "Nach \"$keyword\" für Calibre-ID \"$calibre_id\" wird nicht mehr gefragt: ${green}$calibre_id=$keyword${TOA} in \"$dont_ask_file\""
+                break;;
+              [2]* )
+                echo "$calibre_id=^($keyword_pattern)\$" >> "$ignore_file"
+                extract_and_write_keywords_into_calibre "$working_path"
+                echo -e "\"$keyword\" für Calibre-ID \"$calibre_id\" wurde dauerhaft entfernt: ${green}$calibre_id=^($keyword_pattern)\$${TOA} in \"$ignore_file\""
+                break;;
+              [3]* )
+                echo "Öffne \"$pdf_path\""
+                xdg-open "$pdf_path" > /dev/null 2>&1
+                ;;
+              [4]* )
+                echo "Öffne \"$hr_txt_path\""
+                xdg-open "$hr_txt_path" > /dev/null 2>&1
+                ;;
+              [5]* )
+                echo "Öffne \"$working_path\""
+                xdg-open "$working_path" > /dev/null 2>&1
+                ;;
+              [6]* ) break;;
+              * ) echo "Ungültige Auswahl";;
+          esac
+        done
+      fi
+    done <<< "$pattern_files_hit"
+  fi
 done <<< "$calibre_ids"
 
 exit 0
