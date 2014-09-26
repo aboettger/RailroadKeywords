@@ -2,9 +2,9 @@
 
 category=Baureihen[category_separator]VT17
 
-pattern_delete=([[:space:]][^0-9]$)
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
 
-pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]([^0-9]|$))
+pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]])
 
 # Pattern #1
 
@@ -14,15 +14,15 @@ pattern=([[:space:]]VT[[:space:]]{0,1}17(\.([0]|00[0-5]))[[:space:]]([^0-9]|$))
 
 pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]0(0[0-5])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]000((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]000([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]001((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]001([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]002((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]002([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]003((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]003([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]004((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]004([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]005((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}17[[:space:]]005([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
 
