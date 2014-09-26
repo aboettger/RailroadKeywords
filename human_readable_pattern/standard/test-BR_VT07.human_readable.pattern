@@ -21,7 +21,7 @@ pattern=([[:space:]]VS[[:space:]]{0,1}07[[:space:]]5(0[12])([[:space:]]|-[0-9]))
 
 pattern=([[:space:]]VT[[:space:]]{0,1}07[[:space:]]5(0[12])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}07[[:space:]]501([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}07[[:space:]]501([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}((([abc]{0,1}/{0,1})*)|(([ABC]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}07[[:space:]]502([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}07[[:space:]]502([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}((([abc]{0,1}/{0,1})*)|(([ABC]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
 
