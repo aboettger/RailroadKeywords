@@ -2,9 +2,9 @@
 
 category=Baureihen[category_separator]VT04
 
-pattern_delete=([[:space:]][^0-9]$)
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
 
-pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]([^0-9]|$))
+pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]])
 
 # Pattern #1
 
@@ -17,9 +17,21 @@ pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]0(0[0])([[:space:]]|-[0-9]))
 pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]1(0[1-7])([[:space:]]|-[0-9]))
 pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]5(0[1])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]00(0[ab]{0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]000([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]10(1[ab]{0,1}|2[ab]{0,1}|3[ab]{0,1}|4[ab]{0,1}|5[ab]{0,1}|6[ab]{0,1}|7[ab]{0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]101([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]50(1[ab]{0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]102([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]103([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]104([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]105([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]106([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]107([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}04[[:space:]]501([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
 
