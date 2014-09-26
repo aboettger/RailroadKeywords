@@ -2,19 +2,23 @@
 
 category=Baureihen[category_separator]VT12
 
-pattern_delete=([[:space:]][^0-9]$)
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
 
-pattern=([[:space:]]VT[[:space:]]{0,1}12[[:space:]]([^0-9]|$))
+pattern=([[:space:]]VT[[:space:]]{0,1}12[[:space:]])
 
 # Pattern #1
 
-pattern=([[:space:]]VT[[:space:]]{0,1}12(\.(1[4]|[56]))[[:space:]]([^0-9]|$))
+pattern=([[:space:]]VT[[:space:]]{0,1}12(\.(1[4]|[56]))[[:space:]])
 
 # Pattern #2
 
-pattern=([[:space:]]VT[[:space:]]{0,1}12\.14\.0(1[abcd]{0,1}|2[abcd]{0,1}|3[abcd]{0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}12\.14\.01([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|[[:space:]]{0,1}(d|D){0,1}|([[:space:]]{0,1}((([abcd]{0,1}/{0,1})*)|(([ABCD]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}12[[:space:]]5(0[1-9]|1[012])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}12\.14\.02([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|[[:space:]]{0,1}(d|D){0,1}|([[:space:]]{0,1}((([abcd]{0,1}/{0,1})*)|(([ABCD]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}12\.14\.03([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|[[:space:]]{0,1}(d|D){0,1}|([[:space:]]{0,1}((([abcd]{0,1}/{0,1})*)|(([ABCD]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}12[[:space:]]5(0[1-9]|1[0-2])([[:space:]]|-[0-9]))
 
 pattern=([[:space:]]VT[[:space:]]{0,1}12[[:space:]]6(0[135689]|1[1-7]|2[0])([[:space:]]|-[0-9]))
 
