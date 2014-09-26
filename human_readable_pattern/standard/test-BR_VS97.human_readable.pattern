@@ -2,15 +2,14 @@
 
 category=Baureihen[category_separator]VS97
 
-pattern_delete=([[:space:]][^0-9]$)
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
 
-pattern=([[:space:]]VS[[:space:]]{0,1}97[[:space:]]([^0-9]|$))
+pattern_not_merge=([[:space:]]VS[[:space:]]{0,1}97[[:space:]])
 
 # Pattern #1
 
-pattern=([[:space:]]VS[[:space:]]{0,1}97(\.([0]))[[:space:]]([^0-9]|$))
+pattern_not_merge=([[:space:]]VS[[:space:]]{0,1}97(\.([0]))[[:space:]])
 
 # Pattern #2
 
 pattern=([[:space:]]VS[[:space:]]{0,1}97[[:space:]]0(0[1-6])([[:space:]]|-[0-9]))
-

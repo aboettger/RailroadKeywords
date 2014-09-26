@@ -1,8 +1,7 @@
 category=Baureihen[category_separator]D311
 
-pattern_delete=([[:space:]][^0-9]$)
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
 
-pattern=([[:space:]]D[[:space:]]{0,1}311[[:space:]]([^0-9]|$))
+pattern_not_merge=([[:space:]]D[[:space:]]{0,1}311[[:space:]])
 
 pattern=([[:space:]]D[[:space:]]{0,1}311\.0[1-6][[:space:]](|(a|A)/(b|B)[[:space:]])([^0-9]|$))
-

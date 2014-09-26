@@ -4,11 +4,11 @@ category=Baureihen[category_separator]E44
 
 # pattern_delete=([[:space:]][^0-9a-zA-Z]$)
 
-pattern=([[:space:]]E[[:space:]]{0,1}44[[:space:]])
+pattern_not_merge=([[:space:]]E[[:space:]]{0,1}44[[:space:]])
 
 # Pattern #1
 
-pattern=([[:space:]]E[[:space:]]{0,1}44(\.([0125]|03[9]|08[679]|09[046]|1[1]|14[7]|15[2-9]|16[0-9]|17[0-9]|18[0-7]|2[0]))[[:space:]]([^0-9]|$))
+pattern_not_merge=([[:space:]]E[[:space:]]{0,1}44(\.([0125]|03[9]|08[679]|09[046]|1[1]|14[7]|15[2-9]|16[0-9]|17[0-9]|18[0-7]|2[0]))[[:space:]])
 
 # Pattern #2
 
@@ -65,4 +65,3 @@ pattern=([[:space:]]E[[:space:]]{0,1}44[[:space:]]185([[:space:]]{0,1}(g|G){0,1}
 pattern=([[:space:]]E[[:space:]]{0,1}44[[:space:]]186([[:space:]]{0,1}(g|G){0,1}|([[:space:]]{0,1}((([g]{0,1}/{0,1})*)|(([G]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
 pattern=([[:space:]]E[[:space:]]{0,1}44[[:space:]]187([[:space:]]{0,1}(g|G){0,1}|([[:space:]]{0,1}((([g]{0,1}/{0,1})*)|(([G]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
 pattern=([[:space:]]E[[:space:]]{0,1}44[[:space:]]20(0[1])([[:space:]]|-[0-9]))
-

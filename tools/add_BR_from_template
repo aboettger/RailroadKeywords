@@ -98,7 +98,7 @@ function startOpen () {
   echo >&2
   echo >&2 "Dateien werden zur Bearbeitung geöffnet"
   echo >&2 "w) Dateien öffnen"
-  echo >&2 "d) Alle Dateien des Typs \"$baureihe\" löschen und beenden"
+  echo >&2 "d) Alle Dateien des Typs \"$baureihe\", die durch dieses Programm angelegt wurden, löschen und beenden"
   echo >&2 "q) ohne Bearbeitung fortfahren"
   echo >&2 "b) zurück zum Erstellen der Dateien"
   while true; do
@@ -112,8 +112,10 @@ function startOpen () {
           echo "startTest"
           break;;
         [d]* )
-          find "$script_path/../tests/standard/" -name "test-BR_$baureihe\.*" -exec rm {} \;
-          find "$script_path/../human_readable_pattern/standard/" -name "test-BR_$baureihe\.*" -exec rm {} \;
+          rm "$script_path/../tests/standard/test-BR_$baureihe.ods"
+          rm "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+          rm "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list"
+          rm "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list"
           echo "startQuit"
           break;;
         [q]* )

@@ -2,11 +2,11 @@
 
 category=Baureihen[category_separator]088
 
-pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
-pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|(.*-.*)
 
-pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]088(\.([0-9]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]088[[:space:]]([^0-9]|$))
-pattern=(([[:space:]]088er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+pattern_not_merge=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]088(\.([0-9]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]088[[:space:]])
+pattern_not_merge=(([[:space:]]088er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]088[[:space:]]0(1[12356]|2[5]|3[56])([[:space:]]|-[0-9])
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]088[[:space:]]1(2[12])([[:space:]]|-[0-9])

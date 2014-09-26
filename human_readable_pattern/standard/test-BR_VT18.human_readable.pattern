@@ -2,13 +2,13 @@
 
 category=Baureihen[category_separator]VT18
 
-# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
+pattern_delete=([[:space:]][^0-9a-zA-Z]$)
 
-pattern=([[:space:]]VT[[:space:]]{0,1}18[[:space:]])
+pattern_not_merge=([[:space:]]VT[[:space:]]{0,1}18[[:space:]])
 
 # Pattern #1
 
-pattern=([[:space:]]VT[[:space:]]{0,1}18(\.(1[6]|[5]|50[0]))[[:space:]]([^0-9]|$))
+pattern_not_merge=([[:space:]]VT[[:space:]]{0,1}18(\.(1[6]|[5]|50[0]))[[:space:]])
 
 # Pattern #2
 
@@ -32,4 +32,3 @@ pattern=([[:space:]]VT[[:space:]]{0,1}18\.16\.10([[:space:]]{0,1}(a|A){0,1}|([[:
 pattern=([[:space:]]VT[[:space:]]{0,1}18[[:space:]]5(0[0])([[:space:]]|-[0-9]))
 
 pattern=([[:space:]]VT[[:space:]]{0,1}18[[:space:]]500([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}((([abc]{0,1}/{0,1})*)|(([ABC]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
-

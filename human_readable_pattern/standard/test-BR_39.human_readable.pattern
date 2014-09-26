@@ -5,11 +5,11 @@ category=Baureihen[category_separator]39
 pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])
 pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|(.*-.*)
 
-pattern=(([[:space:]]39er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+pattern_not_merge=(([[:space:]]39er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
 # Pattern #1
 
-pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]39(\.([0-4]|1[0]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]39[[:space:]])
+pattern_not_merge=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VT|)[[:space:]]39(\.([0-4]|1[0]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]39[[:space:]])
 
 # Pattern #2
 
@@ -24,4 +24,3 @@ pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:sp
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]39[[:space:]]4(0[1-9]|1[0-5])([[:space:]]|-[0-9])
 
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]39[[:space:]]10(0[1-9]|1[012467]|2[2345689]|3[01234789]|4[0134689]|5[234568]|6[0127]|8[34])([[:space:]]|-[0-9])
-

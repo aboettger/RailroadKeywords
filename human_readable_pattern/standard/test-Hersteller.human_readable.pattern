@@ -1,5 +1,6 @@
 category=Hersteller
 
-pattern=(([[:space:]]BMAG[[:space:]])|(Berliner Maschinenbau AG))
+pattern=([[:space:]]BMAG[[:space:]])
+pattern=([[:space:]]Berliner Maschinenbau AG[[:space:]])
 pattern=([[:space:]](O[[:space:]]{0,1}&[[:space:]]{0,1}K)|(Orenstein & Koppel)[[:space:]])
 pattern=([[:space:]]Schwartzkopff[[:space:]])

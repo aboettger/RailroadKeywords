@@ -2,11 +2,11 @@
 
 category=Baureihen[category_separator]05
 
-pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]05(\.0)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]05[[:space:]]([^0-9]|$))
-pattern=([[:space:]]05er[[:space:]])
+pattern_not_merge=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]05(\.0)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]05[[:space:]])
+pattern_not_merge=([[:space:]]05er[[:space:]])
 # BR 05.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]05[[:space:]]0(0[1-3])([[:space:]]|-[0-9])
 
 
 # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
-pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])

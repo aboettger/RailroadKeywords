@@ -69,13 +69,15 @@ function getResults () {
   # logInfo "pattern $pattern_case"
   # timea=$(($(date +%s%N)/1000000))
 
-#echo "$pattern_case"
   echo "$pattern" | { while read -r line; do
     # line=$(echo "$line" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g')
     # sed "s/$line/\2/" "$txt_path"
-    # echo "$line"
+    if [[ $isTest == "1" ]]; then
+      result=$(grep -oaE "^$line\$" "$txt_path" | sed -e 's/^ *//' | sed -e 's/ *$//')
+    else
+      result=$(grep -oaE "$line" "$txt_path" | sed -e 's/^ *//' | sed -e 's/ *$//')
+    fi
 
-    result=$(grep -oaE "$line" "$txt_path" | sed -e 's/^ *//' | sed -e 's/ *$//')
 
     if [ ! -z "$pattern_delete" ]; then
       result=$(sed -e "s/$pattern_delete//g" <<< "$result")
@@ -121,17 +123,31 @@ function runTest () {
   # Finde Einträge in "tests/test-....positive.....list" "tests/test-....negative.....list" und  ohne führende und abschließende Leerzeichen
   find "$test_path" -type f -name "$test_name*.list" | sort | { while read -r file;
   do
-     matched_elements_without_leading=$(sed /^[[:space:]]*#/d "$file" | grep '^[^ ]')
+     matched_elements_without_leading=$(sed /^[[:space:]]*#/d "$file" | sed '/^ *$/d' | grep '^[^ ]')
      if [ "$matched_elements_without_leading" != "" ]; then
        logError "$matched_elements_without_leading"
-       logError "Entry without leading spaces found: $file"
+       logError "Einträge ohne Leerzeichen am Anfang gefunden: $file"
+       exit 1
+     fi
+     
+     matched_elements_without_leading=$(sed /^[[:space:]]*#/d "$file" | sed '/^ *$/d' | grep '^  ')
+     if [ "$matched_elements_without_leading" != "" ]; then
+       logError "$matched_elements_without_leading"
+       logError "Einträge mit mehr als einem Leerzeichen am Anfang gefunden: $file"
        exit 1
      fi
 
-     matched_elements_without_trailing=$(sed /^[[:space:]]*#/d "$file" | grep '[^ ]$')
+     matched_elements_without_trailing=$(sed /^[[:space:]]*#/d "$file" | sed '/^ *$/d' | grep '[^ ]$')
      if [ "$matched_elements_without_trailing" != "" ]; then
        logError "$matched_elements_without_trailing"
-       logError "Entry without trailing spaces found: $file"
+       logError "Einträge ohne Leerzeichen am Ende gefunden: $file"
+       exit 1
+     fi
+     
+     matched_elements_without_single_trailing=$(sed /^[[:space:]]*#/d "$file" | sed '/^ *$/d' | grep '  $')
+     if [ "$matched_elements_without_single_trailing" != "" ]; then
+       logError "$matched_elements_without_single_trailing"
+       logError "Einträge mit mehr als einem Leerzeichen am Ende gefunden: $file"
        exit 1
      fi
   done }
@@ -150,17 +166,16 @@ function runTest () {
       # given_elements=$(sed '/^[[:space:]]*$/d' "$test_case_positive" | sed '/^[[:space:]]*#/d' | wc -l)
       logInfo "TestCase: $(basename "$test_case_positive")"
       category=$(look category "$pattern_case" | cut -d '=' -f 2-)
-      test_results="${test_results//$category./}"
+      test_results=$(sed "s/$category\.//g" <<< "$test_results")
       
       temp_file_1="$script_path/test_results/$(basename "$test_case_positive").1"
       temp_file_2="$script_path/test_results/$(basename "$test_case_positive").2"
-      
+
       echo "$test_results" > "$temp_file_1"
       echo -e "${yellow}$test_results${TOA}"
       
       sed '/^[[:space:]]*$/d' "$test_case_positive" | sed '/^[[:space:]]*#/d' | sed 's/^[[:space:]]*//g' | sed 's/[[:space:]]*$//g' > "$temp_file_2"
-      
-      diff -arq "$temp_file_1" "$temp_file_2"  >/dev/null 2>&1; if [ $? -gt 0 ]; then logError "Test failed."; exit 1; else logInfo "Test OK"; fi
+      diff -Barq <(sort "$temp_file_1") <(sort "$temp_file_2")  >/dev/null 2>&1; if [ $? -gt 0 ]; then logError "Test failed."; exit 1; else logInfo "Test OK"; fi
   done }
   
   if [ $? -gt 0 ]; then exit 1; fi
@@ -173,16 +188,31 @@ function runTest () {
   logInfo "$test_name_negative"
   find "$test_path" -type f -name "$test_name_negative*.list" | sort | { while read -r test_case_negative;
     do
+      logInfo "$test_case_negative"
       test_results=$(getResults "$pattern_case" "$test_case_negative" "1")
-      matched_elements=$(echo "$test_results" | sed '/^$/d' | wc -l)
-      given_elements=$(sed '/^pattern=/d' "$test_case_negative"| sed '/^$/d' | sed '/^#/d' | wc -l)
       logInfo "TestCase: $(basename "$test_case_negative")"
       category=$(look category "$pattern_case" | cut -d '=' -f 2-)
-      echo "${test_results//$category./}"
-      if test "$matched_elements" -eq "0"; then
-        logInfo "Test OK: $matched_elements/$given_elements"
+      test_results=$(sed "s/$category\.//g" <<< "$test_results")
+
+
+      temp_file_1="$script_path/test_results/$(basename "$test_case_negative").1"
+      temp_file_2="$script_path/test_results/$(basename "$test_case_negative").2"
+
+      echo "$test_results" > "$temp_file_1"
+
+      sed '/^[[:space:]]*$/d' "$test_case_negative" | sed '/^[[:space:]]*#/d' | sed 's/^[[:space:]]*//g' | sed 's/[[:space:]]*$//g' > "$temp_file_2"
+
+      count_test_case_negative=$(diff -B "$temp_file_1" "$temp_file_2" | grep -c ">")
+      count_test_case_negative_compare=$(less "$temp_file_2" | wc -l)
+
+      # logError "$count_test_case_negative"
+      # logError "$count_test_case_negative_compare"
+
+      if [[ $count_test_case_negative == "$count_test_case_negative_compare" ]]; then
+        logInfo "Test OK"
       else
-        logError "Test failed, to many elements found: $matched_elements/$given_elements"
+        logError "Test failed, to many elements found."
+        logError "$(less "$temp_file_1" | sort | uniq)"
         exit 1
       fi
   done }
@@ -198,17 +228,32 @@ function runTest () {
     do
       logInfo "$diff"
       test_results=$(getResults "$pattern_case" "$diff" "1")
-      matched_elements=$(echo "$test_results" | sed '/^$/d' | wc -l)
-      given_elements=$(sed '/^pattern=/d' "$diff"| sed '/^$/d' | sed '/^#/d' | wc -l)
       logInfo "TestCase: $(basename "$diff")"
       category=$(look category "$pattern_case" | cut -d '=' -f 2-)
-      echo "${test_results//$category./}"
-      if test "$matched_elements" -eq "0"; then
-        logInfo "Test OK: $matched_elements/$given_elements"
+      test_results=$(sed "s/$category\.//g" <<< "$test_results")
+      
+     
+      temp_file_1="$script_path/test_results/$(basename "$diff").1"
+      temp_file_2="$script_path/test_results/$(basename "$diff").2"
+      
+      echo "$test_results" > "$temp_file_1"
+      
+      sed '/^[[:space:]]*$/d' "$diff" | sed '/^[[:space:]]*#/d' | sed 's/^[[:space:]]*//g' | sed 's/[[:space:]]*$//g' > "$temp_file_2"
+      
+      count_diff=$(diff -B "$temp_file_1" "$temp_file_2" | grep -c ">")
+      count_diff_compare=$(less "$temp_file_2" | wc -l)
+      
+      # logError "$count_diff"
+      # logError "$count_diff_compare"
+      
+      if [[ $count_diff == "$count_diff_compare" ]]; then
+        logInfo "Test OK"
       else
-        logError "Test failed, to many elements found: $matched_elements/$given_elements"
+        logError "Test failed, to many elements found."
+        logError "$(less "$temp_file_1" | sort | uniq)"
         exit 1
       fi
+      
   done }
   if [ $? -gt 0 ]; then exit 1; fi
 }
@@ -259,7 +304,7 @@ if [ "$1" == "test" ]; then
   if [ -f "$pattern_path" ]; then
     runTest "$pattern_path"
   else
-    find "$pattern_path" -type f -name '*.pattern' | { while read -r pattern_case;
+    find "$pattern_path" -type f -name '*.pattern' | sort | { while read -r pattern_case;
       do
         echoerr "$pattern_case"
         timea=$(($(date +%s%N)/1000000))
@@ -349,7 +394,7 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
         script_path_escaped=${script_path////\\/}
         cfg_pattern_files=$(sed -e 's/[[:space:]]//g' <<< "$cfg_pattern_files" | sed -e "s/,/\\n/g" | sed -e "s/^/$script_path_escaped\/pattern\//g")
 
-        find "$pattern_path" -type f -name 'test-*.pattern' | { while read -r pattern_case;
+        find "$pattern_path" -type f -name 'test-*.pattern' | sort | { while read -r pattern_case;
           do
             if [[ -d $cfg_pattern_files ]] || [[ $cfg_pattern_files =~ $pattern_case ]]; then
               runSearch "$pattern_case" "$pdf_path"

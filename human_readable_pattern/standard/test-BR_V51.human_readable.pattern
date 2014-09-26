@@ -2,10 +2,10 @@
 
 category=Baureihen[category_separator]V51
 
-pattern_delete=([[:space:]][^0-9]$)
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
 
-pattern=([[:space:]]V[[:space:]]{0,1}51[[:space:]]([^0-9]|$))
+pattern_not_merge=([[:space:]]V[[:space:]]{0,1}51[[:space:]])
 
-pattern=([[:space:]]V[[:space:]]{0,1}51(\.(9))[[:space:]]([^0-9]|$))
+pattern_not_merge=([[:space:]]V[[:space:]]{0,1}51(\.(9))[[:space:]])
 
 pattern=([[:space:]]V[[:space:]]{0,1}51[[:space:]]9(0[123])([[:space:]]|-[0-9]))

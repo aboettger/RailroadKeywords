@@ -2,11 +2,11 @@
 
 category=Baureihen[category_separator]E15
 
-pattern_delete=([[:space:]][^0-9]$)
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
 
-pattern=([[:space:]]E[[:space:]]{0,1}15[[:space:]]([^0-9]|$))
+pattern_not_merge=([[:space:]]E[[:space:]]{0,1}15[[:space:]])
 
-pattern=([[:space:]]E[[:space:]]{0,1}15(\.(0))[[:space:]]([^0-9]|$))
+pattern_not_merge=([[:space:]]E[[:space:]]{0,1}15(\.(0))[[:space:]])
 
 pattern=([[:space:]]E[[:space:]]{0,1}15[[:space:]](0[1])([[:space:]]|-[0-9]))
 pattern=([[:space:]]E[[:space:]]{0,1}15[[:space:]]0(0[1])([[:space:]]|-[0-9]))

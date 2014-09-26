@@ -29,3 +29,9 @@ br="163"; awk '/^$/{ if (! blank++) print; next } { blank=0; print }' /home/aboe
 
 # Finde Pattern-Dateien, die sich innerhalb der letzten 12 Stunden geändert haben
 find ~/src/RailroadKeywords/pattern/ -name "*.pattern" -cmin -720 | awk -F/ '{print $7}' | sort
+
+# Korrigiert in den ASC-Dateien Tabs und " ."
+find 0 -type f -name "*.asc"  | { while read file; do sed -e 's/\t/ /g' "$file" | sed -e 's/ \././g' > working_copy/$(basename "$file"); done }
+
+# Lösche führende und folgende Leerzeichen, wenn sie mehr als zweimal vorkommen
+find ~/src/RailroadKeywords/tests/standard -type f -name "*.list"  | { while read file; do sed -e 's/^ */ /g' "$file" | sed -e 's/ *$/ /g' > ~/tmp/list/$(basename "$file"); mv ~/tmp/list/$(basename "$file") "$file"; done }

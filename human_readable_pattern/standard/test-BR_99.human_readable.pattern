@@ -2,12 +2,12 @@
 
 category=Baureihen[category_separator]99
 
-pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])|([[:space:]][^0-9]$)
-pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|(.*-.*)
 
-pattern=(([[:space:]]99er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+pattern_not_merge=(([[:space:]]99er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
-pattern=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]99(\.([0-9]|0[2]|1[0-7]|2[357]|3[0346]|4[0345678]|5[026789]|6[01]|7[12358]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]99[[:space:]]([^0-9]|$))
+pattern_not_merge=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]99(\.([0-9]|0[2]|1[0-7]|2[357]|3[0346]|4[0345678]|5[026789]|6[01]|7[12358]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]99[[:space:]])
 
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]99[[:space:]]0(0[1-5]|1[1]|2[123]|3[12]|4[1-5]|5[12]|6[123]|7[1-5]|8[1-9]|9[0-3])([[:space:]]|-[0-9])
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]99[[:space:]]1(0[123]|2[1]|3[123]|5[1]|6[123]|7[123]|8[123]|9[1-4])([[:space:]]|-[0-9])
