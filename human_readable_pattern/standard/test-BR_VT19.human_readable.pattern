@@ -2,9 +2,9 @@
 
 category=Baureihen[category_separator]VT19
 
-pattern_delete=([[:space:]][^0-9]$)
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
 
-pattern=([[:space:]]VT[[:space:]]{0,1}19[[:space:]]([^0-9]|$))
+pattern=([[:space:]]VT[[:space:]]{0,1}19[[:space:]])
 
 # Pattern #1
 
@@ -14,5 +14,5 @@ pattern=([[:space:]]VT[[:space:]]{0,1}19(\.([5]|50[0]))[[:space:]]([^0-9]|$))
 
 pattern=([[:space:]]VT[[:space:]]{0,1}19[[:space:]]5(0[0])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}19[[:space:]]500((a){0,1}|(b){0,1}|(c){0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}19[[:space:]]500([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
 
