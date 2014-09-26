@@ -2,8 +2,11 @@
 
 category=Baureihen[category_separator]E90
 
-pattern_delete=([[:space:]][^0-9]$)
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
 
-pattern=([[:space:]]E[[:space:]]{0,1}90[[:space:]]([^0-9]|$))
+pattern_not_merge=([[:space:]]E[[:space:]]{0,1}90[[:space:]])
+
+# Pattern #2
 
 pattern=([[:space:]]E[[:space:]]{0,1}90[[:space:]](5[1-9]|6[0])([[:space:]]|-[0-9]))
+
