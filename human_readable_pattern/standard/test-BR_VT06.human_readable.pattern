@@ -2,13 +2,13 @@
 
 category=Baureihen[category_separator]VT06
 
-pattern_delete=([[:space:]][^0-9]$)
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
 
-pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]([^0-9]|$))
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]])
 
 # Pattern #1
 
-pattern=([[:space:]]VT[[:space:]]{0,1}06(\.([015]|00[01]|10[1-9]|11[01]|50[012]))[[:space:]]([^0-9]|$))
+pattern=([[:space:]]VT[[:space:]]{0,1}06(\.([015]|00[01]|10[1-9]|11[01]|50[0-2]))[[:space:]]([^0-9]|$))
 
 # Pattern #2
 
@@ -16,13 +16,37 @@ pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]0(0[01])([[:space:]]|-[0-9]))
 
 pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]1(0[1-9]|1[01])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]5(0[012])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]5(0[0-2])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]00(0[abc]{0,1}|1[abc]{0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]000([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]10(1[abc]{0,1}|2[abc]{0,1}|3[abc]{0,1}|4[abc]{0,1}|5[abc]{0,1}|6[abc]{0,1}|7[abc]{0,1}|8[abc]{0,1}|9[abc]{0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]001([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]11(0[abc]{0,1}|1[abc]{0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]101([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]50(0[abc]{0,1}|1[abc]{0,1}|2[abc]{0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]102([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]103([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]104([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]105([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]106([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]107([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]108([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]109([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]110([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]111([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]500([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]501([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]VT[[:space:]]{0,1}06[[:space:]]502([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|[[:space:]]{0,1}(c|C){0,1}|([[:space:]]{0,1}(a/b/c|A/B/C)))([[:space:]]|-[0-9]))
 
