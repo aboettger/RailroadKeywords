@@ -2,9 +2,9 @@
 
 category=Baureihen[category_separator]VT87
 
-pattern_delete=([[:space:]][^0-9]$)
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
 
-pattern=([[:space:]]VT[[:space:]]{0,1}87[[:space:]]([^0-9]|$))
+pattern=([[:space:]]VT[[:space:]]{0,1}87[[:space:]])
 
 # Pattern #1
 
@@ -14,7 +14,7 @@ pattern=([[:space:]]VT[[:space:]]{0,1}87(\.([9]|90[01]))[[:space:]]([^0-9]|$))
 
 pattern=([[:space:]]VT[[:space:]]{0,1}87[[:space:]]9(0[01])([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}87[[:space:]]900((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}87[[:space:]]900([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
 
-pattern=([[:space:]]VT[[:space:]]{0,1}87[[:space:]]901((a){0,1}|(b){0,1})([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}87[[:space:]]901([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}(a/b|A/B)))([[:space:]]|-[0-9]))
 
