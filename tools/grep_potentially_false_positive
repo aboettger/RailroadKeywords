@@ -1,5 +1,13 @@
 #!/bin/bash
 
+##
+#
+# Sucht in Calibre nach Schlüsselwörtern und bietet dazu gehörige Aktionen an.
+# 
+# tools/grep_potentially_false_positive "PfadZumCalibreVerzeichnisOderUnterverzeichnis" "ZuSuchendesSchlüsselwort"
+#
+##
+
 # Absolute path to this script, e.g. /home/user/bin/foo.sh
 script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
@@ -15,37 +23,76 @@ yellow="\e[0;33m"
 TOA="\e[0m" # No Color
 
 function logInfo () {
-    echo -e "${green}$1${TOA}"
+    echo -e "${green}$1${TOA}"  1>&2
 }
 
 function logWarn () {
-  echo -e "${yellow}$1${TOA}"
+  echo -e "${yellow}$1${TOA}"  1>&2
 }
 
 function logError () {
-  echo -e "${red}$1${TOA}"
+  echo -e "${red}$1${TOA}"  1>&2
 }
 
 library_path="$1"
 keyword="$2"
 
 if [ -z "$keyword" ] || [ -z "$library_path" ]; then
-  echo "Benutzung: $script_name \"[PfadZurCalibreDB]\" \"[Schlüsselwort]\""
+  echo "Benutzung: $script_name \"[PfadZurCalibreDBOderUnterverzeichnis]\" \"[Schlüsselwort]\""
   exit 1
 fi
 
-search_for="'tags:\"~^.*\\$category_separator$keyword\$\"'"
+
+
+if [ -f "$1" ]; then
+  search_root=$(dirname "$1")
+else
+  search_root="$1"
+fi
+
+if [ "$search_root" == "." ]; then
+  search_root=$(pwd)
+fi
+
+logInfo "Suche Calibre-DB (metadata.db)…"
+
+calibreDbSearchPath="$search_root"
+while [ ! -f "$calibreDbSearchPath/metadata.db" ] && [ "$calibreDbSearchPath" != "/" ]; do
+  logInfo "$calibreDbSearchPath"
+  calibreDbSearchPath=$(dirname "$calibreDbSearchPath")
+done
+
+if [ -f "$calibreDbSearchPath/metadata.db" ]; then
+  logInfo "Calibre-DB (metadata.db) gefunden: \"$calibreDbSearchPath/metadata.db\""
+else
+  logError "Calibre-DB (metadata.db) nicht gefunden"
+  cleanup
+  exit 1
+fi
+
+# Wenn ein konkreter Buchpfad in der Calibre-DBgewält wurde, dann dessen
+# Calibre-ID übernehmen
+search_for="tags:\"~^$keyword\$\""
+if [[ -f "$library_path/metadata.opf" ]]; then
+  calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "$library_path/metadata.opf")
+  search_for="$search_for AND id:\"=$calibre_id\""
+fi
+
 echo "Suche mittels $search_for in Calibre"
-result=$(eval calibredb list --for-machine --library-path "$library_path" --fields=tags -s "$search_for")
+result=$(eval calibredb list --for-machine --library-path "\"$calibreDbSearchPath\" " --fields=tags -s "'$search_for'")
+
+if [[ $result == "[]" ]]; then
+  echo "Keine Ergebnisse gefunden"
+  exit 1
+fi
+
 calibre_ids=$(awk -F"\"id\": " '{print $2}' <<< "$result" | sed 's/,//g' | sed '/^$/d')
 
 countCalibreIds=$(wc -l <<< "$calibre_ids")
 count=0
-
 while read -r calibre_id; do
   count=$((count+1))
-  # echo "$calibre_id"
-  metadata_files=$(find "$1" -type f -name "metadata.opf")
+  metadata_files=$(find "$library_path" -type f -name "metadata.opf")
   while read -r metadata_file; do
     # xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "$metadata_path"
     metadata_path=$(grep -l "<dc:identifier opf:scheme=\"calibre\" id=\"calibre_id\">$calibre_id</dc:identifier>" "$metadata_file")
@@ -55,20 +102,29 @@ while read -r calibre_id; do
     fi
   done <<< "$metadata_files"
 
-  pattern_files=$(find "$script_path"/../pattern -type f -name "test-UIC.pattern")
+  pattern_files=$(find "$script_path"/../pattern -type f -name "test-BR_02.pattern")
   pattern_files_hit=$(
     while read pattern_file; do
-    pattern=$(sed '/^#/d' "$pattern_file" | grep 'pattern=' | gawk  -F 'pattern=' '{print $2}' | sed 's/(/\\(/g' | sed 's/)/\\)/g' | sed 's/|/\\|/g')
-    result=$(grep "$pattern" <<< " $keyword ")
-    if [[ $result != "" ]]; then
-      echo "$pattern_file"
-    fi
+      category=$(look category "$pattern_file" | cut -d '=' -f 2-)
+      keyword=$(sed "s/^$category//" <<< "$keyword")
+      keyword=$(sed "s/^\\$category_separator//" <<< "$keyword")
+      
+      pattern=$("$script_path/functions/getPattern.sh" "$pattern_file")
+      
+      
+      while read -r line; do
+        result=$(grep -E "$line" <<< " $keyword ")
+        if [[ $result != "" ]]; then
+          echo "$pattern_file"
+        fi
+      done <<< "$pattern"
     done <<< "$pattern_files"
   )
+  
   pattern_files_hit=$(sed '/^$/d' <<< "$pattern_files_hit")
 
   if [[ $pattern_files_hit == "" ]]; then
-    echo "[$count/$countCalibreIds] Keine Aktion nötig für Calibre ID: $calibre_id"
+    echo "[$count/$countCalibreIds] Calibre ID: $calibre_id - Es wurde kein Suchmuster gefunden, welches auf \"$keyword\" passt."
   else
     echo
     echo -e "${green}$keyword${TOA} für Calibre-ID ${green}$calibre_id${TOA} gefunden durch:"
@@ -83,6 +139,10 @@ while read -r calibre_id; do
       true_positive_file=${true_positive_file//pattern/list}
       # echo "$true_positive_file"
 
+      category=$(look category "$pattern_file_hit" | cut -d '=' -f 2-)
+      # keyword=$(sed "s/^$category//" <<< "$keyword")
+      # keyword=$(sed "s/^\\$category_separator//" <<< "$keyword")
+      
       if [ -f "$true_positive_file" ]; then
         true_positive=$(grep -l "^$calibre_id=$keyword\$" "$true_positive_file")
       else
@@ -103,7 +163,8 @@ while read -r calibre_id; do
         echo
         egrep -anET -C 5 "$keywords_pattern" "$txt_path"
 
-        keyword_pattern=$(sed -e 's/\//\\\//g' <<< "$keyword")
+        
+        keyword_pattern=$(sed -e 's/\//\\\//g' <<< "$keyword" | sed -e 's/\./\\\./g')
         ignore_file="$false_positive_file"
         dont_ask_file="$true_positive_file"
 
