@@ -3,7 +3,7 @@
 category=Baureihen[category_separator]04
 
 pattern_not_merge=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]04(\.0|\.00)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]04[[:space:]])
-pattern_not_merge=([[:space:]]04er[[:space:]])
+pattern=([[:space:]]04er[[:space:]])
 # BR 04.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]04[[:space:]]0(0[1-2])([[:space:]]|-[0-9])
 # BR 04.00

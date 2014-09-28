@@ -6,7 +6,7 @@ pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:spac
 pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|([[:space:]].*-.*)
 
 pattern_not_merge=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]74(\.([0-9]|1[0-3]|6[67]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]74[[:space:]])
-pattern_not_merge=(([[:space:]]74er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+pattern=(([[:space:]]74er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
 #pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)
 #([[:space:]]|-[0-9])

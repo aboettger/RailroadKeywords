@@ -5,7 +5,7 @@ category=Baureihen[category_separator]479
 pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])
 pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|([[:space:]].*-.*)
 
-pattern_not_merge=(([[:space:]]479er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+pattern=(([[:space:]]479er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
 # Pattern #1
 

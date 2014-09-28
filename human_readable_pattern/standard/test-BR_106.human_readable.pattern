@@ -5,7 +5,7 @@ category=Baureihen[category_separator]106
 pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])
 pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|([[:space:]].*-.*)
 
-pattern_not_merge=(([[:space:]]106er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+pattern=(([[:space:]]106er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
 pattern_not_merge=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]106(\.(0|1|2|3|4|5|6|7|8|9))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]106[[:space:]])
 

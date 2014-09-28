@@ -3,7 +3,7 @@
 category=Baureihen[category_separator]086
 
 pattern_not_merge=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]086(\.([0-8]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]086[[:space:]])
-pattern_not_merge=([[:space:]]086er[[:space:]])
+pattern=([[:space:]]086er[[:space:]])
 
 # BR 086.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]086[[:space:]]0(05|11|49|69|9[4-6,8-9])([[:space:]]|-[0-9])

@@ -3,7 +3,7 @@
 category=Baureihen[category_separator]228
 
 pattern_not_merge=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]228(\.[1-3,5-8])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]228[[:space:]])
-pattern_not_merge=([[:space:]]228er[[:space:]])
+pattern=([[:space:]]228er[[:space:]])
 # BR 228.1
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]228[[:space:]]1(0[1,4-6,8]|1[4-5,7-9]|2[0-1,3-8]|3[2-3,5-6,8]|4[0-1,5-8]|5[2-3,8-9]|6[1-4,6-9]|7[2-5]|8[0-2])([[:space:]]|-[0-9])
 # BR 228.2

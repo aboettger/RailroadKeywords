@@ -5,7 +5,7 @@ category=Baureihen[category_separator]68
 # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
 pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])
 
-pattern_not_merge=([[:space:]]68er[[:space:]])
+pattern=([[:space:]]68er[[:space:]])
 pattern_not_merge=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]68(\.(0))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]68[[:space:]])
 
 

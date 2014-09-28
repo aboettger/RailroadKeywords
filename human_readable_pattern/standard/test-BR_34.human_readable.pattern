@@ -3,7 +3,7 @@
 category=Baureihen[category_separator]34
 
 pattern_not_merge=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]34(\.((7[0,3,6-9])|8[0-2]))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]34[[:space:]])
-pattern_not_merge=([[:space:]]34er[[:space:]])
+pattern=([[:space:]]34er[[:space:]])
 
 # BR 34.70
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]34[[:space:]]70(01)([[:space:]]|-[0-9])

@@ -3,7 +3,7 @@
 category=Baureihen[category_separator]92
 
 pattern_not_merge=(([[:space:]]§|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]92(\.0|\.1|\.2|\.3|\.4|\.5|\.6|\.7|\.8|\.9|\.10|\.11|\.15|\.16|\.19|\.20|\.21|\.22|\.23|\.24|\.25|\.26|\.27|\.28|\.29|\.33|\.60|\.61|\.62|\.63|\.64|\.65|\.66|\.67|\.68)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]92[[:space:]])
-pattern_not_merge=([[:space:]]92er[[:space:]])
+pattern=([[:space:]]92er[[:space:]])
 # BR 92.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]92[[:space:]]0(0[1-9]|1[0-1])([[:space:]]|-[0-9])
 
