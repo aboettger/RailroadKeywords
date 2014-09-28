@@ -70,6 +70,8 @@ else
   exit 1
 fi
 
+given_category=$(grep -oP ".*?\\$category_separator" <<< "$keyword" | tr -d "$category_separator")
+
 # Wenn ein konkreter Buchpfad in der Calibre-DBgewält wurde, dann dessen
 # Calibre-ID übernehmen
 search_for="tags:\"~^$keyword\$\""
@@ -78,7 +80,7 @@ if [[ -f "$library_path/metadata.opf" ]]; then
   search_for="$search_for AND id:\"=$calibre_id\""
 fi
 
-echo "Suche mittels $search_for in Calibre"
+echo -e "Suche mittels ${green}$search_for${TOA} in Calibre"
 result=$(eval calibredb list --for-machine --library-path "\"$calibreDbSearchPath\" " --fields=tags -s "'$search_for'")
 
 if [[ $result == "[]" ]]; then
@@ -102,22 +104,27 @@ while read -r calibre_id; do
     fi
   done <<< "$metadata_files"
 
-  pattern_files=$(find "$script_path"/../pattern -type f -name "test-BR_02.pattern")
+  if [[ $category_separator != "" ]]; then
+    pattern_files=$(find "$script_path"/../pattern -type f -exec grep -q "^category=$given_category\$" {} \; -print)
+  else
+    pattern_files=$(find "$script_path"/../pattern -type f -name "*.pattern")
+  fi
+    
   pattern_files_hit=$(
     while read pattern_file; do
       category=$(look category "$pattern_file" | cut -d '=' -f 2-)
-      keyword=$(sed "s/^$category//" <<< "$keyword")
-      keyword=$(sed "s/^\\$category_separator//" <<< "$keyword")
+      keyword_for_pattern=$(sed "s/^$category//" <<< "$keyword" | sed "s/-/ - /")
+      keyword_for_pattern=$(sed "s/^\\$category_separator//" <<< "$keyword_for_pattern")
       
-      pattern=$("$script_path/functions/getPattern.sh" "$pattern_file")
+      patterns=$("$script_path/../functions/getPattern.sh" "$pattern_file")
       
       
-      while read -r line; do
-        result=$(grep -E "$line" <<< " $keyword ")
+      while read -r pattern; do
+        result=$(grep -E "$pattern" <<< " $keyword_for_pattern ")
         if [[ $result != "" ]]; then
           echo "$pattern_file"
         fi
-      done <<< "$pattern"
+      done <<< "$patterns"
     done <<< "$pattern_files"
   )
   
@@ -126,9 +133,7 @@ while read -r calibre_id; do
   if [[ $pattern_files_hit == "" ]]; then
     echo "[$count/$countCalibreIds] Calibre ID: $calibre_id - Es wurde kein Suchmuster gefunden, welches auf \"$keyword\" passt."
   else
-    echo
-    echo -e "${green}$keyword${TOA} für Calibre-ID ${green}$calibre_id${TOA} gefunden durch:"
-    echo "$pattern_files_hit"
+    echo -e "${green}$keyword${TOA} für Calibre-ID ${green}$calibre_id${TOA} wurde erstellt durch ${green}$pattern_files_hit${TOA}"
     dont_ask_file=""
     ignore_file=""
     while read pattern_file_hit; do
@@ -151,29 +156,25 @@ while read -r calibre_id; do
       if [ ! -z "$true_positive" ]; then
         echo "\"$keyword\" für Calibre-ID $calibre_id  wurde in \"$true_positive\" gefunden, keine Aktion nötig."
       else
-        keywords_pattern=$(sed -E 's/^(.*)$/[[:space:]]\1[[:space:]]/g' <<< "$keyword")
-
         pdf_path=$(find "$working_path" -type f -name '*.pdf')
         hr_txt_path=${pdf_path//.pdf/.human-readable.txt}
         txt_path=${pdf_path//.pdf/.txt}
 
-        echo
-        echo "Bitte Entscheidung treffen für:"
-        logInfo "$pattern_file_hit"
-        echo
-        egrep -anET -C 5 "$keywords_pattern" "$txt_path"
-
-        
         keyword_pattern=$(sed -e 's/\//\\\//g' <<< "$keyword" | sed -e 's/\./\\\./g')
+        
+        grep_by=$(sed "s/^$category\\$category_separator//" <<< "$keyword" | sed "s/-/ - /" | sed -e 's/\//\\\//g' | sed -e 's/\./\\\./g' | sed -E "s/^(.*)\$/[[:space:]]\1[[:space:]]/g")
+        echo "###$grep_by"
+        egrep -anET -C 5 "$grep_by" "$txt_path"
+
         ignore_file="$false_positive_file"
         dont_ask_file="$true_positive_file"
 
         echo
         echo "1) Nicht mehr fragen"
         echo "2) Schlüsselwort dauerhaft entfernen"
-        echo "3) PDF ansehen"
-        echo "4) TXT ansehen"
-        echo "5) Verzeichnis öffnen (\"$working_path\")"
+        echo "3) PDF ansehen \"$pdf_path\""
+        echo "4) TXT ansehen \"$hr_txt_path\""
+        echo "5) Verzeichnis öffnen \"$working_path\""
         echo "6) Nichts tun"
         while true; do
           read -p "Bitte wählen: " input < /dev/tty
