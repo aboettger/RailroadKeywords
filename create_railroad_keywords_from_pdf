@@ -30,15 +30,6 @@ function logError () {
   echo -e "${red}$1${TOA}" 1>&2
 }
 
-function getPattern () {
-  pattern_case="$1"
-  #   echo "$pattern_case"
-  retValue=$(sed '/^#/d' "$pattern_case" | grep 'pattern=' | gawk  -F 'pattern=' '{print $2}')
-
-  # retValue
-  echo "$retValue"
-}
-
 if [[ ! -f $script_path/main.cfg ]]; then
   logWarn "Keine Konfigurationsdatei \"$script_path/main.cfg\" gefunden. Versuche eine Konfiguration aus \"$script_path/main.cfg.template\" zu erstellen."
   cp "$script_path"/main.cfg.template "$script_path"/main.cfg
@@ -55,7 +46,7 @@ function getResults () {
   txt_path="$2"
   isTest="$3"
 
-  pattern=$(getPattern "$pattern_case")
+  pattern=$("$script_path/functions/getPattern.sh" "$pattern_case")
   # prefix=$(sed '/^#/d' "$pattern_case" | grep 'prefix=' | gawk  -F 'prefix=' '{print $2}')
   # if [ ! -z "$prefix" ]; then
   #   prefix=$(echo "$prefix" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
@@ -327,12 +318,12 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
     pdf_filename=$(basename "$pdf_path")
     pdf_filename="${pdf_filename%.*}"
 
-    md5_new_CreateTxtFile=$(md5sum "$script_path/functions/createTxtFile"  | gawk  -F ' ' '{print $1}')
+    md5_new_CreateTxtFile=$(md5sum "$script_path/functions/createTxtFile.sh"  | gawk  -F ' ' '{print $1}')
 
     if [ ! -f "$pdf_dirname/$pdf_filename.txt" ]; then
        logInfo "\"$pdf_filename.txt\" nicht gefunden. schreibe \"$pdf_filename.txt\" neu."
        echo "$md5_new_CreateTxtFile" > "$pdf_dirname/createTxtFile.md5"
-      "$script_path/functions/createTxtFile" "$pdf_path" "$pdf_dirname" "$pdf_filename"
+      "$script_path/functions/createTxtFile.sh" "$pdf_path" "$pdf_dirname" "$pdf_filename"
     fi
 
 
@@ -349,8 +340,8 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
       # Do nothing
       true
     else
-      logInfo "Algorithmus in \"$script_path/functions/createTxtFile\" hat sich geändert. Schreibe \"$pdf_filename.txt\" neu."
-      "$script_path/functions/createTxtFile" "$pdf_path" "$pdf_dirname" "$pdf_filename"
+      logInfo "Algorithmus in \"$script_path/functions/createTxtFile.sh\" hat sich geändert. Schreibe \"$pdf_filename.txt\" neu."
+      "$script_path/functions/createTxtFile.sh" "$pdf_path" "$pdf_dirname" "$pdf_filename"
       logInfo "Schreibe \"createTxtFile.md5\"."
       echo "$md5_new_CreateTxtFile" > "$pdf_dirname/createTxtFile.md5"
     fi
@@ -375,7 +366,7 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
       if [ -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
         rm "$pdf_dirname/$pdf_filename.human-readable.txt"
       fi
-      "$script_path/functions/createTxtFile" "$pdf_path" "$pdf_dirname" "$pdf_filename"
+      "$script_path/functions/createTxtFile.sh" "$pdf_path" "$pdf_dirname" "$pdf_filename"
 
       # Wenn Text durch Alternativprogramm generiert wurde, dann Neuerstellung bei nächsten Durchlauf erzwingen
       if [ ! -f "$pdf_dirname/txt_created_by_pdftotext" ]; then
@@ -385,7 +376,9 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
     fi
 
     if  [ "$1" == "run" ]; then
-      # time_complete_a=$(($(date +%s%N)/1000000))
+      
+      time_complete_a=$(($(date +%s%N)/1000000))
+      
       if [ -f "$pattern_path" ]; then
         runSearch "$pattern_path" "$pdf_path"
       else
@@ -401,8 +394,9 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
             fi
         done }
       fi
-      # time_complete_b=$(($(date +%s%N)/1000000))
-      # logInfo "Gesamtzeit: $((time_complete_b - time_complete_a)) ms"
+      
+      time_complete_b=$(($(date +%s%N)/1000000))
+      logInfo "Gesamtzeit $script: $((time_complete_b - time_complete_a)) ms"
     fi
   fi
 fi
