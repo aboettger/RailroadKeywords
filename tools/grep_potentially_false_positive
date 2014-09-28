@@ -35,10 +35,11 @@ function logError () {
 }
 
 library_path="$1"
-keyword="$2"
+keyword="$3"
+given_category="$2"
 
-if [ -z "$keyword" ] || [ -z "$library_path" ]; then
-  echo "Benutzung: $script_name \"[PfadZurCalibreDBOderUnterverzeichnis]\" \"[Schlüsselwort]\""
+if [ -z "$keyword" ] || [ -z "$library_path" ] || [ -z "$given_category" ]; then
+  echo "Benutzung: $script_name \"PfadZurCalibreDBOderUnterverzeichnis\" \"Kategorie\" \"Schlüsselwort\""
   exit 1
 fi
 
@@ -70,11 +71,13 @@ else
   exit 1
 fi
 
-given_category=$(grep -oP ".*?\\$category_separator" <<< "$keyword" | tr -d "$category_separator")
-
 # Wenn ein konkreter Buchpfad in der Calibre-DBgewält wurde, dann dessen
 # Calibre-ID übernehmen
-search_for="tags:\"~^$keyword\$\""
+search_for="tags:\"~^"
+if [[ $given_category != "" ]]; then
+  search_for="$search_for$given_category$category_separator"
+fi
+search_for="$search_for$keyword\$\""
 if [[ -f "$library_path/metadata.opf" ]]; then
   calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "$library_path/metadata.opf")
   search_for="$search_for AND id:\"=$calibre_id\""
@@ -147,23 +150,34 @@ while read -r calibre_id; do
       category=$(look category "$pattern_file_hit" | cut -d '=' -f 2-)
       # keyword=$(sed "s/^$category//" <<< "$keyword")
       # keyword=$(sed "s/^\\$category_separator//" <<< "$keyword")
-      
+      grep_true_positive_keyword=""
       if [ -f "$true_positive_file" ]; then
-        true_positive=$(grep -l "^$calibre_id=$keyword\$" "$true_positive_file")
+        if [[ $given_category != "" ]]; then
+          grep_true_positive_keyword="$grep_true_positive_keyword$given_category$category_separator"
+        fi
+        grep_true_positive_keyword="$grep_true_positive_keyword$keyword"
+        true_positive_keyword="$grep_true_positive_keyword"
+        grep_true_positive_keyword=$(sed -e 's/\//\\\//g' <<< "$grep_true_positive_keyword" | sed -e 's/\./\\\./g')
+        true_positive=$(grep -l "^$calibre_id=$grep_true_positive_keyword\$" "$true_positive_file")
       else
         true_positive=""
       fi
       if [ ! -z "$true_positive" ]; then
-        echo "\"$keyword\" für Calibre-ID $calibre_id  wurde in \"$true_positive\" gefunden, keine Aktion nötig."
+        echo -e "${green}$keyword${TOA} wurde in ${green}$true_positive${TOA} gefunden, keine Aktion nötig."
       else
         pdf_path=$(find "$working_path" -type f -name '*.pdf')
         hr_txt_path=${pdf_path//.pdf/.human-readable.txt}
         txt_path=${pdf_path//.pdf/.txt}
 
-        keyword_pattern=$(sed -e 's/\//\\\//g' <<< "$keyword" | sed -e 's/\./\\\./g')
-        
+        keyword_pattern=""
+        if [[ $given_category != "" ]]; then
+          keyword_pattern="$keyword_pattern$given_category$category_separator"
+        fi
+        keyword_pattern="$keyword_pattern$keyword"
+        keyword_pattern=$(sed -e 's/\//\\\//g' <<< "$keyword_pattern" | sed -e 's/\./\\\./g')
+
         grep_by=$(sed "s/^$category\\$category_separator//" <<< "$keyword" | sed "s/-/ - /" | sed -e 's/\//\\\//g' | sed -e 's/\./\\\./g' | sed -E "s/^(.*)\$/[[:space:]]\1[[:space:]]/g")
-        echo "###$grep_by"
+        # echo "###$grep_by"
         egrep -anET -C 5 "$grep_by" "$txt_path"
 
         ignore_file="$false_positive_file"
@@ -180,8 +194,8 @@ while read -r calibre_id; do
           read -p "Bitte wählen: " input < /dev/tty
           case $input in
               [1]* )
-                echo "$calibre_id=$keyword" >> "$dont_ask_file"
-                echo -e "Nach \"$keyword\" für Calibre-ID \"$calibre_id\" wird nicht mehr gefragt: ${green}$calibre_id=$keyword${TOA} in \"$dont_ask_file\""
+                echo "$calibre_id=$true_positive_keyword" >> "$dont_ask_file"
+                echo -e "Nach \"$keyword\" für Calibre-ID \"$calibre_id\" wird nicht mehr gefragt: ${green}$calibre_id=$true_positive_keyword${TOA} in \"$dont_ask_file\""
                 break;;
               [2]* )
                 echo "$calibre_id=^($keyword_pattern)\$" >> "$ignore_file"
