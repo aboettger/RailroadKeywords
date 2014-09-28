@@ -13,7 +13,7 @@ find_with_pdf_without_txt ~/Eisenbahn/Eisenbahnliteratur | { while read -r pdf; 
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' | { while read file; do rm "$file"; done }
 
 # Schreibe "createTxtFile.md5" neu
-find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.pdf' | { while read file; do md5_new_CreateTxtFile=$(md5sum "/home/aboettger/src/RailroadKeywords/functions/createTxtFile"  | gawk  -F ' ' '{print $1}'); echo "$md5_new_CreateTxtFile" > "$(dirname "$file")/createTxtFile.md5"; done }
+find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.pdf' | { while read file; do md5_new_CreateTxtFile=$(md5sum "/home/aboettger/src/RailroadKeywords/functions/createTxtFile.sh"  | gawk  -F ' ' '{print $1}'); echo "$md5_new_CreateTxtFile" > "$(dirname "$file")/createTxtFile.md5"; done }
 
 # 
 sed '/^[[:space:]]*$/d' "/home/aboettger/src/RailroadKeywords/tests/test-Feldbahn.positive.001.list" | sed '/^[[:space:]]*#/d' | { while read -r line; do echo; search_for=$(echo "$line" | sed -e 's/^ //g' | sed -e 's/ $//g'); echo "Stichwort: [$search_for]"; /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive ~/Eisenbahn/Eisenbahnliteratur "$line"; done }
@@ -35,3 +35,6 @@ find 0 -type f -name "*.asc"  | { while read file; do sed -e 's/\t/ /g' "$file" 
 
 # Lösche führende und folgende Leerzeichen, wenn sie mehr als zweimal vorkommen
 find ~/src/RailroadKeywords/tests/standard -type f -name "*.list"  | { while read file; do sed -e 's/^ */ /g' "$file" | sed -e 's/ *$/ /g' > ~/tmp/list/$(basename "$file"); mv ~/tmp/list/$(basename "$file") "$file"; done }
+
+# Alle Einträge in "false_positive" nach Schlüsselwörtern durchsuchen lassen
+find "~/src/RailroadKeywords/false_positive" -type f -name "*.pattern" | { while read file; do ids=$(sed '/^#/d' "$file" | grep -E "^[0-9]+=" | gawk  -F '=' '{print $1}' | sort | uniq); echo "$ids" | { while read -r line; do find ~/Eisenbahn/Eisenbahnliteratur -type d -name "*($line)*" | { while read entry; do ~/src/RailroadKeywords/extract_and_write_keywords_into_calibre "$entry"; done}; done}; done}
