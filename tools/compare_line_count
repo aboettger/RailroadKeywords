@@ -1,5 +1,5 @@
 #! /bin/bash
-# Usage: compare_line_count [first_dir] [second_dir]
+# Usage: compare_line_count "first_dir" "second_dir"
 # 
 
 find "$1" -depth  -type f -name "*.asc" | { while read -r asc;
