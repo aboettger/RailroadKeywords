@@ -17,9 +17,9 @@ function compress() {
   # sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern=/d' | sed '/category=/d' | sed ':a;N;$!ba;s/\npattern_delete=/|/g' >> "$output_filename"
   
   sed '/^\#/d' "$file" | sed '/^$/d' | grep "category=" | sed "s/\[category_separator\]/$category_separator/g" >> "$output_filename"
+  sed '/^\#/d' "$file" | sed '/^$/d' | grep "pattern_not_merge=" | sed 's/pattern_not_merge=/pattern=/g' >> "$output_filename"
   sed '/^\#/d' "$file" | sed '/^$/d' | grep "pattern=" | sed ':a;N;$!ba;s/\npattern=/|/g' >> "$output_filename"
   sed '/^\#/d' "$file" | sed '/^$/d' | grep "pattern_delete=" | sed ':a;N;$!ba;s/\npattern_delete=/|/g' >> "$output_filename"
-  sed '/^\#/d' "$file" | sed '/^$/d' | grep "pattern_not_merge=" | sed 's/pattern_not_merge=/pattern=/g' >> "$output_filename"
 }
 
 if [ ! -z "$1" ] && [ ! -d "$1" ]; then
