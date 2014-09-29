@@ -37,6 +37,11 @@ find "$script_path/../tests" -type f -name "*.positive*.list" | sort | { while r
         fi
       fi
     done
+    echo "50er" >> "$output_file"
+    echo "60er" >> "$output_file"
+    echo "70er" >> "$output_file"
+    echo "80er" >> "$output_file"
+    echo "90er" >> "$output_file"
   }
   done
 }
