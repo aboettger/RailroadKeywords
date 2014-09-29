@@ -13,3 +13,5 @@ find "$1" -depth  -type d | { while read -r D;
        echo "$pdfs"
     fi
 done }
+
+exit 0

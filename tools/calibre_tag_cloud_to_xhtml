@@ -47,3 +47,5 @@ done
 echo '</div>' >> "$output_path"
 echo '</body>' >> "$output_path"
 echo '</html>' >> "$output_path"
+
+exit 0

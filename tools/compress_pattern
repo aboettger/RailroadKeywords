@@ -12,10 +12,7 @@ function compress() {
   output_filename="$script_path/../pattern/$(basename "$file")"
   output_filename=${output_filename//human_readable./}
   echo "$output_filename"
-  # sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern=/d' | sed '/pattern_delete=/d' | sed ':a;N;$!ba;s/\ncategory=/|/g' | sed "s/\[category_separator\]/$category_separator/g" >> "$output_filename"
-  # sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern_delete=/d' | sed '/category=/d' | sed ':a;N;$!ba;s/\npattern=/|/g' >> "$output_filename"
-  # sed '/^\#/d' "$file" | sed '/^$/d' | sed '/pattern=/d' | sed '/category=/d' | sed ':a;N;$!ba;s/\npattern_delete=/|/g' >> "$output_filename"
-  
+
   sed '/^\#/d' "$file" | sed '/^$/d' | grep "category=" | sed "s/\[category_separator\]/$category_separator/g" >> "$output_filename"
   sed '/^\#/d' "$file" | sed '/^$/d' | grep "pattern_not_merge=" | sed 's/pattern_not_merge=/pattern=/g' >> "$output_filename"
   sed '/^\#/d' "$file" | sed '/^$/d' | grep "pattern=" | sed ':a;N;$!ba;s/\npattern=/|/g' >> "$output_filename"
@@ -64,3 +61,6 @@ else
     esac
   done
 fi
+
+
+exit 0

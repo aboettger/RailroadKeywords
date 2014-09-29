@@ -15,3 +15,5 @@ echo "$script_path/../all/$2.all.002.txt"
 if [[ $1 == D* ]] || [[ $1 == E* ]] || [[ $1 == V* ]]; then
   sed -i "s/[[:space:]]BR.*//g" "$script_path/../all/$2.all.001.txt"
 fi
+
+exit 0

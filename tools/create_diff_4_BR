@@ -11,3 +11,6 @@ script_path=$(dirname "$script")
 
 echo "$script_path/../diffs/$2.001.diff"
 echo "$script_path/../diffs/$2.002.diff"
+
+
+exit 0
