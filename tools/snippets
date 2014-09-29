@@ -38,3 +38,6 @@ find ~/src/RailroadKeywords/tests/standard -type f -name "*.list"  | { while rea
 
 # Alle Einträge in "false_positive" nach Schlüsselwörtern durchsuchen lassen
 find "/home/aboettger/src/RailroadKeywords/false_positive" -type f -name "*.pattern" | { while read file; do ids=$(sed '/^#/d' "$file" | grep -E "^[0-9]+=" | gawk  -F '=' '{print $1}' | sort | uniq); echo "$ids" | { while read -r line; do find ~/Eisenbahn/Eisenbahnliteratur -type d -name "*($line)*" | { while read entry; do ~/src/RailroadKeywords/extract_and_write_keywords_into_calibre "$entry"; done}; done}; done}
+
+
+calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "./metadata.opf"); calibredb list --fields tags --for-machine --search="id:\"=$calibre_id\"" --library-path ~/Eisenbahn/Eisenbahnliteratur  | jshon -e 0 -e "tags" | tr -d "[" | tr -d "]" | tr -d "," | tr -d "\"" | sed 's/\\//' | sed 's/^ *//g' | sed 's/ *$//g' | sed '/^$/d'
