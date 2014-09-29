@@ -1,0 +1,42 @@
+#! /bin/bash
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+script_path=$(dirname "$script")
+
+script_name=$(basename "$script")
+
+library_path="$1"
+working_path="$2"
+list_file="$3"
+
+if [ -z "$working_path" ] || [ -z "$library_path" ]; then
+  echo "Benutzung: $script_name \"PfadZurCalibreDB\" \"PfadZumCalibreBucheintrag\""
+  exit 1
+fi
+
+calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "$working_path/metadata.opf")
+calibredb list --fields tags --for-machine --search="id:\"=$calibre_id\"" --library-path "$library_path" | \
+  jshon -e 0 -e "tags" | \
+  tr -d "[" | tr -d "]" | tr -d "," | tr -d "\"" | \
+  sed 's/\\//' | sed 's/^ *//g' | sed 's/ *$//g' | sed '/^$/d' | \
+{ 
+  while read line; do 
+    result=$("$script_path"/split_category_and_keyword "$line")
+    category=$(grep "category" <<< "$result" | awk -F '\t' '{print $2}')
+    keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}')
+    
+    if [[ -f "$list_file" ]]; then
+      echo "Suche \"$keyword\" in \"$list_file\""
+      potentially_false_positive=$(grep -E "^$keyword\$" "$list_file")
+      if [[ $potentially_false_positive != "" ]]; then
+        "$script_path"/grep_potentially_false_positive . "$category" "$keyword"
+      fi
+    else
+      "$script_path"/grep_potentially_false_positive . "$category" "$keyword"
+    fi
+  done
+}
+
+exit 0
