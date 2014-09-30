@@ -15,15 +15,21 @@ fi
 
 
 find "$script_path/../tests" -type f -name "*.positive*.list" | sort | { while read -r file;
-#find "$script_path/../tests" -type f -name "test-BR_17.positive.001.list" | sort | { while read -r file;
   do
     echo "$file"
     sed '/^\#/d' "$file" | sed '/^$/d' | { while read -r line; do
-      compressed_line=$(echo "$line" | tr -d ' ')
-      len_compressed_line=$(echo ${#compressed_line})
-      if [ "$len_compressed_line" -gt 0 ] && [ "$len_compressed_line" -lt 3 ]; then
+      line=$(sed 's/^ *//g' <<< "$line" | sed 's/ *$//g')
+      line_without_spaces=$(sed 's/ *//g' <<< "$line")
+      test_uppercases=$(grep "^[A-Z]*\$" <<< "$line_without_spaces")
+      if [[ $test_uppercases != "" ]]; then
+        echo "nur groß: $line"
         echo "$line" >> "$output_file"
       fi
+      
+      
+      # if [[ $len_compressed_line -gt 0 ]] && [[ $len_compressed_line -lt 3 ]]; then
+      #   echo "$line" >> "$output_file"
+      # fi
       
       if [[ $line == *.* ]]; then
         var1=$(echo "$line" | cut -f1 -d.)
@@ -37,14 +43,17 @@ find "$script_path/../tests" -type f -name "*.positive*.list" | sort | { while r
         fi
       fi
     done
-    echo "50er" >> "$output_file"
-    echo "60er" >> "$output_file"
-    echo "70er" >> "$output_file"
-    echo "80er" >> "$output_file"
-    echo "90er" >> "$output_file"
   }
   done
 }
+
+{
+  echo "50er"
+  echo "60er"
+  echo "70er"
+  echo "80er"
+  echo "90er"
+} >> "$output_file"
 
 if [ -f "$output_file" ]; then
   tmp_file=$(mktemp)
