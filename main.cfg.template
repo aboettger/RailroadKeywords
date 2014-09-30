@@ -23,3 +23,11 @@ category_separator=.
 # Mögliche Werte: 0, 1
 
 remove_not_found=0
+
+# Beschränkt die Bildschirmausgaben auf das Nötigste
+# 0 - keine Logausgaben
+# 1 - Error
+# 2 - Error, Warnung
+# 3 - Error, Warnung, Info
+# 4 - Error, Warnung, Info, Debug
+log_level=3
