@@ -156,12 +156,12 @@ while read -r calibre_id; do
           grep_true_positive_keyword="$grep_true_positive_keyword$given_category$category_separator"
         fi
         grep_true_positive_keyword="$grep_true_positive_keyword$keyword"
-        true_positive_keyword="$grep_true_positive_keyword"
         grep_true_positive_keyword=$(sed -e 's/\//\\\//g' <<< "$grep_true_positive_keyword" | sed -e 's/\./\\\./g')
         true_positive=$(grep -l "^$calibre_id=$grep_true_positive_keyword\$" "$true_positive_file")
       else
         true_positive=""
       fi
+      
       if [ ! -z "$true_positive" ]; then
         echo -e "${green}$keyword${TOA} wurde in ${green}$true_positive${TOA} gefunden, keine Aktion nötig."
       else
@@ -182,14 +182,22 @@ while read -r calibre_id; do
 
         ignore_file="$false_positive_file"
         dont_ask_file="$true_positive_file"
+        
+        if [[ $category == "" ]]; then
+          true_positive_keyword="$keyword"
+        else
+          true_positive_keyword="$category$category_separator$keyword"
+        fi
+        
 
         echo
         echo "1) Nicht mehr fragen"
-        echo "2) Schlüsselwort dauerhaft entfernen"
-        echo "3) PDF ansehen \"$pdf_path\""
-        echo "4) TXT ansehen \"$hr_txt_path\""
-        echo "5) Verzeichnis öffnen \"$working_path\""
-        echo "6) Nichts tun"
+        echo "2) Schlüsselwort dauerhaft entfernen und Aktualisierung durchführen"
+        echo "3) Schlüsselwort dauerhaft entfernen, aber keine Aktualisierung durchführen"
+        echo "4) PDF ansehen \"$pdf_path\""
+        echo "5) TXT ansehen \"$hr_txt_path\""
+        echo "6) Verzeichnis öffnen \"$working_path\""
+        echo "7) Nichts tun"
         while true; do
           read -p "Bitte wählen: " input < /dev/tty
           case $input in
@@ -203,18 +211,22 @@ while read -r calibre_id; do
                 echo -e "\"$keyword\" für Calibre-ID \"$calibre_id\" wurde dauerhaft entfernt: ${green}$calibre_id=^($keyword_pattern)\$${TOA} in \"$ignore_file\""
                 break;;
               [3]* )
+                echo "$calibre_id=^($keyword_pattern)\$" >> "$ignore_file"
+                echo -e "\"$keyword\" für Calibre-ID \"$calibre_id\" wurde zur dauerhaften Entfernung vorgemerkt: ${green}$calibre_id=^($keyword_pattern)\$${TOA} in \"$ignore_file\""
+                break;;
+              [4]* )
                 echo "Öffne \"$pdf_path\""
                 xdg-open "$pdf_path" > /dev/null 2>&1
                 ;;
-              [4]* )
+              [5]* )
                 echo "Öffne \"$hr_txt_path\""
                 xdg-open "$hr_txt_path" > /dev/null 2>&1
                 ;;
-              [5]* )
+              [6]* )
                 echo "Öffne \"$working_path\""
                 xdg-open "$working_path" > /dev/null 2>&1
                 ;;
-              [6]* ) break;;
+              [7]* ) break;;
               * ) echo "Ungültige Auswahl";;
           esac
         done
