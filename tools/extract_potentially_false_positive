@@ -22,7 +22,6 @@ find "$script_path/../tests" -type f -name "*.positive*.list" | sort | { while r
       line_without_spaces=$(sed 's/ *//g' <<< "$line")
       test_uppercases=$(grep "^[A-Z]*\$" <<< "$line_without_spaces")
       if [[ $test_uppercases != "" ]]; then
-        echo "nur groß: $line"
         echo "$line" >> "$output_file"
       fi
       
