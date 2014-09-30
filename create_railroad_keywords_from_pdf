@@ -18,16 +18,30 @@ script_path=$(dirname "$script")
 
 # START functions ##############################################################
 
-function logInfo () {
-    echo -e "${green}$1${TOA}" 1>&2
+cfg_log_level=$(look log_level "$script_path"/main.cfg | cut -d '=' -f 2-)
+
+function logError () {
+  if [[ $cfg_log_level == "1" ]] || [[ $cfg_log_level == "2" ]] || [[ $cfg_log_level == "3" ]] || [[ $cfg_log_level == "4" ]]; then
+    echo -e "${red}$1${TOA}" 1>&2
+  fi
 }
 
 function logWarn () {
-  echo -e "${yellow}$1${TOA}" 1>&2
+  if [[ $cfg_log_level == "2" ]] || [[ $cfg_log_level == "3" ]] || [[ $cfg_log_level == "4" ]]; then
+    echo -e "${yellow}$1${TOA}" 1>&2
+  fi
 }
 
-function logError () {
-  echo -e "${red}$1${TOA}" 1>&2
+function logInfo () {
+  if [[ $cfg_log_level == "3" ]] || [[ $cfg_log_level == "4" ]]; then
+    echo -e "${green}$1${TOA}" 1>&2
+  fi
+}
+
+function logDebug () {
+  if [[ $cfg_log_level == "4" ]]; then
+    echo -e "${blue}$1${TOA}" 1>&2
+  fi
 }
 
 if [[ ! -f $script_path/main.cfg ]]; then
@@ -78,13 +92,11 @@ function getResults () {
       result=$(echo "$result" | sed -E "s/^(.*)\$/$prefix\1/g")
     fi
 
-    if [ "$result" != "" ]; then
+    if [[ $result != "" ]]; then
       category=$(look category "$pattern_case" | cut -d '=' -f 2-)
-      if [ "$isTest" == "0" ]; then
+      if [[ $isTest == "0" ]] && [[ $cfg_log_level == "4" ]]; then
         log_result=$(sort <<< "$result" | uniq | sed -e 's/^/\\t/g')
-        
-        logInfo "Kategorie: $category (\"$pattern_case\")\n$log_result"
-        # logInfo "Treffer gefunden durch \"$pattern_case\":\n$log_result"
+        logDebug "Kategorie: $category (\"$pattern_case\")\n$log_result"
       fi
       while read -r keyword; do
         if [[ $keyword != "" ]]; then
@@ -291,23 +303,23 @@ if [ "$1" == "test" ]; then
     rm "$script_path/test_results/"*.list.[12]
   fi
   
-  time_complete_a=$(($(date +%s%N)/1000000))
+  # time_complete_a=$(($(date +%s%N)/1000000))
   if [ -f "$pattern_path" ]; then
     runTest "$pattern_path"
   else
     find "$pattern_path" -type f -name '*.pattern' | sort | { while read -r pattern_case;
       do
-        echoerr "$pattern_case"
-        timea=$(($(date +%s%N)/1000000))
+        # echoerr "$pattern_case"
+        # timea=$(($(date +%s%N)/1000000))
 
         runTest "$pattern_case"
 
-        timeb=$(($(date +%s%N)/1000000))
-        echoerr "---> $((timeb - timea)) ms"
+        # timeb=$(($(date +%s%N)/1000000))
+        # echoerr "---> $((timeb - timea)) ms"
     done }
   fi
-  time_complete_b=$(($(date +%s%N)/1000000))
-  echoerr "Gesamtzeit: $((time_complete_b - time_complete_a)) ms"
+  # time_complete_b=$(($(date +%s%N)/1000000))
+  # echoerr "Gesamtzeit: $((time_complete_b - time_complete_a)) ms"
 elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
   if [ ! -f "$pdf_path" ]; then
     logError "PDF not found \"$3\""
@@ -377,7 +389,7 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
 
     if  [ "$1" == "run" ]; then
       
-      time_complete_a=$(($(date +%s%N)/1000000))
+      # time_complete_a=$(($(date +%s%N)/1000000))
       
       if [ -f "$pattern_path" ]; then
         runSearch "$pattern_path" "$pdf_path"
@@ -395,8 +407,8 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
         done }
       fi
       
-      time_complete_b=$(($(date +%s%N)/1000000))
-      logInfo "Gesamtzeit $script: $((time_complete_b - time_complete_a)) ms"
+      # time_complete_b=$(($(date +%s%N)/1000000))
+      # echo "Gesamtzeit $script: $((time_complete_b - time_complete_a)) ms"
     fi
   fi
 fi

@@ -6,6 +6,7 @@ trap trapint 2
 red="\e[0;31m"
 green="\e[0;32m"
 yellow="\e[0;33m"
+blue="\e[0;34m"
 TOA="\e[0m" # No Color
 
 # Absolute path to this script, e.g. /home/user/bin/foo.sh
@@ -15,16 +16,30 @@ script_path=$(dirname "$script")
 
 # START functions ##############################################################
 
-function logInfo () {
-    echo -e "${green}$1${TOA}" 1>&2
+cfg_log_level=$(look log_level "$script_path"/main.cfg | cut -d '=' -f 2-)
+
+function logError () {
+  if [[ $cfg_log_level == "1" ]] || [[ $cfg_log_level == "2" ]] || [[ $cfg_log_level == "3" ]] || [[ $cfg_log_level == "4" ]]; then
+    echo -e "${red}$1${TOA}" 1>&2
+  fi
 }
 
 function logWarn () {
-  echo -e "${yellow}$1${TOA}" 1>&2
+  if [[ $cfg_log_level == "2" ]] || [[ $cfg_log_level == "3" ]] || [[ $cfg_log_level == "4" ]]; then
+    echo -e "${yellow}$1${TOA}" 1>&2
+  fi
 }
 
-function logError () {
-  echo -e "${red}$1${TOA}" 1>&2
+function logInfo () {
+  if [[ $cfg_log_level == "3" ]] || [[ $cfg_log_level == "4" ]]; then
+    echo -e "${green}$1${TOA}" 1>&2
+  fi
+}
+
+function logDebug () {
+  if [[ $cfg_log_level == "4" ]]; then
+    echo -e "${blue}$1${TOA}" 1>&2
+  fi
 }
 
 function trapint {
@@ -39,6 +54,7 @@ function cleanup {
   rm "$HOME/running/$script_name.pid"
   echo "Bye."
   echo
+  exit 1
 }
 
 if [[ ! -f $script_path/main.cfg ]]; then
@@ -88,15 +104,22 @@ while [ ! -f "$calibreDbSearchPath/metadata.db" ] && [ "$calibreDbSearchPath" !=
 done
 
 if [ -f "$calibreDbSearchPath/metadata.db" ]; then
-  logInfo "Calibre-DB (metadata.db) gefunden: \"$calibreDbSearchPath/metadata.db\""
+  logDebug "Calibre-DB (metadata.db) gefunden: \"$calibreDbSearchPath/metadata.db\""
 else
   logError "Calibre-DB (metadata.db) nicht gefunden"
   cleanup
   exit 1
 fi
 
-find "$search_root" -type f -name '*.pdf' | {
-  while read -r pdf_path; do
+all_pdfs=$(find "$search_root" -type f -name '*.pdf')
+all_pdfs_count=$(wc -l <<< "$all_pdfs")
+pdf_counter=0
+
+while read -r pdf_path; do
+  pdf_counter=$((pdf_counter+1))
+  echo -ne "[$pdf_counter/$all_pdfs_count]\033[K\r"
+  # time_complete_a=$(($(date +%s%N)/1000000))
+
   working_path=$(dirname "$pdf_path")
   metadata_path="$working_path/metadata.opf"
   if [ ! -f "$metadata_path" ]; then
@@ -140,16 +163,14 @@ find "$search_root" -type f -name '*.pdf' | {
     # echo "$pdf_dirname"
     pdf_filename=$(basename "$pdf_path")
     pdf_filename="${pdf_filename%.*}"
-    if [[ -f $pdf_dirname/$pdf_filename.txt ]]; then
-      logInfo "Dateigöße ($pdf_filename.txt): $(stat -c%s "$pdf_dirname/$pdf_filename.txt")"
-    fi
+    # if [[ -f $pdf_dirname/$pdf_filename.txt ]]; then
+    #   logInfo "Dateigöße ($pdf_filename.txt): $(stat -c%s "$pdf_dirname/$pdf_filename.txt")"
+    # fi
 
     cfg_pattern_files=$(look pattern_files "$script_path"/main.cfg | cut -d '=' -f 2-)
 
     keywords=$("$script_path/create_railroad_keywords_from_pdf" run "$script_path/pattern" "$pdf_path")
-    
-    # time_complete_a=$(($(date +%s%N)/1000000))
-    
+
     if [[ $cfg_pattern_files == "" ]]; then
       pattern_files="$script_path/pattern/*"
     else
@@ -163,7 +184,7 @@ find "$search_root" -type f -name '*.pdf' | {
           false_positive_pattern=$(grep "^$calibre_id=" "$false_positive_pattern_path" | gawk  -F "$calibre_id=" '{print $2}')
           while read -r pattern; do
             if [ ! -z "$pattern" ]; then
-              logWarn "Falscher Treffer wird entfernt durch \"$pattern\", definiert in \"$false_positive_pattern_path\"."
+              logInfo "Falscher Treffer wird entfernt durch \"$pattern\", definiert in \"$false_positive_pattern_path\"."
               pattern=$(sed -e 's/(/\\(/g' <<< "$pattern" | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
               keywords=$(sed -e "s/$pattern//g" <<< "$keywords")
               keywords=$(sed -e "s/,,/,/g" <<< "$keywords" | sed -e "s/^,//g" | sed -e "s/,\$//g" | sed -e 's/ \- /-/g')
@@ -172,7 +193,7 @@ find "$search_root" -type f -name '*.pdf' | {
         fi
     done
 
-    logInfo "Processing: $pdf_path"
+    # logInfo "Processing: $pdf_path"
     # keywords=${keywords//Baureihe/BR}
     # keywords=$(echo "$keywords" | sort | sed -e "s/,,/,/g" | sed -e "s/^,//g" | sed -e "s/,$//g" | sed -E 's/(V)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(VT)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(E)[[:space:]]([0-9])/\1\2/g' | sed -E 's/(S)([0-9])/\1 \2/g' | uniq | tr '\n' ',' | sed -e 's/^,//g' | sed -e 's/,$//g' | sed -e 's/,{2,}//' | sed -e 's/ \- /-/g')
     # make_another_dot=$(python -c 'print u"\u0323".encode("utf8")')
@@ -194,7 +215,7 @@ find "$search_root" -type f -name '*.pdf' | {
     tr ',' '\n' <<< "$keywords" > "$temp_file_keywords"
     tr ',' '\n' <<< "$old_keywords" > "$temp_file_old_keywords"
 
-    echo "$keywords"
+    logDebug "$keywords"
     diff "$temp_file_old_keywords" "$temp_file_keywords" | tee >(grep "<") >(grep ">") > /dev/null 2>&1
 
     rm "$temp_file_keywords"
@@ -207,12 +228,12 @@ find "$search_root" -type f -name '*.pdf' | {
     fi
     
     # time_complete_b=$(($(date +%s%N)/1000000))
-    # logInfo "Gesamtzeit $script: $((time_complete_b - time_complete_a)) ms"
+    # echo "Gesamtzeit $script: $((time_complete_b - time_complete_a)) ms"
     
-    echo "…done"
+    logInfo "…done"
   fi
-  done
-}
+done <<< "$all_pdfs"
+
 
 echo "…finished"
 
