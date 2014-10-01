@@ -1,0 +1,16 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/ET65.asc
+
+category=Baureihen[category_separator]ET65
+
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
+
+pattern_not_merge=([[:space:]]ET[[:space:]]{0,1}65[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]ET[[:space:]]{0,1}65(\.([0]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]ET[[:space:]]{0,1}65[[:space:]]0(0[1-9]|1[0-9]|2[0-5]|3[1])([[:space:]]|-[0-9]))
+
