@@ -12,4 +12,4 @@ pattern_not_merge=([[:space:]]VT[[:space:]]{0,1}4(\.(1[2]))[[:space:]])
 
 # Pattern #2
 
-pattern=([[:space:]]VT[[:space:]]{0,1}4\.12\.(0[12])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}4\.12\.(0[12])[[:space:]])

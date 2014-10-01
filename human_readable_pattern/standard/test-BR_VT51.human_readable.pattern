@@ -12,6 +12,6 @@ pattern_not_merge=([[:space:]]VT[[:space:]]{0,1}51(\.([01]))[[:space:]])
 
 # Pattern #2
 
-pattern=([[:space:]]VT[[:space:]]{0,1}51[[:space:]]0(0[01])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}51[[:space:]]0(0[01])[[:space:]])
 
-pattern=([[:space:]]VT[[:space:]]{0,1}51[[:space:]]1(0[0-4])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VT[[:space:]]{0,1}51[[:space:]]1(0[0-4])[[:space:]])

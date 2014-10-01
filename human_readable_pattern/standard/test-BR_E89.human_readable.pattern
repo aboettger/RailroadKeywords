@@ -8,5 +8,5 @@ pattern_not_merge=([[:space:]]E[[:space:]]{0,1}89[[:space:]])
 
 pattern_not_merge=([[:space:]]E[[:space:]]{0,1}89(\.(0|1))[[:space:]])
 
-pattern=([[:space:]]E[[:space:]]{0,1}89[[:space:]]0(0[1-7])([[:space:]]|-[0-9]))
-pattern=([[:space:]]E[[:space:]]{0,1}89[[:space:]]1(0[1-9])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}89[[:space:]]0(0[1-7])[[:space:]])
+pattern=([[:space:]]E[[:space:]]{0,1}89[[:space:]]1(0[1-9])[[:space:]])

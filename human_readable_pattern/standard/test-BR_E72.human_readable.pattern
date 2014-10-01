@@ -8,4 +8,4 @@ pattern_not_merge=([[:space:]]E[[:space:]]{0,1}72[[:space:]])
 
 pattern_not_merge=([[:space:]]E[[:space:]]{0,1}72(\.(0))[[:space:]])
 
-pattern=([[:space:]]E[[:space:]]{0,1}72[[:space:]]0(0[1-8])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}72[[:space:]]0(0[1-8])[[:space:]])

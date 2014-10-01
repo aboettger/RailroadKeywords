@@ -8,4 +8,4 @@ pattern_not_merge=([[:space:]]V[[:space:]]{0,1}120[[:space:]])
 
 pattern_not_merge=([[:space:]]V[[:space:]]{0,1}120(\.(0))[[:space:]])
 
-pattern=([[:space:]]V[[:space:]]{0,1}120[[:space:]]0(0[1])([[:space:]]|-[0-9]))
+pattern=([[:space:]]V[[:space:]]{0,1}120[[:space:]]0(0[1])[[:space:]])

@@ -12,7 +12,7 @@ pattern_not_merge=([[:space:]]VS[[:space:]]{0,1}144(\.([059]))[[:space:]])
 
 # Pattern #2
 
-pattern=([[:space:]]VS[[:space:]]{0,1}144[[:space:]]0(0[1-6])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VS[[:space:]]{0,1}144[[:space:]]0(0[1-6])[[:space:]])
 
-pattern=([[:space:]]VS[[:space:]]{0,1}144[[:space:]]5(0[012])([[:space:]]|-[0-9]))
-pattern=([[:space:]]VS[[:space:]]{0,1}144[[:space:]]9(0[1])([[:space:]]|-[0-9]))
+pattern=([[:space:]]VS[[:space:]]{0,1}144[[:space:]]5(0[012])[[:space:]])
+pattern=([[:space:]]VS[[:space:]]{0,1}144[[:space:]]9(0[1])[[:space:]])

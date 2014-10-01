@@ -8,5 +8,5 @@ pattern_not_merge=([[:space:]]ET[[:space:]]{0,1}41[[:space:]])
 
 # Pattern #2
 
-pattern=([[:space:]]ET[[:space:]]{0,1}41[[:space:]](0[1-5])([[:space:]]|-[0-9]))
+pattern=([[:space:]]ET[[:space:]]{0,1}41[[:space:]](0[1-5])[[:space:]])
 

@@ -6,4 +6,4 @@ category=Baureihen[category_separator]E62
 
 pattern_not_merge=([[:space:]]E[[:space:]]{0,1}62[[:space:]])
 
-pattern_not_merge=([[:space:]]E[[:space:]]{0,1}62[[:space:]](0[1-5])([[:space:]]|-[0-9]))
+pattern_not_merge=([[:space:]]E[[:space:]]{0,1}62[[:space:]](0[1-5])[[:space:]])

@@ -12,7 +12,7 @@ pattern=([[:space:]]ET[[:space:]]{0,1}26(\.([01]))[[:space:]])
 
 # Pattern #2
 
-pattern=([[:space:]]ET[[:space:]]{0,1}26[[:space:]]0(0[1-4])([[:space:]]|-[0-9]))
+pattern=([[:space:]]ET[[:space:]]{0,1}26[[:space:]]0(0[1-4])[[:space:]])
 
-pattern=([[:space:]]ET[[:space:]]{0,1}26[[:space:]]1(0[12])([[:space:]]|-[0-9]))
+pattern=([[:space:]]ET[[:space:]]{0,1}26[[:space:]]1(0[12])[[:space:]])
 

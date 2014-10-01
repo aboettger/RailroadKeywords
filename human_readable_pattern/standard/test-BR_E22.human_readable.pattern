@@ -8,6 +8,6 @@ pattern_not_merge=([[:space:]]E[[:space:]]{0,1}22[[:space:]])
 
 pattern_not_merge=([[:space:]]E[[:space:]]{0,1}22(\.(0|1|2))[[:space:]])
 
-pattern=([[:space:]]E[[:space:]]{0,1}22[[:space:]]0(0[1-4])([[:space:]]|-[0-9]))
-pattern=([[:space:]]E[[:space:]]{0,1}22[[:space:]]1(0[1-9]|1[0-9]|2[0-9])([[:space:]]|-[0-9]))
-pattern=([[:space:]]E[[:space:]]{0,1}22[[:space:]]2(0[1-5])([[:space:]]|-[0-9]))
+pattern=([[:space:]]E[[:space:]]{0,1}22[[:space:]]0(0[1-4])[[:space:]])
+pattern=([[:space:]]E[[:space:]]{0,1}22[[:space:]]1(0[1-9]|1[0-9]|2[0-9])[[:space:]])
+pattern=([[:space:]]E[[:space:]]{0,1}22[[:space:]]2(0[1-5])[[:space:]])

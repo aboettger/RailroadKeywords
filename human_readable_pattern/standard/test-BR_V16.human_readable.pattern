@@ -8,5 +8,5 @@ pattern_not_merge=([[:space:]]V[[:space:]]{0,1}16[[:space:]])
 
 pattern_not_merge=([[:space:]]V[[:space:]]{0,1}16(\.(0|1))[[:space:]])
 
-pattern=([[:space:]]V[[:space:]]{0,1}16[[:space:]]0(0[1-5]|1[01]|4[3]|7[0-5])([[:space:]]|-[0-9]))
-pattern=([[:space:]]V[[:space:]]{0,1}16[[:space:]]1(0[01])([[:space:]]|-[0-9]))
+pattern=([[:space:]]V[[:space:]]{0,1}16[[:space:]]0(0[1-5]|1[01]|4[3]|7[0-5])[[:space:]])
+pattern=([[:space:]]V[[:space:]]{0,1}16[[:space:]]1(0[01])[[:space:]])
