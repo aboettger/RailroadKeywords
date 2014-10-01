@@ -1,0 +1,16 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/ET125.asc
+
+category=Baureihen[category_separator]ET125
+
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
+
+pattern_not_merge=([[:space:]]ET[[:space:]]{0,1}125[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]ET[[:space:]]{0,1}125(\.([0]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]ET[[:space:]]{0,1}125[[:space:]]0(0[1-9]|1[0-8])[[:space:]])
+
