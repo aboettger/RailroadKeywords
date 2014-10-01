@@ -1,0 +1,18 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/ET26.asc
+
+category=Baureihen[category_separator]ET26
+
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
+
+pattern_not_merge=([[:space:]]ET[[:space:]]{0,1}26[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]ET[[:space:]]{0,1}26(\.([01]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]ET[[:space:]]{0,1}26[[:space:]]0(0[1-4])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]ET[[:space:]]{0,1}26[[:space:]]1(0[12])([[:space:]]|-[0-9]))
+
