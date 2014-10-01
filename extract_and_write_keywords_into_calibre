@@ -3,12 +3,6 @@
 # Trap the INT signal (ctrl-c, for example)
 trap trapint 2
 
-red="\e[0;31m"
-green="\e[0;32m"
-yellow="\e[0;33m"
-blue="\e[0;34m"
-TOA="\e[0m" # No Color
-
 # Absolute path to this script, e.g. /home/user/bin/foo.sh
 script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
@@ -17,30 +11,7 @@ script_path=$(dirname "$script")
 # START functions ##############################################################
 
 cfg_log_level=$(look log_level "$script_path"/main.cfg | cut -d '=' -f 2-)
-
-function logError () {
-  if [[ $cfg_log_level == "1" ]] || [[ $cfg_log_level == "2" ]] || [[ $cfg_log_level == "3" ]] || [[ $cfg_log_level == "4" ]]; then
-    echo -e "${red}$1${TOA}" 1>&2
-  fi
-}
-
-function logWarn () {
-  if [[ $cfg_log_level == "2" ]] || [[ $cfg_log_level == "3" ]] || [[ $cfg_log_level == "4" ]]; then
-    echo -e "${yellow}$1${TOA}" 1>&2
-  fi
-}
-
-function logInfo () {
-  if [[ $cfg_log_level == "3" ]] || [[ $cfg_log_level == "4" ]]; then
-    echo -e "${green}$1${TOA}" 1>&2
-  fi
-}
-
-function logDebug () {
-  if [[ $cfg_log_level == "4" ]]; then
-    echo -e "${blue}$1${TOA}" 1>&2
-  fi
-}
+. "$script_path/libraries/logging.sh" "$cfg_log_level"
 
 function trapint {
   echo
@@ -50,9 +21,9 @@ function trapint {
 }
 
 function cleanup {
-  echo "Cleaning up…"
+  logInfo "Cleaning up…"
   rm "$HOME/running/$script_name.pid"
-  echo "Bye."
+  logInfo "Bye."
   echo
   exit 1
 }
@@ -74,7 +45,7 @@ function save_pid {
   fi
 
   if [ -f "$HOME/running/$script_name.pid" ]; then
-    echo "$script_name is already running ($HOME/running/$script_name.pid)"
+    logError "$script_name is already running ($HOME/running/$script_name.pid)"
     exit 1
   else
     echo $$ > "$HOME/running/$script_name.pid"
@@ -117,8 +88,7 @@ pdf_counter=0
 
 while read -r pdf_path; do
   pdf_counter=$((pdf_counter+1))
-  echo -ne "[$pdf_counter/$all_pdfs_count]\033[K\r"
-  # time_complete_a=$(($(date +%s%N)/1000000))
+  time_complete_a=$(($(date +%s%N)/1000000))
 
   working_path=$(dirname "$pdf_path")
   metadata_path="$working_path/metadata.opf"
@@ -159,7 +129,7 @@ while read -r pdf_path; do
     #     echo "$keywords"
     #   done
     # })
-    pdf_dirname=$(dirname "$pdf_path")
+    # pdf_dirname=$(dirname "$pdf_path")
     # echo "$pdf_dirname"
     pdf_filename=$(basename "$pdf_path")
     pdf_filename="${pdf_filename%.*}"
@@ -227,7 +197,18 @@ while read -r pdf_path; do
       calibredb set_metadata --field tags:"$keywords" "$calibre_id" --library-path="$calibreDbSearchPath"
     fi
     
-    # time_complete_b=$(($(date +%s%N)/1000000))
+    time_complete_b=$(($(date +%s%N)/1000000))
+    time_complete_single_run=$((time_complete_b - time_complete_a))
+    # echo "time_complete_single_run $time_complete_single_run"
+    
+    time_complete=$((time_complete_single_run + time_complete))
+    # echo "time_complete $time_complete"
+    
+    time_estimated=$((time_complete * all_pdfs_count / pdf_counter))
+    time_left=$((time_estimated - time_complete))
+
+    echo -ne "[$pdf_counter/$all_pdfs_count] Voraussichtliches Ende in < $((time_left / 1000 / 60)) min\033[K\r"    
+    
     # echo "Gesamtzeit $script: $((time_complete_b - time_complete_a)) ms"
     
     logInfo "…done"
@@ -235,7 +216,7 @@ while read -r pdf_path; do
 done <<< "$all_pdfs"
 
 
-echo "…finished"
+logInfo "…finished"
 
 cleanup
 

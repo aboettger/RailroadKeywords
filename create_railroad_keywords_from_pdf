@@ -6,43 +6,15 @@
 #
 #===============================================================================
 
-red="\e[0;31m"
-green="\e[0;32m"
-yellow="\e[0;33m"
-TOA="\e[0m" # No Color
-
 # Absolute path to this script, e.g. /home/user/bin/foo.sh
 script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
-# START functions ##############################################################
-
 cfg_log_level=$(look log_level "$script_path"/main.cfg | cut -d '=' -f 2-)
+. "$script_path/libraries/logging.sh" "$cfg_log_level"
 
-function logError () {
-  if [[ $cfg_log_level == "1" ]] || [[ $cfg_log_level == "2" ]] || [[ $cfg_log_level == "3" ]] || [[ $cfg_log_level == "4" ]]; then
-    echo -e "${red}$1${TOA}" 1>&2
-  fi
-}
-
-function logWarn () {
-  if [[ $cfg_log_level == "2" ]] || [[ $cfg_log_level == "3" ]] || [[ $cfg_log_level == "4" ]]; then
-    echo -e "${yellow}$1${TOA}" 1>&2
-  fi
-}
-
-function logInfo () {
-  if [[ $cfg_log_level == "3" ]] || [[ $cfg_log_level == "4" ]]; then
-    echo -e "${green}$1${TOA}" 1>&2
-  fi
-}
-
-function logDebug () {
-  if [[ $cfg_log_level == "4" ]]; then
-    echo -e "${blue}$1${TOA}" 1>&2
-  fi
-}
+# START functions ##############################################################
 
 if [[ ! -f $script_path/main.cfg ]]; then
   logWarn "Keine Konfigurationsdatei \"$script_path/main.cfg\" gefunden. Versuche eine Konfiguration aus \"$script_path/main.cfg.template\" zu erstellen."
@@ -61,12 +33,12 @@ function getResults () {
   isTest="$3"
 
   pattern=$("$script_path/functions/getPattern.sh" "$pattern_case")
-  # prefix=$(sed '/^#/d' "$pattern_case" | grep 'prefix=' | gawk  -F 'prefix=' '{print $2}')
+  # prefix=$(sed -e '/^#/d' "$pattern_case" | grep 'prefix=' | gawk  -F 'prefix=' '{print $2}')
   # if [ ! -z "$prefix" ]; then
   #   prefix=$(echo "$prefix" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
   # fi
 
-  pattern_delete=$(sed '/^#/d' "$pattern_case" | grep 'pattern_delete=' | gawk  -F 'pattern_delete=' '{print $2}')
+  pattern_delete=$(sed -e '/^#/d' "$pattern_case" | grep 'pattern_delete=' | gawk  -F 'pattern_delete=' '{print $2}')
   if [ ! -z "$pattern_delete" ]; then
     pattern_delete=$(echo "$pattern_delete" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
   fi
@@ -76,7 +48,7 @@ function getResults () {
 
   echo "$pattern" | { while read -r line; do
     # line=$(echo "$line" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g')
-    # sed "s/$line/\2/" "$txt_path"
+    # sed -e "s/$line/\2/" "$txt_path"
     if [[ $isTest == "1" ]]; then
       result=$(grep -oaE "^$line\$" "$txt_path" | sed -e 's/^ *//' | sed -e 's/ *$//')
     else
@@ -126,28 +98,28 @@ function runTest () {
   # Finde Einträge in "tests/test-....positive.....list" "tests/test-....negative.....list" und  ohne führende und abschließende Leerzeichen
   find "$test_path" -type f -name "$test_name*.list" | sort | { while read -r file;
   do
-     matched_elements_without_leading=$(sed /^[[:space:]]*#/d "$file" | sed '/^ *$/d' | grep '^[^ ]')
+     matched_elements_without_leading=$(sed -e '/^[[:space:]]*#/d' "$file" | sed -e '/^ *$/d' | grep '^[^ ]')
      if [ "$matched_elements_without_leading" != "" ]; then
        logError "$matched_elements_without_leading"
        logError "Einträge ohne Leerzeichen am Anfang gefunden: $file"
        exit 1
      fi
      
-     matched_elements_without_leading=$(sed /^[[:space:]]*#/d "$file" | sed '/^ *$/d' | grep '^  ')
+     matched_elements_without_leading=$(sed -e '/^[[:space:]]*#/d' "$file" | sed -e '/^ *$/d' | grep '^  ')
      if [ "$matched_elements_without_leading" != "" ]; then
        logError "$matched_elements_without_leading"
        logError "Einträge mit mehr als einem Leerzeichen am Anfang gefunden: $file"
        exit 1
      fi
 
-     matched_elements_without_trailing=$(sed /^[[:space:]]*#/d "$file" | sed '/^ *$/d' | grep '[^ ]$')
+     matched_elements_without_trailing=$(sed -e '/^[[:space:]]*#/d' "$file" | sed -e '/^ *$/d' | grep '[^ ]$')
      if [ "$matched_elements_without_trailing" != "" ]; then
        logError "$matched_elements_without_trailing"
        logError "Einträge ohne Leerzeichen am Ende gefunden: $file"
        exit 1
      fi
      
-     matched_elements_without_single_trailing=$(sed /^[[:space:]]*#/d "$file" | sed '/^ *$/d' | grep '  $')
+     matched_elements_without_single_trailing=$(sed -e '/^[[:space:]]*#/d' "$file" | sed -e '/^ *$/d' | grep '  $')
      if [ "$matched_elements_without_single_trailing" != "" ]; then
        logError "$matched_elements_without_single_trailing"
        logError "Einträge mit mehr als einem Leerzeichen am Ende gefunden: $file"
@@ -165,19 +137,19 @@ function runTest () {
   find "$test_path" -type f -name "$test_name_positive*.list" | sort | { while read -r test_case_positive;
     do
       test_results=$(getResults "$pattern_case" "$test_case_positive" "1")
-      # matched_elements=$(echo "$test_results" | sed '/^[[:space:]]*$/d' | wc -l)
-      # given_elements=$(sed '/^[[:space:]]*$/d' "$test_case_positive" | sed '/^[[:space:]]*#/d' | wc -l)
+      # matched_elements=$(echo "$test_results" | sed -e '/^[[:space:]]*$/d' | wc -l)
+      # given_elements=$(sed -e '/^[[:space:]]*$/d' "$test_case_positive" | sed -e '/^[[:space:]]*#/d' | wc -l)
       logInfo "TestCase: $(basename "$test_case_positive")"
       category=$(look category "$pattern_case" | cut -d '=' -f 2-)
-      test_results=$(sed "s/$category\.//g" <<< "$test_results")
+      test_results=$(sed -e "s/$category\.//g" <<< "$test_results")
       
       temp_file_1="$script_path/test_results/$(basename "$test_case_positive").1"
       temp_file_2="$script_path/test_results/$(basename "$test_case_positive").2"
 
       echo "$test_results" > "$temp_file_1"
-      echo -e "${yellow}$test_results${TOA}"
+      logWarn "$test_results"
       
-      sed '/^[[:space:]]*$/d' "$test_case_positive" | sed '/^[[:space:]]*#/d' | sed 's/^[[:space:]]*//g' | sed 's/[[:space:]]*$//g' > "$temp_file_2"
+      sed -e '/^[[:space:]]*$/d' "$test_case_positive" | sed -e '/^[[:space:]]*#/d' | sed -e 's/^[[:space:]]*//g' | sed -e 's/[[:space:]]*$//g' > "$temp_file_2"
       diff -Barq <(sort "$temp_file_1") <(sort "$temp_file_2")  >/dev/null 2>&1; if [ $? -gt 0 ]; then logError "Test failed."; exit 1; else logInfo "Test OK"; fi
   done }
   
@@ -195,7 +167,7 @@ function runTest () {
       test_results=$(getResults "$pattern_case" "$test_case_negative" "1")
       logInfo "TestCase: $(basename "$test_case_negative")"
       category=$(look category "$pattern_case" | cut -d '=' -f 2-)
-      test_results=$(sed "s/$category\.//g" <<< "$test_results")
+      test_results=$(sed -e "s/$category\.//g" <<< "$test_results")
 
 
       temp_file_1="$script_path/test_results/$(basename "$test_case_negative").1"
@@ -203,7 +175,7 @@ function runTest () {
 
       echo "$test_results" > "$temp_file_1"
 
-      sed '/^[[:space:]]*$/d' "$test_case_negative" | sed '/^[[:space:]]*#/d' | sed 's/^[[:space:]]*//g' | sed 's/[[:space:]]*$//g' > "$temp_file_2"
+      sed -e '/^[[:space:]]*$/d' "$test_case_negative" | sed -e '/^[[:space:]]*#/d' | sed -e 's/^[[:space:]]*//g' | sed -e 's/[[:space:]]*$//g' > "$temp_file_2"
 
       count_test_case_negative=$(diff -B "$temp_file_1" "$temp_file_2" | grep -c ">")
       count_test_case_negative_compare=$(less "$temp_file_2" | wc -l)
@@ -233,7 +205,7 @@ function runTest () {
       test_results=$(getResults "$pattern_case" "$diff" "1")
       logInfo "TestCase: $(basename "$diff")"
       category=$(look category "$pattern_case" | cut -d '=' -f 2-)
-      test_results=$(sed "s/$category\.//g" <<< "$test_results")
+      test_results=$(sed -e "s/$category\.//g" <<< "$test_results")
       
      
       temp_file_1="$script_path/test_results/$(basename "$diff").1"
@@ -241,7 +213,7 @@ function runTest () {
       
       echo "$test_results" > "$temp_file_1"
       
-      sed '/^[[:space:]]*$/d' "$diff" | sed '/^[[:space:]]*#/d' | sed 's/^[[:space:]]*//g' | sed 's/[[:space:]]*$//g' > "$temp_file_2"
+      sed -e '/^[[:space:]]*$/d' "$diff" | sed -e '/^[[:space:]]*#/d' | sed -e 's/^[[:space:]]*//g' | sed -e 's/[[:space:]]*$//g' > "$temp_file_2"
       
       count_diff=$(diff -B "$temp_file_1" "$temp_file_2" | grep -c ">")
       count_diff_compare=$(less "$temp_file_2" | wc -l)

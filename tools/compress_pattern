@@ -5,6 +5,9 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
+cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
+. "$script_path/../libraries/logging.sh" "$cfg_log_level"
+
 category_separator=$(look category_separator "$script_path"/../main.cfg | cut -d '=' -f 2-)
 
 function compress() {
@@ -14,10 +17,10 @@ function compress() {
   echo "$output_filename"
 
   {
-    sed '/^\#/d' "$file" | sed '/^$/d' | grep "category=" | sed "s/\[category_separator\]/$category_separator/g"
-    sed '/^\#/d' "$file" | sed '/^$/d' | grep "pattern_not_merge=" | sed 's/pattern_not_merge=/pattern=/g'
-    sed '/^\#/d' "$file" | sed '/^$/d' | grep "pattern=" | sed ':a;N;$!ba;s/\npattern=/|/g'
-    sed '/^\#/d' "$file" | sed '/^$/d' | grep "pattern_delete=" | sed ':a;N;$!ba;s/\npattern_delete=/|/g'
+    sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "category=" | sed -e "s/\[category_separator\]/$category_separator/g"
+    sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "pattern_not_merge=" | sed -e 's/pattern_not_merge=/pattern=/g'
+    sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "pattern=" | sed -e ':a;N;$!ba;s/\npattern=/|/g'
+    sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "pattern_delete=" | sed -e ':a;N;$!ba;s/\npattern_delete=/|/g'
   } >> "$output_filename"
 }
 

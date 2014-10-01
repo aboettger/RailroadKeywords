@@ -5,6 +5,9 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
+cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
+. "$script_path/../libraries/logging.sh" "$cfg_log_level"
+
 if [ ! -d "$1" ]; then
   if [ -f "$script_path/../diffs/$(basename "$1")" ]; then
     rm "$script_path/../diffs/$(basename "$1")"

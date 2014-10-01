@@ -4,6 +4,10 @@
 script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
+
+cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
+. "$script_path/../libraries/logging.sh" "$cfg_log_level"
+
 #if [[ -f $2 ]]; then
   comm -2 -3  <(sort "$script_path/../all/$2.all.002.txt" ) <(sort "$script_path/../tests/standard/test-$2.positive.002.list") > "$script_path/../diffs/$2.002.diff"
   comm -2 -3  <(sort "$script_path/../all/$2.all.001.txt" ) <(sort "$script_path/../tests/standard/test-$2.positive.001.list") > "$script_path/../diffs/$2.001.diff"

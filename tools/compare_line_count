@@ -1,16 +1,23 @@
 #! /bin/bash
 # Usage: compare_line_count "first_dir" "second_dir"
 # 
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+script_path=$(dirname "$script")
+
+cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
+. "$script_path/../libraries/logging.sh" "$cfg_log_level"
 
 find "$1" -depth  -type f -name "*.asc" | { while read -r asc;
   do
     echo -ne "$asc \r"
-    ascLineCount=$(sed '/^[[:space:]]*\#/d' "$asc" | sed '/^$/d' | wc -l )
+    ascLineCount=$(sed -e '/^[[:space:]]*\#/d' "$asc" | sed -e '/^$/d' | wc -l )
     ascFileName=$(basename "$asc")
     key=${ascFileName//.asc/}
     testFilePath="$2/test-BR_$key.positive.002.list"
     if [[ -f $testFilePath ]]; then
-      testLineCount=$(sed '/^[[:space:]]*\#/d' "$testFilePath" | sed '/^$/d' | wc -l )
+      testLineCount=$(sed -e '/^[[:space:]]*\#/d' "$testFilePath" | sed -e '/^$/d' | wc -l )
       if [[ $ascLineCount != $testLineCount ]]; then
         echo ">>> Unterschiedliche Anzahl:"
         echo "$asc: $ascLineCount"

@@ -5,6 +5,9 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
+cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
+. "$script_path/../libraries/logging.sh" "$cfg_log_level"
+
 cfg_category_separator=$(look category_separator "$script_path"/../main.cfg | cut -d '=' -f 2-)
 
 category_and_tag_init="$1"
@@ -14,7 +17,7 @@ part=""
 count_pattern_files=-1
 while [[ $count_pattern_files -lt 1 ]] || [[ $count_pattern_files -gt 1 ]]; do
   
-  category_and_tag=$(sed "s/^$part\\$cfg_category_separator//g" <<< "$category_and_tag")
+  category_and_tag=$(sed -e "s/^$part\\$cfg_category_separator//g" <<< "$category_and_tag")
 
   part=$(grep -o ".*\." <<< "$category_and_tag" | awk -F "." '{print $1}');
   if [[ -z $part ]]; then
@@ -31,7 +34,7 @@ while [[ $count_pattern_files -lt 1 ]] || [[ $count_pattern_files -gt 1 ]]; do
   count_pattern_files=$(find ~/src/RailroadKeywords/pattern -type f -exec grep -q "^category=$category\$" {} \; -print | wc -l)
 done
 
-echo -e "category\t$(sed "s/\\\//g" <<< "$category")"
-echo -e "keyword \t$(sed "s/^$category\\$cfg_category_separator//g" <<< "$category_and_tag_init")"
+echo -e "category\t$(sed -e "s/\\\//g" <<< "$category")"
+echo -e "keyword \t$(sed -e "s/^$category\\$cfg_category_separator//g" <<< "$category_and_tag_init")"
 
 exit 0

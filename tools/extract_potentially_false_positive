@@ -7,6 +7,9 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
+cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
+. "$script_path/../libraries/logging.sh" "$cfg_log_level"
+
 output_file="$script_path/../false_positive/potentially_false_positive"
 
 if [ -f "$output_file" ]; then
@@ -14,29 +17,23 @@ if [ -f "$output_file" ]; then
 fi
 
 
-find "$script_path/../tests" -type f -name "*.positive*.list" | sort | { while read -r file;
+find "$script_path/../tests" -type f -name "*.list" | sort | { while read file;
   do
     echo "$file"
-    sed '/^\#/d' "$file" | sed '/^$/d' | { while read -r line; do
-      line=$(sed 's/^ *//g' <<< "$line" | sed 's/ *$//g')
-      line_without_spaces=$(sed 's/ *//g' <<< "$line")
-      test_uppercases=$(grep "^[A-Z]*\$" <<< "$line_without_spaces")
-      if [[ $test_uppercases != "" ]]; then
+    sed -e '/^ *#.*/d' "$file" | sed -e '/^ *$/d' | { while read line; do
+      line=$(sed -e 's/^ *//g' <<< "$line" | sed -e 's/ *$//g')
+
+      result=$(grep -oE "^[A-Z] [A-Z]\$" <<< "$line")
+      # echo "$line"
+      if [[ $result != "" ]]; then
         echo "$line" >> "$output_file"
-      fi
-      
-      
-      # if [[ $len_compressed_line -gt 0 ]] && [[ $len_compressed_line -lt 3 ]]; then
-      #   echo "$line" >> "$output_file"
-      # fi
-      
-      if [[ $line == *.* ]]; then
-        var1=$(echo "$line" | cut -f1 -d.)
-        var2=$(echo "$line" | cut -f2 -d.)
-        size1=${#var1}
-        size2=${#var2}
-        if [ "$size1" -gt "0" ] && [ "$size1" -lt "3" ] && [ "$size2" -gt "0" ] && [ "$size2" -lt "3" ] ; then
-          if [ "$var1" -gt "0" ] && [ "$var1" -lt "32" ] && [ "$var2" -gt "0" ] && [ "$var2" -lt "13" ] ; then
+      else
+        result=$(grep -oE "^((0[1-9])|([1-2][0-9])|(3[01]))\.((0[1-9])|(1[012]))\$" <<< "$line")
+        if [[ $result != "" ]]; then
+          echo "$line" >> "$output_file"
+        else
+          result=$(grep -oE "^[5-9]0er\$" <<< "$line")
+          if [[ $result != "" ]]; then
             echo "$line" >> "$output_file"
           fi
         fi
@@ -45,14 +42,6 @@ find "$script_path/../tests" -type f -name "*.positive*.list" | sort | { while r
   }
   done
 }
-
-{
-  echo "50er"
-  echo "60er"
-  echo "70er"
-  echo "80er"
-  echo "90er"
-} >> "$output_file"
 
 if [ -f "$output_file" ]; then
   tmp_file=$(mktemp)

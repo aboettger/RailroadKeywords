@@ -1,6 +1,14 @@
 #!/bin/bash
 # Thanks: https://github.com/l0b0/txt2cloud
 
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+script_path=$(dirname "$script")
+
+cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
+. "$script_path/../libraries/logging.sh" "$cfg_log_level"
+
 library_path="$1"
 output_path="$2"
 
@@ -11,7 +19,7 @@ count_entries=$(echo "$json" | jshon -l)
 count_entries=$((count_entries-1))
 for i in $(seq 0 "$count_entries"); do
   echo -ne "Processing $i/$count_entries\033[K\r"
-  keysForCounter=$(echo "$json" | jshon -e "$i" -e "tags" | tr -d "[" | tr -d "]" | tr -d "," | tr -d "\"" | sed 's/\\//')
+  keysForCounter=$(echo "$json" | jshon -e "$i" -e "tags" | tr -d "[" | tr -d "]" | tr -d "," | tr -d "\"" | sed -e 's/\\//')
   if [ ! -z "$keysForCounter" ]; then
     keysForCounter=$(echo "$keysForCounter" | sed -e 's/^ *//' | sed -e 's/ *$//')
     keys="$keys$keysForCounter"
@@ -28,24 +36,30 @@ if [ -f "$output_path" ]; then
   rm "$output_path"
 fi
 
-echo '<?xml version="1.0" encoding="UTF-8"?>' >> "$output_path"
-echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' >> "$output_path"
-echo '<html xmlns="http://www.w3.org/1999/xhtml">' >> "$output_path" 
-echo '<head>' >> "$output_path"
-echo '<title>Tag Cloud</title>' >> "$output_path"
-echo '</head>' >> "$output_path"
-echo '<body>' >> "$output_path"
-echo '<div class="cloud" style="text-align:justify">' >> "$output_path"
+{
+  echo '<?xml version="1.0" encoding="UTF-8"?>'
+  echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">'
+  echo '<html xmlns="http://www.w3.org/1999/xhtml">'
+  echo '<head>'
+  echo '<title>Tag Cloud</title>'
+  echo '</head>'
+  echo '<body>'
+  echo '<div class="cloud" style="text-align:justify">'
+} >> "$output_path"
+
 for key in $unique_keys; do
   echo -ne "Processing $key\033[K\r"
-  keyCount=$(echo "$keys" | grep -co "^$key$")
-  key=$(echo "$key" | sed -e 's/ /\&nbsp;/')
+  keyCount=$(grep -co "^$key\$" <<< "$keys")
+  key=$(sed -e 's/ /\&nbsp;/' <<< "$key")
   # Font size (minimum 1)
   font_size=$(echo "l(${keyCount} - ${min_font_size-0} + 1) + 1" | bc -l)
   echo -n "<span title='$keyCount' style='margin:0em 0.5em 0em 0.5em; font-size:${font_size}em'>$key</span> " >> "$output_path"
 done
-echo '</div>' >> "$output_path"
-echo '</body>' >> "$output_path"
-echo '</html>' >> "$output_path"
+
+{
+  echo '</div>'
+  echo '</body>'
+  echo '</html>'
+} >> "$output_path"
 
 exit 0

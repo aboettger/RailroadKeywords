@@ -5,6 +5,9 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
+cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
+. "$script_path/../libraries/logging.sh" "$cfg_log_level"
+
 script_name=$(basename "$script")
 
 library_path="$1"
@@ -20,7 +23,7 @@ calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/tex
 calibredb list --fields tags --for-machine --search="id:\"=$calibre_id\"" --library-path "$library_path" | \
   jshon -e 0 -e "tags" | \
   tr -d "[" | tr -d "]" | tr -d "," | tr -d "\"" | \
-  sed 's/\\//' | sed 's/^ *//g' | sed 's/ *$//g' | sed '/^$/d' | \
+  sed -e 's/\\//' | sed -e 's/^ *//g' | sed -e 's/ *$//g' | sed -e '/^$/d' | \
 { 
   while read line; do 
     result=$("$script_path"/split_category_and_keyword "$line")
@@ -30,6 +33,7 @@ calibredb list --fields tags --for-machine --search="id:\"=$calibre_id\"" --libr
     if [[ -f "$list_file" ]]; then
       echo "Suche \"$keyword\" in \"$list_file\""
       potentially_false_positive=$(grep -E "^$keyword\$" "$list_file")
+
       if [[ $potentially_false_positive != "" ]]; then
         "$script_path"/grep_potentially_false_positive . "$category" "$keyword"
       fi

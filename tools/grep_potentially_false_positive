@@ -13,26 +13,15 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
+cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
+. "$script_path/../libraries/logging.sh" "$cfg_log_level"
+
 script_name=$(basename "$script")
 
 category_separator=$(look category_separator "$script_path"/../main.cfg | cut -d '=' -f 2-)
 
-red="\e[0;31m"
 green="\e[0;32m"
-yellow="\e[0;33m"
 TOA="\e[0m" # No Color
-
-function logInfo () {
-    echo -e "${green}$1${TOA}"  1>&2
-}
-
-function logWarn () {
-  echo -e "${yellow}$1${TOA}"  1>&2
-}
-
-function logError () {
-  echo -e "${red}$1${TOA}"  1>&2
-}
 
 library_path="$1"
 keyword="$3"
@@ -40,10 +29,13 @@ given_category="$2"
 
 if [ -z "$keyword" ] || [ -z "$library_path" ] || [ -z "$given_category" ]; then
   echo "Benutzung: $script_name \"PfadZurCalibreDBOderUnterverzeichnis\" \"Kategorie\" \"Schlüsselwort\""
+  echo "Als Kategorie kann auch das Wildcard * verwendet werden."
   exit 1
 fi
 
-
+if [[ $given_category == "*" ]]; then 
+  given_category=""
+fi
 
 if [ -f "$1" ]; then
   search_root=$(dirname "$1")
@@ -73,17 +65,20 @@ fi
 
 # Wenn ein konkreter Buchpfad in der Calibre-DBgewält wurde, dann dessen
 # Calibre-ID übernehmen
-search_for="tags:\"~^"
+search_for="tags:\"~"
 if [[ $given_category != "" ]]; then
-  search_for="$search_for$given_category$category_separator"
+  search_for="$search_for^$given_category\\$category_separator"
+else
+  search_for="$search_for$given_category\\$category_separator"
 fi
-search_for="$search_for$keyword\$\""
+keyword_search_for=$(sed -e 's/\./\\./g' <<< "$keyword")
+search_for="$search_for$keyword_search_for\$\""
 if [[ -f "$library_path/metadata.opf" ]]; then
   calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "$library_path/metadata.opf")
   search_for="$search_for AND id:\"=$calibre_id\""
 fi
 
-echo -e "Suche mittels ${green}$search_for${TOA} in Calibre"
+logDebug "Suche mittels \"$search_for\" in Calibre"
 result=$(eval calibredb list --for-machine --library-path "\"$calibreDbSearchPath\" " --fields=tags -s "'$search_for'")
 
 if [[ $result == "[]" ]]; then
@@ -91,10 +86,40 @@ if [[ $result == "[]" ]]; then
   exit 1
 fi
 
-calibre_ids=$(awk -F"\"id\": " '{print $2}' <<< "$result" | sed 's/,//g' | sed '/^$/d')
+calibre_ids=$(awk -F"\"id\": " '{print $2}' <<< "$result" | sed -e 's/,//g' | sed -e '/^$/d')
 
 countCalibreIds=$(wc -l <<< "$calibre_ids")
 count=0
+
+if [[ ! -z $given_category ]]; then
+  pattern_files=$(find "$script_path"/../pattern -type f -exec grep -q "^category=$given_category\$" {} \; -print)
+else
+  pattern_files=$(find "$script_path"/../pattern -type f -name "*.pattern")
+fi
+
+pattern_files_hit=$(
+  logDebug "Suche passende Pattern-Datei"
+  while read pattern_file; do
+    if [[ ! -z $pattern_file ]]; then
+
+      keyword_for_pattern=$(sed -e "s/^$category//" <<< "$keyword" | sed -e "s/-/ - /")
+      keyword_for_pattern=$(sed -e "s/^\\$category_separator//" <<< "$keyword_for_pattern")
+      
+      patterns=$("$script_path/../functions/getPattern.sh" "$pattern_file")
+      
+      
+      while read -r pattern; do
+        result=$(grep -E "$pattern" <<< " $keyword_for_pattern ")
+        if [[ $result != "" ]]; then
+          echo "$pattern_file"
+        fi
+      done <<< "$patterns"
+    fi
+  done <<< "$pattern_files"
+)
+
+pattern_files_hit=$(sed -e '/^$/d' <<< "$pattern_files_hit")
+
 while read -r calibre_id; do
   count=$((count+1))
   metadata_files=$(find "$library_path" -type f -name "metadata.opf")
@@ -107,36 +132,39 @@ while read -r calibre_id; do
     fi
   done <<< "$metadata_files"
 
-  if [[ $category_separator != "" ]]; then
-    pattern_files=$(find "$script_path"/../pattern -type f -exec grep -q "^category=$given_category\$" {} \; -print)
-  else
-    pattern_files=$(find "$script_path"/../pattern -type f -name "*.pattern")
-  fi
-    
-  pattern_files_hit=$(
-    while read pattern_file; do
-      category=$(look category "$pattern_file" | cut -d '=' -f 2-)
-      keyword_for_pattern=$(sed "s/^$category//" <<< "$keyword" | sed "s/-/ - /")
-      keyword_for_pattern=$(sed "s/^\\$category_separator//" <<< "$keyword_for_pattern")
-      
-      patterns=$("$script_path/../functions/getPattern.sh" "$pattern_file")
-      
-      
-      while read -r pattern; do
-        result=$(grep -E "$pattern" <<< " $keyword_for_pattern ")
-        if [[ $result != "" ]]; then
-          echo "$pattern_file"
-        fi
-      done <<< "$patterns"
-    done <<< "$pattern_files"
-  )
-  
-  pattern_files_hit=$(sed '/^$/d' <<< "$pattern_files_hit")
+  # if [[ ! -z $given_category ]]; then
+  #   pattern_files=$(find "$script_path"/../pattern -type f -exec grep -q "^category=$given_category\$" {} \; -print)
+  # else
+  #   pattern_files=$(find "$script_path"/../pattern -type f -name "*.pattern")
+  # fi
+  # 
+  # pattern_files_hit=$(
+  #   logDebug "Suche passende Pattern-Datei"
+  #   while read pattern_file; do
+  #     if [[ ! -z $pattern_file ]]; then
+  # 
+  #       keyword_for_pattern=$(sed -e "s/^$category//" <<< "$keyword" | sed -e "s/-/ - /")
+  #       keyword_for_pattern=$(sed -e "s/^\\$category_separator//" <<< "$keyword_for_pattern")
+  #       
+  #       patterns=$("$script_path/../functions/getPattern.sh" "$pattern_file")
+  #       
+  #       
+  #       while read -r pattern; do
+  #         result=$(grep -E "$pattern" <<< " $keyword_for_pattern ")
+  #         if [[ $result != "" ]]; then
+  #           echo "$pattern_file"
+  #         fi
+  #       done <<< "$patterns"
+  #     fi
+  #   done <<< "$pattern_files"
+  # )
+  # 
+  # pattern_files_hit=$(sed -e '/^$/d' <<< "$pattern_files_hit")
 
   if [[ $pattern_files_hit == "" ]]; then
     echo "[$count/$countCalibreIds] Calibre ID: $calibre_id - Es wurde kein Suchmuster gefunden, welches auf \"$keyword\" passt."
   else
-    echo -e "${green}$keyword${TOA} für Calibre-ID ${green}$calibre_id${TOA} wurde erstellt durch ${green}$pattern_files_hit${TOA}"
+    logDebug "\"$keyword\" für Calibre-ID \"$calibre_id\" wurde erstellt durch \"$pattern_files_hit\""
     dont_ask_file=""
     ignore_file=""
     while read pattern_file_hit; do
@@ -148,12 +176,14 @@ while read -r calibre_id; do
       # echo "$true_positive_file"
 
       category=$(look category "$pattern_file_hit" | cut -d '=' -f 2-)
-      # keyword=$(sed "s/^$category//" <<< "$keyword")
-      # keyword=$(sed "s/^\\$category_separator//" <<< "$keyword")
+      # keyword=$(sed -e "s/^$category//" <<< "$keyword")
+      # keyword=$(sed -e "s/^\\$category_separator//" <<< "$keyword")
       grep_true_positive_keyword=""
-      if [ -f "$true_positive_file" ]; then
-        if [[ $given_category != "" ]]; then
+      if [[ -f $true_positive_file ]]; then
+        if [[ ! -z $given_category ]]; then
           grep_true_positive_keyword="$grep_true_positive_keyword$given_category$category_separator"
+        else
+          grep_true_positive_keyword="$grep_true_positive_keyword$category$category_separator"
         fi
         grep_true_positive_keyword="$grep_true_positive_keyword$keyword"
         grep_true_positive_keyword=$(sed -e 's/\//\\\//g' <<< "$grep_true_positive_keyword" | sed -e 's/\./\\\./g')
@@ -162,28 +192,28 @@ while read -r calibre_id; do
         true_positive=""
       fi
       
-      if [ ! -z "$true_positive" ]; then
-        echo -e "${green}$keyword${TOA} wurde in ${green}$true_positive${TOA} gefunden, keine Aktion nötig."
+      if [[ ! -z $true_positive ]]; then
+        logInfo "\"$keyword\" wurde in \"$true_positive\" gefunden, keine Aktion nötig."
       else
         pdf_path=$(find "$working_path" -type f -name '*.pdf')
         hr_txt_path=${pdf_path//.pdf/.human-readable.txt}
         txt_path=${pdf_path//.pdf/.txt}
 
         keyword_pattern=""
-        if [[ $given_category != "" ]]; then
-          keyword_pattern="$keyword_pattern$given_category$category_separator"
+        if [[ ! -z $category ]]; then
+          keyword_pattern="$keyword_pattern$category$category_separator"
         fi
         keyword_pattern="$keyword_pattern$keyword"
         keyword_pattern=$(sed -e 's/\//\\\//g' <<< "$keyword_pattern" | sed -e 's/\./\\\./g')
 
-        grep_by=$(sed "s/^$category\\$category_separator//" <<< "$keyword" | sed "s/-/ - /" | sed -e 's/\//\\\//g' | sed -e 's/\./\\\./g' | sed -E "s/^(.*)\$/[[:space:]]\1[[:space:]]/g")
+        grep_by=$(sed -e "s/^$category\\$category_separator//" <<< "$keyword" | sed -e "s/-/ - /" | sed -e 's/\//\\\//g' | sed -e 's/\./\\\./g' | sed -E "s/^(.*)\$/[[:space:]]\1[[:space:]]/g")
         # echo "###$grep_by"
         egrep -anET -C 5 "$grep_by" "$txt_path"
 
         ignore_file="$false_positive_file"
         dont_ask_file="$true_positive_file"
-        
-        if [[ $category == "" ]]; then
+
+        if [[ -z $category ]]; then
           true_positive_keyword="$keyword"
         else
           true_positive_keyword="$category$category_separator$keyword"
@@ -203,16 +233,16 @@ while read -r calibre_id; do
           case $input in
               [1]* )
                 echo "$calibre_id=$true_positive_keyword" >> "$dont_ask_file"
-                echo -e "Nach \"$keyword\" für Calibre-ID \"$calibre_id\" wird nicht mehr gefragt: ${green}$calibre_id=$true_positive_keyword${TOA} in \"$dont_ask_file\""
+                logDebug "Nach \"$keyword\" für Calibre-ID \"$calibre_id\" wird nicht mehr gefragt: \"$calibre_id=$true_positive_keyword\" in \"$dont_ask_file\""
                 break;;
               [2]* )
                 echo "$calibre_id=^($keyword_pattern)\$" >> "$ignore_file"
                 extract_and_write_keywords_into_calibre "$working_path"
-                echo -e "\"$keyword\" für Calibre-ID \"$calibre_id\" wurde dauerhaft entfernt: ${green}$calibre_id=^($keyword_pattern)\$${TOA} in \"$ignore_file\""
+                logDebug "\"$keyword\" für Calibre-ID \"$calibre_id\" wurde dauerhaft entfernt: \"$calibre_id=^($keyword_pattern)\$\" in \"$ignore_file\""
                 break;;
               [3]* )
                 echo "$calibre_id=^($keyword_pattern)\$" >> "$ignore_file"
-                echo -e "\"$keyword\" für Calibre-ID \"$calibre_id\" wurde zur dauerhaften Entfernung vorgemerkt: ${green}$calibre_id=^($keyword_pattern)\$${TOA} in \"$ignore_file\""
+                logDebug "\"$keyword\" für Calibre-ID \"$calibre_id\" wurde zur dauerhaften Entfernung vorgemerkt: \"$calibre_id=^($keyword_pattern)\$\" in \"$ignore_file\""
                 break;;
               [4]* )
                 echo "Öffne \"$pdf_path\""
