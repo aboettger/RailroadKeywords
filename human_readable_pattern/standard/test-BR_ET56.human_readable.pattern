@@ -1,0 +1,30 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/ET56.asc
+
+category=Baureihen[category_separator]ET56
+
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
+
+pattern_not_merge=([[:space:]]ET[[:space:]]{0,1}56[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]ET[[:space:]]{0,1}56(\.([0]|00[1-7]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]ET[[:space:]]{0,1}56[[:space:]]0(0[1-7])([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]ET[[:space:]]{0,1}56[[:space:]]001([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]ET[[:space:]]{0,1}56[[:space:]]002([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]ET[[:space:]]{0,1}56[[:space:]]003([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]ET[[:space:]]{0,1}56[[:space:]]004([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]ET[[:space:]]{0,1}56[[:space:]]005([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]ET[[:space:]]{0,1}56[[:space:]]006([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
+
+pattern=([[:space:]]ET[[:space:]]{0,1}56[[:space:]]007([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))([[:space:]]|-[0-9]))
+
