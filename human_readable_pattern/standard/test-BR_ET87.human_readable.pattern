@@ -1,0 +1,12 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/ET87.asc
+
+category=Baureihen[category_separator]ET87
+
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
+
+pattern_not_merge=([[:space:]]ET[[:space:]]{0,1}87[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]ET[[:space:]]{0,1}87[[:space:]](0[1-5])[[:space:]])
+
