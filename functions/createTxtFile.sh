@@ -72,7 +72,7 @@ logInfo "Schreibe \"$pdf_filename.txt\" neu."
 # Ständiger Wechsel zwischen temp_file_1 und temp_file_2
 sed -E ':a;N;$!ba;s/([a-z])\-\n([a-z])/\1\2/g' "$pdf_dirname/$pdf_filename.human-readable.txt" > "$temp_file_1"
 sed -E ':a;N;$!ba;s/([a-zA-Z])(\-)\n([A-Z])/\1\2\3/g' "$temp_file_1" > "$temp_file_2"
-sed -e ':a;N;$!ba;s/\n/ \n /g' "$temp_file_2" | sed -e 's/['"$make_space"']/ /g' | sed -e 's/\*[[:space:]]/ \* /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\![[:space:]]/ \! /g' | sed -e 's/\?[[:space:]]/ \? /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -E 's/\-/ - /g' | sed -E 's/([0-9])\-(.)/\1 - \2/g' | sed -E 's/[[:space:]]{2,}/ /g' | sed -E 's/([[:space:]]BR)([0-9])/\1 \2/g' > "$temp_file_1"
+sed -e ':a;N;$!ba;s/\n/ \n /g' "$temp_file_2" | sed -e 's/['"$make_space"']/ /g' | sed -e 's/\*[[:space:]]/ \* /g' | sed -e 's/\.\./ /g'  | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\![[:space:]]/ \! /g' | sed -e 's/\?[[:space:]]/ \? /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -E 's/\-/ - /g' | sed -E 's/([0-9])\-(.)/\1 - \2/g' | sed -E 's/[[:space:]]{2,}/ /g' | sed -E 's/([[:space:]]BR)([0-9])/\1 \2/g' > "$temp_file_1"
 sed -E 's/[[:space:]][a-z]{3,}/ ~/g' "$temp_file_1" > "$temp_file_2"
 sed -E 's/\(cid\:[0-9]{1,3}\)//g' "$temp_file_2" > "$temp_file_1"
 # Move the temporary file 
