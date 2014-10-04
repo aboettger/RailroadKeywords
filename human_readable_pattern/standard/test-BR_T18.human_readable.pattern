@@ -1,0 +1,12 @@
+# Quelle: http://www.albert-gieseler.de/dampf_de/maschinen16/dampfdet166843.shtml
+# Quelle: http://www.albert-gieseler.de/dampf_de/maschinen16/dampfdet166844.shtml
+
+category=Baureihen[category_separator]T18
+
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
+
+pattern_not_merge=([[:space:]]T[[:space:]]{0,1}18[[:space:]])
+
+pattern_not_merge=([[:space:]]T[[:space:]]{0,1}18(\.10)[[:space:]])
+
+pattern=([[:space:]]T[[:space:]]{0,1}18[[:space:]]10(0[12])[[:space:]])
