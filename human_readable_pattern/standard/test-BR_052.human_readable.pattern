@@ -2,29 +2,29 @@
 
 category=Baureihen[category_separator]052
 
-pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052(\.[0-9])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]052[[:space:]])
+pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052(\.[0-9])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]052[[:space:]])
 pattern=([[:space:]]052er[[:space:]])
 
 # BR 052.0
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]0(0[146789]|1[0234579]|2[0134789]|3[01456789]|4[12367]|5[1578]|6[23489]|7[256789]|8[0235679]|9[0135678])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]0(0[146789]|1[0234579]|2[0134789]|3[01456789]|4[12367]|5[1578]|6[23489]|7[256789]|8[0235679]|9[0135678])([[:space:]]|-[0-9])
 # BR 052.1
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]1(0[02345689]|1[013456789]|2[01234569]|3[011234789]|4[1235789]|5[2467]|6[013789]|7[01345679]|8[023456789]|9[012456789])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]1(0[02345689]|1[013456789]|2[01234569]|3[011234789]|4[1235789]|5[2467]|6[013789]|7[01345679]|8[023456789]|9[012456789])([[:space:]]|-[0-9])
 # BR 052.2
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]2(0[0123678]|1[2358]|2[2-5]|3[029]|4[1347]|5[0]|6[0126789]|7[1245678]|8[01235689]|9[012356789])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]2(0[0123678]|1[2358]|2[2-5]|3[029]|4[1347]|5[0]|6[0126789]|7[1245678]|8[01235689]|9[012356789])([[:space:]]|-[0-9])
 # BR 052.3
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]3(0[2456]|1[05789]|2[03467]|3[012345679]|4[01]|5[134678]|6[1-9]|7[0123459]|8[14679]|9[12357])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]3(0[2456]|1[05789]|2[03467]|3[012345679]|4[01]|5[134678]|6[1-9]|7[0123459]|8[14679]|9[12357])([[:space:]]|-[0-9])
 # BR 052.4
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]4(0[124689]|1[0234578]|2[01345689]|3[013478]|4[0234678]|5[012489]|6[012358]|7[234579]|8[01234689]|9[0136789])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]4(0[124689]|1[0234578]|2[01345689]|3[013478]|4[0234678]|5[012489]|6[012358]|7[234579]|8[01234689]|9[0136789])([[:space:]]|-[0-9])
 # BR 052.5
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]5(0[0189]|1[0123469]|2[0124569]|3[02579]|4[4589]|5[123678]|6[14579]|7[0-6]|8[016]|9[0256789])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]5(0[0189]|1[0123469]|2[0124569]|3[02579]|4[4589]|5[123678]|6[14579]|7[0-6]|8[016]|9[0256789])([[:space:]]|-[0-9])
 # BR 052.6
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]6(0[023479]|1[0346789]|2[0568]|3[568]|4[046]|5[37]|6[28]|7[469]|8[0178]|9[023456789])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]6(0[023479]|1[0346789]|2[0568]|3[568]|4[046]|5[37]|6[28]|7[469]|8[0178]|9[023456789])([[:space:]]|-[0-9])
 # BR 052.7
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]7(0[0234579]|1[23569]|2[1236789]|3[345679]|4[12358]|5[01256789]|6[012389]|7[01289]|8[0123569]|9[0145789])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]7(0[0234579]|1[23569]|2[1236789]|3[345679]|4[12358]|5[01256789]|6[012389]|7[01289]|8[0123569]|9[0145789])([[:space:]]|-[0-9])
 # BR 052.8
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]8(0[14678]|1[125679]|2[01357]|3[012346789]|4[012345689]|5[023456789]|6[012345679]|7[023789]|8[024568]|9[01589])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]8(0[14678]|1[125679]|2[01357]|3[012346789]|4[012345689]|5[023456789]|6[012345679]|7[023789]|8[024568]|9[01589])([[:space:]]|-[0-9])
 # BR 052.9
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]9(0[0236789]|1[023468]|2[0348]|3[458]|4[125]|5[01237]|6[01346789]|7[0234589]|8[035689]|9[013467])([[:space:]]|-[0-9])
+pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]052[[:space:]]9(0[0236789]|1[023468]|2[0348]|3[458]|4[125]|5[01237]|6[01346789]|7[0234589]|8[035689]|9[013467])([[:space:]]|-[0-9])
 
 # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
-pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*Mo.*)|([[:space:]]*Di.*)|([[:space:]]*Mi.*)|([[:space:]]*Do.*)|([[:space:]]*Fr.*)|([[:space:]]*S(a|o).*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*E.*)|([[:space:]]*ET.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*Mo.*)|([[:space:]]*Di.*)|([[:space:]]*Mi.*)|([[:space:]]*Do.*)|([[:space:]]*Fr.*)|([[:space:]]*S(a|o).*)|([[:space:]]*P.*)|([[:space:]]*T.*)|([[:space:]]*D.*)|([[:space:]]*H.*)|([[:space:]]*E.*)|([[:space:]]*ET.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VM.*)|([[:space:]]*VS*)|([[:space:]]*VT.*))|(-[0-9])
