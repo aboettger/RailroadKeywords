@@ -1,0 +1,11 @@
+# Quelle: https://de.wikipedia.org/wiki/DR_H_02_1001
+
+category=Baureihen[category_separator]H02
+
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
+
+pattern_not_merge=([[:space:]]H[[:space:]]{0,1}02[[:space:]])
+
+pattern_not_merge=([[:space:]]H[[:space:]]{0,1}02(\.10)[[:space:]])
+
+pattern=([[:space:]]H[[:space:]]{0,1}02[[:space:]]10(01)[[:space:]])
