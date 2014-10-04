@@ -108,7 +108,7 @@ function runTest () {
        logError "Einträge ohne Leerzeichen am Anfang gefunden: $file"
        exit 1
      fi
-     
+
      matched_elements_without_leading=$(sed -e '/^[[:space:]]*#/d' "$file" | sed -e '/^ *$/d' | grep '^  ')
      if [ "$matched_elements_without_leading" != "" ]; then
        logError "$matched_elements_without_leading"
@@ -122,7 +122,7 @@ function runTest () {
        logError "Einträge ohne Leerzeichen am Ende gefunden: $file"
        exit 1
      fi
-     
+
      matched_elements_without_single_trailing=$(sed -e '/^[[:space:]]*#/d' "$file" | sed -e '/^ *$/d' | grep '  $')
      if [ "$matched_elements_without_single_trailing" != "" ]; then
        logError "$matched_elements_without_single_trailing"
@@ -137,7 +137,7 @@ function runTest () {
   # positive tests
   test_name_positive=${pattern_name//pattern/positive}
   logInfo "$test_name_positive"
-  
+
   find "$test_path" -type f -name "$test_name_positive*.list" | sort | { while read -r test_case_positive;
     do
       test_results=$(getResults "$pattern_case" "$test_case_positive" "1")
@@ -146,17 +146,18 @@ function runTest () {
       logInfo "TestCase: $(basename "$test_case_positive")"
       category=$(look category "$pattern_case" | cut -d '=' -f 2-)
       test_results=$(sed -e "s/$category\.//g" <<< "$test_results")
-      
+
       temp_file_1="$script_path/test_results/$(basename "$test_case_positive").1"
       temp_file_2="$script_path/test_results/$(basename "$test_case_positive").2"
 
       echo "$test_results" > "$temp_file_1"
       logWarn "$test_results"
+
+      sed -e '/^[[:space:]]*$/d' "$test_case_positive" | sed -e '/^[[:space:]]*#/d' | sed -e 's/^[[:space:]]*//g' | sed -e 's/[[:space:]]*$//g' | sed -e 's/ - /-/g' > "$temp_file_2"
       
-      sed -e '/^[[:space:]]*$/d' "$test_case_positive" | sed -e '/^[[:space:]]*#/d' | sed -e 's/^[[:space:]]*//g' | sed -e 's/[[:space:]]*$//g' > "$temp_file_2"
-      diff -Barq <(sort "$temp_file_1") <(sort "$temp_file_2")  >/dev/null 2>&1; if [ $? -gt 0 ]; then logError "Test failed."; exit 1; else logInfo "Test OK"; fi
+      diff -Barq <(sort "$temp_file_1") <(sort "$temp_file_2")  >/dev/null 2>&1; if [ $? -gt 0 ]; then diff <(sort "$temp_file_2") <(sort "$temp_file_1") | tee >(grep "<") >(grep ">") > /dev/null 2>&1; logError "Test failed."; exit 1; else logInfo "Test OK"; fi
   done }
-  
+
   if [ $? -gt 0 ]; then exit 1; fi
 
   logInfo "-----"
