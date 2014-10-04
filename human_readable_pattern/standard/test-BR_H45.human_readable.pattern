@@ -1,0 +1,11 @@
+# Quelle: Chronik der Eisenbahn: 1945 bis 1970, Heel (2006), ISBN-13: 9783898805483
+
+category=Baureihen[category_separator]H45
+
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
+
+pattern_not_merge=([[:space:]]H[[:space:]]{0,1}45[[:space:]])
+
+pattern_not_merge=([[:space:]]H[[:space:]]{0,1}45(\.0)[[:space:]])
+
+pattern=([[:space:]]H[[:space:]]{0,1}45[[:space:]]0(24)[[:space:]])
