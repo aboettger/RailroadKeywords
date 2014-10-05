@@ -222,9 +222,10 @@ while read -r calibre_id; do
         echo "2) Schlüsselwort dauerhaft entfernen und Aktualisierung durchführen"
         echo "3) Schlüsselwort dauerhaft entfernen, aber keine Aktualisierung durchführen"
         echo "4) PDF ansehen \"$pdf_path\""
-        echo "5) TXT ansehen \"$hr_txt_path\""
-        echo "6) Verzeichnis öffnen \"$working_path\""
-        echo "7) Nichts tun"
+        echo "5) Original TXT ansehen \"$hr_txt_path\""
+        echo "6) Gekürzten TXT ansehen \"$txt_path\""
+        echo "7) Verzeichnis öffnen \"$working_path\""
+        echo "8) Nichts tun"
         while true; do
           read -p "Bitte wählen: " input < /dev/tty
           case $input in
@@ -250,10 +251,14 @@ while read -r calibre_id; do
                 xdg-open "$hr_txt_path" > /dev/null 2>&1
                 ;;
               [6]* )
+                echo "Öffne \"$txt_path\""
+                xdg-open "$txt_path" > /dev/null 2>&1
+                ;;
+              [7]* )
                 echo "Öffne \"$working_path\""
                 xdg-open "$working_path" > /dev/null 2>&1
                 ;;
-              [7]* ) break;;
+              [8]* ) break;;
               * ) echo "Ungültige Auswahl";;
           esac
         done
