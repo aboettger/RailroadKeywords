@@ -20,9 +20,6 @@ script_name=$(basename "$script")
 
 category_separator=$(look category_separator "$script_path"/../main.cfg | cut -d '=' -f 2-)
 
-green="\e[0;32m"
-TOA="\e[0m" # No Color
-
 library_path="$1"
 keyword="$3"
 given_category="$2"
