@@ -1,0 +1,12 @@
+# Quelle: http://www.albert-gieseler.de/dampf_de/lokdaten14/lokdet140743.shtml
+# Quelle: http://www.albert-gieseler.de/dampf_de/lokdaten14/lokdet140744.shtml
+
+category=Baureihen[category_separator]T09
+
+# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
+
+pattern_not_merge=([[:space:]]T[[:space:]]{0,1}09[[:space:]])
+
+pattern_not_merge=([[:space:]]T[[:space:]]{0,1}09(\.0)[[:space:]])
+
+pattern=([[:space:]]T[[:space:]]{0,1}09[[:space:]]0(0[12])[[:space:]])
