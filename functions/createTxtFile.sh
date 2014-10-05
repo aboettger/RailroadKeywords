@@ -13,8 +13,8 @@ pdf_path="$1"
 pdf_dirname="$2"
 pdf_filename="$3"
 
-make_space=$(python -c 'print u"\u0001\u000C\u0009\u00A0\u2004\u2005\u2006\u2009\u200A\u200B".encode("utf8")')
-make_double_quotes=$(python -c 'print u"\u201c\u201d\u201e\u201f".encode("utf8")')
+spaces=$(python -c 'print u"\u0001\u000C\u0009\u00A0\u2004\u2005\u2006\u2009\u200A\u200B".encode("utf8")')
+double_quotes=$(python -c 'print u"\u201c\u201d\u201e\u201f\u0022".encode("utf8")')
 # pdftotext "$pdf_path" "$pdf_dirname/$pdf_filename.txt"
 # if [ $? -gt 0 ]; then 
 #   logError "Fehler in der Verarbeitung, lösche txt-Dateien"
@@ -72,10 +72,14 @@ logInfo "Schreibe \"$pdf_filename.txt\" neu."
 # !!!!! Runde Klammern dürfen nicht angefasst werden, das gibt Probleme mit Bauarten und Achsfolgen !!!!!
 # Ständiger Wechsel zwischen temp_file_1 und temp_file_2
 sed -E ':a;N;$!ba;s/([a-z])\-\n([a-z])/\1\2/g' "$pdf_dirname/$pdf_filename.human-readable.txt" > "$temp_file_1"
-sed -E ':a;N;$!ba;s/([a-zA-Z])(\-)\n([A-Z])/\1\2\3/g' "$temp_file_1" > "$temp_file_2"
-sed -e ':a;N;$!ba;s/\n/ \n /g' "$temp_file_2" | sed -e 's/['"$make_space"']/ /g' | sed -e 's/['"$make_double_quotes"']/ " /g' | sed -e 's/\*[[:space:]]/ \* /g' | sed -e 's/\.\./ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\![[:space:]]/ \! /g' | sed -e 's/\?[[:space:]]/ \? /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -E 's/\-/ - /g' | sed -E 's/([0-9])\-(.)/\1 - \2/g' | sed -E 's/[[:space:]]{2,}/ /g' | sed -E 's/([[:space:]]BR)([0-9])/\1 \2/g' > "$temp_file_1"
-sed -E 's/[[:space:]][a-z]{3,}/ ~/g' "$temp_file_1" > "$temp_file_2"
-sed -E 's/\(cid\:[0-9]{1,3}\)//g' "$temp_file_2" > "$temp_file_1"
+# Namen die durch Zeilenumbrüche getrennt sind zusammenführen, z.B. "Richard\nTrevithick" --> "Richard Trevithick"
+sed -E ':a;N;$!ba;s/([a-z])\n([A-Z])/\1 \2/g' "$temp_file_1" > "$temp_file_2"
+sed -E ':a;N;$!ba;s/([0-9])\n([0-9])/\1 \2/g' "$temp_file_2" > "$temp_file_1"
+sed -E ':a;N;$!ba;s/([A-Z])\n([0-9])/\1 \2/g' "$temp_file_1" > "$temp_file_2"
+sed -E ':a;N;$!ba;s/([a-zA-Z])(\-)\n([A-Z])/\1\2\3/g' "$temp_file_2" > "$temp_file_1"
+sed -e ':a;N;$!ba;s/\n/ \n /g' "$temp_file_1" | sed -e 's/['"$spaces"']/ /g' | sed -e 's/['"$double_quotes"']//g' | sed -e 's/\*[[:space:]]/ \* /g' | sed -e 's/\.\./ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\![[:space:]]/ \! /g' | sed -e 's/\?[[:space:]]/ \? /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -E 's/\-/ - /g' | sed -E 's/([0-9])\-(.)/\1 - \2/g' | sed -E 's/[[:space:]]{2,}/ /g' | sed -E 's/([[:space:]]BR)([0-9])/\1 \2/g' > "$temp_file_2"
+sed -E 's/[[:space:]][a-z]{3,}/ ~/g' "$temp_file_2" > "$temp_file_1"
+sed -E 's/\(cid\:[0-9]{1,3}\)//g' "$temp_file_1" > "$temp_file_2"
 # Move the temporary file 
 cp "$temp_file_1" "$pdf_dirname/$pdf_filename.txt"
 
