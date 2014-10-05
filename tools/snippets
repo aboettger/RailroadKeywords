@@ -4,7 +4,7 @@ comm -2 -3  <(sort 118\ 001-999.list) <(sort ../tests/test-BR_118.positive.002.l
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readable.txt' | { while read file; do grep -aEl " Nossen " "$file" | { while read -r pdf; do echo "$file"; extract_and_write_keywords_into_calibre "$pdf"; done } done }
 
 # Sucht in vorhandenen txt-dateien, die mittels "pdftotext" erzeugt werden, nach einem Suchbegriff und zeigt den umgebenen Text an
-find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readable.txt' | { while read file; do egrep -anET -C 5 "Pfälzische" "$file"; done }
+find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readable.txt' | { while read file; do egrep -anETH -C 5 "Pfälzische" "$file"; done }
 
 # Findet PDFs ohne txt-Dateien, die mittels "pdftotext" erzeugt werden und startet "extract_and_write_keywords_into_calibre"
 find_with_pdf_without_txt ~/Eisenbahn/Eisenbahnliteratur | { while read -r pdf; do extract_and_write_keywords_into_calibre "$pdf"; done }
@@ -37,7 +37,10 @@ find 0 -type f -name "*.asc"  | { while read file; do sed -e 's/\t/ /g' "$file" 
 find ~/src/RailroadKeywords/tests/standard -type f -name "*.list"  | { while read file; do sed -e 's/^ */ /g' "$file" | sed -e 's/ *$/ /g' > ~/tmp/list/$(basename "$file"); mv ~/tmp/list/$(basename "$file") "$file"; done }
 
 # Alle Einträge in "false_positive" nach Schlüsselwörtern durchsuchen lassen
-find "/home/aboettger/src/RailroadKeywords/false_positive" -type f -name "*.pattern" | { while read file; do ids=$(sed -e '/^#/d' "$file" | grep -E "^[0-9]+=" | gawk  -F '=' '{print $1}' | sort | uniq); echo "$ids" | { while read -r line; do find ~/Eisenbahn/Eisenbahnliteratur -type d -name "*($line)*" | { while read entry; do ~/src/RailroadKeywords/extract_and_write_keywords_into_calibre "$entry"; done}; done}; done}
+#find "/home/aboettger/src/RailroadKeywords/false_positive" -type f -name "*.pattern" | { while read file; do ids=$(sed -e '/^#/d' "$file" | grep -E "^[0-9]+=" | gawk  -F '=' '{print $1}' | sort | uniq); echo "$ids" | { while read -r line; do find ~/Eisenbahn/Eisenbahnliteratur -type d -name "*($line)*" | { while read entry; do ~/src/RailroadKeywords/extract_and_write_keywords_into_calibre "$entry"; done}; done}; done}
 
 
 calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "./metadata.opf"); calibredb list --fields tags --for-machine --search="id:\"=$calibre_id\"" --library-path ~/Eisenbahn/Eisenbahnliteratur  | jshon -e 0 -e "tags" | tr -d "[" | tr -d "]" | tr -d "," | tr -d "\"" | sed -e 's/\\//' | sed -e 's/^ *//g' | sed -e 's/ *$//g' | sed -e '/^$/d'
+
+# Für ein Heft alle Schlüsselwörter prüfen
+calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "./metadata.opf"); calibredb list --fields tags --for-machine --search="id:\"=$calibre_id\"" --library-path ~/Eisenbahn/Eisenbahnliteratur  | jshon -e 0 -e "tags" | tr -d "[" | tr -d "]" | tr -d "," | tr -d "\"" | sed 's/\\//' | sed 's/^ *//g' | sed 's/ *$//g' | sed '/^$/d' | { while read line; do result=$(/home/aboettger/src/RailroadKeywords/tools/split_category_and_keyword "$line"); category=$(grep "category" <<< "$result" | awk -F '\t' '{print $2}'); keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}'); /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive . "$category" "$keyword"; done;}
