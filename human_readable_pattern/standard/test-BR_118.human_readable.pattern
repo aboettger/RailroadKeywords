@@ -2,7 +2,7 @@
 
 category=Baureihen[category_separator]118
 
-pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]118(\.[0-8])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]118[[:space:]])
+pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]118(\.[0-8])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]118[[:space:]])
 pattern=([[:space:]]118er[[:space:]])
 # BR 118.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]118[[:space:]]0(0[2-9]|[1-7][0-9]|8[0-7])([[:space:]]|-[0-9])

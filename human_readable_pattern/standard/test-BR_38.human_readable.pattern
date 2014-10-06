@@ -2,7 +2,7 @@
 
 category=Baureihen[category_separator]38
 
-pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]38(\.(([0,2-5])|1[0-9]|2[0-9]|3[0-9]|4[0-6]|5[2-3]|70))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]38[[:space:]])
+pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]38(\.(([0,2-5])|1[0-9]|2[0-9]|3[0-9]|4[0-6]|5[2-3]|70))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]38[[:space:]])
 pattern=([[:space:]]38er[[:space:]])
 
 # BR 38.0

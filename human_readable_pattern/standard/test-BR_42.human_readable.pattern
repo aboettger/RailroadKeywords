@@ -2,7 +2,7 @@
 
 category=Baureihen[category_separator]42
 
-pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]42(\.(([0,4-9])|00|1[0,3-9]|2[3-8]|50|90))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]42[[:space:]])
+pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]42(\.(([0,4-9])|00|1[0,3-9]|2[3-8]|50|90))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]42[[:space:]])
 pattern=([[:space:]]42er[[:space:]])
 # BR 42.0
 pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]42[[:space:]]0(0[1-3])([[:space:]]|-[0-9])
