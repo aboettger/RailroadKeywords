@@ -13,6 +13,6 @@ pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:s
 
 # Pattern #2
 
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]244[[:space:]]0(3[01]|4[245689]|5[124]|6[389]|7[3]|9[25])([[:space:]]|-[0-9])
+pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]244[[:space:]]0(3[01]|4[245689]|5[124]|6[389]|7[3]|9[25])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]244[[:space:]]1(0[123589]|1[234]|2[34578]|3[012345679]|4[368]|5[1]|7[8])([[:space:]]|-[0-9])
+pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]244[[:space:]]1(0[123589]|1[234]|2[34578]|3[012345679]|4[368]|5[1]|7[8])([[:space:]]|-[0-9])

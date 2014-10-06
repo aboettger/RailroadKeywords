@@ -13,10 +13,10 @@ pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:s
 
 # Pattern #2
 
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]241[[:space:]]0(0[8])([[:space:]]|-[0-9])
+pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]241[[:space:]]0(0[8])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]241[[:space:]]3(3[8]|5[3])([[:space:]]|-[0-9])
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]241[[:space:]]4(4[9])([[:space:]]|-[0-9])
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]241[[:space:]]6(9[7])([[:space:]]|-[0-9])
+pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]241[[:space:]]3(3[8]|5[3])([[:space:]]|-[0-9])
+pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]241[[:space:]]4(4[9])([[:space:]]|-[0-9])
+pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]241[[:space:]]6(9[7])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]241[[:space:]]8(0[1-5])([[:space:]]|-[0-9])
+pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]241[[:space:]]8(0[1-5])([[:space:]]|-[0-9])

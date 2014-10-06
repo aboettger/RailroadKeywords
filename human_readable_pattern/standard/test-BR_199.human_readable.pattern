@@ -13,12 +13,12 @@ pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:s
 
 # Pattern #2
 
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]199[[:space:]]0(0[1-8]|1[012]|3[0])([[:space:]]|-[0-9])
+pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]199[[:space:]]0(0[1-8]|1[012]|3[0])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]199[[:space:]]1(0[123])([[:space:]]|-[0-9])
+pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]199[[:space:]]1(0[123])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]199[[:space:]]3(0[1]|1[0])([[:space:]]|-[0-9])
+pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]199[[:space:]]3(0[1]|1[0])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]199[[:space:]]8(0[12]|6[13]|7[012479]|9[12])([[:space:]]|-[0-9])
+pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]199[[:space:]]8(0[12]|6[13]|7[012479]|9[12])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]P|[[:space:]]T|[[:space:]]D|[[:space:]]H|[[:space:]]E|[[:space:]]ET|[[:space:]]V|[[:space:]]VB|[[:space:]]VM|[[:space:]]VS|[[:space:]]VT|)[[:space:]]199[[:space:]]9(9[12])([[:space:]]|-[0-9])
+pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]199[[:space:]]9(9[12])([[:space:]]|-[0-9])
