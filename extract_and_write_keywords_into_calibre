@@ -13,6 +13,11 @@ script_path=$(dirname "$script")
 cfg_log_level=$(look log_level "$script_path"/main.cfg | cut -d '=' -f 2-)
 . "$script_path/libraries/logging.sh" "$cfg_log_level"
 
+cfg_dry_run=$(look dry_run "$script_path"/main.cfg | cut -d '=' -f 2-)
+if [[ -z $cfg_dry_run ]]; then
+  cfg_dry_run=0
+fi
+
 function trapint {
   echo
   echo
@@ -193,7 +198,7 @@ while read -r pdf_path; do
 
     # echo "Tags alt: >$old_keywords<"
     # echo "Tags neu: >$keywords<"
-    if [ "$old_keywords" != "$keywords" ]; then
+    if [[ $old_keywords != "$keywords" ]] && [[ $cfg_dry_run == "0" ]]; then
       calibredb set_metadata --field tags:"$keywords" "$calibre_id" --library-path="$calibreDbSearchPath"
     fi
     

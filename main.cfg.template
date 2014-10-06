@@ -7,6 +7,8 @@
 
 category_separator=.
 
+#bad_prefix=D,E,ET,H,T,V,VB,VS,VT
+
 # Eine durch Kommas (,) getrennte Liste der Dateien im Verzeichnis "pattern", die
 # verwendet werden sollen.
 #
