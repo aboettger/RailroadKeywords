@@ -2,6 +2,9 @@
 
 category=Baureihen[category_separator]02
 
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*Mo.*)|([[:space:]]*Di.*)|([[:space:]]*Mi.*)|([[:space:]]*Do.*)|([[:space:]]*Fr.*)|([[:space:]]*S(a|o).*)|([[:space:]]*D.*)|([[:space:]]*E.*)|([[:space:]]*ET.*)|([[:space:]]*H.*)|([[:space:]]*T.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VS.*)|([[:space:]]*VT.*))
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|(-.*)
+
 pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]02(\.[0-1]|\.02|\.03|\.10)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]02[[:space:]])
 pattern=([[:space:]]02er[[:space:]])
 # 02.0
@@ -14,6 +17,3 @@ pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:sp
 pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]02[[:space:]]03(14)([[:space:]]|-[0-9])
 # 02.10
 pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]02[[:space:]]10(01)([[:space:]]|-[0-9])
-
-# EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
-pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*Mo.*)|([[:space:]]*Di.*)|([[:space:]]*Mi.*)|([[:space:]]*Do.*)|([[:space:]]*Fr.*)|([[:space:]]*S(a|o).*)|([[:space:]]*D.*)|([[:space:]]*E.*)|([[:space:]]*ET.*)|([[:space:]]*H.*)|([[:space:]]*T.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VS.*)|([[:space:]]*VT.*))

@@ -2,6 +2,9 @@
 
 category=Baureihen[category_separator]23
 
+pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*Mo.*)|([[:space:]]*Di.*)|([[:space:]]*Mi.*)|([[:space:]]*Do.*)|([[:space:]]*Fr.*)|([[:space:]]*S(a|o).*)|([[:space:]]*D.*)|([[:space:]]*E.*)|([[:space:]]*ET.*)|([[:space:]]*H.*)|([[:space:]]*T.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VS.*)|([[:space:]]*VT.*))
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|(-.*)
+
 pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]23(\.0|\.1|\.10|\.11)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]23[[:space:]])
 pattern=([[:space:]]23er[[:space:]])
 
@@ -16,7 +19,3 @@ pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:sp
 
 # BR 23.11
 pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]23[[:space:]]11(0[0-9]|1[0-3])([[:space:]]|-[0-9])
-
-
-# EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
-pattern_delete=(^([[:space:]]*§.*)|([[:space:]]*Mo.*)|([[:space:]]*Di.*)|([[:space:]]*Mi.*)|([[:space:]]*Do.*)|([[:space:]]*Fr.*)|([[:space:]]*S(a|o).*)|([[:space:]]*D.*)|([[:space:]]*E.*)|([[:space:]]*ET.*)|([[:space:]]*H.*)|([[:space:]]*T.*)|([[:space:]]*V.*)|([[:space:]]*VB.*)|([[:space:]]*VS.*)|([[:space:]]*VT.*))
