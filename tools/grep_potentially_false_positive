@@ -99,7 +99,7 @@ pattern_files_hit=$(
   while read pattern_file; do
     if [[ ! -z $pattern_file ]]; then
 
-      keyword_for_pattern=$(sed -e "s/^$category//" <<< "$keyword" | sed -e "s/-/ - /")
+      keyword_for_pattern=$(sed -e "s/^$category//" <<< "$keyword")
       keyword_for_pattern=$(sed -e "s/^\\$category_separator//" <<< "$keyword_for_pattern")
       
       patterns=$("$script_path/../functions/getPattern.sh" "$pattern_file")
@@ -140,7 +140,7 @@ while read -r calibre_id; do
   #   while read pattern_file; do
   #     if [[ ! -z $pattern_file ]]; then
   # 
-  #       keyword_for_pattern=$(sed -e "s/^$category//" <<< "$keyword" | sed -e "s/-/ - /")
+  #       keyword_for_pattern=$(sed -e "s/^$category//" <<< "$keyword")
   #       keyword_for_pattern=$(sed -e "s/^\\$category_separator//" <<< "$keyword_for_pattern")
   #       
   #       patterns=$("$script_path/../functions/getPattern.sh" "$pattern_file")
@@ -203,7 +203,7 @@ while read -r calibre_id; do
         keyword_pattern="$keyword_pattern$keyword"
         keyword_pattern=$(sed -e 's/\//\\\//g' <<< "$keyword_pattern" | sed -e 's/\./\\\./g')
 
-        grep_by=$(sed -e "s/^$category\\$category_separator//" <<< "$keyword" | sed -e "s/-/ - /" | sed -e 's/\//\\\//g' | sed -e 's/\./\\\./g' | sed -E "s/^(.*)\$/[[:space:]]\1[[:space:]]/g")
+        grep_by=$(sed -e "s/^$category\\$category_separator//" <<< "$keyword" | sed -e 's/\//\\\//g' | sed -e 's/\./\\\./g' | sed -E "s/^(.*)\$/[[:space:]]\1[[:space:]]/g")
         # echo "###$grep_by"
         egrep -anET -C 5 "$grep_by" "$txt_path"
 

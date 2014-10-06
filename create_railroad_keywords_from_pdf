@@ -76,9 +76,6 @@ function getResults () {
       fi
       while read -r keyword; do
         if [[ $keyword != "" ]]; then
-          # Da ich bei der Erstellung der txt-Dateien einen Bindestrich "-"
-          # durch " - " ersetze, muss ich das hier wieder rückgängig machen.
-          keyword=${keyword// - /-}
           if [[ $cfg_category_separator == "" ]] || [[ $category == "" ]]; then
             echo "$keyword"
           else
@@ -153,7 +150,7 @@ function runTest () {
       echo "$test_results" > "$temp_file_1"
       logWarn "$test_results"
 
-      sed -e '/^[[:space:]]*$/d' "$test_case_positive" | sed -e '/^[[:space:]]*#/d' | sed -e 's/^[[:space:]]*//g' | sed -e 's/[[:space:]]*$//g' | sed -e 's/ - /-/g' > "$temp_file_2"
+      sed -e '/^[[:space:]]*$/d' "$test_case_positive" | sed -e '/^[[:space:]]*#/d' | sed -e 's/^[[:space:]]*//g' | sed -e 's/[[:space:]]*$//g' > "$temp_file_2"
       
       diff -Barq <(sort "$temp_file_1") <(sort "$temp_file_2")  >/dev/null 2>&1; if [ $? -gt 0 ]; then diff <(sort "$temp_file_2") <(sort "$temp_file_1") | tee >(grep "<") >(grep ">") > /dev/null 2>&1; logError "Test failed."; exit 1; else logInfo "Test OK"; fi
   done }

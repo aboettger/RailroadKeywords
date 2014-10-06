@@ -1,21 +1,21 @@
 category=Bauarten
 
 # 1’C	2-6-0	Mogul
-pattern=([[:space:]]1’C(t|)([[:space:]]|([[:space:]]\-[[:space:]])|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
+pattern=([[:space:]]1’C(t|)([[:space:]]|(-)|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
 
-pattern=([[:space:]]1’C(t|)([[:space:]]|([[:space:]]\-[[:space:]])|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
+pattern=([[:space:]]1’C(t|)([[:space:]]|(-)|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
 
 # 2’C	4-6-0	Ten-Wheeler
-pattern=([[:space:]]2’C(t|)([[:space:]]|([[:space:]]\-[[:space:]])|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
+pattern=([[:space:]]2’C(t|)([[:space:]]|(-)|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
 
 # 2’C1’	4-6-2	Pacific
-pattern=([[:space:]]2’C1’(t|)([[:space:]]|([[:space:]]\-[[:space:]])|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
+pattern=([[:space:]]2’C1’(t|)([[:space:]]|(-)|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
 
 # 1’D1’	2-8-2	Mikado, Mac Arthur
-pattern=([[:space:]]1’D1’(t|)([[:space:]]|([[:space:]]\-[[:space:]])|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
+pattern=([[:space:]]1’D1’(t|)([[:space:]]|(-)|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
 
 # 1’E1’	2-10-2	Santa Fe
-pattern=([[:space:]]1’E1’(t|)([[:space:]]|([[:space:]]\-[[:space:]])|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
+pattern=([[:space:]]1’E1’(t|)([[:space:]]|(-)|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
 
 # (1’C)D
-pattern=([[:space:]]\(1’C\)D(t|)([[:space:]]|([[:space:]]\-[[:space:]])|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
+pattern=([[:space:]]\(1’C\)D(t|)([[:space:]]|(-)|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
