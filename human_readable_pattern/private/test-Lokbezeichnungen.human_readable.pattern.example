@@ -1,6 +1,6 @@
 category=Lokbezeichnunugen
 # Bezeichnungen Loks
-pattern=([[:space:]](Breuer-|)Rangiertraktor[[:space:]])
+pattern=([[:space:]](Breuer \- |)Rangiertraktor[[:space:]])
 pattern=([[:space:]]Kleinlok(|s)[[:space:]])
 pattern=([[:space:]]Kö (I|II)[[:space:]])
 pattern=([[:space:]]Köf (II|III)[[:space:]])
