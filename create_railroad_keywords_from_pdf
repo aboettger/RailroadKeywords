@@ -44,7 +44,7 @@ function getResults () {
 
   pattern_delete=$(sed -e '/^#/d' "$pattern_case" | grep 'pattern_delete=' | gawk  -F 'pattern_delete=' '{print $2}')
   if [ ! -z "$pattern_delete" ]; then
-    pattern_delete=$(echo "$pattern_delete" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
+    pattern_delete=$(sed -e 's/(/\\(/g' <<< "$pattern_delete" | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
   fi
 
   # logInfo "pattern $pattern_case"
