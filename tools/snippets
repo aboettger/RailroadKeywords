@@ -45,5 +45,5 @@ calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/tex
 # Für ein Heft alle Schlüsselwörter prüfen
 calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "./metadata.opf"); calibredb list --fields tags --for-machine --search="id:\"=$calibre_id\"" --library-path ~/Eisenbahn/Eisenbahnliteratur  | jshon -e 0 -e "tags" | tr -d "[" | tr -d "]" | tr -d "," | tr -d "\"" | sed 's/\\//' | sed 's/^ *//g' | sed 's/ *$//g' | sed '/^$/d' | { while read line; do result=$(/home/aboettger/src/RailroadKeywords/tools/split_category_and_keyword "$line"); category=$(grep "category" <<< "$result" | awk -F '\t' '{print $2}'); keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}'); /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive . "$category" "$keyword"; done;}
 
-
+# Welche Anfangsbuchstaben für Bezeichnungen in der Art "test-BR_001*" gefiltert werden sollten
 find /home/aboettger/src/RailroadKeywords/pattern -type f -name "*BR*.pattern" | awk -F "_" '{print $2}' | grep -o "[A-Z]*" | sort | uniq
