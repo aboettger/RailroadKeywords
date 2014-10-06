@@ -77,7 +77,7 @@ sed -E ':a;N;$!ba;s/([a-z])\n([A-Z])/\1 \2/g' "$temp_file_1" > "$temp_file_2"
 sed -E ':a;N;$!ba;s/([0-9])\n([0-9])/\1 \2/g' "$temp_file_2" > "$temp_file_1"
 sed -E ':a;N;$!ba;s/([A-Z])\n([0-9])/\1 \2/g' "$temp_file_1" > "$temp_file_2"
 sed -E ':a;N;$!ba;s/([a-zA-Z])(\-)\n([A-Z])/\1\2\3/g' "$temp_file_2" > "$temp_file_1"
-sed -e ':a;N;$!ba;s/\n/ \n /g' "$temp_file_1" | sed -e 's/['"$spaces"']/ /g' | sed -e 's/['"$double_quotes"']//g' | sed -e 's/\*[[:space:]]/ \* /g' | sed -e 's/\.\./ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\![[:space:]]/ \! /g' | sed -e 's/\?[[:space:]]/ \? /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -E 's/[[:space:]]{2,}/ /g' | sed -E 's/([[:space:]]BR)([0-9])/\1 \2/g' > "$temp_file_2"
+sed -e ':a;N;$!ba;s/\n/ \n /g' "$temp_file_1" | sed -e 's/['"$spaces"']/ /g' | sed -e 's/['"$double_quotes"']//g' | sed -e 's/\*[[:space:]]/ \* /g' | sed -e 's/)/ )/g' | sed -e 's/(/( /g' | sed -e 's/\.\./ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\![[:space:]]/ \! /g' | sed -e 's/\?[[:space:]]/ \? /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -E 's/[[:space:]]{2,}/ /g' | sed -E 's/([[:space:]]BR)([0-9])/\1 \2/g' > "$temp_file_2"
 sed -E 's/[[:space:]][a-z]{3,}/ ~/g' "$temp_file_2" > "$temp_file_1"
 sed -E 's/\(cid\:[0-9]{1,3}\)//g' "$temp_file_1" > "$temp_file_2"
 # Move the temporary file 

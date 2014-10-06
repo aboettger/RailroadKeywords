@@ -16,6 +16,3 @@ pattern=([[:space:]]1’D1’(t|)([[:space:]]|(-)|)(h|n|)([2-4]|)(v|)(t|)[[:spac
 
 # 1’E1’	2-10-2	Santa Fe
 pattern=([[:space:]]1’E1’(t|)([[:space:]]|(-)|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
-
-# (1’C)D
-pattern=([[:space:]]\(1’C\)D(t|)([[:space:]]|(-)|)(h|n|)([2-4]|)(v|)(t|)[[:space:]])
