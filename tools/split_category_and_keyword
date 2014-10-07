@@ -34,6 +34,7 @@ while [[ $count_pattern_files -lt 1 ]] || [[ $count_pattern_files -gt 1 ]]; do
   count_pattern_files=$(find ~/src/RailroadKeywords/pattern -type f -exec grep -q "^category=$category\$" {} \; -print | wc -l)
 done
 
+echo -e "pattern_file\t$(find ~/src/RailroadKeywords/pattern -type f -exec grep -q "^category=$category\$" {} \; -print)"
 echo -e "category\t$(sed -e "s/\\\//g" <<< "$category")"
 echo -e "keyword \t$(sed -e "s/^$category\\$cfg_category_separator//g" <<< "$category_and_tag_init")"
 
