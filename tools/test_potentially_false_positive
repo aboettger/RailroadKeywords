@@ -22,10 +22,10 @@ cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
 
 library_path="$1"
 
-files=$(find "$script_path/../false_positive" -type f -name "*.pattern")
-while read file; do
-  echo "$file"
-  entries=$(sed -e '/^ *#/d' "$file" | grep '[0-9]*=')
+pattern_files=$(find "$script_path/../false_positive" -type f -name "*.pattern")
+while read pattern_file; do
+  echo "$pattern_file"
+  entries=$(sed -e '/^ *#/d' "$pattern_file" | grep '[0-9]*=')
   while read entry; do
     if [[ ! -z "$entry" ]]; then
       stripped_entry=$(sed -e 's/\^//g' <<< "$entry" | sed -e 's/(//g' | sed -e 's/)//g' | sed -e 's/\$//g' | sed -e 's/\\\././g')
@@ -64,13 +64,13 @@ while read file; do
               [1]* )
                 break;;
               [2]* )
-                sed -i "/$escaped_keyword_pattern/d" "$file"
+                sed -i "/$escaped_keyword_pattern/d" "$pattern_file"
                 extract_and_write_keywords_into_calibre "$working_path"
-                logDebug "\"$keyword\" für Calibre-ID \"$calibre_id\" wieder möglich: \"$calibre_id=^($keyword_pattern)\$\" aus \"$file\" entfernt."
+                logDebug "\"$keyword\" für Calibre-ID \"$calibre_id\" wieder möglich: \"$calibre_id=^($keyword_pattern)\$\" aus \"$pattern_file\" entfernt."
                 break;;
               [3]* )
-                sed -i "/$escaped_keyword_pattern/d" "$file"
-                logDebug "\"$keyword\" für Calibre-ID \"$calibre_id\" wieder möglich: \"$calibre_id=^($keyword_pattern)\$\" aus \"$file\" entfernt."
+                sed -i "/$escaped_keyword_pattern/d" "$pattern_file"
+                logDebug "\"$keyword\" für Calibre-ID \"$calibre_id\" wieder möglich: \"$calibre_id=^($keyword_pattern)\$\" aus \"$pattern_file\" entfernt."
                 break;;
               [4]* )
                 echo "Öffne \"$pdf_path\""
@@ -95,7 +95,6 @@ while read file; do
       fi
     fi
   done <<< "$entries"
-done <<< "$files"
-
+done <<< "$pattern_files"
 
 exit 0
