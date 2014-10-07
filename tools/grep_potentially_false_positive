@@ -244,7 +244,12 @@ while read -r calibre_id; do
                 break;;
               [4]* )
                 echo "Öffne \"$pdf_path\""
-                xdg-open "$pdf_path" > /dev/null 2>&1
+                check_evince=$(command -v evince)
+                if [[ ! -z $check_evince ]]; then
+                  evince "$pdf_path" --find="$keyword" > /dev/null 2>&1
+                else
+                  xdg-open "$pdf_path" > /dev/null 2>&1
+                fi
                 ;;
               [5]* )
                 echo "Öffne \"$hr_txt_path\""
