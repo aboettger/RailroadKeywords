@@ -50,7 +50,7 @@ while read file; do
         keyword_pattern=$(sed -e 's/\./\\\./g' <<< "$entry")
         escaped_keyword_pattern=$(sed -e 's/[]\/$*.^|[]/\\&/g' <<< "$keyword_pattern")
 
-        echo "1)"
+        echo "1) Nichts tun"
         echo "2) Schlüsselwort wieder erlauben und Aktualisierung durchführen"
         echo "3) Schlüsselwort wieder erlauben, aber keine Aktualisierung durchführen"
         echo "4) PDF ansehen \"$pdf_path\""
@@ -62,7 +62,7 @@ while read file; do
           read -p "Bitte wählen: " input < /dev/tty
           case $input in
               [1]* )
-                ;;
+                break;;
               [2]* )
                 sed -i "/$escaped_keyword_pattern/d" "$file"
                 extract_and_write_keywords_into_calibre "$working_path"
