@@ -47,3 +47,10 @@ calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/tex
 
 # Welche Anfangsbuchstaben für Bezeichnungen in der Art "test-BR_001*" gefiltert werden sollten
 find /home/aboettger/src/RailroadKeywords/pattern -type f -name "*BR*.pattern" | awk -F "_" '{print $2}' | grep -o "[A-Z]*" | sort | uniq
+
+# Findet OPF-Dateien, die nach einem bestimmten Datum und Uhrzeit verändert wurden
+touch --date='6 Oct 2014 15:00' /tmp/referenz | find ~/Eisenbahn/Eisenbahnliteratur -type f -name "*.opf" -cnewer /tmp/referenz -exec dirname {} \; | { while read file; do command; done}
+
+# Führt ein "test_potentially_false_positive" auf die Verzeichnisse aus, deren OPF-Datei sich nach einem bestimmten Datum und Uhrzeit geändert hat
+# Das ist hilfreich, wenn die neu angelegt wurden und sich deren Inhalt eventuall geändert hat, so dass neue Schlüsselworte gefunden worden
+touch --date='6 Oct 2014 15:00' /tmp/referenz | find ~/Eisenbahn/Eisenbahnliteratur -type f -name "*.opf" -cnewer /tmp/referenz -exec dirname {} \; | { while read file; do echo "$file" /home/aboettger/src/RailroadKeywords/tools/test_potentially_false_positive "$file"; done}
