@@ -16,9 +16,9 @@ script_path=$(dirname "$script")
 cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
 . "$script_path/../libraries/logging.sh" "$cfg_log_level"
 
-script_name=$(basename "$script")
+# script_name=$(basename "$script")
 
-category_separator=$(look category_separator "$script_path"/../main.cfg | cut -d '=' -f 2-)
+# category_separator=$(look category_separator "$script_path"/../main.cfg | cut -d '=' -f 2-)
 
 library_path="$1"
 
@@ -36,16 +36,16 @@ while read file; do
         # echo "$calibre_id"
         # echo "$category_and_keyword"
         result=$("$script_path/../tools/split_category_and_keyword" "$category_and_keyword")
-        category=$(grep "category" <<< "$result" | awk -F '\t' '{print $2}')
-        keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}')
+        # category=$(grep "category" <<< "$result" | awk -F '\t' '{print $2}')
+        keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}' | sed -e 's/[]\/$*.^|[]/\\&/g')
 
         working_path=$(dirname "$metadata_file")
         
         pdf_path=$(find "$working_path" -type f -name '*.pdf')
         hr_txt_path=${pdf_path//.pdf/.human-readable.txt}
         txt_path=${pdf_path//.pdf/.txt}
-        
-        egrep -anET -C 5 "$keyword" "$txt_path"
+        echo "$keyword"
+        egrep -anET -C 5 "[[:space:]]$keyword[[:space:]]" "$txt_path"
         
         keyword_pattern=$(sed -e 's/\./\\\./g' <<< "$entry")
         escaped_keyword_pattern=$(sed -e 's/[]\/$*.^|[]/\\&/g' <<< "$keyword_pattern")
