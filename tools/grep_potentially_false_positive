@@ -246,22 +246,22 @@ while read -r calibre_id; do
                 echo "Öffne \"$pdf_path\""
                 check_evince=$(command -v evince)
                 if [[ ! -z $check_evince ]]; then
-                  evince "$pdf_path" --find="$keyword" > /dev/null 2>&1
+                  evince "$pdf_path" --find="$keyword" > /dev/null 2>&1 &
                 else
-                  xdg-open "$pdf_path" > /dev/null 2>&1
+                  xdg-open "$pdf_path" > /dev/null 2>&1 &
                 fi
                 ;;
               [5]* )
                 echo "Öffne \"$hr_txt_path\""
-                xdg-open "$hr_txt_path" > /dev/null 2>&1
+                xdg-open "$hr_txt_path" > /dev/null 2>&1 &
                 ;;
               [6]* )
                 echo "Öffne \"$txt_path\""
-                xdg-open "$txt_path" > /dev/null 2>&1
+                xdg-open "$txt_path" > /dev/null 2>&1 &
                 ;;
               [7]* )
                 echo "Öffne \"$working_path\""
-                xdg-open "$working_path" > /dev/null 2>&1
+                xdg-open "$working_path" > /dev/null 2>&1 &
                 ;;
               [8]* ) break;;
               * ) echo "Ungültige Auswahl";;
