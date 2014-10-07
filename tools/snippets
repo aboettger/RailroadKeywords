@@ -51,6 +51,6 @@ find /home/aboettger/src/RailroadKeywords/pattern -type f -name "*BR*.pattern" |
 # Findet OPF-Dateien, die nach einem bestimmten Datum und Uhrzeit verändert wurden
 touch --date='6 Oct 2014 15:00' /tmp/referenz | find ~/Eisenbahn/Eisenbahnliteratur -type f -name "*.opf" -cnewer /tmp/referenz -exec dirname {} \; | { while read file; do command; done}
 
-# Führt ein "test_potentially_false_positive" auf die Verzeichnisse aus, in denen die Datei "changed" gefunden wurde und löscht diese anschließend
+# Führt ein "test_potentially_false_positive" auf die Verzeichnisse aus, in denen die Datei "changedByRailroadKeywords" gefunden wurde und löscht diese anschließend
 # Diese Datei wird erstellt, wenn das Script "extract_and_write_keywords_into_calibre" eine Änderung vorgenommen hat
-find ~/Eisenbahn/Eisenbahnliteratur -type f -name "changed" -exec dirname {} \; | { while read file; do echo; echo "$file"; /home/aboettger/src/RailroadKeywords/tools/test_potentially_false_positive "$file"; rm "$file/changed"; done}
+find ~/Eisenbahn/Eisenbahnliteratur -type f -name "changedByRailroadKeywords" -exec dirname {} \; | { while read file; do echo; echo "$file"; /home/aboettger/src/RailroadKeywords/tools/test_potentially_false_positive "$file"; rm "$file/changedByRailroadKeywords"; done}
