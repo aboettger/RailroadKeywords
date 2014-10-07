@@ -71,21 +71,23 @@ fi
 keyword_search_for=$(sed -e 's/\./\\./g' <<< "$keyword")
 search_for="$search_for$keyword_search_for\$\""
 if [[ -f "$library_path/metadata.opf" ]]; then
-  calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "$library_path/metadata.opf")
-  search_for="$search_for AND id:\"=$calibre_id\""
+  given_calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "$library_path/metadata.opf")
+  search_for="$search_for AND id:\"=$given_calibre_id\""
 fi
 
-logDebug "Suche mittels \"$search_for\" in Calibre"
-result=$(eval calibredb list --for-machine --library-path "\"$calibreDbSearchPath\" " --fields=tags -s "'$search_for'")
-
-if [[ $result == "[]" ]]; then
-  echo "Keine Ergebnisse gefunden"
-  exit 1
+if [[ ! -z $given_calibre_id ]]; then
+  calibre_ids="$given_calibre_id"
+else
+  logDebug "Suche mittels \"$search_for\" in Calibre"
+  result=$(eval calibredb list --for-machine --library-path "\"$calibreDbSearchPath\" " --fields=tags -s "'$search_for'")
+  if [[ $result == "[]" ]]; then
+    echo "Keine Ergebnisse gefunden"
+    exit 1
+  fi
+  calibre_ids=$(awk -F"\"id\": " '{print $2}' <<< "$result" | sed -e 's/,//g' | sed -e '/^$/d')
 fi
-
-calibre_ids=$(awk -F"\"id\": " '{print $2}' <<< "$result" | sed -e 's/,//g' | sed -e '/^$/d')
-
 countCalibreIds=$(wc -l <<< "$calibre_ids")
+
 count=0
 
 if [[ ! -z $given_category ]]; then
@@ -165,7 +167,6 @@ while read -r calibre_id; do
     dont_ask_file=""
     ignore_file=""
     while read pattern_file_hit; do
-      # echo "$pattern_file_hit"
       false_positive_file=${pattern_file_hit//pattern\//false_positive\/}
       # echo "$false_positive_file"
       true_positive_file=${pattern_file_hit//pattern\//true_positive\/}
