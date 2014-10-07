@@ -1,37 +1,31 @@
 Sucht in vorhandenen txt-dateien, die mittels "pdftotext" erzeugt werden, nach einem Suchbegriff und startet "extract_and_write_keywords_into_calibre"
-------------
+
 ```
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readable.txt' | { while read file; do grep -aEl " Nossen " "$file" | { while read -r pdf; do echo "$file"; extract_and_write_keywords_into_calibre "$pdf"; done } done }
 ```
 
 Sucht in vorhandenen txt-dateien, die mittels "pdftotext" erzeugt werden, nach einem Suchbegriff und zeigt den umgebenen Text an
-------------
+
 ```
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readable.txt' | { while read file; do egrep -anETH -C 5 "Pfälzische" "$file"; done }
 ```
 
 Findet PDFs ohne txt-Dateien, die mittels "pdftotext" erzeugt werden und startet "extract_and_write_keywords_into_calibre"
-------------
+
 ```
 find_with_pdf_without_txt ~/Eisenbahn/Eisenbahnliteratur | { while read -r pdf; do extract_and_write_keywords_into_calibre "$pdf"; done }
 ```
 
 Textdateien löschen um das System zu zwingen, neue anzulegen
-------------
+
 ```
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' | { while read file; do rm "$file"; done }
 ```
 
 Schreibe "createTxtFile.md5" neu
-------------
+
 ```
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.pdf' | { while read file; do md5_new_CreateTxtFile=$(md5sum "/home/aboettger/src/RailroadKeywords/functions/createTxtFile.sh"  | gawk  -F ' ' '{print $1}'); echo "$md5_new_CreateTxtFile" > "$(dirname "$file")/createTxtFile.md5"; done }
-```
-
-Liste in "false_positive/potentially_false_positive" abarbeiten
-------------
-```
-sed -e '/^[[:space:]]*$/d' "/home/aboettger/src/RailroadKeywords/false_positive/potentially_false_positive" | sed -e '/^[[:space:]]*#/d' | { while read -r line; do echo; echo "$line"; /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive ~/Eisenbahn/Eisenbahnliteratur "*" "$line"; done }
 ```
 
 ```
@@ -39,31 +33,31 @@ find /home/aboettger/src/RailroadKeywords/human_readable_pattern/private -type f
 ```
 
 Entferne doppelte Leerzeilen
-------------
+
 ```
 br="163"; awk '/^$/{ if (! blank++) print; next } { blank=0; print }' /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$br".human_readable.pattern > ~/tmp/test-BR_"$br".human_readable.pattern; mv ~/tmp/test-BR_"$br".human_readable.pattern /home/aboettger/src/RailroadKeywords/human_readable_pattern/standard/test-BR_"$br".human_readable.pattern
 ```
 
 Finde Pattern-Dateien, die sich innerhalb der letzten 12 Stunden geändert haben
-------------
+
 ```
 find ~/src/RailroadKeywords/pattern/ -name "*.pattern" -cmin -720 | awk -F/ '{print $7}' | sort
 ```
 
 Korrigiert in den ASC-Dateien Tabs und " ."
-------------
+
 ```
 find 0 -type f -name "*.asc"  | { while read file; do sed -e 's/\t/ /g' "$file" | sed -e 's/ \././g' > working_copy/$(basename "$file"); done }
 ```
 
 Lösche führende und folgende Leerzeichen, wenn sie mehr als zweimal vorkommen
-------------
+
 ```
 find ~/src/RailroadKeywords/tests/standard -type f -name "*.list"  | { while read file; do sed -e 's/^ */ /g' "$file" | sed -e 's/ *$/ /g' > ~/tmp/list/$(basename "$file"); mv ~/tmp/list/$(basename "$file") "$file"; done }
 ```
 
 Alle Einträge in "false_positive" nach Schlüsselwörtern durchsuchen lassen
-------------
+
 ```
 find "/home/aboettger/src/RailroadKeywords/false_positive" -type f -name "*.pattern" | { while read file; do ids=$(sed -e '/^#/d' "$file" | grep -E "^[0-9]+=" | gawk  -F '=' '{print $1}' | sort | uniq); echo "$ids" | { while read -r line; do find ~/Eisenbahn/Eisenbahnliteratur -type d -name "*($line)*" | { while read entry; do ~/src/RailroadKeywords/extract_and_write_keywords_into_calibre "$entry"; done}; done}; done}
 ```
@@ -72,37 +66,49 @@ find "/home/aboettger/src/RailroadKeywords/false_positive" -type f -name "*.patt
 calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "./metadata.opf"); calibredb list --fields tags --for-machine --search="id:\"=$calibre_id\"" --library-path ~/Eisenbahn/Eisenbahnliteratur  | jshon -e 0 -e "tags" | tr -d "[" | tr -d "]" | tr -d "," | tr -d "\"" | sed -e 's/\\//' | sed -e 's/^ *//g' | sed -e 's/ *$//g' | sed -e '/^$/d'
 ```
 
-Für ein Heft alle Schlüsselwörter prüfen
-------------
-```
-calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "./metadata.opf"); calibredb list --fields tags --for-machine --search="id:\"=$calibre_id\"" --library-path ~/Eisenbahn/Eisenbahnliteratur  | jshon -e 0 -e "tags" | tr -d "[" | tr -d "]" | tr -d "," | tr -d "\"" | sed 's/\\//' | sed 's/^ *//g' | sed 's/ *$//g' | sed '/^$/d' | { while read line; do result=$(/home/aboettger/src/RailroadKeywords/tools/split_category_and_keyword "$line"); category=$(grep "category" <<< "$result" | awk -F '\t' '{print $2}'); keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}'); /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive . "$category" "$keyword"; done;}
-```
 
 Welche Anfangsbuchstaben für Bezeichnungen in der Art "test-BR_001*" gefiltert werden sollten
-------------
+
 ```
 find /home/aboettger/src/RailroadKeywords/pattern -type f -name "*BR*.pattern" | awk -F "_" '{print $2}' | grep -o "[A-Z]*" | sort | uniq
 ```
 
 Findet OPF-Dateien, die nach einem bestimmten Datum und Uhrzeit verändert wurden
-------------
+
 ```
 touch --date='6 Oct 2014 15:00' /tmp/referenz | find ~/Eisenbahn/Eisenbahnliteratur -type f -name "*.opf" -cnewer /tmp/referenz -exec dirname {} \; | { while read file; do command; done}
 ```
 
+tools/test_potentially_false_positive
+----------
+
 Führt ein "test_potentially_false_positive" auf die Verzeichnisse aus, in denen die Datei "tag_4_test_potentially_false_positive" gefunden wurde und löscht die Datei "tag_4_test_potentially_false_positive" in dem gefundenen Verzeichnis anschließend
 Diese Datei wird erstellt, wenn das Script "extract_and_write_keywords_into_calibre" eine Änderung vorgenommen hat
-------------
+
 ```
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name "tag_4_test_potentially_false_positive" -exec dirname {} \; | { while read file; do echo; echo "$file"; /home/aboettger/src/RailroadKeywords/tools/test_potentially_false_positive "$file"; rm "$file"/tag_4_test_potentially_false_positive; done}
 ```
 
+tools/grep_potentially_false_positive
+----------
+
 Führt ein "grep_potentially_false_positive" auf die Verzeichnisse aus, in denen die Datei "tag_4_grep_potentially_false_positive" gefunden wurde und löscht die Datei "tag_4_grep_potentially_false_positive" in dem gefundenen Verzeichnis anschließend
 Diese Datei wird erstellt, wenn das Script "extract_and_write_keywords_into_calibre" eine Änderung vorgenommen hat
-------------
+
 ```
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name "tag_4_grep_potentially_false_positive" -exec dirname {} \; | { while read file; do echo; echo "$file"; sed -e '/^[[:space:]]*$/d' "/home/aboettger/src/RailroadKeywords/false_positive/potentially_false_positive" | sed -e '/^[[:space:]]*#/d' | { while read -r line; do echo; echo "$line"; /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive "$file" "*" "$line"; done}; rm "$file"/tag_4_grep_potentially_false_positive; done}
 ```
+Für ein Heft alle Schlüsselwörter prüfen
+
+```
+calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "./metadata.opf"); calibredb list --fields tags --for-machine --search="id:\"=$calibre_id\"" --library-path ~/Eisenbahn/Eisenbahnliteratur  | jshon -e 0 -e "tags" | tr -d "[" | tr -d "]" | tr -d "," | tr -d "\"" | sed 's/\\//' | sed 's/^ *//g' | sed 's/ *$//g' | sed '/^$/d' | { while read line; do result=$(/home/aboettger/src/RailroadKeywords/tools/split_category_and_keyword "$line"); category=$(grep "category" <<< "$result" | awk -F '\t' '{print $2}'); keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}'); /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive . "$category" "$keyword"; done}; rm tag_4_grep_potentially_false_positive
+```
+Liste in "false_positive/potentially_false_positive" abarbeiten
+
+```
+sed -e '/^[[:space:]]*$/d' "/home/aboettger/src/RailroadKeywords/false_positive/potentially_false_positive" | sed -e '/^[[:space:]]*#/d' | { while read -r line; do echo; echo "$line"; /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive ~/Eisenbahn/Eisenbahnliteratur "*" "$line"; done }
+```
+
 
 
 ```
