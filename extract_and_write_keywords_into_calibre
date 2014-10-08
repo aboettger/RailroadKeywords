@@ -191,7 +191,8 @@ while read -r pdf_path; do
     tr ',' '\n' <<< "$old_keywords" > "$temp_file_old_keywords"
 
     logDebug "$keywords"
-    diff "$temp_file_old_keywords" "$temp_file_keywords" | tee >(grep "<") >(grep ">") > /dev/null 2>&1
+    keywords_diff=$(diff "$temp_file_old_keywords" "$temp_file_keywords" | tee >(grep "<") >(grep ">") > /dev/null 2>&1)
+    echo "$keywords_diff"
 
     rm "$temp_file_keywords"
     rm "$temp_file_old_keywords"
@@ -201,7 +202,9 @@ while read -r pdf_path; do
     if [[ $old_keywords != "$keywords" ]] && [[ $cfg_dry_run == "0" ]]; then
       calibredb set_metadata --field tags:"$keywords" "$calibre_id" --library-path="$calibreDbSearchPath"
       touch "$working_path/tag_4_grep_potentially_false_positive"
+      echo "$keywords_diff" >> "$working_path/tag_4_grep_potentially_false_positive"
       touch "$working_path/tag_4_test_potentially_false_positive"
+      echo "$keywords_diff" >> "$working_path/tag_4_test_potentially_false_positive"
     fi
     
     time_complete_b=$(($(date +%s%N)/1000000))
