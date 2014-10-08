@@ -103,10 +103,9 @@ pattern_files_hit=$(
 
       keyword_for_pattern=$(sed -e "s/^$category//" <<< "$keyword" | sed -e "s/-/ - /")
       keyword_for_pattern=$(sed -e "s/^\\$category_separator//" <<< "$keyword_for_pattern")
-      
+
       patterns=$("$script_path/../functions/getPattern.sh" "$pattern_file")
-      
-      
+
       while read -r pattern; do
         result=$(grep -E "$pattern" <<< " $keyword_for_pattern ")
         if [[ $result != "" ]]; then
