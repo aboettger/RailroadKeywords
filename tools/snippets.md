@@ -62,13 +62,15 @@ find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.pdf' | {
 }
 ```
 
+Ööhm, ja ;)
 ```sh
 #!/bin/bash
 find /home/aboettger/src/RailroadKeywords/human_readable_pattern/private -type f -name "test-*.pattern" | {
   while read file; do
     keyword_category="$(basename "$file")";
     keyword_category=${keyword_category//test-/};
-    keyword_category=${keyword_category//.human_readable.pattern/}; keyword_category=${keyword_category//_/ };
+    keyword_category=${keyword_category//.human_readable.pattern/}; 
+    keyword_category=${keyword_category//_/ };
     gawk -v var="$keyword_category" 'NR==1{printf "category=";print var;print;print} NR!=1' "$file"  > "/home/aboettger/tmp/$(basename "$file")";
     mv "/home/aboettger/tmp/$(basename "$file")" "$file";
   done
