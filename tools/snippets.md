@@ -160,7 +160,7 @@ touch --date='6 Oct 2014 15:00' /tmp/referenz | find ~/Eisenbahn/Eisenbahnlitera
 tools/test_potentially_false_positive
 --
 
-Führt ein "test_potentially_false_positive" auf die Verzeichnisse aus, in denen die Datei "tag_4_test_potentially_false_positive" gefunden wurde und löscht die Datei "tag_4_test_potentially_false_positive" in dem gefundenen Verzeichnis anschließend
+Führt ein "test_potentially_false_positive" auf die Verzeichnisse aus, in denen die Datei "tag_4_test_potentially_false_positive" gefunden wurde
 Diese Datei wird erstellt, wenn das Script "extract_and_write_keywords_into_calibre" eine Änderung vorgenommen hat
 
 ```sh
@@ -178,7 +178,7 @@ find ~/Eisenbahn/Eisenbahnliteratur -type f -name "tag_4_test_potentially_false_
 tools/grep_potentially_false_positive
 --
 
-Führt ein "grep_potentially_false_positive" auf die Verzeichnisse aus, in denen die Datei "tag_4_grep_potentially_false_positive" gefunden wurde und löscht die Datei "tag_4_grep_potentially_false_positive" in dem gefundenen Verzeichnis anschließend
+Führt ein "grep_potentially_false_positive" auf die Verzeichnisse aus, in denen die Datei "tag_4_grep_potentially_false_positive" gefunden
 Diese Datei wird erstellt, wenn das Script "extract_and_write_keywords_into_calibre" eine Änderung vorgenommen hat
 
 ```sh
@@ -193,7 +193,6 @@ find ~/Eisenbahn/Eisenbahnliteratur -type f -name "tag_4_grep_potentially_false_
         echo "$line"; /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive "$file" "*" "$line";
       done
     };
-    rm "$file"/tag_4_grep_potentially_false_positive;
   done
 }
 ```
@@ -210,7 +209,6 @@ calibredb list --fields tags --for-machine --search="id:\"=$calibre_id\"" --libr
     /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive . "$category" "$keyword";
   done
 };
-rm tag_4_grep_potentially_false_positive
 ```
 Liste in "false_positive/potentially_false_positive" abarbeiten
 
