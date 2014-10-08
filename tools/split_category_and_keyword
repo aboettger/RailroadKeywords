@@ -11,29 +11,19 @@ cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
 cfg_category_separator=$(look category_separator "$script_path"/../main.cfg | cut -d '=' -f 2-)
 
 category_and_tag_init="$1"
-category_and_tag="$category_and_tag_init"
-category=""
-part=""
+category="$category_and_tag_init"
+
 count_pattern_files=-1
 while [[ $count_pattern_files -lt 1 ]] || [[ $count_pattern_files -gt 1 ]]; do
   
-  category_and_tag=$(sed -e "s/^$part\\$cfg_category_separator//g" <<< "$category_and_tag")
+  category=$(sed -E "s/(.*)\\$cfg_category_separator.*\$/\1/" <<< "$category");
 
-  part=$(grep -o ".*\." <<< "$category_and_tag" | awk -F "." '{print $1}');
-  if [[ -z $part ]]; then
-    category="";
+  if [[ -z $category ]]; then
     break;
   fi
-  
-  if [[ -z $category ]]; then
-    category="$part"
-  else
-    category="$category\\$cfg_category_separator$part"
-  fi
-  
+
   count_pattern_files=$(find ~/src/RailroadKeywords/pattern -type f -exec grep -q "^category=$category\$" {} \; -print | wc -l)
 done
-
 echo -e "pattern_file\t$(find ~/src/RailroadKeywords/pattern -type f -exec grep -q "^category=$category\$" {} \; -print)"
 echo -e "category\t$(sed -e "s/\\\//g" <<< "$category")"
 echo -e "keyword \t$(sed -e "s/^$category\\$cfg_category_separator//g" <<< "$category_and_tag_init")"
