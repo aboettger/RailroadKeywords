@@ -1,0 +1,58 @@
+#!/bin/bash
+
+##
+#
+# Durchsucht die vorhandenen false positive Dateien und testet sie erneut
+# 
+# tools/test_potentially_false_positive "PfadZumCalibreVerzeichnisOderUnterverzeichnis"
+#
+##
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+script_path=$(dirname "$script")
+
+cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
+. "$script_path/../libraries/logging.sh" "$cfg_log_level"
+
+# script_name=$(basename "$script")
+
+# category_separator=$(look category_separator "$script_path"/../main.cfg | cut -d '=' -f 2-)
+
+#!/bin/bash
+find ~/Eisenbahn/Eisenbahnliteratur -type f -name "tag_4_grep_potentially_false_positive" -exec grep -l ">" {} \; | {
+  while read file; do
+    new_keywords=$(grep "> " "$file" | sed -e 's/^>  \{0,1\}//g' | sort | uniq)
+    while read new_keyword; do
+      result=$(/home/aboettger/src/RailroadKeywords/tools/split_category_and_keyword "$new_keyword")
+        category=$(grep "category" <<< "$result" | awk -F '\t' '{print $2}')
+        keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}')
+        working_dir=$(dirname "$file")
+        echo "$working_dir"
+
+        /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive "$working_dir" "$category" "$keyword"
+        
+        escaped_new_keyword=$(sed -e 's/[]\/$*.^|[]/\\&/g' <<< "> $new_keyword")
+        echo
+        echo "Das Schlüsselwort \"$new_keyword\" wurde einer der letzten Aktualisierungen als \"Neu\" hinzugefügt. Diesen Vermerk entfernen?"
+        echo "n) Nein, nichts tun"
+        echo "j) Ja, Schlüsselwort als neues Schlüsselwort entfernen"
+        
+        while true; do
+          read -p "Bitte wählen: " input < /dev/tty
+          case $input in
+              n* )
+                break;;
+              j* )
+                sed -i "/^$escaped_new_keyword\$/d" "$file"
+                logDebug "\"$keyword\" aus \"$file\" entfernt."
+                break;;
+              * ) echo "Ungültige Auswahl";;
+          esac
+        done
+    done <<< "$new_keywords"
+  done
+};
+
+exit 0
