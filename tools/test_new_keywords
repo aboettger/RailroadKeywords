@@ -45,7 +45,7 @@ find ~/Eisenbahn/Eisenbahnliteratur -type f -name "tag_4_grep_potentially_false_
               n* )
                 break;;
               j* )
-                sed -i "/^$escaped_new_keyword\$/d" "$file"
+                sed -i "/^$escaped_new_keyword[[:space:]]*\$/d" "$file"
                 logDebug "\"$keyword\" aus \"$file\" entfernt."
                 break;;
               * ) echo "Ungültige Auswahl";;
