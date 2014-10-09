@@ -7,7 +7,7 @@ Sucht in vorhandenen txt-dateien, die mittels "pdftotext" erzeugt werden, nach e
 #!/bin/bash
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readable.txt' | {
   while read file; do
-    grep -aEl " Nossen " "$file" | {
+    grep -aEl " Rot" "$file" | {
       while read -r pdf; do
         echo "$file"; extract_and_write_keywords_into_calibre "$pdf"
       done
@@ -22,7 +22,7 @@ Sucht in vorhandenen txt-dateien, die mittels "pdftotext" erzeugt werden, nach e
 #!/bin/bash
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readable.txt' | {
   while read file; do
-    egrep -anETH -C 5 "Pfälzische" "$file";
+    egrep -anETH -C 5 "Rot" "$file";
   done
 }
 
