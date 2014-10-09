@@ -224,24 +224,5 @@ sed -e '/^[[:space:]]*$/d' "/home/aboettger/src/RailroadKeywords/false_positive/
 ```
 
 ```sh
-#!/bin/bash
-find ~/Eisenbahn/Eisenbahnliteratur -type f -name "tag_4_grep_potentially_false_positive" -exec grep -l ">" {} \; | {
-  while read file; do
-    new_keywords=$(grep ">" "$file" | tr -d ">" | sort | uniq)
-    while read keyword; do
-      result=$(/home/aboettger/src/RailroadKeywords/tools/split_category_and_keyword "$keyword")
-        category=$(grep "category" <<< "$result" | awk -F '\t' '{print $2}')
-        keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}')
-        working_dir=$(dirname "$file")
-        echo "$working_dir"
-        echo "$category"
-        echo "$keyword"
-        /home/aboettger/src/RailroadKeywords/tools/grep_potentially_false_positive "$working_dir" "$category" "$keyword"
-    done <<< "$new_keywords"
-  done
-};
-```
-
-```sh
 comm -2 -3  <(sort 118\ 001-999.list) <(sort ../tests/test-BR_118.positive.002.list)
 ```
