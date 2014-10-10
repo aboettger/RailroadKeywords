@@ -154,7 +154,7 @@ function runTest () {
       logWarn "$test_results"
 
       sed -e '/^[[:space:]]*$/d' "$test_case_positive" | sed -e '/^[[:space:]]*#/d' | sed -e 's/^[[:space:]]*//g' | sed -e 's/[[:space:]]*$//g' | sed -e 's/ - /-/g' > "$temp_file_2"
-      
+
       diff -Barq <(sort "$temp_file_1") <(sort "$temp_file_2")  >/dev/null 2>&1; if [ $? -gt 0 ]; then diff <(sort "$temp_file_2") <(sort "$temp_file_1") | tee >(grep "<") >(grep ">") > /dev/null 2>&1; logError "Test failed."; exit 1; else logInfo "Test OK"; fi
   done }
   if [ $? -gt 0 ]; then exit 1; fi
@@ -210,21 +210,21 @@ function runTest () {
       logInfo "TestCase: $(basename "$diff")"
       category=$(look category "$pattern_case" | cut -d '=' -f 2-)
       test_results=$(sed -e "s/$category\.//g" <<< "$test_results")
-      
-     
+
+
       temp_file_1="$script_path/test_results/$(basename "$diff").1"
       temp_file_2="$script_path/test_results/$(basename "$diff").2"
-      
+
       echo "$test_results" > "$temp_file_1"
-      
+
       sed -e '/^[[:space:]]*$/d' "$diff" | sed -e '/^[[:space:]]*#/d' | sed -e 's/^[[:space:]]*//g' | sed -e 's/[[:space:]]*$//g' > "$temp_file_2"
-      
+
       count_diff=$(diff -B "$temp_file_1" "$temp_file_2" | grep -c ">")
       count_diff_compare=$(less "$temp_file_2" | wc -l)
-      
+
       # logError "$count_diff"
       # logError "$count_diff_compare"
-      
+
       if [[ $count_diff == "$count_diff_compare" ]]; then
         logInfo "Test OK"
       else
@@ -232,7 +232,7 @@ function runTest () {
         logError "$(less "$temp_file_1" | sort | uniq)"
         exit 1
       fi
-      
+
   done }
   if [ $? -gt 0 ]; then exit 1; fi
 }
@@ -271,14 +271,14 @@ if [ ! -d "$pattern_path" ] && [ ! -d "$(dirname "$pattern_path")" ]; then
 fi
 
 if [ "$1" == "test" ]; then
-  
+
   "$script_path/tools/compress_pattern" "$2"
   "$script_path/tools/create_diffs" "$2"
-  
+
   if [[ ! -f $2 ]]; then
     rm "$script_path/test_results/"*.list.[12]
   fi
-  
+
   # time_complete_a=$(($(date +%s%N)/1000000))
   if [ -f "$pattern_path" ]; then
     runTest "$pattern_path"
@@ -364,13 +364,13 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
     fi
 
     if  [ "$1" == "run" ]; then
-      
+
       # time_complete_a=$(($(date +%s%N)/1000000))
-      
+
       if [ -f "$pattern_path" ]; then
         runSearch "$pattern_path" "$pdf_path"
       else
-        
+
         cfg_pattern_files=$(look pattern_files "$script_path"/main.cfg | cut -d '=' -f 2-)
         script_path_escaped=${script_path////\\/}
         cfg_pattern_files=$(sed -e 's/[[:space:]]//g' <<< "$cfg_pattern_files" | sed -e "s/,/\\n/g" | sed -e "s/^/$script_path_escaped\/pattern\//g")
@@ -382,7 +382,7 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
             fi
         done }
       fi
-      
+
       # time_complete_b=$(($(date +%s%N)/1000000))
       # echo "Gesamtzeit $script: $((time_complete_b - time_complete_a)) ms"
     fi

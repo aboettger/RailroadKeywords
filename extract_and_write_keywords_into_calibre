@@ -152,7 +152,7 @@ while read -r pdf_path; do
       script_path_escaped=${script_path////\\/}
       pattern_files=$(sed -e 's/[[:space:]]//g' <<< "$cfg_pattern_files" | sed -e "s/,/\\n/g" | sed -e "s/^/$script_path_escaped\/pattern\//g")
     fi
-    
+
     for pattern_path in $pattern_files; do
       false_positive_pattern_path="$script_path/false_positive/$(basename "$pattern_path")"
         if [ -f "$false_positive_pattern_path" ]; then
@@ -174,7 +174,7 @@ while read -r pdf_path; do
     # make_another_dot=$(python -c 'print u"\u0323".encode("utf8")')
 
     old_keywords=$(calibredb show_metadata "$calibre_id"  --library-path="$calibreDbSearchPath" | grep "Tags" | awk -F: '{print $2}' | sed -e 's/^ *//' | sed -e 's/ *$//' | sed -e 's/, /,/g' )
-    
+
     cfg_remove_not_found=$(look remove_not_found "$script_path"/main.cfg | cut -d '=' -f 2-)
     if [[ $cfg_remove_not_found == "0" ]]; then
       old_keywords_list=$(tr ',' "\n" <<< "$old_keywords")
@@ -206,23 +206,23 @@ while read -r pdf_path; do
       # touch "$working_path/tag_4_test_potentially_false_positive"
       # echo "$keywords_diff" >> "$working_path/tag_4_test_potentially_false_positive"
     fi
-    
+
     time_complete_b=$(($(date +%s%N)/1000000))
     time_complete_single_run=$((time_complete_b - time_complete_a))
     # echo "time_complete_single_run $time_complete_single_run"
-    
+
     time_complete=$((time_complete_single_run + time_complete))
     # echo "time_complete $time_complete"
-    
+
     time_estimated=$((time_complete * all_pdfs_count / pdf_counter))
     time_left=$((time_estimated - time_complete))
-    
+
     time_left_seconds=$((time_left / 1000))
     time_left_minutes=$((time_left_seconds / 60))
-    echo -ne "[$pdf_counter/$all_pdfs_count] Voraussichtliches Ende in < $time_left_minutes min ($(date -d "+$time_left_seconds seconds"))\033[K\r"    
-    
+    echo -ne "[$pdf_counter/$all_pdfs_count] Voraussichtliches Ende in < $time_left_minutes min ($(date -d "+$time_left_seconds seconds"))\033[K\r"
+
     # echo "Gesamtzeit $script: $((time_complete_b - time_complete_a)) ms"
-    
+
     logInfo "…done"
   fi
 done <<< "$all_pdfs"
