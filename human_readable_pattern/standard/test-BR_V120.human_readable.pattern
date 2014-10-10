@@ -2,9 +2,9 @@
 
 category=Baureihen[category_separator]V120
 
-# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
+pattern_delete=(.*km\/h.*)
 
-pattern_not_merge=([[:space:]]V[[:space:]]{0,1}120[[:space:]])
+pattern_not_merge=([[:space:]]V[[:space:]]{0,1}120(|[[:space:]]*km\/h)[[:space:]])
 
 pattern_not_merge=([[:space:]]V[[:space:]]{0,1}120(\.(0))[[:space:]])
 
