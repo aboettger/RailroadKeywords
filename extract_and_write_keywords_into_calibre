@@ -217,8 +217,8 @@ while read -r pdf_path; do
     time_estimated=$((time_complete * all_pdfs_count / pdf_counter))
     time_left=$((time_estimated - time_complete))
     
-    time_left_minutes=$((time_left / 1000 / 60))
     time_left_seconds=$((time_left / 1000))
+    time_left_minutes=$((time_left_seconds / 60))
     echo -ne "[$pdf_counter/$all_pdfs_count] Voraussichtliches Ende in < $time_left_minutes min ($(date -d "+$time_left_seconds seconds"))\033[K\r"    
     
     # echo "Gesamtzeit $script: $((time_complete_b - time_complete_a)) ms"
