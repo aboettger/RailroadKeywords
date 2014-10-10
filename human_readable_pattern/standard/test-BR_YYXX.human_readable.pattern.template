@@ -1,7 +1,3 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/YYXX.asc
 
 category=Baureihen[category_separator]YYXX
-
-# pattern_delete=([[:space:]][^0-9a-zA-Z]$)
-
-pattern_not_merge=([[:space:]]YY[[:space:]]{0,1}XX[[:space:]])
