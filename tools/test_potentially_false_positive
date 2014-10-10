@@ -3,7 +3,7 @@
 ##
 #
 # Durchsucht die vorhandenen false positive Dateien und testet sie erneut
-# 
+#
 # tools/test_potentially_false_positive "PfadZumCalibreVerzeichnisOderUnterverzeichnis"
 #
 ##
@@ -21,10 +21,18 @@ cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
 # category_separator=$(look category_separator "$script_path"/../main.cfg | cut -d '=' -f 2-)
 
 library_path="$1"
+auto_remove_needless="$2"
+
+if [[ -z $library_path ]] || [[ -z $auto_remove_needless ]]; then
+  echo "Benutzung: $script_name \"PfadZurCalibreDBOderUnterverzeichnis\" \"auto_remove_needless\""
+  echo -e "auto_remove_needless:\t0 - Schlüsselwörter einzeln abfragen"
+  echo -e "\t\t\t1 - Nicht mehr findbare Schlüsselwörter automatisch löschen"
+  exit 1
+fi
 
 pattern_files=$(find "$script_path/../false_positive" -type f -name "*.pattern")
 while read pattern_file; do
-  echo "$pattern_file"
+
   entries=$(sed -e '/^ *#/d' "$pattern_file" | grep '[0-9]*=')
   while read entry; do
     if [[ ! -z "$entry" ]]; then
@@ -40,63 +48,75 @@ while read pattern_file; do
         keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}' | sed -e 's/[]\/$*.^|[]/\\&/g')
 
         working_path=$(dirname "$metadata_file")
-        
+
         pdf_path=$(find "$working_path" -type f -name '*.pdf')
         hr_txt_path=${pdf_path//.pdf/.human-readable.txt}
         txt_path=${pdf_path//.pdf/.txt}
-        echo "$keyword"
-        egrep -anET -C 5 "[[:space:]]$keyword[[:space:]]" "$txt_path"
-        
+
         keyword_pattern=$(sed -e 's/\./\\\./g' <<< "$entry")
         escaped_keyword_pattern=$(sed -e 's/[]\/$*.^|[]/\\&/g' <<< "$keyword_pattern")
 
-        echo "1) Nichts tun"
-        echo "2) Schlüsselwort wieder erlauben und Aktualisierung durchführen"
-        echo "3) Schlüsselwort wieder erlauben, aber keine Aktualisierung durchführen"
-        echo "4) PDF ansehen \"$pdf_path\""
-        echo "5) Original TXT ansehen \"$hr_txt_path\""
-        echo "6) Gekürzten TXT ansehen \"$txt_path\""
-        echo "7) Verzeichnis öffnen \"$working_path\""
-        echo "8) Nichts tun"
-        while true; do
-          read -p "Bitte wählen: " input < /dev/tty
-          case $input in
-              [1]* )
-                break;;
-              [2]* )
-                sed -i "/$escaped_keyword_pattern/d" "$pattern_file"
-                extract_and_write_keywords_into_calibre "$working_path"
-                logDebug "\"$keyword\" für Calibre-ID \"$calibre_id\" wieder möglich: \"$calibre_id=^($keyword_pattern)\$\" aus \"$pattern_file\" entfernt."
-                break;;
-              [3]* )
-                sed -i "/$escaped_keyword_pattern/d" "$pattern_file"
-                logDebug "\"$keyword\" für Calibre-ID \"$calibre_id\" wieder möglich: \"$calibre_id=^($keyword_pattern)\$\" aus \"$pattern_file\" entfernt."
-                break;;
-              [4]* )
-                echo "Öffne \"$pdf_path\""
-                check_evince=$(command -v evince)
-                if [[ ! -z $check_evince ]]; then
-                  evince "$pdf_path" --find="$keyword" > /dev/null 2>&1 &
-                else
-                  xdg-open "$pdf_path" > /dev/null 2>&1 &
-                fi
-                ;;
-              [5]* )
-                echo "Öffne \"$hr_txt_path\""
-                xdg-open "$hr_txt_path" > /dev/null 2>&1 &
-                ;;
-              [6]* )
-                echo "Öffne \"$txt_path\""
-                xdg-open "$txt_path" > /dev/null 2>&1 &
-                ;;
-              [7]* )
-                echo "Öffne \"$working_path\""
-                xdg-open "$working_path" > /dev/null 2>&1 &
-                ;;
-              [8]* ) break;;
-              * ) echo "Ungültige Auswahl";;
-          esac
-        done
+        if [[ $auto_remove_needless == "1" ]]; then
+          remove_needless_result=$(egrep -ao "[[:space:]]$keyword[[:space:]]" "$txt_path")
+          result_count=$(wc -l <<< "$remove_needless_result")
+          if [[ $result_count == "0" ]]; then
+            echo "$pattern_file"
+            echo "$keyword"
+            echo "$calibre_id $result_count"
+
+            # sed -i "/$escaped_keyword_pattern/d" "$pattern_file"
+          fi
+        else
+          egrep -anET -C 5 "[[:space:]]$keyword[[:space:]]" "$txt_path"
+
+          echo "1) Nichts tun"
+          echo "2) Schlüsselwort wieder erlauben und Aktualisierung durchführen"
+          echo "3) Schlüsselwort wieder erlauben, aber keine Aktualisierung durchführen"
+          echo "4) PDF ansehen \"$pdf_path\""
+          echo "5) Original TXT ansehen \"$hr_txt_path\""
+          echo "6) Gekürzten TXT ansehen \"$txt_path\""
+          echo "7) Verzeichnis öffnen \"$working_path\""
+          echo "8) Nichts tun"
+          while true; do
+            read -p "Bitte wählen: " input < /dev/tty
+            case $input in
+                [1]* )
+                  break;;
+                [2]* )
+                  sed -i "/$escaped_keyword_pattern/d" "$pattern_file"
+                  extract_and_write_keywords_into_calibre "$working_path"
+                  logDebug "\"$keyword\" für Calibre-ID \"$calibre_id\" wieder möglich: \"$calibre_id=^($keyword_pattern)\$\" aus \"$pattern_file\" entfernt."
+                  break;;
+                [3]* )
+                  sed -i "/$escaped_keyword_pattern/d" "$pattern_file"
+                  logDebug "\"$keyword\" für Calibre-ID \"$calibre_id\" wieder möglich: \"$calibre_id=^($keyword_pattern)\$\" aus \"$pattern_file\" entfernt."
+                  break;;
+                [4]* )
+                  echo "Öffne \"$pdf_path\""
+                  check_evince=$(command -v evince)
+                  if [[ ! -z $check_evince ]]; then
+                    evince "$pdf_path" --find="$keyword" > /dev/null 2>&1 &
+                  else
+                    xdg-open "$pdf_path" > /dev/null 2>&1 &
+                  fi
+                  ;;
+                [5]* )
+                  echo "Öffne \"$hr_txt_path\""
+                  xdg-open "$hr_txt_path" > /dev/null 2>&1 &
+                  ;;
+                [6]* )
+                  echo "Öffne \"$txt_path\""
+                  xdg-open "$txt_path" > /dev/null 2>&1 &
+                  ;;
+                [7]* )
+                  echo "Öffne \"$working_path\""
+                  xdg-open "$working_path" > /dev/null 2>&1 &
+                  ;;
+                [8]* ) break;;
+                * ) echo "Ungültige Auswahl";;
+            esac
+          done
+        fi
       fi
     fi
   done <<< "$entries"
