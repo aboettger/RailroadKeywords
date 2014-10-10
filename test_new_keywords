@@ -1,0 +1,64 @@
+#!/bin/bash
+
+##
+#
+# Durchsucht ab "LibraryPath" alle Verzeichnisse nach neuen Schlüsselwörtern
+# und bietet Aktionen an
+# 
+# test_new_keywords "PfadZumCalibreVerzeichnisOderUnterverzeichnis"
+#
+##
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+script_path=$(dirname "$script")
+
+cfg_log_level=$(look log_level "$script_path"/main.cfg | cut -d '=' -f 2-)
+. "$script_path/libraries/logging.sh" "$cfg_log_level"
+
+# script_name=$(basename "$script")
+
+library_path="$1"
+
+if [[ -z $library_path ]]; then
+  echo "Benutzung: $script_name \"PfadZurCalibreDBOderUnterverzeichnis\""
+  exit 1
+fi
+
+files=$(find "$library_path" -type f -name "tag_4_grep_potentially_false_positive" -exec grep -l ">" {} \;)
+logDebug "$(wc -l <<< "$files") Dateien gefunden"
+while read file; do
+  new_keywords=$(grep "> " "$file" | sed -e 's/^>  \{0,1\}//g' | sort | uniq)
+  logDebug "\n$(wc -l <<< "$new_keywords") neue Schlüsselwörter für \"$(dirname "$file")\" gefunden"
+  while read new_keyword; do
+    result=$("$script_path"/tools/split_category_and_keyword "$new_keyword")
+      category=$(grep "category" <<< "$result" | awk -F '\t' '{print $2}')
+      keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}')
+      working_dir=$(dirname "$file")
+      echo "$working_dir"
+
+      "$script_path"/tools/grep_potentially_false_positive "$working_dir" "$category" "$keyword"
+      
+      escaped_new_keyword=$(sed -e 's/[]\/$*.^|[]/\\&/g' <<< "> $new_keyword")
+      echo
+      echo "Das Schlüsselwort \"$new_keyword\" wurde einer der letzten Aktualisierungen als \"Neu\" hinzugefügt. Diesen Vermerk entfernen?"
+      echo "n) Nein, nichts tun"
+      echo "j) Ja, Schlüsselwort als neues Schlüsselwort entfernen"
+      
+      while true; do
+        read -p "Bitte wählen: " input < /dev/tty
+        case $input in
+            n* )
+              break;;
+            j* )
+              sed -i "/^$escaped_new_keyword[[:space:]]*\$/d" "$file"
+              logDebug "\"$keyword\" aus \"$file\" entfernt."
+              break;;
+            * ) echo "Ungültige Auswahl";;
+        esac
+      done
+  done <<< "$new_keywords"
+done <<< "$files"
+
+exit 0
