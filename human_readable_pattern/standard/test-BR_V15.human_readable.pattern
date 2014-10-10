@@ -4,8 +4,7 @@ category=Baureihen[category_separator]V15
 
 pattern_delete=(.*km\/h.*)
 
-pattern_not_merge=([[:space:]]V[[:space:]]{0,1}15[[:space:]])
-
+pattern_not_merge=([[:space:]]V[[:space:]]{0,1}15(|[[:space:]]*km\/h)[[:space:]])
 pattern_not_merge=([[:space:]]V[[:space:]]{0,1}15(\.(0|1|9|1[0]|2[0-3]))[[:space:]])
 
 pattern=([[:space:]]V[[:space:]]{0,1}15[[:space:]]0(0[1-5]|4[0])[[:space:]])
