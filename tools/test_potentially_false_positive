@@ -20,18 +20,19 @@ cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
 
 # category_separator=$(look category_separator "$script_path"/../main.cfg | cut -d '=' -f 2-)
 
-library_path="$1"
-auto_remove_needless="$2"
+library_path="$2"
+test_mode="$1"
 
-if [[ -z $library_path ]] || [[ -z $auto_remove_needless ]]; then
-  echo "Benutzung: $script_name \"PfadZurCalibreDBOderUnterverzeichnis\" \"auto_remove_needless\""
-  echo -e "auto_remove_needless:\t0 - Schlüsselwörter einzeln abfragen"
-  echo -e "\t\t\t1 - Nicht mehr findbare Schlüsselwörter automatisch löschen"
+if [[ -z $library_path ]] || [[ -z $test_mode ]]; then
+  echo "Benutzung: $script_name \"test_mode\" \"PfadZurCalibreDBOderUnterverzeichnis\""
+  echo -e "test_mode:\t1 - Schlüsselwörter aus \"false_positive\" abfragen."
+  echo -e "test_mode:\t2 - Schlüsselwörter aus \"false_positive\" entfernen, die nicht mehr gefunden werden können."
+  echo -e "test_mode:\t3 - Schlüsselwörter ohne Rückfrage aus \"false_positive\" entfernen, die nicht mehr gefunden werden können."
   exit 1
 fi
 
 pdf_files=$(find "$library_path" -type f -name "*.pdf")
-while read pdf_path; do
+while read -r pdf_path; do
   working_path=$(dirname "$pdf_path")
 
   metadata_file="$working_path/metadata.opf"
@@ -40,60 +41,26 @@ while read pdf_path; do
   false_positive_files=$(find "$script_path/../false_positive" -type f -name "*.pattern" -exec grep -q "^$calibre_id=" {} \; -print)
 
   if [[ ! -z $false_positive_files ]]; then
-    echo "$calibre_id"
-    while read false_positive_file; do
+    logInfo "$working_path"
+    while read -r false_positive_file; do
       entries=$(sed -e '/^ *#/d' "$false_positive_file" | grep "^$calibre_id=")
-      while read entry; do
+      while read -r entry; do
         if [[ ! -z "$entry" ]]; then
-
           stripped_entry=$(sed -e 's/\^//g' <<< "$entry" | sed -e 's/(//g' | sed -e 's/)//g' | sed -e 's/\$//g' | sed -e 's/\\\././g')
 
           category_and_keyword=$(gawk  -F '=' '{print $2}' <<< "$stripped_entry")
 
           result=$("$script_path/../tools/split_category_and_keyword" "$category_and_keyword")
-          
+
           keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}' | sed -e 's/[]\/$*.^|[]/\\&/g')
           stripped_keyword=$(sed -e 's/\^//g' <<< "$keyword" | sed -e 's/(//g' | sed -e 's/)//g' | sed -e 's/\$//g' | sed -e 's/\\\././g' | sed -e 's/\\//g')
 
-          keyword_pattern=$(sed -e 's/\./\\\./g' <<< "$entry")
-          escaped_keyword_pattern=$(sed -e 's/[]\/$*.^|[]/\\&/g' <<< "$keyword_pattern")
+          escaped_keyword_pattern=$(sed -e 's/[]\/$*.^|[]/\\&/g' <<< "$entry")
 
-          if [[ $auto_remove_needless == "1" ]]; then
-            pattern_case=${false_positive_file//false_positive/pattern}
-            if [[ ! -f $pattern_case ]]; then
-              true
-              # rm "$false_positive_file"
-            else
-              echo "$pattern_case"
-              temp_file=$(tempfile)
-              echo " $stripped_keyword " >> "$temp_file"
-
-              remove_needless_result=$("$script_path/../functions/getResults.sh" "$pattern_case" "$temp_file" "1")
-            fi
-
-            if [[ -z $remove_needless_result ]]; then
-              echo "\"$stripped_keyword\" wird nicht (mehr) durch \"$pattern_case\" gefunden."
-              
-              echo "1) Nichts tun"
-              echo "2) Eintrag \"$entry\" aus \"$false_positive_file\" entfernen?"
-              
-              while true; do
-                read -p "Bitte wählen: " input < /dev/tty
-                case $input in
-                    [1]* )
-                      break;;
-                    [2]* )
-                      sed -i "/$escaped_keyword_pattern/d" "$false_positive_file"
-                      logDebug "Eintrag \"$entry\" aus \"$false_positive_file\" entfernt."
-                      break;;
-                    * ) echo "Ungültige Auswahl";;
-                esac
-              done
-            fi
-          else
+          if [[ $test_mode == "1" ]]; then
             hr_txt_path=${pdf_path//.pdf/.human-readable.txt}
             txt_path=${pdf_path//.pdf/.txt}
-            
+
             egrep -anET -C 5 "[[:space:]]$keyword[[:space:]]" "$txt_path"
 
             echo "1) Nichts tun"
@@ -143,8 +110,42 @@ while read pdf_path; do
                   * ) echo "Ungültige Auswahl";;
               esac
             done
+          elif [[ $test_mode == "2" ]] || [[ $test_mode == "3" ]]; then
+            false_positive_pattern=$(grep "^$calibre_id=" "$false_positive_file" | gawk  -F "$calibre_id=" '{print $2}')
+            if [[ ! -z $false_positive_pattern ]]; then
+              logDebug "$false_positive_file"
+              logDebug "$entry"
+              keywords=$("$script_path/../create_railroad_keywords_from_pdf" run "${false_positive_file//false_positive/pattern}" "$pdf_path")
+              # while read -r pattern; do
+                escaped_pattern=$(sed -e 's/[]\/$*.^|[]/\\&/g' <<< "$entry")
+                grep_result=$(sort <<< "$keywords" | uniq | grep -oE "$false_positive_pattern")
+                if [[ -z $grep_result ]]; then
+                  if [[ $test_mode == "2" ]]; then
+                    echo "Der Eintrag \"$entry\" in \"$false_positive_file\" ist überflüssig, entfernen?"
+                    echo "n) Nein, nichts tun"
+                    echo "j) Ja, \"$entry\" aus \"$false_positive_file\" entfernen"
+                    while true; do
+                      read -p "Bitte wählen: " input < /dev/tty
+                      case $input in
+                          n* )
+                            break;;
+                          j* )
+                            sed -i "/^$escaped_pattern\$/d" "$false_positive_file"
+                            logInfo "\"$entry\" aus \"$false_positive_file\" entfernt."
+                            break;;
+                          * ) echo "Ungültige Auswahl";;
+                      esac
+                    done
+                  elif [[ $test_mode == "3" ]]; then
+                    sed -i "/^$escaped_pattern\$/d" "$false_positive_file"
+                    logDebug "\"$entry\" aus \"$false_positive_file\" entfernt."
+                  fi
+                fi
+              # done <<< "$false_positive_pattern"
+            fi
+          else
+            true
           fi
-
         fi
       done <<< "$entries"
     done <<< "$false_positive_files"
