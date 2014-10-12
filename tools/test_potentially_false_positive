@@ -116,32 +116,30 @@ while read -r pdf_path; do
               logDebug "$false_positive_file"
               logDebug "$entry"
               keywords=$("$script_path/../create_railroad_keywords_from_pdf" run "${false_positive_file//false_positive/pattern}" "$pdf_path")
-              # while read -r pattern; do
-                escaped_pattern=$(sed -e 's/[]\/$*.^|[]/\\&/g' <<< "$entry")
-                grep_result=$(sort <<< "$keywords" | uniq | grep -oE "$false_positive_pattern")
-                if [[ -z $grep_result ]]; then
-                  if [[ $test_mode == "2" ]]; then
-                    echo "Der Eintrag \"$entry\" in \"$false_positive_file\" ist überflüssig, entfernen?"
-                    echo "n) Nein, nichts tun"
-                    echo "j) Ja, \"$entry\" aus \"$false_positive_file\" entfernen"
-                    while true; do
-                      read -p "Bitte wählen: " input < /dev/tty
-                      case $input in
-                          n* )
-                            break;;
-                          j* )
-                            sed -i "/^$escaped_pattern\$/d" "$false_positive_file"
-                            logInfo "\"$entry\" aus \"$false_positive_file\" entfernt."
-                            break;;
-                          * ) echo "Ungültige Auswahl";;
-                      esac
-                    done
-                  elif [[ $test_mode == "3" ]]; then
-                    sed -i "/^$escaped_pattern\$/d" "$false_positive_file"
-                    logDebug "\"$entry\" aus \"$false_positive_file\" entfernt."
-                  fi
+              escaped_pattern=$(sed -e 's/[]\/$*.^|[]/\\&/g' <<< "$entry")
+              grep_result=$(sort <<< "$keywords" | uniq | grep -oE "$false_positive_pattern")
+              if [[ -z $grep_result ]]; then
+                if [[ $test_mode == "2" ]]; then
+                  echo "Der Eintrag \"$entry\" in \"$false_positive_file\" ist überflüssig, entfernen?"
+                  echo "n) Nein, nichts tun"
+                  echo "j) Ja, \"$entry\" aus \"$false_positive_file\" entfernen"
+                  while true; do
+                    read -p "Bitte wählen: " input < /dev/tty
+                    case $input in
+                        n* )
+                          break;;
+                        j* )
+                          sed -i "/^$escaped_pattern\$/d" "$false_positive_file"
+                          logInfo "\"$entry\" aus \"$false_positive_file\" entfernt."
+                          break;;
+                        * ) echo "Ungültige Auswahl";;
+                    esac
+                  done
+                elif [[ $test_mode == "3" ]]; then
+                  sed -i "/^$escaped_pattern\$/d" "$false_positive_file"
+                  logDebug "\"$entry\" aus \"$false_positive_file\" entfernt."
                 fi
-              # done <<< "$false_positive_pattern"
+              fi
             fi
           else
             true
