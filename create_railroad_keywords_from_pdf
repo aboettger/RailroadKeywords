@@ -302,26 +302,32 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
 
     if  [ "$1" == "run" ]; then
 
-      # time_complete_a=$(($(date +%s%N)/1000000))
-
       if [ -f "$pattern_path" ]; then
+        # time_complete_a=$(($(date +%s%N)/1000000))
+        
         runSearch "$pattern_path" "$pdf_path"
+        
+        # time_complete_b=$(($(date +%s%N)/1000000))
+        # logDebug "Gesamtzeit $script: $((time_complete_b - time_complete_a)) ms"
       else
 
         cfg_pattern_files=$(look pattern_files "$script_path"/main.cfg | cut -d '=' -f 2-)
         script_path_escaped=${script_path////\\/}
         cfg_pattern_files=$(sed -e 's/[[:space:]]//g' <<< "$cfg_pattern_files" | sed -e "s/,/\\n/g" | sed -e "s/^/$script_path_escaped\/pattern\//g")
 
-        find "$pattern_path" -type f -name 'test-*.pattern' | sort | { while read -r pattern_case;
+        # time_complete_a=$(($(date +%s%N)/1000000))
+
+        pattern_files=$(find "$pattern_path" -type f -name 'test-*.pattern')
+        while read -r pattern_case;
           do
             if [[ -d $cfg_pattern_files ]] || [[ $cfg_pattern_files =~ $pattern_case ]]; then
               runSearch "$pattern_case" "$pdf_path"
             fi
-        done }
+        done <<< "$pattern_files"
+        
+        # time_complete_b=$(($(date +%s%N)/1000000))
+        # logDebug "Gesamtzeit $script: $((time_complete_b - time_complete_a)) ms"
       fi
-
-      # time_complete_b=$(($(date +%s%N)/1000000))
-      # echo "Gesamtzeit $script: $((time_complete_b - time_complete_a)) ms"
     fi
   fi
 fi
