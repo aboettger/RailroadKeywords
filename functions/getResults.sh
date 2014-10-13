@@ -42,7 +42,7 @@ while read -r line; do
   if [[ $isTest == "1" ]]; then
     result=$(grep -oaE "^$line\$" "$txt_path" | sed -e 's/^ *//' | sed -e 's/ *$//')
   else
-    result=$(grep -oaE "$line" "$txt_path" | sed -e 's/^ *//' | sed -e 's/ *$//')
+    result=$(grep -oaE "$line" "$txt_path" | sed -e 's/^ *//' | sed -e 's/ *$//' | sort | uniq)
   fi
   
   # time_complete_b=$(($(date +%s%N)/1000000))
