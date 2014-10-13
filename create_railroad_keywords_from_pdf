@@ -317,7 +317,7 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
 
         # time_complete_a=$(($(date +%s%N)/1000000))
 
-        pattern_files=$(find "$pattern_path" -type f -name 'test-*.pattern')
+        pattern_files=$(find "$pattern_path" -type f -name 'test-*.pattern' | sort)
         while read -r pattern_case;
           do
             if [[ -d $cfg_pattern_files ]] || [[ $cfg_pattern_files =~ $pattern_case ]]; then
