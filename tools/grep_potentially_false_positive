@@ -21,8 +21,8 @@ script_name=$(basename "$script")
 category_separator=$(look category_separator "$script_path"/../main.cfg | cut -d '=' -f 2-)
 
 library_path="$1"
-keyword="$3"
 given_category="$2"
+keyword="$3"
 
 if [ -z "$keyword" ] || [ -z "$library_path" ] || [ -z "$given_category" ]; then
   echo "Benutzung: $script_name \"PfadZurCalibreDBOderUnterverzeichnis\" \"Kategorie\" \"Schlüsselwort\""
@@ -107,6 +107,7 @@ pattern_files_hit=$(
       patterns=$("$script_path/../functions/getPattern.sh" "$pattern_file")
 
       while read -r pattern; do
+        
         result=$(grep -E "$pattern" <<< " $keyword_for_pattern ")
         if [[ $result != "" ]]; then
           echo "$pattern_file"
@@ -116,7 +117,7 @@ pattern_files_hit=$(
   done <<< "$pattern_files"
 )
 
-pattern_files_hit=$(sed -e '/^$/d' <<< "$pattern_files_hit")
+pattern_files_hit=$(sort <<< "$pattern_files_hit" | uniq | sed -e '/^$/d')
 
 while read -r calibre_id; do
   count=$((count+1))
