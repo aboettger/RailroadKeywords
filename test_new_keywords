@@ -29,15 +29,16 @@ fi
 files=$(find "$library_path" -type f -name "tag_4_grep_potentially_false_positive" -exec grep -l ">" {} \;)
 if [[ ! -z "$files" ]]; then
   logDebug "$(wc -l <<< "$files") Datei(en) gefunden"
+  logDebug "$files"
   while read file; do
     new_keywords=$(grep "> " "$file" | sed -e 's/^>  \{0,1\}//g' | sort | uniq)
     logDebug "\n$(wc -l <<< "$new_keywords") neue Schlüsselwörter für \"$(dirname "$file")\" gefunden"
+    logDebug "$new_keywords"
     working_dir=$(dirname "$file")
     while read new_keyword; do
       result=$("$script_path"/tools/split_category_and_keyword "$new_keyword")
       category=$(grep "category" <<< "$result" | awk -F '\t' '{print $2}')
       keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}')
-      echo "$working_dir"
 
       "$script_path"/tools/grep_potentially_false_positive "$working_dir" "$category" "$keyword"
 
