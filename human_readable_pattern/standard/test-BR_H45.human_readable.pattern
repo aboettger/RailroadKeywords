@@ -6,6 +6,6 @@ category=Baureihen[category_separator]H45
 
 pattern_not_merge=([[:space:]]H[[:space:]]{0,1}45[[:space:]])
 
-pattern_not_merge=([[:space:]]H[[:space:]]{0,1}45(\.0)[[:space:]])
+pattern=([[:space:]]H[[:space:]]{0,1}45(\.0)[[:space:]])
 
 pattern=([[:space:]]H[[:space:]]{0,1}45[[:space:]]0(24)[[:space:]])

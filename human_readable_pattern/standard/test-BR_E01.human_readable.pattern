@@ -6,7 +6,7 @@ category=Baureihen[category_separator]E01
 
 pattern_not_merge=([[:space:]]E[[:space:]]{0,1}01[[:space:]])
 
-pattern_not_merge=([[:space:]]E[[:space:]]{0,1}01(\.(0))[[:space:]])
+pattern=([[:space:]]E[[:space:]]{0,1}01(\.(0))[[:space:]])
 
 pattern=([[:space:]]E[[:space:]]{0,1}01[[:space:]](0[9]|1[0-9])[[:space:]])
 pattern=([[:space:]]E[[:space:]]{0,1}01[[:space:]]0(0[9]|1[0-9])[[:space:]])

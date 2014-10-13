@@ -6,6 +6,6 @@ pattern_delete=(.*km\/h.*)
 
 pattern_not_merge=([[:space:]]V[[:space:]]{0,1}29(|[[:space:]]*km\/h)[[:space:]])
 
-pattern_not_merge=([[:space:]]V[[:space:]]{0,1}29(\.(9))[[:space:]])
+pattern=([[:space:]]V[[:space:]]{0,1}29(\.(9))[[:space:]])
 
 pattern=([[:space:]]V[[:space:]]{0,1}29[[:space:]]9(5[123])[[:space:]])

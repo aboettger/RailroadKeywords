@@ -7,6 +7,6 @@ category=Baureihen[category_separator]T09
 
 pattern_not_merge=([[:space:]]T[[:space:]]{0,1}09[[:space:]])
 
-pattern_not_merge=([[:space:]]T[[:space:]]{0,1}09(\.0)[[:space:]])
+pattern=([[:space:]]T[[:space:]]{0,1}09(\.0)[[:space:]])
 
 pattern=([[:space:]]T[[:space:]]{0,1}09[[:space:]]0(0[12])[[:space:]])

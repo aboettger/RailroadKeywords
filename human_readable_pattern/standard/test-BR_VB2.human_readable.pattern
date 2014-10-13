@@ -8,7 +8,7 @@ pattern_not_merge=([[:space:]]VB[[:space:]]{0,1}2[[:space:]])
 
 # Pattern #1
 
-pattern_not_merge=([[:space:]]VB[[:space:]]{0,1}2(\.(0[7]))[[:space:]])
+pattern=([[:space:]]VB[[:space:]]{0,1}2(\.(0[7]))[[:space:]])
 
 # Pattern #2
 
