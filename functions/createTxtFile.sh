@@ -10,8 +10,10 @@ cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
 . "$script_path/../libraries/logging.sh" "$cfg_log_level"
 
 pdf_path="$1"
-pdf_dirname="$2"
-pdf_filename="$3"
+
+pdf_dirname=$(dirname "$pdf_path")
+pdf_filename=$(basename "$pdf_path")
+pdf_filename="${pdf_filename%.*}"
 
 spaces=$(python -c 'print u"\u0001\u000C\u0009\u00A0\u2004\u2005\u2006\u2009\u200A\u200B".encode("utf8")')
 double_quotes=$(python -c 'print u"\u201c\u201d\u201e\u201f\u0022".encode("utf8")')
@@ -62,31 +64,32 @@ if [ ! -f "$pdf_dirname/$pdf_filename.human-readable.txt" ] || [ -f "$pdf_dirnam
   fi
 fi
 
-temp_file_1=$(tempfile)
-temp_file_2=$(tempfile)
-# temp_file_3=$(tempfile)
-# temp_file_4=$(tempfile)
+logInfo "Schreibe \"$pdf_dirname/$pdf_filename.txt\" neu."
+cp "$pdf_dirname/$pdf_filename.human-readable.txt" "$pdf_dirname/$pdf_filename.txt"
 
-logInfo "Schreibe \"$pdf_filename.txt\" neu."
-
-# !!!!! Runde Klammern dürfen nicht angefasst werden, das gibt Probleme mit Bauarten und Achsfolgen !!!!!
-# Ständiger Wechsel zwischen temp_file_1 und temp_file_2
-sed -E ':a;N;$!ba;s/([a-z])[[:space:]]*\-[[:space:]]*\n([a-z])/\1\2/g' "$pdf_dirname/$pdf_filename.human-readable.txt" > "$temp_file_1"
-# Namen die durch Zeilenumbrüche getrennt sind zusammenführen, z.B. "Richard\nTrevithick" --> "Richard Trevithick"
-sed -E ':a;N;$!ba;s/([a-z])[[:space:]]*\n[[:space:]]*([A-Z])/\1 \2/g' "$temp_file_1" > "$temp_file_2"
-sed -E ':a;N;$!ba;s/([0-9])[[:space:]]*\n[[:space:]]*([0-9])/\1 ~ \2/g' "$temp_file_2" > "$temp_file_1"
-sed -E ':a;N;$!ba;s/([A-Z])[[:space:]]*\n[[:space:]]*([0-9])/\1 \2/g' "$temp_file_1" > "$temp_file_2"
-sed -E ':a;N;$!ba;s/([a-zA-Z])(\-)[[:space:]]*\n[[:space:]]*([A-Z])/\1\2\3/g' "$temp_file_2" > "$temp_file_1"
-sed -e ':a;N;$!ba;s/\n/ \n /g' "$temp_file_1" | sed -e 's/['"$spaces"']/ /g' | sed -e 's/['"$double_quotes"']//g' | sed -e 's/\*[[:space:]]/ \* /g' | sed -e 's/)/ )/g' | sed -e 's/(/( /g' | sed -e 's/\.\./ /g' | sed -e 's/\.[[:space:]]/ \. /g' | sed -e 's/\![[:space:]]/ \! /g' | sed -e 's/\?[[:space:]]/ \? /g' | sed -e 's/\,[[:space:]]/ \, /g' | sed -e 's/\:[[:space:]]/ \: /g' | sed -e 's/\;[[:space:]]/ \; /g' | sed -E 's/\-/ - /g' | sed -E 's/([0-9])\-(.)/\1 - \2/g' | sed -E 's/[[:space:]]{2,}/ /g' | sed -E 's/([[:space:]]BR)([0-9])/\1 \2/g' > "$temp_file_2"
-sed -E 's/[[:space:]][a-z]{3,}/ ~/g' "$temp_file_2" > "$temp_file_1"
-sed -E 's/\(cid\:[0-9]{1,3}\)//g' "$temp_file_1" > "$temp_file_2"
-# Move the temporary file 
-cp "$temp_file_1" "$pdf_dirname/$pdf_filename.txt"
-
-rm "$temp_file_1"
-rm "$temp_file_2"
-# rm "$temp_file_3"
-# rm "$temp_file_4"
-
+sed -Ei ':a;N;$!ba;s/([a-z])[[:space:]]*\-[[:space:]]*\n([a-z])/\1\2/g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei ':a;N;$!ba;s/\n/ \n /g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei ':a;N;$!ba;s/([a-z])[[:space:]]*\n[[:space:]]*([A-Z])/\1 \2/g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei ':a;N;$!ba;s/([0-9])[[:space:]]*\n[[:space:]]*([0-9])/\1 ~ \2/' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei ':a;N;$!ba;s/([A-Z])[[:space:]]*\n[[:space:]]*([0-9])/\1 \2/g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei ':a;N;$!ba;s/([a-zA-Z])(\-)[[:space:]]*\n[[:space:]]*([A-Z])/\1\2\3/g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/\(cid\:[0-9]{1,3}\)//g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/['"$spaces"']/ /g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/['"$double_quotes"']//g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/\*[[:space:]]/ \* /g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/\)/ )/g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/\(/( /g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/\.\./ /g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/\.[[:space:]]/ \. /g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/\![[:space:]]/ \! /g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/\?[[:space:]]/ \? /g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/\,[[:space:]]/ \, /g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/\:[[:space:]]/ \: /g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/\;[[:space:]]/ \; /g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/\-/ - /g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/([0-9])\-(.)/\1 - \2/g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/[[:space:]]{2,}/ /g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/([[:space:]]BR)([0-9])/\1 \2/g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei 's/[[:space:]][a-z]{3,}/ ~/g' "$pdf_dirname/$pdf_filename.txt"
 
 exit 0
