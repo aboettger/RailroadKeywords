@@ -1,0 +1,42 @@
+#!/bin/bash
+
+##
+#
+# Durchsucht ab "LibraryPath" alle Verzeichnisse nach entfernten Schlüsselwörtern
+# 
+# test_removed_keywords "PfadZumCalibreVerzeichnisOderUnterverzeichnis"
+#
+##
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+script_path=$(dirname "$script")
+
+cfg_log_level=$(look log_level "$script_path"/main.cfg | cut -d '=' -f 2-)
+. "$script_path/libraries/logging.sh" "$cfg_log_level"
+
+# script_name=$(basename "$script")
+
+library_path="$1"
+
+if [[ -z $library_path ]]; then
+  echo "Benutzung: $script_name \"PfadZurCalibreDBOderUnterverzeichnis\""
+  exit 1
+fi
+
+files=$(find "$library_path" -type f -name "tag_4_grep_potentially_false_positive" -exec grep -l "<" {} \;)
+if [[ ! -z "$files" ]]; then
+  logDebug "$(wc -l <<< "$files") Datei(en) gefunden"
+  while read file; do
+    removed_keywords=$(grep "< " "$file" | sed -e 's/^<  \{0,1\}//g' | sort | uniq)
+    if [[ ! -z $removed_keywords ]]; then
+      logInfo "\n$(wc -l <<< "$removed_keywords") gelöschte Schlüsselwörter für \"$(dirname "$file")\" gefunden"
+      while read removed_keyword; do
+        logInfo "$removed_keyword"
+      done <<< "$removed_keywords"
+    fi
+  done <<< "$files"
+fi
+
+exit 0
