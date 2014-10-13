@@ -15,43 +15,48 @@ pattern_case="$1"
 txt_path="$2"
 isTest="$3"
 
+category=$(look category "$pattern_case" | cut -d '=' -f 2-)
+
 pattern=$("$script_path/../functions/getPattern.sh" "$pattern_case")
 # prefix=$(sed -e '/^#/d' "$pattern_case" | grep 'prefix=' | gawk  -F 'prefix=' '{print $2}')
 # if [ ! -z "$prefix" ]; then
 #   prefix=$(echo "$prefix" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
 # fi
 
+# time_complete_a=$(($(date +%s%N)/1000000))
+
 pattern_delete=$(sed -e '/^#/d' "$pattern_case" | grep 'pattern_delete=' | gawk  -F 'pattern_delete=' '{print $2}')
 if [ ! -z "$pattern_delete" ]; then
   pattern_delete=$(sed -e 's/(/\\(/g' <<< "$pattern_delete" | sed -e 's/)/\\)/g' | sed -e 's/{/\\{/g' | sed -e 's/}/\\}/g' | sed -e 's/|/\\|/g')
 fi
 
-# logInfo "pattern $pattern_case"
-# timea=$(($(date +%s%N)/1000000))
+# time_complete_b=$(($(date +%s%N)/1000000))
+# logDebug "pattern_delete in $script: $((time_complete_b - time_complete_a)) ms"
 
-echo "$pattern" | { while read -r line; do
+while read -r line; do
   # line=$(echo "$line" | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g')
   # sed -e "s/$line/\2/" "$txt_path"
+  
+  # time_complete_a=$(($(date +%s%N)/1000000))
+  
   if [[ $isTest == "1" ]]; then
     result=$(grep -oaE "^$line\$" "$txt_path" | sed -e 's/^ *//' | sed -e 's/ *$//')
   else
     result=$(grep -oaE "$line" "$txt_path" | sed -e 's/^ *//' | sed -e 's/ *$//')
   fi
-
+  
+  # time_complete_b=$(($(date +%s%N)/1000000))
+  # logDebug "result in $script: $((time_complete_b - time_complete_a)) ms"
 
   if [ ! -z "$pattern_delete" ]; then
     result=$(sed -e "s/$pattern_delete//g" <<< "$result")
   fi
 
-  if [ ! -z "$prefix" ]; then
-    result=$(echo "$result" | sed -E "s/^(.*)\$/$prefix\1/g")
-  fi
-
   if [[ $result != "" ]]; then
-    category=$(look category "$pattern_case" | cut -d '=' -f 2-)
     if [[ $isTest == "0" ]] && [[ $cfg_log_level == "4" ]]; then
-      log_result=$(sort <<< "$result" | uniq | sed -e 's/^/\\t/g')
-      logDebug "Kategorie: $category (\"$pattern_case\")\n$log_result"
+      # log_result=$(sort <<< "$result" | uniq | sed -e 's/^/\\t/g')
+      # logDebug "Kategorie: $category (\"$pattern_case\")\n$log_result"
+      logDebug "Kategorie: $category (\"$pattern_case\")\n$result"
     fi
     while read -r keyword; do
       if [[ $keyword != "" ]]; then
@@ -66,7 +71,7 @@ echo "$pattern" | { while read -r line; do
       fi
     done <<< "$result"
   fi
-done }
+done <<< "$pattern"
 # timeb=$(($(date +%s%N)/1000000))
 # logInfo "---> $((timeb - timea)) ms"
 
