@@ -248,7 +248,7 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
     if [ ! -f "$pdf_dirname/$pdf_filename.txt" ]; then
        logInfo "\"$pdf_filename.txt\" nicht gefunden. schreibe \"$pdf_filename.txt\" neu."
        echo "$md5_new_CreateTxtFile" > "$pdf_dirname/createTxtFile.md5"
-      "$script_path/functions/createTxtFile.sh" "$pdf_path" "$pdf_dirname" "$pdf_filename"
+      "$script_path/functions/createTxtFile.sh" "$pdf_path"
     fi
 
 
@@ -266,7 +266,7 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
       true
     else
       logInfo "Algorithmus in \"$script_path/functions/createTxtFile.sh\" hat sich geändert. Schreibe \"$pdf_filename.txt\" neu."
-      "$script_path/functions/createTxtFile.sh" "$pdf_path" "$pdf_dirname" "$pdf_filename"
+      "$script_path/functions/createTxtFile.sh" "$pdf_path"
       logInfo "Schreibe \"createTxtFile.md5\"."
       echo "$md5_new_CreateTxtFile" > "$pdf_dirname/createTxtFile.md5"
     fi
@@ -291,7 +291,7 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
       if [ -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
         rm "$pdf_dirname/$pdf_filename.human-readable.txt"
       fi
-      "$script_path/functions/createTxtFile.sh" "$pdf_path" "$pdf_dirname" "$pdf_filename"
+      "$script_path/functions/createTxtFile.sh" "$pdf_path"
 
       # Wenn Text durch Alternativprogramm generiert wurde, dann Neuerstellung bei nächsten Durchlauf erzwingen
       if [ ! -f "$pdf_dirname/txt_created_by_pdftotext" ]; then
