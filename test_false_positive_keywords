@@ -2,9 +2,9 @@
 
 ##
 #
-# Durchsucht die vorhandenen false positive Dateien und testet sie erneut
+# Durchsucht die vorhandenen false_positive Dateien und testet sie erneut
 #
-# tools/test_potentially_false_positive "PfadZumCalibreVerzeichnisOderUnterverzeichnis"
+# tools/test_potentially_false_positive "TestModus" "PfadZumCalibreVerzeichnisOderUnterverzeichnis"
 #
 ##
 
@@ -13,21 +13,21 @@ script=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 script_path=$(dirname "$script")
 
-cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
-. "$script_path/../libraries/logging.sh" "$cfg_log_level"
+cfg_log_level=$(look log_level "$script_path"/main.cfg | cut -d '=' -f 2-)
+. "$script_path/libraries/logging.sh" "$cfg_log_level"
 
 # script_name=$(basename "$script")
 
-# category_separator=$(look category_separator "$script_path"/../main.cfg | cut -d '=' -f 2-)
+# category_separator=$(look category_separator "$script_path"/main.cfg | cut -d '=' -f 2-)
 
 library_path="$2"
 test_mode="$1"
 
 if [[ -z $library_path ]] || [[ -z $test_mode ]]; then
   echo "Benutzung: $script_name \"test_mode\" \"PfadZurCalibreDBOderUnterverzeichnis\""
-  echo -e "test_mode:\t1 - Schlüsselwörter aus \"false_positive\" abfragen."
-  echo -e "test_mode:\t2 - Schlüsselwörter aus \"false_positive\" entfernen, die nicht mehr gefunden werden können."
-  echo -e "test_mode:\t3 - Schlüsselwörter ohne Rückfrage aus \"false_positive\" entfernen, die nicht mehr gefunden werden können."
+  echo -e "\ttest_mode:\t1 - Schlüsselwörter aus \"false_positive\" abfragen."
+  echo -e "\t\t\t2 - Schlüsselwörter mit Rückfrage aus \"false_positive\" entfernen, die nicht mehr gefunden werden können."
+  echo -e "\t\t\t3 - Schlüsselwörter ohne Rückfrage aus \"false_positive\" entfernen, die nicht mehr gefunden werden können."
   exit 1
 fi
 
@@ -38,7 +38,7 @@ while read -r pdf_path; do
   metadata_file="$working_path/metadata.opf"
   calibre_id=$(xpath -q -e "//package/metadata/dc:identifier[@id='calibre_id']/text()" "$metadata_file")
 
-  false_positive_files=$(find "$script_path/../false_positive" -type f -name "*.pattern" -exec grep -q "^$calibre_id=" {} \; -print)
+  false_positive_files=$(find "$script_path/false_positive" -type f -name "*.pattern" -exec grep -q "^$calibre_id=" {} \; -print)
 
   if [[ ! -z $false_positive_files ]]; then
     logInfo "$working_path"
@@ -50,11 +50,10 @@ while read -r pdf_path; do
 
           category_and_keyword=$(gawk  -F '=' '{print $2}' <<< "$stripped_entry")
 
-          result=$("$script_path/../tools/split_category_and_keyword" "$category_and_keyword")
+          result=$("$script_path/tools/split_category_and_keyword" "$category_and_keyword")
 
           keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}' | sed -e 's/[]\/$*.^|[]/\\&/g')
           escaped_pattern=$(sed -e 's/[]\/$*.^|[]/\\&/g' <<< "$entry")
-          stripped_keyword=$(sed -e 's/\^//g' <<< "$keyword" | sed -e 's/(//g' | sed -e 's/)//g' | sed -e 's/\$//g' | sed -e 's/\\\././g' | sed -e 's/\\//g')
 
           if [[ $test_mode == "1" ]]; then
 
@@ -115,7 +114,7 @@ while read -r pdf_path; do
             if [[ ! -z $false_positive_pattern ]]; then
               logDebug "$false_positive_file"
               logDebug "$entry"
-              keywords=$("$script_path/../create_railroad_keywords_from_pdf" run "${false_positive_file//false_positive/pattern}" "$pdf_path")
+              keywords=$("$script_path/create_railroad_keywords_from_pdf" run "${false_positive_file//false_positive/pattern}" "$pdf_path")
               
               grep_result=$(sort <<< "$keywords" | uniq | grep -oE "$false_positive_pattern")
               if [[ -z $grep_result ]]; then
