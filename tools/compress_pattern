@@ -17,11 +17,20 @@ function compress() {
   echo "$output_filename"
 
   {
-    sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "category=" | sed -e "s/\[category_separator\]/$category_separator/g"
-    sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "pattern_not_merge=" | sed -e 's/pattern_not_merge=/pattern=/g'
-    sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "pattern=" | sed -e ':a;N;$!ba;s/\npattern=/|/g'
-    sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "pattern_delete=" | sed -e ':a;N;$!ba;s/\npattern_delete=/|/g'
+    sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "^[[:space:]]*category=" | sed -e "s/\[category_separator\]/$category_separator/g"
+    sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "^[[:space:]]*pattern_delete=" | sed -e ':a;N;$!ba;s/\npattern_delete=/|/g'
   } >> "$output_filename"
+  
+  order_pattern=$(look order_pattern "$file" | cut -d '=' -f 2- | sed -e 's/[[:space:]]*,[[:space:]]*/\n/g')
+  while read -r element; do
+    if [[ $element == "pattern_not_merge" ]]; then
+      sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "^[[:space:]]*pattern_not_merge=" | sed -e 's/pattern_not_merge=/pattern=/g' >> "$output_filename"
+    elif [[ $element == "pattern" ]]; then
+      sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "^[[:space:]]*pattern=" | sed -e ':a;N;$!ba;s/\npattern=/|/g' >> "$output_filename"
+    else
+      echo "Unbekannter Eintrag \"$element\" in \"order_pattern\" in \"$file\""
+    fi
+  done <<< "$order_pattern"
 }
 
 if [ ! -z "$1" ] && [ ! -d "$1" ]; then

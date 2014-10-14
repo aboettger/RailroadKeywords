@@ -1,3 +1,8 @@
 # Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/YYXX.asc
 
 category=Baureihen[category_separator]YYXX
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
