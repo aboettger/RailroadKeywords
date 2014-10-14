@@ -23,12 +23,14 @@ function compress() {
   
   order_pattern=$(look order_pattern "$file" | cut -d '=' -f 2- | sed -e 's/[[:space:]]*,[[:space:]]*/\n/g')
   while read -r element; do
-    if [[ $element == "pattern_not_merge" ]]; then
-      sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "^[[:space:]]*pattern_not_merge=" | sed -e 's/pattern_not_merge=/pattern=/g' >> "$output_filename"
-    elif [[ $element == "pattern" ]]; then
-      sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "^[[:space:]]*pattern=" | sed -e ':a;N;$!ba;s/\npattern=/|/g' >> "$output_filename"
-    else
-      echo "Unbekannter Eintrag \"$element\" in \"order_pattern\" in \"$file\""
+    if [[ ! -z $element ]]; then
+      if [[ $element == "pattern_not_merge" ]]; then
+        sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "^[[:space:]]*pattern_not_merge=" | sed -e 's/pattern_not_merge=/pattern=/g' >> "$output_filename"
+      elif [[ $element == "pattern" ]]; then
+        sed -e '/^\#/d' "$file" | sed -e '/^$/d' | grep "^[[:space:]]*pattern=" | sed -e ':a;N;$!ba;s/\npattern=/|/g' >> "$output_filename"
+      else
+        echo "Unbekannter Eintrag \"$element\" in \"order_pattern\" in \"$file\""
+      fi
     fi
   done <<< "$order_pattern"
 }
