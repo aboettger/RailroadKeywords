@@ -1,13 +1,15 @@
 Snippets
 ==
 
-Doppelte Einträge in den Dateien in "false_positive" finden
+Doppelte Einträge in den Dateien in "false_positive" finden und löschen
 
 ```sh
 #!/bin/bash
+temp_file=$(mktemp)
 find ~/src/RailroadKeywords/false_positive -type f -name "*.pattern" | {
-  while read -r file;
-  do sort "$file" | uniq -c -d
+  while read -r file; do
+    sort "$file" | uniq > "$temp_file"
+    cp "$temp_file" "$file"
   done
 }
 ```
@@ -16,9 +18,11 @@ Doppelte Einträge in den Dateien in "true_positive" finden
 
 ```sh
 #!/bin/bash
-find ~/src/RailroadKeywords/true_positive -type f -name "*.pattern" | {
+temp_file=$(mktemp)
+find ~/src/RailroadKeywords/true_positive -type f -name "*.list" | {
   while read -r file; do
-    sort "$file" | uniq -c -d
+    sort "$file" | uniq > "$temp_file"
+    cp "$temp_file" "$file"
   done
 }
 ```
