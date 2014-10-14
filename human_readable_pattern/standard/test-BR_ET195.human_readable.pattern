@@ -1,0 +1,20 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/ET195.asc
+
+category=Baureihen[category_separator]ET195
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]ET[[:space:]]{0,1}195[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]ET[[:space:]]{0,1}195(\.([0]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]ET[[:space:]]{0,1}195[[:space:]](0[12])[[:space:]])
+
+pattern=([[:space:]]ET[[:space:]]{0,1}195[[:space:]]0(0[12])[[:space:]])
+
