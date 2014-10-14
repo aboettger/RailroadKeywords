@@ -1,0 +1,16 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/ET182.asc
+
+category=Baureihen[category_separator]ET182
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]ET[[:space:]]{0,1}182[[:space:]])
+
+# Pattern #1
+
+# Pattern #2
+
+pattern=([[:space:]]ET[[:space:]]{0,1}182[[:space:]](0[1]|1[12]|2[1])[[:space:]])
+
