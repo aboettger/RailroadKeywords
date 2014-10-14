@@ -1,0 +1,22 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/ET174.asc
+
+category=Baureihen[category_separator]ET174
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]ET[[:space:]]{0,1}174[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]ET[[:space:]]{0,1}174(\.([0]|00[12]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]ET[[:space:]]{0,1}174[[:space:]]0(0[12])[[:space:]])
+
+pattern=([[:space:]]ET[[:space:]]{0,1}174[[:space:]]001([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ET[[:space:]]{0,1}174[[:space:]]002([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
