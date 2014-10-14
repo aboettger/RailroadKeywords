@@ -2,14 +2,14 @@
 
 category=Baureihen[category_separator]039
 
-pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]039(\.(([0-2])))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]039[[:space:]])
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]039(\.(([0-2])))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]039[[:space:]])
 pattern=([[:space:]]039er[[:space:]])
 # BR 039.0
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]039[[:space:]]0(35)([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]039[[:space:]]0(35)([[:space:]]|-[0-9])
 # BR 039.1
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]039[[:space:]]1(49|96)([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]039[[:space:]]1(49|96)([[:space:]]|-[0-9])
 # BR 039.2
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]039[[:space:]]2(31|54)([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]039[[:space:]]2(31|54)([[:space:]]|-[0-9])
 
 
 # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'

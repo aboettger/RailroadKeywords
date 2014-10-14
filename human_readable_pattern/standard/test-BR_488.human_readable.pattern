@@ -12,7 +12,7 @@ pattern=(([[:space:]]488er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
 # Pattern #1
 
-pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]488(\.(0|1|2|3|5|6))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]488[[:space:]])
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]488(\.(0|1|2|3|5|6))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]488[[:space:]])
 
 # Pattern #2
 

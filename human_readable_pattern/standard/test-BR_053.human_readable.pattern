@@ -2,11 +2,11 @@
 
 category=Baureihen[category_separator]053
 
-pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]053(\.[0-1])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]053[[:space:]])
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]053(\.[0-1])[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]053[[:space:]])
 pattern=([[:space:]]053er[[:space:]])
 
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]053[[:space:]]0(0[123459]|1[012368]|2[0134689]|3[0124679]|4[01259]|5[379]|6[123568]|7[013458]|8[02345789]|9[17])([[:space:]]|-[0-9])
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]053[[:space:]]1(0[146]|1[789]|2[012359]|3[12359]|4[1379]|5[0123567]|6[14])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]053[[:space:]]0(0[123459]|1[012368]|2[0134689]|3[0124679]|4[01259]|5[379]|6[123568]|7[013458]|8[02345789]|9[17])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]053[[:space:]]1(0[146]|1[789]|2[012359]|3[12359]|4[1379]|5[0123567]|6[14])([[:space:]]|-[0-9])
 
 
 

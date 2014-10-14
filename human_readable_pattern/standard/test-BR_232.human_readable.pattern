@@ -9,25 +9,25 @@ pattern=(([[:space:]]232er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
 # Pattern #1
 
-pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]232(\.(0|1|2|3|4|5|6|7|8|9))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]232[[:space:]])
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]232(\.(0|1|2|3|4|5|6|7|8|9))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]232[[:space:]])
 
 # Pattern #2
 
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]232[[:space:]]0(0[12345689]|1[01246789]|2[0-9]|3[0-9]|4[0-9]|5[012345679]|6[0-8]|7[0-9]|8[013456789]|9[012346789])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]232[[:space:]]0(0[12345689]|1[01246789]|2[0-9]|3[0-9]|4[0-9]|5[012345679]|6[0-8]|7[0-9]|8[013456789]|9[012346789])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]232[[:space:]]1(0[013456789]|1[01234678]|2[01235789]|3[01245678]|4[0-9]|5[1-8]|6[1245678]|7[02346789]|8[01246789]|9[01245678])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]232[[:space:]]1(0[013456789]|1[01234678]|2[01235789]|3[01245678]|4[0-9]|5[1-8]|6[1245678]|7[02346789]|8[01246789]|9[01245678])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]232[[:space:]]2(0[1-9]|1[12356789]|2[012356789]|3[0-9]|4[012456789]|5[0-9]|6[01234589]|7[1234678]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]232[[:space:]]2(0[1-9]|1[12356789]|2[012356789]|3[0-9]|4[012456789]|5[0-9]|6[01234589]|7[1234678]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]232[[:space:]]3(0[01345689]|1[01234579]|2[01235689]|3[012345789]|4[12456789]|5[0-9]|6[123578]|7[1-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]232[[:space:]]3(0[01345689]|1[01234579]|2[01235689]|3[012345789]|4[12456789]|5[0-9]|6[123578]|7[1-9]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]232[[:space:]]4(0[0-9]|1[0-9]|2[013456789]|3[02456789]|4[0-9]|5[0-9]|6[012456789]|7[0-8]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]232[[:space:]]4(0[0-9]|1[0-9]|2[013456789]|3[02456789]|4[0-9]|5[0-9]|6[012456789]|7[0-8]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]232[[:space:]]5(0[0-9]|1[0-9]|2[013456789]|3[0-9]|4[0-9]|5[012345789]|6[0-9]|7[012356789]|8[0-9]|9[0-8])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]232[[:space:]]5(0[0-9]|1[0-9]|2[013456789]|3[0-9]|4[0-9]|5[012345789]|6[0-9]|7[012356789]|8[0-9]|9[0-8])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]232[[:space:]]6(0[0-9]|1[0-8]|2[023456789]|3[01234568]|4[0-9]|5[0-9]|6[0-9]|7[023456789]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]232[[:space:]]6(0[0-9]|1[0-8]|2[023456789]|3[01234568]|4[0-9]|5[0-9]|6[0-9]|7[023456789]|8[0-9]|9[0-9])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]232[[:space:]]7(0[0-9])([[:space:]]|-[0-9])
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]232[[:space:]]8(0[0])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]232[[:space:]]7(0[0-9])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]232[[:space:]]8(0[0])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]232[[:space:]]9(0[1-9])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]232[[:space:]]9(0[1-9])([[:space:]]|-[0-9])

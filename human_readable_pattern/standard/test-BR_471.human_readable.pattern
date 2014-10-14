@@ -9,11 +9,11 @@ pattern=(([[:space:]]471er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
 # Pattern #1
 
-pattern_not_merge=(([[:space:]]§|[[:space:]]Mo|[[:space:]]Di|[[:space:]]Mi|[[:space:]]Do|[[:space:]]Fr|[[:space:]]S(a|o)|[[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]471(\.(1|4))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]471[[:space:]])
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]471(\.(1|4))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]471[[:space:]])
 
 # Pattern #2
 
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]471[[:space:]]1(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-4]|5[12]|6[1-9]|7[0-9]|8[0-6])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]471[[:space:]]1(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-4]|5[12]|6[1-9]|7[0-9]|8[0-6])([[:space:]]|-[0-9])
 
-pattern=([[:space:]]D|[[:space:]]E|[[:space:]]ET|[[:space:]]H|[[:space:]]T|[[:space:]]V|[[:space:]]VB|[[:space:]]VS|[[:space:]]VT|)[[:space:]]471[[:space:]]4(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-4]|5[12]|6[1-9]|7[0-9]|8[0-6])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]471[[:space:]]4(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-4]|5[12]|6[1-9]|7[0-9]|8[0-6])([[:space:]]|-[0-9])
 
