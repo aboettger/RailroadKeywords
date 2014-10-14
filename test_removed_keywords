@@ -28,6 +28,7 @@ fi
 files=$(find "$library_path" -type f -name "tag_4_grep_potentially_false_positive" -exec grep -l "<" {} \;)
 if [[ ! -z "$files" ]]; then
   logDebug "$(wc -l <<< "$files") Datei(en) gefunden"
+  logDebug "$files"
   while read file; do
     removed_keywords=$(grep "< " "$file" | sed -e 's/^<  \{0,1\}//g' | sort | uniq)
     if [[ ! -z $removed_keywords ]]; then
