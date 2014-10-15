@@ -1,0 +1,22 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/ESA180.asc
+
+category=Baureihen[category_separator]ESA180
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]ESA[[:space:]]{0,1}180[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]ESA[[:space:]]{0,1}180(\.(08[1-3]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]ESA[[:space:]]{0,1}180[[:space:]]081([[:space:]]{0,1}(a|A){1,1}|[[:space:]]{0,1}(b|B){1,1}|([[:space:]]{0,1}((([ab]{1,1}/{1,1})+)|(([AB]{1,1}/{1,1})+))))[[:space:]])
+
+pattern=([[:space:]]ESA[[:space:]]{0,1}180[[:space:]]082([[:space:]]{0,1}(a|A){1,1}|[[:space:]]{0,1}(b|B){1,1}|([[:space:]]{0,1}((([ab]{1,1}/{1,1})+)|(([AB]{1,1}/{1,1})+))))[[:space:]])
+
+pattern=([[:space:]]ESA[[:space:]]{0,1}180[[:space:]]083([[:space:]]{0,1}(a|A){1,1}|[[:space:]]{0,1}(b|B){1,1}|([[:space:]]{0,1}((([ab]{1,1}/{1,1})+)|(([AB]{1,1}/{1,1})+))))[[:space:]])
+
