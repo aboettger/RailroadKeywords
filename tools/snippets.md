@@ -48,7 +48,7 @@ Sucht in vorhandenen txt-dateien, die mittels "pdftotext" erzeugt werden, nach e
 #!/bin/bash
 find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readable.txt' | {
   while read file; do
-    egrep -anETH -C 5 "Rot" "$file";
+    egrep -anETH -C 5 "EB 65 003 a+b" "$file";
   done
 }
 
