@@ -1,0 +1,18 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/EB168.asc
+
+category=Baureihen[category_separator]EB168
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]EB[[:space:]]{0,1}168[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]EB[[:space:]]{0,1}168(\.([0]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]EB[[:space:]]{0,1}168[[:space:]]0(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0])[[:space:]])
+
