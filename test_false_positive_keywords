@@ -27,7 +27,7 @@ if [[ -z $library_path ]] || [[ -z $test_mode ]]; then
   echo "Benutzung: $script_name \"test_mode\" \"PfadZurCalibreDBOderUnterverzeichnis\""
   echo -e "\ttest_mode:\t1 - Schlüsselwörter aus \"false_positive\" abfragen."
   echo -e "\t\t\t2 - Schlüsselwörter mit Rückfrage aus \"false_positive\" entfernen, die nicht mehr gefunden werden können."
-  echo -e "\t\t\t3 - Schlüsselwörter ohne Rückfrage aus \"false_positive\" entfernen, die nicht mehr gefunden werden können."
+# echo -e "\t\t\t3 - Schlüsselwörter ohne Rückfrage aus \"false_positive\" entfernen, die nicht mehr gefunden werden können."
   exit 1
 fi
 
@@ -118,7 +118,8 @@ while read -r pdf_path; do
               
               grep_result=$(sort <<< "$keywords" | uniq | grep -oE "$false_positive_pattern")
               if [[ -z $grep_result ]]; then
-                if [[ $test_mode == "2" ]]; then
+              # if [[ $test_mode == "2" ]]; then
+                  echo -e "\n$working_path"
                   echo "Der Eintrag \"$entry\" in \"$false_positive_file\" ist überflüssig, entfernen?"
                   echo "n) Nein, nichts tun"
                   echo "j) Ja, \"$entry\" aus \"$false_positive_file\" entfernen"
@@ -138,7 +139,7 @@ while read -r pdf_path; do
                   sed -i "/^$escaped_pattern\$/d" "$false_positive_file"
                   logDebug "\"$entry\" aus \"$false_positive_file\" entfernt."
                 fi
-              fi
+              # fi
             fi
           else
             true
