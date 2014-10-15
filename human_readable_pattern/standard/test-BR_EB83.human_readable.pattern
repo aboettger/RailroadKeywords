@@ -1,0 +1,18 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/EB83.asc
+
+category=Baureihen[category_separator]EB83
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]EB[[:space:]]{0,1}83[[:space:]])
+
+# Pattern #1
+
+#WERT!
+
+# Pattern #2
+
+pattern=([[:space:]]EB[[:space:]]{0,1}83[[:space:]](0[1])[[:space:]])
+
