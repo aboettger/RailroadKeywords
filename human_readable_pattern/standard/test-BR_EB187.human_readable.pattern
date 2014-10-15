@@ -1,0 +1,16 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/EB187.asc
+
+category=Baureihen[category_separator]EB187
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]EB[[:space:]]{0,1}187[[:space:]])
+
+# Pattern #1
+
+# Pattern #2
+
+pattern=([[:space:]]EB[[:space:]]{0,1}187[[:space:]](0[12]|2[1-9])[[:space:]])
+
