@@ -1,0 +1,58 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/ETA179.asc
+
+category=Baureihen[category_separator]ETA179
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179(\.([01]|00[1-7]|01[1-5]|10[1-7]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]0(0[1-7]|1[1-5])[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]1(0[1-7])[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]001([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]002([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]003([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]004([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]005([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]006([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]007([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]011([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]012([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]013([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]014([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]015([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]101([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]102([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]103([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]104([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]105([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]106([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ETA[[:space:]]{0,1}179[[:space:]]107([[:space:]]{0,1}(a|A){0,1}|[[:space:]]{0,1}(b|B){0,1}|([[:space:]]{0,1}((([ab]{0,1}/{0,1})*)|(([AB]{0,1}/{0,1})*))))[[:space:]])
+
