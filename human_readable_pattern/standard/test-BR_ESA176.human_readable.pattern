@@ -1,0 +1,18 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/ESA176.asc
+
+category=Baureihen[category_separator]ESA176
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]ESA[[:space:]]{0,1}176[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]ESA[[:space:]]{0,1}176(\.([0]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]ESA[[:space:]]{0,1}176[[:space:]]0(0[1-8])[[:space:]])
+
