@@ -24,4 +24,4 @@ pattern=([[:space:]]VT[[:space:]]{0,1}136[[:space:]]5(0[0-6])[[:space:]])
 pattern=([[:space:]]VT[[:space:]]{0,1}136[[:space:]]6(0[0])[[:space:]])
 
 pattern=([[:space:]]VT[[:space:]]{0,1}136[[:space:]]7(0[1]|5[1-9])[[:space:]])
-pattern=([[:space:]]VT[[:space:]]{0,1}136[[:space:]]600([[:space:]]{0,1}(abc|ABC){0,1}|([[:space:]]{0,1}((([abc]{0,1}/{0,1})*)|(([ABC]{0,1}/{0,1})*))))[[:space:]])
+pattern=([[:space:]]VT[[:space:]]{0,1}136[[:space:]]600([[:space:]]{0,1}(abc|ABC){0,1}|([[:space:]]{0,1}((([abc]{0,1}(\+|\-|/){0,1})*)|(([ABC]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
