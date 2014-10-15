@@ -14,7 +14,6 @@ pattern=([[:space:]]ESA[[:space:]]{0,1}178(\.([0]|05[1]))[[:space:]])
 
 # Pattern #2
 
-pattern=([[:space:]]ESA[[:space:]]{0,1}178[[:space:]]0(0[1-6])[[:space:]])
+pattern=([[:space:]]ESA[[:space:]]{0,1}178[[:space:]]0(0[123456])[[:space:]])
 
-pattern=([[:space:]]ESA[[:space:]]{0,1}178[[:space:]]051([[:space:]]{0,1}(a|A){1,1}|[[:space:]]{0,1}(b|B){1,1}|([[:space:]]{0,1}((([ab]{1,1}/{1,1})+)|(([AB]{1,1}/{1,1})+))))[[:space:]])
-
+pattern=([[:space:]]ESA[[:space:]]{0,1}178[[:space:]]051([[:space:]]{0,1}[aA]|[bB])(([[:space:]]{0,1}((([ab]{0,1}(\+|\-|/){0,1})*)|(([AB]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
