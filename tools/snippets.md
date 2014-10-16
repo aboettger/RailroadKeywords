@@ -248,6 +248,11 @@ sed -e '/^[[:space:]]*$/d' "~/src/RailroadKeywords/false_positive/potentially_fa
   done
 }
 ```
+Anzahl der möglichen Schlüsselwörter ermitteln
+```sh
+#!/bin/bash
+( find tests/ -name '*.positive.*.list' -print0 | xargs -0 cat ) | wc -l
+```
 
 ```sh
 comm -2 -3  <(sort 118\ 001-999.list) <(sort ../tests/test-BR_118.positive.002.list)
