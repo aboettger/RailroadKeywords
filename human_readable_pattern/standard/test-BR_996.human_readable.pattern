@@ -1,0 +1,29 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/996.asc
+
+category=Baureihen[category_separator]996
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern, pattern_not_merge
+
+pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT).*)|(-[0-9])
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|([[:space:]].*-.*)
+
+pattern=(([[:space:]]996er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+
+# Pattern #1
+
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]996(\.(2|3|6|7|8|9))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]996[[:space:]])
+
+# Pattern #2
+
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]996[[:space:]]2(2[5]|3[6]|4[8]|5[17]|6[08]|7[6]|8[6]|9[0246789])([[:space:]]|-[0-9])
+
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]996[[:space:]]3(0[02489]|1[02])([[:space:]]|-[0-9])
+
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]996[[:space:]]6(0[49]|2[8]|4[1]|5[8]|6[14]|7[67]|8[3])([[:space:]]|-[0-9])
+
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]996[[:space:]]7(0[12]|1[7]|2[56]|3[89]|4[02789]|5[0157]|6[68]|7[034789]|8[0-5]|9[01])([[:space:]]|-[0-9])
+
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]996[[:space:]]8(0[24])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]996[[:space:]]9(1[9])([[:space:]]|-[0-9])
+
