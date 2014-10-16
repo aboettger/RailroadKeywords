@@ -34,13 +34,36 @@ if [[ ! -z "$files" ]]; then
   logInfo "$(wc -l <<< "$files") Datei(en) gefunden"
   logInfo "$files"
   while read file; do
-    removed_keywords=$(grep "< " "$file" | sed -e 's/^<  \{0,1\}//g' | sort | uniq)
-    if [[ ! -z $removed_keywords ]]; then
+      removed_keywords=$(grep "< " "$file" | sed -e 's/^<  \{0,1\}//g' | sort | uniq)
       logInfo "\n$(wc -l <<< "$removed_keywords") gelöschte Schlüsselwörter für \"$(dirname "$file")\" gefunden"
+      logInfo "$removed_keywords"
+      working_dir=$(dirname "$file")
       while read removed_keyword; do
-        logInfo "$removed_keyword"
+        result=$("$script_path"/tools/split_category_and_keyword "$removed_keyword")
+        category=$(grep "category" <<< "$result" | awk -F '\t' '{print $2}')
+        keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}')
+
+        # "$script_path"/tools/grep_potentially_false_positive "$working_dir" "$category" "$keyword"
+
+        escaped_removed_keyword=$(sed -e 's/[]\/$*.^|[]/\\&/g' <<< "< $removed_keyword")
+        echo
+        echo "Das Schlüsselwort \"$removed_keyword\" wurde einer der letzten Aktualisierungen als \"Gelöscht\" markiert. Diesen Vermerk entfernen?"
+        echo "n) Nein, nichts tun"
+        echo "j) Ja, Vermerk als gelöschtes Schlüsselwort entfernen"
+
+        while true; do
+          read -p "Bitte wählen: " input < /dev/tty
+          case $input in
+              n* )
+                break;;
+              j* )
+                sed -i "/^$escaped_removed_keyword[[:space:]]*\$/d" "$file"
+                logInfo "\"$keyword\" aus \"$file\" entfernt."
+                break;;
+              * ) echo "Ungültige Auswahl";;
+          esac
+        done
       done <<< "$removed_keywords"
-    fi
   done <<< "$files"
 fi
 
