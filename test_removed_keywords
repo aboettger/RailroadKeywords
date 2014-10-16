@@ -16,6 +16,10 @@ script_path=$(dirname "$script")
 cfg_log_level=$(look log_level "$script_path"/main.cfg | cut -d '=' -f 2-)
 . "$script_path/libraries/logging.sh" "$cfg_log_level"
 
+if [[ $cfg_log_level != "4" ]]; then
+  cfg_log_level=3
+fi
+
 # script_name=$(basename "$script")
 
 library_path="$1"
@@ -27,8 +31,8 @@ fi
 
 files=$(find "$library_path" -type f -name "tag_4_grep_potentially_false_positive" -exec grep -l "<" {} \;)
 if [[ ! -z "$files" ]]; then
-  logDebug "$(wc -l <<< "$files") Datei(en) gefunden"
-  logDebug "$files"
+  logInfo "$(wc -l <<< "$files") Datei(en) gefunden"
+  logInfo "$files"
   while read file; do
     removed_keywords=$(grep "< " "$file" | sed -e 's/^<  \{0,1\}//g' | sort | uniq)
     if [[ ! -z $removed_keywords ]]; then
