@@ -48,9 +48,9 @@ if [[ ! -z "$files" ]]; then
 
       escaped_new_keyword=$(sed -e 's/[]\/$*.^|[]/\\&/g' <<< "> $new_keyword")
       echo
-      echo "Das Schlüsselwort \"$new_keyword\" wurde einer der letzten Aktualisierungen als \"Neu\" hinzugefügt. Diesen Vermerk entfernen?"
+      echo "Das Schlüsselwort \"$new_keyword\" wurde einer der letzten Aktualisierungen als \"Neu\" markiert. Diesen Vermerk entfernen?"
       echo "n) Nein, nichts tun"
-      echo "j) Ja, Schlüsselwort als neues Schlüsselwort entfernen"
+      echo "j) Ja, Vermerk als neues Schlüsselwort entfernen"
 
       while true; do
         read -p "Bitte wählen: " input < /dev/tty
