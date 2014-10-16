@@ -1,0 +1,10 @@
+# Quelle: http://www.morop.eu/de/normes/nem806d_d.pdf
+
+category=Epochen
+
+pattern=([[:space:]]Epoche I(|[a-d])[[:space:]])
+pattern=([[:space:]]Epoche II(|[a-c])[[:space:]])
+pattern=([[:space:]]Epoche III(|[a-b])[[:space:]])
+pattern=([[:space:]]Epoche IV(|[a-c])[[:space:]])
+pattern=([[:space:]]Epoche V(|[a-c])[[:space:]])
+pattern=([[:space:]]Epoche VI[[:space:]])
