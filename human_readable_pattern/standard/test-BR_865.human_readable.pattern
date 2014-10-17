@@ -5,18 +5,18 @@ category=Baureihen[category_separator]865
 # Reihenfolge der pattern-Angaben für "tools/compress_pattern"
 order_pattern=pattern, pattern_not_merge
 
-pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT).*)|(-[0-9])
+pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT).*)|(-[0-9])
 pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|([[:space:]].*-.*)
 
 pattern=(([[:space:]]865er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
 # Pattern #1
 
-pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]865(\.(0|6))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]865[[:space:]])
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]865(\.(0|6))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]865[[:space:]])
 
 # Pattern #2
 
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]865[[:space:]]0(0[12356789]|1[023456789]|2[0-5]|3[1]|9[9])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]865[[:space:]]0(0[12356789]|1[023456789]|2[0-5]|3[1]|9[9])([[:space:]]|-[0-9])
 
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]865[[:space:]]6(0[1-8]|1[01345679]|2[124]|3[1-5])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]865[[:space:]]6(0[1-8]|1[01345679]|2[124]|3[1-5])([[:space:]]|-[0-9])
 

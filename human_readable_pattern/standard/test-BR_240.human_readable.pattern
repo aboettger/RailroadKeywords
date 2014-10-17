@@ -2,15 +2,15 @@
 
 category=Baureihen[category_separator]240
 
-pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT).*)|(-[0-9])
+pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT).*)|(-[0-9])
 pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|([[:space:]].*-.*)
 
 pattern=(([[:space:]]240er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
 # Pattern #1
 
-pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]240(\.(0))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]240[[:space:]])
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]240(\.(0))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]240[[:space:]])
 
 # Pattern #2
 
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]240[[:space:]]0(0[123])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]240[[:space:]]0(0[123])([[:space:]]|-[0-9])

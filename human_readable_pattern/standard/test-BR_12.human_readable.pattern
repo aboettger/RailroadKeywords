@@ -2,14 +2,14 @@
 
 category=Baureihen[category_separator]12
 
-pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]12(\.0|\.1|\.2)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]12[[:space:]])
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]12(\.0|\.1|\.2)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]12[[:space:]])
 pattern=([[:space:]]12er[[:space:]])
 # BR 12.0
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]12[[:space:]]0(0[1-9]|1[0-3])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]12[[:space:]]0(0[1-9]|1[0-3])([[:space:]]|-[0-9])
 # BR 12.1
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]12[[:space:]]1(01)([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]12[[:space:]]1(01)([[:space:]]|-[0-9])
 # BR 12.2
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]12[[:space:]]2(0[1-2])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]12[[:space:]]2(0[1-2])([[:space:]]|-[0-9])
 
 # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
-pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT).*)|(-[0-9])
+pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT).*)|(-[0-9])

@@ -2,32 +2,32 @@
 
 category=Baureihen[category_separator]310
 
-pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT).*)|(-[0-9])
+pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT).*)|(-[0-9])
 pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|([[:space:]].*-.*)
 
 pattern=(([[:space:]]310er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
 # Pattern #1
 
-pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]310(\.(1|2|3|4|5|6|7|8|9))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]310[[:space:]])
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]310(\.(1|2|3|4|5|6|7|8|9))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]310[[:space:]])
 
 # Pattern #2
 
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]310[[:space:]]1(0[2-9]|1[01235678]|2[01345679]|3[0-2]|6[4]|7[0]|9[06])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]310[[:space:]]1(0[2-9]|1[01235678]|2[01345679]|3[0-2]|6[4]|7[0]|9[06])([[:space:]]|-[0-9])
 
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]310[[:space:]]2(0[13689]|1[01245678]|2[78]|4[7]|5[19]|7[13589]|8[014568]|9[015])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]310[[:space:]]2(0[13689]|1[01245678]|2[78]|4[7]|5[19]|7[13589]|8[014568]|9[015])([[:space:]]|-[0-9])
 
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]310[[:space:]]3(0[9]|1[148]|2[14679]|3[034]|4[7]|5[2367]|6[0137]|7[1]|8[23])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]310[[:space:]]3(0[9]|1[148]|2[14679]|3[034]|4[7]|5[2367]|6[0137]|7[1]|8[23])([[:space:]]|-[0-9])
 
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]310[[:space:]]4(0[679]|1[248]|2[1-9]|3[02456789]|4[0-5]|5[0147]|7[1]|8[0]|9[48])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]310[[:space:]]4(0[679]|1[248]|2[1-9]|3[02456789]|4[0-5]|5[0147]|7[1]|8[0]|9[48])([[:space:]]|-[0-9])
 
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]310[[:space:]]5(0[01678]|1[0357]|2[089]|3[07]|4[3579]|5[6]|6[5]|7[39]|8[9]|9[4])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]310[[:space:]]5(0[01678]|1[0357]|2[089]|3[07]|4[3579]|5[6]|6[5]|7[39]|8[9]|9[4])([[:space:]]|-[0-9])
 
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]310[[:space:]]6(0[45]|1[79]|2[5-8]|3[0135]|4[5]|5[2]|8[19])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]310[[:space:]]6(0[45]|1[79]|2[5-8]|3[0135]|4[5]|5[2]|8[19])([[:space:]]|-[0-9])
 
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]310[[:space:]]7(0[012345689]|1[149]|2[2357]|3[0123458]|4[02345679]|5[01345789]|6[2-9]|7[0123468]|8[289]|9[5-8])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]310[[:space:]]7(0[012345689]|1[149]|2[2357]|3[0123458]|4[02345679]|5[01345789]|6[2-9]|7[0123468]|8[289]|9[5-8])([[:space:]]|-[0-9])
 
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]310[[:space:]]8(0[01236789]|1[0124678]|2[123678]|3[0346789]|4[01245689]|5[89]|6[0-9]|7[0345789]|8[124589]|9[12379])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]310[[:space:]]8(0[01236789]|1[0124678]|2[123678]|3[0346789]|4[01245689]|5[89]|6[0-9]|7[0345789]|8[124589]|9[12379])([[:space:]]|-[0-9])
 
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]310[[:space:]]9(0[1]|1[01248]|2[4679]|3[0457]|4[124679]|5[0-5])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]310[[:space:]]9(0[1]|1[01248]|2[4679]|3[0457]|4[124679]|5[0-5])([[:space:]]|-[0-9])
 

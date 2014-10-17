@@ -2,28 +2,28 @@
 
 category=Baureihen[category_separator]95
 
-pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]95(\.0|\.1|\.2|\.3|\.00|\.10|\.66)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]95[[:space:]])
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]95(\.0|\.1|\.2|\.3|\.00|\.10|\.66)[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]95[[:space:]])
 pattern=([[:space:]]95er[[:space:]])
 # BR 95.0
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]95[[:space:]]0(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-5])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]95[[:space:]]0(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-5])([[:space:]]|-[0-9])
 
 # BR 95.1
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]95[[:space:]]1(0[1-9]|1[0-9]|2[0-4])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]95[[:space:]]1(0[1-9]|1[0-9]|2[0-4])([[:space:]]|-[0-9])
 
 # BR 95.2
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]95[[:space:]]2(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-8])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]95[[:space:]]2(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-8])([[:space:]]|-[0-9])
 
 # BR 95.3
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]95[[:space:]]3(0[1-9]|1[0-8])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]95[[:space:]]3(0[1-9]|1[0-8])([[:space:]]|-[0-9])
 
 # BR 95.00
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]95[[:space:]]00(0[4-5,9]|1[0,4-6]|2[0,2-5,7-9]|3[0,2,6-7]|4[0-1,3-5])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]95[[:space:]]00(0[4-5,9]|1[0,4-6]|2[0,2-5,7-9]|3[0,2,6-7]|4[0-1,3-5])([[:space:]]|-[0-9])
 
 # BR 95.10
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]95[[:space:]]10(1[6-9]|2[1,4-5,7]|39|4[1-2,5])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]95[[:space:]]10(1[6-9]|2[1,4-5,7]|39|4[1-2,5])([[:space:]]|-[0-9])
 
 # BR 95.66
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]95[[:space:]]66(7[6-9])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]95[[:space:]]66(7[6-9])([[:space:]]|-[0-9])
 
 # EDV Prüfziffer entfernen: sed -e 's/\-[0-9]//g'
-pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT).*)|(-[0-9])
+pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT).*)|(-[0-9])

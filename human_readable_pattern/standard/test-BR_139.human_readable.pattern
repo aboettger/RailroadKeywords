@@ -2,14 +2,14 @@
 
 category=Baureihen[category_separator]139
 
-pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT).*)|(-[0-9])
+pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT).*)|(-[0-9])
 pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|([[:space:]].*-.*)
 
 pattern=(([[:space:]]139er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
-pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]139(\.(1|2|3|5))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]139[[:space:]])
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]139(\.(1|2|3|5))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]139[[:space:]])
 
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]139[[:space:]]1(2[2]|3[12345679]|4[5]|5[7]|6[3-6]|7[27])([[:space:]]|-[0-9])
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]139[[:space:]]2(1[34]|2[2]|4[6]|5[05]|6[0234]|8[357])([[:space:]]|-[0-9])
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]139[[:space:]]3(0[9]|1[0-6])([[:space:]]|-[0-9])
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]139[[:space:]]5(5[2-9]|6[0-3])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]139[[:space:]]1(2[2]|3[12345679]|4[5]|5[7]|6[3-6]|7[27])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]139[[:space:]]2(1[34]|2[2]|4[6]|5[05]|6[0234]|8[357])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]139[[:space:]]3(0[9]|1[0-6])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]139[[:space:]]5(5[2-9]|6[0-3])([[:space:]]|-[0-9])

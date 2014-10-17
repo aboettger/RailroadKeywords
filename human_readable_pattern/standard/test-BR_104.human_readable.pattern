@@ -2,15 +2,15 @@
 
 category=Baureihen[category_separator]104
 
-pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT).*)|(-[0-9])
+pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT).*)|(-[0-9])
 pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|([[:space:]].*-.*)
 
 pattern=(([[:space:]]104er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
 
-pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]104(\.(0|1|7|8|9))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]104[[:space:]])
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]104(\.(0|1|7|8|9))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]104[[:space:]])
 
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]104[[:space:]]0(1[789]|2[012]|3[4]|4[5]|5[9]|7[8]|8[1])([[:space:]]|-[0-9])
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]104[[:space:]]1(4[6]|6[3])([[:space:]]|-[0-9])
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]104[[:space:]]7(3[6]|6[7])([[:space:]]|-[0-9])
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]104[[:space:]]8(9[2])([[:space:]]|-[0-9])
-pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]104[[:space:]]9(1[0]|4[0]|5[8]|6[8]|9[06])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]104[[:space:]]0(1[789]|2[012]|3[4]|4[5]|5[9]|7[8]|8[1])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]104[[:space:]]1(4[6]|6[3])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]104[[:space:]]7(3[6]|6[7])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]104[[:space:]]8(9[2])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]104[[:space:]]9(1[0]|4[0]|5[8]|6[8]|9[06])([[:space:]]|-[0-9])
