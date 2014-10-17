@@ -1,0 +1,19 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/941.asc
+
+category=Baureihen[category_separator]941
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern, pattern_not_merge
+
+pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT).*)|(-[0-9])
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|([[:space:]].*-.*)
+
+pattern=(([[:space:]]941er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+# Pattern #1
+
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]941(\.(2))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]941[[:space:]])
+
+# Pattern #2
+
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VB|VS|VT))|)[[:space:]]941[[:space:]]2(1[0]|4[7])([[:space:]]|-[0-9])
+
