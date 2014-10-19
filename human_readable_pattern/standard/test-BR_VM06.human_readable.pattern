@@ -1,0 +1,20 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VM06.asc
+
+category=Baureihen[category_separator]VM06
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]VM[[:space:]]{0,1}06[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]VM[[:space:]]{0,1}06(\.([15]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]VM[[:space:]]{0,1}06[[:space:]]1(0[346789]|1[0])[[:space:]])
+
+pattern=([[:space:]]VM[[:space:]]{0,1}06[[:space:]]5(0[0-2])[[:space:]])
+
