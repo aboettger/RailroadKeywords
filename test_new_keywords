@@ -21,6 +21,16 @@ if [[ $cfg_log_level != "4" ]]; then
   cfg_log_level=3
 fi
 
+cfg_remove_not_found=$(look remove_not_found "$script_path"/main.cfg | cut -d '=' -f 2-)
+cfg_dry_run=$(look dry_run "$script_path"/main.cfg | cut -d '=' -f 2-)
+
+if [[ $cfg_remove_not_found == "0" ]]; then
+  logWarn "In \"$script_path/main.cfg\" (remove_not_found) ist konfiguriert, dass bei einer Aktualisierung keine Schlüsselwörter entfernt werden."
+fi
+if [[ $cfg_dry_run == "1" ]]; then
+  logWarn "In \"$script_path/main.cfg\" (dry_run) ist konfiguriert, dass bei einer Aktualisierung Schlüsselwörter weder hinzugefügt noch entfernt werden."
+fi
+
 # script_name=$(basename "$script")
 
 library_path="$1"
