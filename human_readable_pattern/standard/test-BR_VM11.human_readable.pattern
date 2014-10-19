@@ -1,0 +1,24 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VM11.asc
+
+category=Baureihen[category_separator]VM11
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]VM[[:space:]]{0,1}11[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]VM[[:space:]]{0,1}11(\.(5[1-4]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]VM[[:space:]]{0,1}11[[:space:]]51(0[1-9]|1[0-9]|2[0-3])[[:space:]])
+
+pattern=([[:space:]]VM[[:space:]]{0,1}11[[:space:]]52(0[1-8])[[:space:]])
+
+pattern=([[:space:]]VM[[:space:]]{0,1}11[[:space:]]53(0[1-8])[[:space:]])
+
+pattern=([[:space:]]VM[[:space:]]{0,1}11[[:space:]]54(0[1-9])[[:space:]])
+
