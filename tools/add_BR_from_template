@@ -21,9 +21,9 @@ function startCreate () {
       yy=$(sed -e "s/[0-9]*//g" <<< "$baureihe")
       xx=$(sed -e "s/[A-Z]*//g" <<< "$baureihe")
 
-      if [[ $baureihe == V* ]]; then
+      if [[ $baureihe == V ]]; then
         echo "pattern_delete=(.*km\/h.*)" >> "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
-        echo "pattern_not_merge=([[:space:]]XX[[:space:]]{0,1}YYY(|[[:space:]]*km\/h)[[:space:]])" >> "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
+        echo "pattern_not_merge=([[:space:]]YY[[:space:]]{0,1}XX(|[[:space:]]*km\/h)[[:space:]])" >> "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
       else
         echo "pattern_not_merge=([[:space:]]YY[[:space:]]{0,1}XX[[:space:]])" >> "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern"
       fi
