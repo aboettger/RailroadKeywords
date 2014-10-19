@@ -1,0 +1,18 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VM23.asc
+
+category=Baureihen[category_separator]VM23
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]VM[[:space:]]{0,1}23[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]VM[[:space:]]{0,1}23(\.([5]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]VM[[:space:]]{0,1}23[[:space:]]5(0[12])[[:space:]])
+
