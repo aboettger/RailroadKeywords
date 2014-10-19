@@ -1,0 +1,18 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VM08.asc
+
+category=Baureihen[category_separator]VM08
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]VM[[:space:]]{0,1}08[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]VM[[:space:]]{0,1}08(\.([5]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]VM[[:space:]]{0,1}08[[:space:]]5(0[1-9]|1[0-9]|2[0-2])[[:space:]])
+
