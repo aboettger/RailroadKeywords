@@ -1,0 +1,32 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/VM18.asc
+
+category=Baureihen[category_separator]VM18
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]VM[[:space:]]{0,1}18[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]VM[[:space:]]{0,1}18(\.(1[6]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]VM[[:space:]]{0,1}18\.16\.01([[:space:]]{0,1}[cC]|[dD]|[eE])(([[:space:]]{0,1}((([cde]{0,1}(\+|\-|/){0,1})*)|(([CDE]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+
+pattern=([[:space:]]VM[[:space:]]{0,1}18\.16\.02([[:space:]]{0,1}[cC]|[dD]|[eE])(([[:space:]]{0,1}((([cde]{0,1}(\+|\-|/){0,1})*)|(([CDE]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+
+pattern=([[:space:]]VM[[:space:]]{0,1}18\.16\.03([[:space:]]{0,1}[cC]|[dD]|[eE])(([[:space:]]{0,1}((([cde]{0,1}(\+|\-|/){0,1})*)|(([CDE]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+
+pattern=([[:space:]]VM[[:space:]]{0,1}18\.16\.04([[:space:]]{0,1}[cC]|[dD]|[eE])(([[:space:]]{0,1}((([cde]{0,1}(\+|\-|/){0,1})*)|(([CDE]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+
+pattern=([[:space:]]VM[[:space:]]{0,1}18\.16\.05([[:space:]]{0,1}[cC]|[dD]|[eE])(([[:space:]]{0,1}((([cde]{0,1}(\+|\-|/){0,1})*)|(([CDE]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+
+pattern=([[:space:]]VM[[:space:]]{0,1}18\.16\.06([[:space:]]{0,1}[cC]|[dD]|[eE])(([[:space:]]{0,1}((([cde]{0,1}(\+|\-|/){0,1})*)|(([CDE]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+
+pattern=([[:space:]]VM[[:space:]]{0,1}18\.16\.07([[:space:]]{0,1}[cC]|[dD])(([[:space:]]{0,1}((([cd]{0,1}(\+|\-|/){0,1})*)|(([CD]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+
+pattern=([[:space:]]VM[[:space:]]{0,1}18\.16\.08([[:space:]]{0,1}[cC]|[dD])(([[:space:]]{0,1}((([cd]{0,1}(\+|\-|/){0,1})*)|(([CD]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+
