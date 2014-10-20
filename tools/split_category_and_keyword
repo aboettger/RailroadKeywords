@@ -13,8 +13,7 @@ cfg_category_separator=$(look category_separator "$script_path"/../main.cfg | cu
 category_and_tag_init="$1"
 category="$category_and_tag_init"
 
-if [[ $string == *.* ]]; then
-
+if [[ $category == *.* ]]; then
   count_pattern_files=-1
   while [[ $count_pattern_files -lt 1 ]] || [[ $count_pattern_files -gt 1 ]]; do
     
@@ -29,7 +28,6 @@ if [[ $string == *.* ]]; then
   echo -e "pattern_file\t$(find ~/src/RailroadKeywords/pattern -type f -exec grep -q "^category=$category\$" {} \; -print)"
   echo -e "category\t$(sed -e "s/\\\//g" <<< "$category")"
   echo -e "keyword \t$(sed -e "s/^$category\\$cfg_category_separator//g" <<< "$category_and_tag_init")"
-
 fi
 
 exit 0
