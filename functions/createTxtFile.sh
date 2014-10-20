@@ -17,11 +17,11 @@ pdf_filename="${pdf_filename%.*}"
 
 spaces=$(python -c 'print u"\u0001\u000C\u0009\u00A0\u2004\u2005\u2006\u2009\u200A\u200B".encode("utf8")')
 double_quotes=$(python -c 'print u"\u201c\u201d\u201e\u201f\u0022".encode("utf8")')
-# pdftotext "$pdf_path" "$pdf_dirname/$pdf_filename.txt"
+# pdftotext "$pdf_path" "$pdf_dirname/$pdf_filename.compressed.txt"
 # if [ $? -gt 0 ]; then 
 #   logError "Fehler in der Verarbeitung, lösche txt-Dateien"
 #   rm "$pdf_dirname/$pdf_filename.human-readable.txt"
-#   rm "$pdf_dirname/$pdf_filename.txt"
+#   rm "$pdf_dirname/$pdf_filename.compressed.txt"
 #   exit 1;
 # fi
 
@@ -33,8 +33,8 @@ if [ ! -f "$pdf_dirname/$pdf_filename.human-readable.txt" ] || [ -f "$pdf_dirnam
     if [ -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
       rm "$pdf_dirname/$pdf_filename.human-readable.txt"
     fi
-    if [ -f "$pdf_dirname/$pdf_filename.txt" ]; then
-      rm "$pdf_dirname/$pdf_filename.txt"
+    if [ -f "$pdf_dirname/$pdf_filename.compressed.txt" ]; then
+      rm "$pdf_dirname/$pdf_filename.compressed.txt"
     fi
     
     logInfo "Neuer Versuch unter Verwendung von \"pdftotext\"…"
@@ -45,8 +45,8 @@ if [ ! -f "$pdf_dirname/$pdf_filename.human-readable.txt" ] || [ -f "$pdf_dirnam
       if [ -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
         rm "$pdf_dirname/$pdf_filename.human-readable.txt"
       fi
-      if [ -f "$pdf_dirname/$pdf_filename.txt" ]; then
-        rm "$pdf_dirname/$pdf_filename.txt"
+      if [ -f "$pdf_dirname/$pdf_filename.compressed.txt" ]; then
+        rm "$pdf_dirname/$pdf_filename.compressed.txt"
       fi
       exit 1;
     fi
@@ -64,35 +64,35 @@ if [ ! -f "$pdf_dirname/$pdf_filename.human-readable.txt" ] || [ -f "$pdf_dirnam
   fi
 fi
 
-logInfo "Schreibe \"$pdf_dirname/$pdf_filename.txt\" neu."
-cp "$pdf_dirname/$pdf_filename.human-readable.txt" "$pdf_dirname/$pdf_filename.txt"
+logInfo "Schreibe \"$pdf_dirname/$pdf_filename.compressed.txt\" neu."
+cp "$pdf_dirname/$pdf_filename.human-readable.txt" "$pdf_dirname/$pdf_filename.compressed.txt"
 
-sed -Ei ':a;N;$!ba;s/([a-z])[[:space:]]*\-[[:space:]]*\n([a-z])/\1\2/g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei ':a;N;$!ba;s/\n/ \n /g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei ':a;N;$!ba;s/([a-z])[[:space:]]*\n[[:space:]]*([A-Z])/\1 \2/g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei ':a;N;$!ba;s/([0-9])[[:space:]]*\n[[:space:]]*([0-9])/\1 ~ \2/' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei ':a;N;$!ba;s/([A-Z])[[:space:]]*\n[[:space:]]*([0-9])/\1 \2/g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei ':a;N;$!ba;s/([a-zA-Z])(\-)[[:space:]]*\n[[:space:]]*([A-Z])/\1\2\3/g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/\(cid\:[0-9]{1,3}\)//g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/['"$spaces"']/ /g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/['"$double_quotes"']//g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/\*[[:space:]]/ \* /g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/\)/ )/g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/\(/( /g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/\.\./ /g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/\.[[:space:]]/ \. /g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/\![[:space:]]/ \! /g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/\?[[:space:]]/ \? /g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/\,[[:space:]]/ \, /g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/\:[[:space:]]/ \: /g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/\;[[:space:]]/ \; /g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/\-/ - /g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/([0-9])\-(.)/\1 - \2/g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/[[:space:]]{2,}/ /g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/([[:space:]]BR)([0-9])/\1 \2/g' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei 's/[[:space:]][a-z]{3,}/ ~/g' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei ':a;N;$!ba;s/([a-z])[[:space:]]*\-[[:space:]]*\n([a-z])/\1\2/g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei ':a;N;$!ba;s/\n/ \n /g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei ':a;N;$!ba;s/([a-z])[[:space:]]*\n[[:space:]]*([A-Z])/\1 \2/g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei ':a;N;$!ba;s/([0-9])[[:space:]]*\n[[:space:]]*([0-9])/\1 ~ \2/' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei ':a;N;$!ba;s/([A-Z])[[:space:]]*\n[[:space:]]*([0-9])/\1 \2/g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei ':a;N;$!ba;s/([a-zA-Z])(\-)[[:space:]]*\n[[:space:]]*([A-Z])/\1\2\3/g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/\(cid\:[0-9]{1,3}\)//g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/['"$spaces"']/ /g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/['"$double_quotes"']//g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/\*[[:space:]]/ \* /g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/\)/ )/g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/\(/( /g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/\.\./ /g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/\.[[:space:]]/ \. /g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/\![[:space:]]/ \! /g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/\?[[:space:]]/ \? /g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/\,[[:space:]]/ \, /g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/\:[[:space:]]/ \: /g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/\;[[:space:]]/ \; /g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/\-/ - /g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/([0-9])\-(.)/\1 - \2/g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/[[:space:]]{2,}/ /g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/([[:space:]]BR)([0-9])/\1 \2/g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/[[:space:]][a-z]{3,}/ ~/g' "$pdf_dirname/$pdf_filename.compressed.txt"
 # Müll entfernen
-sed -Ei '/^[[:space:]]*\-*[[:space:]]*$/d' "$pdf_dirname/$pdf_filename.txt"
-sed -Ei '/^[[:space:]]*[~0-9A-Za-z][[:space:]]*$/d' "$pdf_dirname/$pdf_filename.txt"
+sed -Ei '/^[[:space:]]*\-*[[:space:]]*$/d' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei '/^[[:space:]]*[~0-9A-Za-z][[:space:]]*$/d' "$pdf_dirname/$pdf_filename.compressed.txt"
 
 exit 0
