@@ -119,6 +119,14 @@ Finde Pattern-Dateien, die sich innerhalb der letzten 12 Stunden geändert haben
 find ~/src/RailroadKeywords/pattern/ -name "*.pattern" -cmin -720 | awk -F/ '{print $7}' | sort
 ```
 
+Findet Änderungen in "~/src/RailroadKeywords/human_readable_pattern/" und bereitet diese für die Konfiguration "pattern_files" in "main.cfg" auf
+```sh
+#!/bin/bash
+files=$(find ~/src/RailroadKeywords/human_readable_pattern/ -name "*.pattern" -cmin -720 | awk -F/ '{print $8}' | sort)
+pattern_files="${files//human_readable./}"
+echo "pattern_files=$(awk '{print $1}' <<< "$pattern_files" | paste -s -d,)"
+```
+
 Korrigiert in den ASC-Dateien Tabs und " ."
 
 ```sh
