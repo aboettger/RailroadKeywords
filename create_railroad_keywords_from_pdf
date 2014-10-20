@@ -183,12 +183,12 @@ function runSearch () {
   pdf_filename=$(basename "$pdf_path")
   pdf_filename="${pdf_filename%.*}"
 
-  if [ -f "$pdf_dirname/$pdf_filename.txt" ]; then
-    lines=$(wc -l < "$pdf_dirname/$pdf_filename.txt")
+  if [ -f "$pdf_dirname/$pdf_filename.compressed.txt" ]; then
+    lines=$(wc -l < "$pdf_dirname/$pdf_filename.compressed.txt")
 
     if [ "$lines" != "0" ]
     then
-      "$script_path/functions/getResults.sh" "$pattern_case" "$pdf_dirname/$pdf_filename.txt" "0"
+      "$script_path/functions/getResults.sh" "$pattern_case" "$pdf_dirname/$pdf_filename.compressed.txt" "0"
     fi
   fi
 }
@@ -245,8 +245,8 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
 
     md5_new_CreateTxtFile=$(md5sum "$script_path/functions/createTxtFile.sh"  | gawk  -F ' ' '{print $1}')
 
-    if [ ! -f "$pdf_dirname/$pdf_filename.txt" ]; then
-       logInfo "\"$pdf_filename.txt\" nicht gefunden. schreibe \"$pdf_filename.txt\" neu."
+    if [ ! -f "$pdf_dirname/$pdf_filename.compressed.txt" ]; then
+       logInfo "\"$pdf_filename.compressed.txt\" nicht gefunden. schreibe \"$pdf_filename.compressed.txt\" neu."
        echo "$md5_new_CreateTxtFile" > "$pdf_dirname/createTxtFile.md5"
       "$script_path/functions/createTxtFile.sh" "$pdf_path"
     fi
@@ -265,7 +265,7 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
       # Do nothing
       true
     else
-      logInfo "Algorithmus in \"$script_path/functions/createTxtFile.sh\" hat sich geändert. Schreibe \"$pdf_filename.txt\" neu."
+      logInfo "Algorithmus in \"$script_path/functions/createTxtFile.sh\" hat sich geändert. Schreibe \"$pdf_filename.compressed.txt\" neu."
       "$script_path/functions/createTxtFile.sh" "$pdf_path"
       logInfo "Schreibe \"createTxtFile.md5\"."
       echo "$md5_new_CreateTxtFile" > "$pdf_dirname/createTxtFile.md5"
@@ -279,7 +279,7 @@ elif [ "$1" == "run" ] || [ "$1" == "create_txt" ]; then
     # echo "$md5_new_Pdf"
     if [ "$md5_current_Pdf" == "$md5_new_Pdf" ] && [ ! -f "$pdf_dirname/txt_created_by_pdftotext" ]; then
       logInfo "\"$(basename "$pdf_path")\" scheint sich seit dem letzten Durchlauf nicht geändert zu haben."
-      logInfo "Versuche bestehende \"$pdf_filename.txt\" zu verwenden."
+      logInfo "Versuche bestehende \"$pdf_filename.compressed.txt\" zu verwenden."
     else
       if [ "$md5_current_Pdf" != "$md5_new_Pdf" ]; then
         logInfo "\"$(basename "$pdf_path")\" hat sich seit dem letzten Durchlauf geändert."

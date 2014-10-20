@@ -138,8 +138,8 @@ while read -r pdf_path; do
     # echo "$pdf_dirname"
     pdf_filename=$(basename "$pdf_path")
     pdf_filename="${pdf_filename%.*}"
-    # if [[ -f $pdf_dirname/$pdf_filename.txt ]]; then
-    #   logInfo "Dateigöße ($pdf_filename.txt): $(stat -c%s "$pdf_dirname/$pdf_filename.txt")"
+    # if [[ -f $pdf_dirname/$pdf_filename.compressed.txt ]]; then
+    #   logInfo "Dateigöße ($pdf_filename.compressed.txt): $(stat -c%s "$pdf_dirname/$pdf_filename.compressed.txt")"
     # fi
 
     cfg_pattern_files=$(look pattern_files "$script_path"/main.cfg | cut -d '=' -f 2-)

@@ -16,7 +16,7 @@ find "$1" -depth  -type d | { while read -r D;
       "$DR" ) continue;;
     esac
     pdfs=$(echo "$D"/*.pdf)
-    txts=$(echo "$D"/*.txt)
+    txts=$(echo "$D"/*compressed.txt)
     if [ "$txts" == "" ] && [ "$pdfs" != "" ]; then
        echo "$pdfs"
     fi

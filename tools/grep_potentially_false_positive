@@ -195,7 +195,7 @@ while read -r calibre_id; do
       else
         pdf_path=$(find "$working_path" -type f -name '*.pdf')
         hr_txt_path=${pdf_path//.pdf/.human-readable.txt}
-        txt_path=${pdf_path//.pdf/.txt}
+        txt_path=${pdf_path//.pdf/.compressed.txt}
 
         keyword_pattern=""
         if [[ ! -z $category ]]; then

@@ -58,7 +58,7 @@ while read -r pdf_path; do
           if [[ $test_mode == "1" ]]; then
 
             hr_txt_path=${pdf_path//.pdf/.human-readable.txt}
-            txt_path=${pdf_path//.pdf/.txt}
+            txt_path=${pdf_path//.pdf/.compressed.txt}
 
             egrep -anET -C 5 "[[:space:]]$keyword[[:space:]]" "$txt_path"
             echo "Folgende Aktionen sind für den Eintrag \"$entry\" in \"$false_positive_file\" möglich:"
