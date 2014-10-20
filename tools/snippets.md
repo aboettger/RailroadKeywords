@@ -31,7 +31,7 @@ Sucht in vorhandenen txt-dateien, die mittels "pdftotext" erzeugt werden, nach e
 
 ```sh
 #!/bin/bash
-find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readable.txt' | {
+find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*compressed.txt' | {
   while read file; do
     grep -aEl " Rot" "$file" | {
       while read -r pdf; do
@@ -46,7 +46,7 @@ Sucht in vorhandenen txt-dateien, die mittels "pdftotext" erzeugt werden, nach e
 
 ```sh
 #!/bin/bash
-find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*.txt' ! -name '*human-readable.txt' | {
+find ~/Eisenbahn/Eisenbahnliteratur -type f -name '*compressed.txt' | {
   while read file; do
     egrep -anETH -C 5 "EB 65 003 a+b" "$file";
   done
