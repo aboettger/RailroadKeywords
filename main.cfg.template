@@ -18,7 +18,7 @@ category_separator=.
 #pattern_files=test-BR_01.pattern, test-BR_001.pattern,test-BR_02.pattern
 
 # Sollen bestehende Schlüsselwörter entfernt werden, wenn sie durch eine Suche
-# nicht gefunden worden?
+# nicht gefunden werden?
 #
 # Wenn "remove_not_found" nicht angegeben ist, dann werden bestehende
 # Schlüsselwörter entfernt, wenn sie durch eine Suche nicht gefunden werden.
