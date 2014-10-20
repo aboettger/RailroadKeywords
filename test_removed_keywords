@@ -39,9 +39,7 @@ if [[ ! -z "$files" ]]; then
       logInfo "$removed_keywords"
       working_dir=$(dirname "$file")
       while read removed_keyword; do
-        echo "#$removed_keyword"
         result=$("$script_path"/tools/split_category_and_keyword "$removed_keyword")
-        echo "#1"
         category=$(grep "category" <<< "$result" | awk -F '\t' '{print $2}')
         keyword=$(grep "keyword" <<< "$result" | awk -F '\t' '{print $2}')
 
