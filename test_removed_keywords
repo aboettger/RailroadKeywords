@@ -29,7 +29,7 @@ if [[ -z $library_path ]]; then
   exit 1
 fi
 
-files=$(find "$library_path" -type f -name "tag_4_grep_potentially_false_positive" -exec grep -l "<" {} \;)
+files=$(find "$library_path" -type f -name "keyword_history" -exec grep -l "<" {} \;)
 if [[ ! -z "$files" ]]; then
   logInfo "$(wc -l <<< "$files") Datei(en) gefunden"
   logInfo "$files"

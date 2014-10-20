@@ -204,12 +204,12 @@ find ~/Eisenbahn/Eisenbahnliteratur -type f -name "tag_4_test_potentially_false_
 tools/grep_potentially_false_positive
 --
 
-Führt ein "grep_potentially_false_positive" auf die Verzeichnisse aus, in denen die Datei "tag_4_grep_potentially_false_positive" gefunden
+Führt ein "grep_potentially_false_positive" auf die Verzeichnisse aus, in denen die Datei "keyword_history" gefunden
 Diese Datei wird erstellt, wenn das Script "extract_and_write_keywords_into_calibre" eine Änderung vorgenommen hat
 
 ```sh
 #!/bin/bash
-find ~/Eisenbahn/Eisenbahnliteratur -type f -name "tag_4_grep_potentially_false_positive" -exec dirname {} \; | {
+find ~/Eisenbahn/Eisenbahnliteratur -type f -name "keyword_history" -exec dirname {} \; | {
   while read file; do
     echo;
     echo "$file";

@@ -201,8 +201,8 @@ while read -r pdf_path; do
     # echo "Tags neu: >$keywords<"
     if [[ $old_keywords != "$keywords" ]] && [[ $cfg_dry_run == "0" ]]; then
       calibredb set_metadata --field tags:"$keywords" "$calibre_id" --library-path="$calibreDbSearchPath"
-      touch "$working_path/tag_4_grep_potentially_false_positive"
-      echo "$keywords_diff" >> "$working_path/tag_4_grep_potentially_false_positive"
+      touch "$working_path/keyword_history"
+      echo "$keywords_diff" >> "$working_path/keyword_history"
       # touch "$working_path/tag_4_test_potentially_false_positive"
       # echo "$keywords_diff" >> "$working_path/tag_4_test_potentially_false_positive"
     fi
