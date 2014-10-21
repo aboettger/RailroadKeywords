@@ -1,0 +1,28 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/ES87.asc
+
+category=Baureihen[category_separator]ES87
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]ES[[:space:]]{0,1}87[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]ES[[:space:]]{0,1}87(\.(0[1-5]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]ES[[:space:]]{0,1}87[[:space:]](0[6])[[:space:]])
+
+pattern=([[:space:]]ES[[:space:]]{0,1}87[[:space:]]01([[:space:]]{0,1}[aA]|[bB])(([[:space:]]{0,1}((([ab]{0,1}(\+|\-|/){0,1})*)|(([AB]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ES[[:space:]]{0,1}87[[:space:]]02([[:space:]]{0,1}[aA]|[bB])(([[:space:]]{0,1}((([ab]{0,1}(\+|\-|/){0,1})*)|(([AB]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ES[[:space:]]{0,1}87[[:space:]]03([[:space:]]{0,1}[aA]|[bB])(([[:space:]]{0,1}((([ab]{0,1}(\+|\-|/){0,1})*)|(([AB]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ES[[:space:]]{0,1}87[[:space:]]04([[:space:]]{0,1}[aA]|[bB])(([[:space:]]{0,1}((([ab]{0,1}(\+|\-|/){0,1})*)|(([AB]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+
+pattern=([[:space:]]ES[[:space:]]{0,1}87[[:space:]]05([[:space:]]{0,1}[aA]|[bB])(([[:space:]]{0,1}((([ab]{0,1}(\+|\-|/){0,1})*)|(([AB]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+
