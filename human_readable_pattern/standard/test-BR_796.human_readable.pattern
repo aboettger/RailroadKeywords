@@ -1,0 +1,26 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/796.asc
+
+category=Baureihen[category_separator]796
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern, pattern_not_merge
+
+pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT).*)|(-[0-9])
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|([[:space:]].*-.*)
+
+pattern=(([[:space:]]796er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+
+# Pattern #1
+
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]796(\.(5|6|7|8))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]796[[:space:]])
+
+# Pattern #2
+
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]796[[:space:]]5(9[7])([[:space:]]|-[0-9])
+
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]796[[:space:]]6(2[5]|4[6]|5[17]|6[3]|7[9]|8[03]|9[079])([[:space:]]|-[0-9])
+
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]796[[:space:]]7(0[2]|1[02]|2[145]|3[3469]|4[0458]|5[7]|6[01789]|7[45]|8[458]|9[026])([[:space:]]|-[0-9])
+
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]796[[:space:]]8(0[2]|1[5-7]|2[568])([[:space:]]|-[0-9])
+
