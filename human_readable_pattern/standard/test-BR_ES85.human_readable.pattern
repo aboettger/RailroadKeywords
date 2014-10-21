@@ -1,0 +1,20 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/ES85.asc
+
+category=Baureihen[category_separator]ES85
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]ES[[:space:]]{0,1}85[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]ES[[:space:]]{0,1}85(\.([1]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]ES[[:space:]]{0,1}85[[:space:]](0[1-9]|1[0-9]|2[0-9]|3[0-4]|4[0])[[:space:]])
+
+pattern=([[:space:]]ES[[:space:]]{0,1}85[[:space:]]1(0[1-9])[[:space:]])
+
