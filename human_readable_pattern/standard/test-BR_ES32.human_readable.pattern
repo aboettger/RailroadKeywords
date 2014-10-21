@@ -1,0 +1,20 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/ES32.asc
+
+category=Baureihen[category_separator]ES32
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern_not_merge, pattern
+
+#
+pattern_not_merge=([[:space:]]ES[[:space:]]{0,1}32[[:space:]])
+
+# Pattern #1
+
+pattern=([[:space:]]ES[[:space:]]{0,1}32(\.([0]|00[12]))[[:space:]])
+
+# Pattern #2
+
+pattern=([[:space:]]ES[[:space:]]{0,1}32[[:space:]]0(0[12]|2[12])[[:space:]])
+pattern=([[:space:]]ES[[:space:]]{0,1}32[[:space:]]001([[:space:]]{0,1}[bB])(([[:space:]]{0,1}((([b]{0,1}(\+|\-|/){0,1})*)|(([B]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+pattern=([[:space:]]ES[[:space:]]{0,1}32[[:space:]]002([[:space:]]{0,1}[bB])(([[:space:]]{0,1}((([b]{0,1}(\+|\-|/){0,1})*)|(([B]{0,1}(\+|\-|/){0,1})*))))[[:space:]])
+
