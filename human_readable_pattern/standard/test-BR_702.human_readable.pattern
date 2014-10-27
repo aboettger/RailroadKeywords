@@ -1,0 +1,22 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/702.asc
+
+category=Baureihen[category_separator]702
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern, pattern_not_merge
+
+pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT).*)|(-[0-9])
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|([[:space:]].*-.*)
+
+pattern=(([[:space:]]702er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+
+# Pattern #1
+
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]702(\.(0|1))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]702[[:space:]])
+
+# Pattern #2
+
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]702[[:space:]]0(0[1-4]|4[29]|5[056])([[:space:]]|-[0-9])
+
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]702[[:space:]]1(1[5]|2[3459]|3[1-8]|4[89]|5[0]|6[34])([[:space:]]|-[0-9])
+
