@@ -1,0 +1,21 @@
+# Quelle: http://www.beitraege.lokomotive.de/datenbank/baureihen/720.asc
+
+category=Baureihen[category_separator]720
+
+# Reihenfolge der pattern-Angaben für "tools/compress_pattern"
+order_pattern=pattern, pattern_not_merge
+
+pattern_delete=(^[[:space:]]*(§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT).*)|(-[0-9])
+pattern_delete=([[:space:]]*.*er[[:space:]].*J.*)|([[:space:]].*-.*)
+
+pattern=(([[:space:]]720er[[:space:]])(|-[[:space:]])(|Jahre(|n)[[:space:]]))
+
+# Pattern #1
+
+pattern_not_merge=((([[:space:]](§|Mo|Di|Mi|Do|Fr|S(a|o)|D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]720(\.(0|1))[[:space:]])|([[:space:]](BR|Baureihe)[[:space:]]720[[:space:]])
+
+# Pattern #2
+
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]720[[:space:]]0(0[1])([[:space:]]|-[0-9])
+pattern=(([[:space:]](D|E|EB|ESA|ET|ETA|H|T|V|VM|VB|VS|VT))|)[[:space:]]720[[:space:]]1(0[1])([[:space:]]|-[0-9])
+
