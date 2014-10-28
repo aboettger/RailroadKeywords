@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+script_path=$(dirname "$script")
+
+cfg_category_separator=$(look category_separator "$script_path"/main.cfg | cut -d '=' -f 2-)
+cfg_pattern_files=$(look pattern_files "$script_path"/main.cfg | cut -d '=' -f 2-)
+cfg_remove_not_found=$(look remove_not_found "$script_path"/main.cfg | cut -d '=' -f 2-)
+cfg_dry_run=$(look dry_run "$script_path"/main.cfg | cut -d '=' -f 2-)
+cfg_log_level=$(look log_level "$script_path"/main.cfg | cut -d '=' -f 2-)
+
+cfg_possible_remove_not_found=$(printf "%s\n0\n1" "$cfg_remove_not_found")
+remove_not_found=$(cat -n <<< "$cfg_possible_remove_not_found" | sort --key=2.1 -b -u | sort -n | cut -c8- | sed -E ':a;N;$!ba;s/\n/!/g')
+
+yad --center \
+  --form \
+  --class="RailroadKeywords" \
+  --name="Railroad Keywords" \
+  --window-icon="" \
+  --title="Einstellungen - Railroad Keywords" \
+  --field="Kategorie-Trenner" "$cfg_category_separator" \
+  --field="Pattern Dateien" "$cfg_pattern_files" \
+  --field="Nicht gefundene löschen:CB" "$remove_not_found" \
+  --field="Testlauf:CB" "$cfg_dry_run" \
+  --field="Log Level:CB" "$cfg_log_level" \
+  --field="Calibre Bibliothek:DIR" "$cfg_log_level" \
+  --text="" \
+  --button="Reset to default:2" \
+  --button="gtk-cancel:1" \
+  --button="gtk-ok:0"

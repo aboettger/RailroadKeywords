@@ -1,0 +1,2 @@
+#!/bin/bash
+yad --center --icons --class="RailroadKeywords" --name="Railroad Keywords" --window-icon="" --item-width="182" --single-click --read-dir="desktopfiles" --width="435" --height="380" --title="Railroad Keywords" --button="Close:1"

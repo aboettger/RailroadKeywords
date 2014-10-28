@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=Extract and write keywords
+Comment=Extract and write keywords into Calibre
+GenericName=Extract and write keywords
+Exec=extract_and_write_keywords_into_calibre
+Icon=rk_extract_and_write_keywords_into_calibre
+Terminal=true
+X-MultipleArgs=false
+Type=Application
+Categories=
+StartupWMClass=RailroadKeywords
