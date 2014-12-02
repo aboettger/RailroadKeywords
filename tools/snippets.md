@@ -265,3 +265,9 @@ Anzahl der möglichen Schlüsselwörter ermitteln
 ```sh
 comm -2 -3  <(sort 118\ 001-999.list) <(sort ../tests/test-BR_118.positive.002.list)
 ```
+
+Wandelt alle TIFFs in einem Verzeichnis in ein PDF um
+```sh
+#!/bin/bash
+convert *.tiff output.pdf
+```
