@@ -1,0 +1,112 @@
+#!/bin/bash
+
+##
+#
+# Durchsucht ab "LibraryPath" alle Verzeichnisse nach "spellcheck_check_required"
+# und bietet Aktionen an
+#
+# test_spell_check_required "PfadZumCalibreVerzeichnisOderUnterverzeichnis"
+#
+##
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+script=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+script_path=$(dirname "$script")
+
+cfg_log_level=$(look log_level "$script_path"/main.cfg | cut -d '=' -f 2-)
+. "$script_path/libraries/logging.sh" "$cfg_log_level"
+
+if [[ $cfg_log_level != "4" ]]; then
+  cfg_log_level=3
+fi
+
+cfg_remove_not_found=$(look remove_not_found "$script_path"/main.cfg | cut -d '=' -f 2-)
+cfg_dry_run=$(look dry_run "$script_path"/main.cfg | cut -d '=' -f 2-)
+
+if [[ $cfg_remove_not_found == "0" ]]; then
+  logWarn "In \"$script_path/main.cfg\" (remove_not_found) ist konfiguriert, dass bei einer Aktualisierung keine Schlüsselwörter entfernt werden."
+fi
+if [[ $cfg_dry_run == "1" ]]; then
+  logWarn "In \"$script_path/main.cfg\" (dry_run) ist konfiguriert, dass bei einer Aktualisierung Schlüsselwörter weder hinzugefügt noch entfernt werden."
+fi
+
+# script_name=$(basename "$script")
+
+library_path="$1"
+
+if [[ -z $library_path ]]; then
+  echo "Benutzung: $script_name \"PfadZurCalibreDbOderUnterverzeichnis\""
+  exit 1
+fi
+
+files=$(find "$library_path" -type f -name "spellcheck_check_required")
+files_result="${files%x}"
+logInfo "$(wc -l <<< "$files") Datei(en) gefunden"
+if [[ ! -z "$files" ]]; then
+  while read file_line; do
+    working_path=$(dirname "$file_line")
+    check_file_lines=$(cat "$file_line")
+    while read check_file_line ; do
+      if [[ ! -z "$check_file_line" ]]; then
+
+        pdf_file_path=${check_file_line//human-readable\.txt/pdf}
+
+        echo
+        echo "Rechtschreibprüfung für \"$check_file_line\""
+
+        echo "1) Rechtschreibprüfung starten"
+        echo "2) PDF ansehen \"$pdf_file_path\""
+        echo "3) Aktualisierung durchführen"
+        echo "8) Nichts tun"
+        while true; do
+          read -p "Bitte wählen: " input < /dev/tty
+          case $input in
+            [1]* )
+            echo "Öffne \"$check_file_line\""
+            xdg-open "$check_file_line"
+            ;;
+            [2]* )
+            echo "Öffne \"$pdf_file_path\""
+            check_evince=$(command -v evince)
+            if [[ ! -z $check_evince ]]; then
+              evince "$pdf_file_path" > /dev/null 2>&1 &
+            else
+              xdg-open "$pdf_file_path" > /dev/null 2>&1 &
+            fi;;
+            [3]* )
+            compressed_file_path=${check_file_line//human-readable/compressed}
+            if [[ -f "$compressed_file_path" ]]; then
+              rm "$compressed_file_path"
+            fi
+            extract_and_write_keywords_into_calibre "$working_path"
+            break;;
+            [8]* ) break;;
+            * ) echo "Ungültige Auswahl";;
+          esac
+        done
+
+        escaped_file_line=$(sed -e 's/[]\/$*.^|[]/\\&/g' <<< "$check_file_line")
+        echo
+        echo "Die Datei \"$check_file_line\" wurde in einer der letzten Aktualisierungen als \"Rechtschreibung testen\" markiert. Diesen Vermerk entfernen?"
+        echo "n) Nein, nichts tun"
+        echo "j) Ja, Vermerk als neues Schlüsselwort entfernen"
+
+        while true; do
+          read -p "Bitte wählen: " input < /dev/tty
+          case $input in
+              n* )
+                break;;
+              j* )
+                sed -i "/^$escaped_file_line\$/d" "$file_line"
+                logInfo "\"$file_line\" aus \"$file_line\" entfernt."
+                break;;
+              * ) echo "Ungültige Auswahl";;
+          esac
+        done
+      fi
+    done <<< "$check_file_lines"
+  done <<< "$files_result"
+fi
+
+exit 0
