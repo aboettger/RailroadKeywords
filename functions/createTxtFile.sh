@@ -28,10 +28,17 @@ double_quotes=$(python -c 'print u"\u201c\u201d\u201e\u201f\u0022".encode("utf8"
 if [ ! -f "$pdf_dirname/$pdf_filename.human-readable.txt" ] || [ -f "$pdf_dirname/txt_created_by_pdftotext" ]; then
   
   "$script_path/checkOCR.sh" "$pdf_path"
+  
   if [ $? -eq 1 ]; then
     logInfo "Starte OCR"
     convert -depth 8 "$pdf_path" "$pdf_dirname/$pdf_filename.tiff"
-    tesseract  "$pdf_dirname/$pdf_filename.tiff" "$pdf_dirname/$pdf_filename.human-readable" -l deu
+    tesseract  "$pdf_dirname/$pdf_filename.tiff" "$pdf_dirname/$pdf_filename.ocr" -l deu
+    echo "$pdf_dirname/$pdf_filename.human-readable.txt" > "$pdf_dirname/spellcheck_check_required"
+    if [ ! -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
+      cp "$pdf_dirname/$pdf_filename.ocr.txt" "$pdf_dirname/$pdf_filename.human-readable.txt"
+    else
+      logWarn "\"$pdf_dirname/$pdf_filename.human-readable.txt\" existiert bereits und wird nicht mit \"$pdf_dirname/$pdf_filename.ocr.txt\" ersetzt."
+    fi
     if [ $? -eq 1 ]; then
       touch "$pdf_dirname/$pdf_filename.human-readable.txt"
       touch "$pdf_dirname/$pdf_filename.compressed.txt"
