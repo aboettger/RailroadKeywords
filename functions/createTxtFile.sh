@@ -105,6 +105,7 @@ sed -Ei 's/([0-9])\-(.)/\1 - \2/g' "$pdf_dirname/$pdf_filename.compressed.txt"
 sed -Ei 's/[[:space:]]{2,}/ /g' "$pdf_dirname/$pdf_filename.compressed.txt"
 sed -Ei 's/([[:space:]]BR)([0-9])/\1 \2/g' "$pdf_dirname/$pdf_filename.compressed.txt"
 sed -Ei 's/[[:space:]][a-z]{3,}/ ~/g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/ﬂ/fl/g' "$pdf_dirname/$pdf_filename.compressed.txt"
 # Müll entfernen
 sed -Ei '/^[[:space:]]*\-*[[:space:]]*$/d' "$pdf_dirname/$pdf_filename.compressed.txt"
 sed -Ei '/^[[:space:]]*[~0-9A-Za-z][[:space:]]*$/d' "$pdf_dirname/$pdf_filename.compressed.txt"
