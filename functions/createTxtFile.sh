@@ -26,37 +26,51 @@ double_quotes=$(python -c 'print u"\u201c\u201d\u201e\u201f\u0022".encode("utf8"
 # fi
 
 if [ ! -f "$pdf_dirname/$pdf_filename.human-readable.txt" ] || [ -f "$pdf_dirname/txt_created_by_pdftotext" ]; then
-  logInfo "Verwende \"pdf2txt\""
-  pdf2txt.py -o "$pdf_dirname/$pdf_filename.human-readable.txt" "$pdf_path"
-  if [ $? -gt 0 ]; then 
-    logError "Fehler in der Verarbeitung durch \"pdf2txt\", lösche txt-Dateien"
-    if [ -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
-      rm "$pdf_dirname/$pdf_filename.human-readable.txt"
+  
+  "$script_path/checkOCR.sh" "$pdf_path"
+  if [ $? -eq 1 ]; then
+    logInfo "Starte OCR"
+    convert -depth 8 "$pdf_path" "$pdf_dirname/$pdf_filename.tiff"
+    tesseract  "$pdf_dirname/$pdf_filename.tiff" "$pdf_dirname/$pdf_filename.human-readable" -l deu
+    if [ $? -eq 1 ]; then
+      touch "$pdf_dirname/$pdf_filename.human-readable.txt"
+      touch "$pdf_dirname/$pdf_filename.compressed.txt"
     fi
-    if [ -f "$pdf_dirname/$pdf_filename.compressed.txt" ]; then
-      rm "$pdf_dirname/$pdf_filename.compressed.txt"
-    fi
-    
-    logInfo "Neuer Versuch unter Verwendung von \"pdftotext\"…"
-
-    pdftotext "$pdf_path" "$pdf_dirname/$pdf_filename.human-readable.txt"
+    rm "$pdf_dirname"/*.tiff
+  else
+  
+    logInfo "Verwende \"pdf2txt\""
+    pdf2txt.py -o "$pdf_dirname/$pdf_filename.human-readable.txt" "$pdf_path"
     if [ $? -gt 0 ]; then 
-      logError "Fehler in der Verarbeitung, lösche txt-Dateien"
+      logError "Fehler in der Verarbeitung durch \"pdf2txt\", lösche txt-Dateien"
       if [ -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
         rm "$pdf_dirname/$pdf_filename.human-readable.txt"
       fi
       if [ -f "$pdf_dirname/$pdf_filename.compressed.txt" ]; then
         rm "$pdf_dirname/$pdf_filename.compressed.txt"
       fi
-      exit 1;
-    fi
-    touch "$pdf_dirname/txt_created_by_pdftotext"
-  else
-    if [ -f "$pdf_dirname/txt_created_by_pdftotext" ]; then
-      rm "$pdf_dirname/txt_created_by_pdftotext"
+      
+      logInfo "Neuer Versuch unter Verwendung von \"pdftotext\"…"
+
+      pdftotext "$pdf_path" "$pdf_dirname/$pdf_filename.human-readable.txt"
+      if [ $? -gt 0 ]; then 
+        logError "Fehler in der Verarbeitung, lösche txt-Dateien"
+        if [ -f "$pdf_dirname/$pdf_filename.human-readable.txt" ]; then
+          rm "$pdf_dirname/$pdf_filename.human-readable.txt"
+        fi
+        if [ -f "$pdf_dirname/$pdf_filename.compressed.txt" ]; then
+          rm "$pdf_dirname/$pdf_filename.compressed.txt"
+        fi
+        exit 1;
+      fi
+      touch "$pdf_dirname/txt_created_by_pdftotext"
+    else
+      if [ -f "$pdf_dirname/txt_created_by_pdftotext" ]; then
+        rm "$pdf_dirname/txt_created_by_pdftotext"
+      fi
     fi
   fi
-
+  
   if [ ! -f "$pdf_dirname/txt_created_by_pdftotext" ]; then
     logInfo "Erzwinge neu schreiben von \"$pdf_dirname/$pdf_filename.md5\"."
     md5_new_Pdf=$(md5sum "$pdf_path"  | gawk  -F ' ' '{print $1}')
@@ -91,7 +105,11 @@ sed -Ei 's/([0-9])\-(.)/\1 - \2/g' "$pdf_dirname/$pdf_filename.compressed.txt"
 sed -Ei 's/[[:space:]]{2,}/ /g' "$pdf_dirname/$pdf_filename.compressed.txt"
 sed -Ei 's/([[:space:]]BR)([0-9])/\1 \2/g' "$pdf_dirname/$pdf_filename.compressed.txt"
 sed -Ei 's/[[:space:]][a-z]{3,}/ ~/g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/ﬂ/fl/g' "$pdf_dirname/$pdf_filename.compressed.txt"
+sed -Ei 's/ﬁ/fi/g' "$pdf_dirname/$pdf_filename.compressed.txt"
+
 # Müll entfernen
+
 sed -Ei '/^[[:space:]]*\-*[[:space:]]*$/d' "$pdf_dirname/$pdf_filename.compressed.txt"
 sed -Ei '/^[[:space:]]*[~0-9A-Za-z][[:space:]]*$/d' "$pdf_dirname/$pdf_filename.compressed.txt"
 
