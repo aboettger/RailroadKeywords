@@ -90,7 +90,7 @@ if [[ ! -z "$files" ]]; then
         echo
         echo "Die Datei \"$check_file_line\" wurde in einer der letzten Aktualisierungen als \"Rechtschreibung testen\" markiert. Diesen Vermerk entfernen?"
         echo "n) Nein, nichts tun"
-        echo "j) Ja, Vermerk als neues Schlüsselwort entfernen"
+        echo "j) Ja, Vermerk entfernen"
 
         while true; do
           read -p "Bitte wählen: " input < /dev/tty
@@ -99,7 +99,7 @@ if [[ ! -z "$files" ]]; then
                 break;;
               j* )
                 sed -i "/^$escaped_file_line\$/d" "$file_line"
-                logInfo "\"$file_line\" aus \"$file_line\" entfernt."
+                logInfo "\"$check_file_line\" aus \"$file_line\" entfernt."
                 break;;
               * ) echo "Ungültige Auswahl";;
           esac
