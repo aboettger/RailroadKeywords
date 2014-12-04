@@ -38,4 +38,7 @@ log_level=3
 # app_spellcheck=abiword
 
 # Wenn leer oder nicht angegeben wird "xdg-open" verwendet
+# app_txt_viewer=gedit
+
+# Wenn leer oder nicht angegeben wird "xdg-open" verwendet
 # app_pdf_viewer=evince
