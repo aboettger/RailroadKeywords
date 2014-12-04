@@ -33,3 +33,9 @@ remove_not_found=0
 # 3 - Error, Warnung, Info
 # 4 - Error, Warnung, Info, Debug
 log_level=3
+
+# Wenn leer oder nicht angegeben wird "xdg-open" verwendet
+# app_spellcheck=abiword
+
+# Wenn leer oder nicht angegeben wird "xdg-open" verwendet
+# app_pdf_viewer=evince
