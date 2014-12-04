@@ -16,6 +16,16 @@ script_path=$(dirname "$script")
 cfg_log_level=$(look log_level "$script_path"/main.cfg | cut -d '=' -f 2-)
 . "$script_path/libraries/logging.sh" "$cfg_log_level"
 
+cfg_app_txt_viewer=$(look app_txt_viewer "$script_path"/main.cfg | cut -d '=' -f 2-)
+if [[ -z $cfg_app_txt_viewer ]]; then
+  cfg_app_txt_viewer="xdg-open"
+fi
+
+cfg_app_pdf_viewer=$(look app_pdf_viewer "$script_path"/main.cfg | cut -d '=' -f 2-)
+if [[ -z $cfg_app_pdf_viewer ]]; then
+  cfg_app_pdf_viewer="xdg-open"
+fi
+
 # script_name=$(basename "$script")
 
 # category_separator=$(look category_separator "$script_path"/main.cfg | cut -d '=' -f 2-)
@@ -86,20 +96,15 @@ while read -r pdf_path; do
                     break;;
                   [4]* )
                     echo "Öffne \"$pdf_path\""
-                    check_evince=$(command -v evince)
-                    if [[ ! -z $check_evince ]]; then
-                      evince "$pdf_path" --find="$keyword" > /dev/null 2>&1 &
-                    else
-                      xdg-open "$pdf_path" > /dev/null 2>&1 &
-                    fi
+                    "$cfg_app_pdf_viewer" "$pdf_path" > /dev/null 2>&1 &
                     ;;
                   [5]* )
                     echo "Öffne \"$hr_txt_path\""
-                    xdg-open "$hr_txt_path" > /dev/null 2>&1 &
+                    "$cfg_app_txt_viewer" "$hr_txt_path" > /dev/null 2>&1 &
                     ;;
                   [6]* )
                     echo "Öffne \"$txt_path\""
-                    xdg-open "$txt_path" > /dev/null 2>&1 &
+                    "$cfg_app_txt_viewer" "$txt_path" > /dev/null 2>&1 &
                     ;;
                   [7]* )
                     echo "Öffne \"$working_path\""
