@@ -24,6 +24,16 @@ fi
 cfg_remove_not_found=$(look remove_not_found "$script_path"/main.cfg | cut -d '=' -f 2-)
 cfg_dry_run=$(look dry_run "$script_path"/main.cfg | cut -d '=' -f 2-)
 
+cfg_app_spellcheck=$(look app_spellcheck "$script_path"/main.cfg | cut -d '=' -f 2-)
+if [[ -z $cfg_app_spellcheck ]]; then
+  cfg_app_spellcheck="xdg-open"
+fi
+
+cfg_app_pdf_viewer=$(look app_pdf_viewer "$script_path"/main.cfg | cut -d '=' -f 2-)
+if [[ -z $cfg_app_pdf_viewer ]]; then
+  cfg_app_pdf_viewer="xdg-open"
+fi
+
 if [[ $cfg_remove_not_found == "0" ]]; then
   logWarn "In \"$script_path/main.cfg\" (remove_not_found) ist konfiguriert, dass bei einer Aktualisierung keine Schlüsselwörter entfernt werden."
 fi
@@ -42,6 +52,7 @@ fi
 
 files=$(find "$library_path" -type f -name "spellcheck_check_required")
 logInfo "$(wc -l <<< "$files") Datei(en) gefunden"
+echo "$files"
 if [[ ! -z "$files" ]]; then
   while read file; do
     working_path=$(dirname "$file")
@@ -60,16 +71,12 @@ if [[ ! -z "$files" ]]; then
       case $input in
         [1]* )
           echo "Öffne \"$human_readable_path\""
-          xdg-open "$human_readable_path" > /dev/null 2>&1 &
+          "$cfg_app_spellcheck" "$human_readable_path" > /dev/null 2>&1 &
           ;;
         [2]* )
-        echo "Öffne \"$pdf_file_path\""
-        check_evince=$(command -v evince)
-        if [[ ! -z $check_evince ]]; then
-          evince "$pdf_file_path" > /dev/null 2>&1 &
-        else
-          xdg-open "$pdf_file_path" > /dev/null 2>&1 &
-        fi;;
+          echo "Öffne \"$pdf_file_path\""
+          "$cfg_app_pdf_viewer" "$pdf_file_path" > /dev/null 2>&1 &
+          ;;
         [3]* )
         compressed_file_path=${human_readable_path//human-readable/compressed}
         if [[ -f "$compressed_file_path" ]]; then
