@@ -8,6 +8,11 @@ script_path=$(dirname "$script")
 cfg_log_level=$(look log_level "$script_path"/../main.cfg | cut -d '=' -f 2-)
 . "$script_path/../libraries/logging.sh" "$cfg_log_level"
 
+cfg_app_txt_viewer=$(look app_txt_viewer "$script_path"/../main.cfg | cut -d '=' -f 2-)
+if [[ -z $cfg_app_txt_viewer ]]; then
+  cfg_app_txt_viewer="xdg-open"
+fi
+
 if [[ $cfg_log_level != "4" ]]; then
   cfg_log_level=3
 fi
@@ -102,9 +107,9 @@ function startOpen () {
     case "$input" in
         [w]* )
           xdg-open "$script_path/../tests/standard/test-BR_$baureihe.ods" > /dev/null 2>&1
-          xdg-open "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" > /dev/null 2>&1
-          xdg-open "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" > /dev/null 2>&1
-          xdg-open "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" > /dev/null 2>&1
+          "$cfg_app_txt_viewer" "$script_path/../human_readable_pattern/standard/test-BR_$baureihe.human_readable.pattern" > /dev/null 2>&1
+          "$cfg_app_txt_viewer" "$script_path/../tests/standard/test-BR_$baureihe.positive.002.list" > /dev/null 2>&1
+          "$cfg_app_txt_viewer" "$script_path/../tests/standard/test-BR_$baureihe.positive.001.list" > /dev/null 2>&1
           echo "startTest"
           break;;
         [d]* )
