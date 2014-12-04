@@ -32,6 +32,7 @@ if [ ! -f "$pdf_dirname/$pdf_filename.human-readable.txt" ] || [ -f "$pdf_dirnam
     logInfo "Starte OCR"
     convert -depth 8 "$pdf_path" "$pdf_dirname/$pdf_filename.tiff"
     tesseract  "$pdf_dirname/$pdf_filename.tiff" "$pdf_dirname/$pdf_filename.human-readable" -l deu
+    touch "$pdf_dirname/spellcheck_check_required"
     if [ $? -eq 1 ]; then
       touch "$pdf_dirname/$pdf_filename.human-readable.txt"
       touch "$pdf_dirname/$pdf_filename.compressed.txt"
