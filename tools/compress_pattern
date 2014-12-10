@@ -64,10 +64,18 @@ else
         find "$script_path/../human_readable_pattern/standard" -type f -name "test-*.human_readable.pattern" | sort | { while read -r file;
         do
           compress "$file"
+          result=$(grep "^pattern=" "$file")
+          if [[ -z $result ]]; then
+            logWarn "Keine Suchmuster für \"$file\" gefunden. Bitte Inhalt der Datei auf unlesbare Zeichen mit \"less\" prüfen."
+          fi
         done }
         find "$script_path/../human_readable_pattern/private" -type f -name "test-*.human_readable.pattern" | sort | { while read -r file;
         do
           compress "$file"
+          result=$(grep "^pattern=" "$file")
+          if [[ -z $result ]]; then
+            logWarn "Keine Suchmuster für \"$file\" gefunden. Bitte Inhalt der Datei auf unlesbare Zeichen mit \"less\" prüfen."
+          fi
         done }
       break;;
       [Nn]* )
