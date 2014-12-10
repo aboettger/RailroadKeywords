@@ -66,7 +66,8 @@ else
           compress "$file"
           result=$(grep "^pattern=" "$file")
           if [[ -z $result ]]; then
-            logWarn "Keine Suchmuster für \"$file\" gefunden. Bitte Inhalt der Datei auf unlesbare Zeichen mit \"less\" prüfen."
+            logError "Keine Suchmuster für \"$file\" gefunden. Bitte Inhalt der Datei auf unlesbare Zeichen mit \"less\" prüfen."
+            exit 1
           fi
         done }
         find "$script_path/../human_readable_pattern/private" -type f -name "test-*.human_readable.pattern" | sort | { while read -r file;
@@ -74,7 +75,8 @@ else
           compress "$file"
           result=$(grep "^pattern=" "$file")
           if [[ -z $result ]]; then
-            logWarn "Keine Suchmuster für \"$file\" gefunden. Bitte Inhalt der Datei auf unlesbare Zeichen mit \"less\" prüfen."
+            logError "Keine Suchmuster für \"$file\" gefunden. Bitte Inhalt der Datei auf unlesbare Zeichen mit \"less\" prüfen."
+            exit 1
           fi
         done }
       break;;
